@@ -9,161 +9,11 @@ chunk_output_type: console
 This is from the Microbial Landscape experiment (summer 2019). ITS2 data from Symportal pipeline. 
 Last updated:20220622
 
-* load in all data. Use the raw reads to view seqs and then create rarefied relative abundance df yourself
-```{r}
-#rm(list=ls())
 
-library(tidyverse)
-library(readxl)
-library(phyloseq)
-library(janitor)
-library("writexl")
-
+#Analysis
+```{r} 
 setwd("~/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/ITS2_Summer_symportal2020")
-```
-Reading in data with Ross code, this is relA. 
-# Relative Abundance 
-Read in coral ITS2 profiles: "coral"
-```{r}  
-#add metadata to symportal submission data
-Symp_sub<-readxl::read_xlsx("MCL_SymPortal_submission_input.xlsx", skip = 1)
-Metadata<-read.csv("MCL19_metadata_20220621.csv")
-Metadata<-rename(Metadata, sample_name=UNIQUEID) #rename UNIQUEID column to sample_name
-Symp_sub_Meta<-left_join(Symp_sub, Metadata, by="sample_name") # merge
-#save in correct format:
-write_xlsx(Symp_sub_Meta,"MCL_Symp_Metadata_20220621.xlsx")
 
-sam0 <- readxl::read_xlsx("MCL_Symp_Metadata_20220621.xlsx") #Symportal metadata combined from above
-sam1 <- as.matrix(sam0[, -1])
-rownames(sam1) <- sam0$sample_name
-sam <- sample_data(data.frame(sam1))
-
-tax0 <- read_tsv(
-  file  = "20201214_matsuda_MCL/its2_type_profiles/133_20201216_DBV_20201216T011417.profiles.relative.abund_and_meta.txt",
-  n_max = 6) %>%
-  dplyr::select(-2) %>% 
-  gather(UID, value, -1) %>% 
-  spread(1, value) %>%
-  clean_names()
-
-tax1 <- as.matrix(tax0[, -1], dimnames = list(tax0$uid, colnames(tax0[-1])))
-rownames(tax1) <- tax0$uid
-tax <- tax_table(tax1)
-
-otu0 <- read_tsv(
-  file  = "20201214_matsuda_MCL/its2_type_profiles/133_20201216_DBV_20201216T011417.profiles.relative.abund_and_meta.txt") %>% 
-  rename(sample_name = ...2) %>% #rename column "...2", previously "X2" in symportal language
-  select(-1) %>%
-  slice(7:n()) %>%
-  mutate_at(2:ncol(.), as.numeric)
-otu1 <- as.matrix(otu0[, -1])
-rownames(otu1) <- otu0$sample_name
-otu <- otu_table(otu1, taxa_are_rows = FALSE)
-
-coral <- phyloseq(otu, tax, sam)
- 
-```
-Read in coral post-QC sequence variants: "coralDIV"
-```{r}  
-sam0 <- read_xlsx("MCL_Symp_Metadata_20220621.xlsx")
-sam1 <- as.matrix(sam0[, -1])
-rownames(sam1) <- sam0$sample_name
-sam <- sample_data(data.frame(sam1))
-
-
-taxnames <- read_tsv(
-  file  = "20201214_matsuda_MCL/post_med_seqs/133_20201216_DBV_20201216T011417.seqs.relative.abund_only.txt",
-  n_max = 0) %>%
-  select(-1) %>%
-  names(.)
-tax0 <- data_frame(
-  DIV = taxnames,
-  clade = str_extract(DIV, "[A-Z]")
-)
-tax1 <- as.matrix(tax0)
-rownames(tax1) <- tax0$DIV
-tax <- tax_table(tax1)
-otu0 <- read_tsv(
-  file  = "20201214_matsuda_MCL/post_med_seqs/133_20201216_DBV_20201216T011417.seqs.relative.abund_and_meta.txt") %>%
-  select(-1, -(3:33))
-otu1 <- as.matrix(otu0[, -1])
-rownames(otu1) <- otu0$sample_name
-otu <- otu_table(otu1, taxa_are_rows = FALSE)
-coralDIV <- phyloseq(otu, tax, sam)
-```
-
-```{r} 
-save(coral, coralDIV, file = "data/coral_phyloseq_2022.RData")
-```
-
-#Reading in data by ABSOLUTE abundances
-This is the same as above just by absolute (you may not even want to keep this)
-
-Profiles Absolute
-```{r}
- 
-sam0 <- readxl::read_xlsx("MCL_Symp_Metadata_20220621.xlsx") #Symportal metadata combined from above
-# make all factors
-cols <- c("sample_type", "TagID", "Colony.Color", "Samp.Date","Land_Ocean","SampLoc","BranchLoc","Zoox","Location")
-sam0[cols] <- lapply(sam0[cols], factor)  ## as.factor() could also be used
-sam1 <- as.matrix(sam0[, -1])
-rownames(sam1) <- sam0$sample_name
-sam <- sample_data(data.frame(sam1))
-
-tax0 <- read_tsv(
-  file  = "20201214_matsuda_MCL/its2_type_profiles/133_20201216_DBV_20201216T011417.profiles.absolute.abund_and_meta.txt",
-  n_max = 6) %>%
-  dplyr::select(-2) %>% 
-  gather(UID, value, -1) %>% 
-  spread(1, value) %>%
-  clean_names()
-
-tax1 <- as.matrix(tax0[, -1], dimnames = list(tax0$uid, colnames(tax0[-1])))
-rownames(tax1) <- tax0$uid
-tax <- tax_table(tax1)
-
-otu0 <- read_tsv(
-  file  = "20201214_matsuda_MCL/its2_type_profiles/133_20201216_DBV_20201216T011417.profiles.absolute.abund_and_meta.txt") %>% 
-  rename(sample_name = ...2) %>%
-  select(-1) %>%
-  slice(7:n()) %>%
-  mutate_at(2:ncol(.), as.numeric)
-otu1 <- as.matrix(otu0[, -1])
-rownames(otu1) <- otu0$sample_name
-otu <- otu_table(otu1, taxa_are_rows = FALSE)
-
-coral_absolutePro <- phyloseq(otu, tax, sam)
-```
-DIVs absolute
-```{r} 
-
-taxnames <- read_tsv(
-  file  = "20201214_matsuda_MCL/post_med_seqs/133_20201216_DBV_20201216T011417.seqs.absolute.abund_only.txt",
-  n_max = 0) %>%
-  select(-1) %>%
-  names(.)
-tax0 <- data_frame(
-  DIV = taxnames,
-  clade = str_extract(DIV, "[A-Z]")
-)
-tax1 <- as.matrix(tax0)
-rownames(tax1) <- tax0$DIV
-tax <- tax_table(tax1)
-otu0 <- read_tsv(
-  file  = "20201214_matsuda_MCL/post_med_seqs/133_20201216_DBV_20201216T011417.seqs.absolute.abund_and_meta.txt") %>%
-  select(-1, -(3:33))
-otu1 <- as.matrix(otu0[, -1])
-rownames(otu1) <- otu0$sample_name
-otu <- otu_table(otu1, taxa_are_rows = FALSE)
-coral_Absolute_DIV <- phyloseq(otu, tax, sam)
-```
-Save as an obj
-```{r}
-save(coral_absolutePro, coral_Absolute_DIV, file = "data/Absolute_coral_phyloseq2022.RData")
-```
-
-#Analysis (RCunning Script) REL Abundance -  
-```{r} 
 library(tidyverse)
 library(janitor)
 library(phyloseq)  # source('http://bioconductor.org/biocLite.R'); biocLite('phyloseq')
@@ -178,21 +28,25 @@ load("data/coral_phyloseq_2022.RData") # Rel A data
 load("data/Absolute_coral_phyloseq2022.RData") #absolute reads data
 
 ```
+
+Use: coral_absolutePro and coral_Absolute_DIV to create your RelA dfs
+
+
 Clean -dont run this yet for Raw
 ```{r}
-coral2 <- coral %>% 
-  subset_samples(!is.na(host_species))
-coralDIV2 <- coralDIV %>% 
-  subset_samples(!is.na(host_species))
-
-# HERE YOU MAKE RELA DATA ACTUALLY OUT OF 100% 
-# Transform to relative abundance
-coral2 <- transform_sample_counts(coral2, function(x) 100 * x/sum(x))
-coralDIV2 <- transform_sample_counts(coralDIV2, function(x) 100 * x/sum(x))
+# coral2 <- coral %>% 
+#   subset_samples(!is.na(host_species))
+# coralDIV2 <- coralDIV %>% 
+#   subset_samples(!is.na(host_species))
+# 
+# # HERE YOU MAKE RELA DATA ACTUALLY OUT OF 100% 
+# # Transform to relative abundance
+# coral2 <- transform_sample_counts(coral2, function(x) 100 * x/sum(x))
+# coralDIV2 <- transform_sample_counts(coralDIV2, function(x) 100 * x/sum(x))
 
 ```
 
-Data wrangle: remove samples with under 5k 
+Data wrangle: look at low samples
 ```{r} 
 #lets see what is up with the low samps
 
@@ -208,13 +62,13 @@ sample_names(coral_Absolute_DIV) #print sample names
 
 #look at NTCs
 #Negative Controls
-  NTCtest <- subset_samples(coral_Absolute_DIV, sample_names =="NTC"| sample_names =="NTC2") #subset multiple samples
+  NTCtest <- subset_samples(coral_Absolute_DIV, collection_latitude =="NTC"| collection_latitude =="NTC2") #subset multiple samples
    NTCtest.prune <- prune_taxa(taxa_sums(NTCtest) >0, NTCtest)
      plot_bar(NTCtest.prune,fill = "DIV")+
       geom_bar(aes(color=DIV, fill=DIV), stat="identity", position="stack")
      
 #Samples under 2000 hits 
-LOWtest <- subset_samples(coralDIV2, sample_name =="S6"| sample_name =="G7"|sample_name =="Q11"|sample_name =="G8"|sample_name =="B13"|sample_name =="B6"|sample_name =="C14") #subset multiple samples
+LOWtest <- subset_samples(coralDIV2, Sample_name =="S6"| Sample_name =="G7"|Sample_name =="Q11"|Sample_name =="G8"|Sample_name =="B13"|Sample_name =="B6"|Sample_name =="C14") #subset multiple samples
    LOWtest.prune <- prune_taxa(taxa_sums(LOWtest) >0, LOWtest) # prune all 0s
      
    plot_bar(LOWtest.prune,fill = "DIV")+                     # plot DIVS
@@ -228,7 +82,6 @@ LOWtest <- subset_samples(coralDIV2, sample_name =="S6"| sample_name =="G7"|samp
 Remove low samples from the datasets (less than 2000)
 coral_absolutePro
 coral_Absolute_DIV
-
 ```{r} 
 #DIVs 
 to_remove <- c("NTC", "NTC2", "S6", "G7","Q11","G8", "B13","B6") #make list of samples to remove with less than 2000 seqs
@@ -295,6 +148,15 @@ data.ra <- as(sample_data(DIV_RelA), "data.frame") #look at samp data
 #write.csv(data.ra, "DIV_its2_sampledata.csv")
 
    DIV_RelA = prune_taxa(taxa_sums(DIV_RelA) > 0, DIV_RelA) #this removes any OTU with 0s
+   
+ #Pro_RelA
+Pro_RelA  = transform_sample_counts(coral_Absolute_Pro.rare, function(x) x / sum(x) )  #save as RELA DIVs
+data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
+#write.csv(data.ra, "DIV_its2_sampledata.csv")
+
+   Pro_RelA = prune_taxa(taxa_sums(Pro_RelA) > 0, Pro_RelA) #this removes any OTU with 0s  
+   
+   
 
 ```
 
@@ -302,29 +164,53 @@ data.ra <- as(sample_data(DIV_RelA), "data.frame") #look at samp data
 (Code from TT17)
 ```{r}
 #make bray curtis data matrix
-DIV_RelA.dist <- phyloseq::distance(DIV_RelA, method = "bray")
+  DIV_RelA.dist <- phyloseq::distance(DIV_RelA, method = "bray")
   samp.DIV_RelA.dist <- as(sample_data(DIV_RelA), "data.frame") #sample df
 
 #adonis by colony level
-adonis2(DIV_RelA.dist ~ TagID, data = samp.DIV_RelA.dist)
+  adonis2(DIV_RelA.dist ~ TagID, data = samp.DIV_RelA.dist)
     
 
 # Homogeneity of dispersion test
-betaTagID <- betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$TagID)
-perm<-permutest(betaTagID, pairwise = T) 
-(betaTagID.HSD <- TukeyHSD(betaTagID)) #do you need? impossible to visualize
-plot(betaTagID.HSD)
+  betaTagID <- betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$TagID)
+  perm<-permutest(betaTagID, pairwise = T) 
+  (betaTagID.HSD <- TukeyHSD(betaTagID)) #do you need? impossible to visualize
+  plot(betaTagID.HSD)
 
 #adonis by sample location and colony ID
-adonis2(DIV_RelA.dist ~ Location*TagID, data = samp.DIV_RelA.dist)
+  adonis2(DIV_RelA.dist ~ Location*TagID, data = samp.DIV_RelA.dist)
    
  # Homogeneity of dispersion test, Location
-betaTagID <- betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$Location)
-perm<-permutest(betaTagID, pairwise = T) 
+  betaTagID <- betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$Location)
+  perm<-permutest(betaTagID, pairwise = T) 
 
 #adonis by broad location and colony ID
-adonis2(DIV_RelA.dist ~ SampLoc*TagID, data = samp.DIV_RelA.dist)
+  adonis2(DIV_RelA.dist ~ SampLoc*TagID, data = samp.DIV_RelA.dist)
 
+
+#subset only branches
+#adonis by colony by sample location by branch/plate
+  Branch.only <- subset_samples(DIV_RelA, SampLoc =="Branch") #Subset by colony 
+
+  Branch.only.dist <- phyloseq::distance(Branch.only, method = "bray")
+  samp.Branch.only.dist <- as(sample_data(Branch.only), "data.frame") #sample df
+
+#adonis by colony level
+  adonis2(Branch.only.dist ~ TagID*Sub.loc, data = samp.Branch.only.dist)
+  
+#adonis by colony level by branch
+  samp.Branch.only.dist$col.branch<-paste(samp.Branch.only.dist$TagID,samp.Branch.only.dist$branch.plate)
+  
+  adonis2(Branch.only.dist ~ col.branch, data = samp.Branch.only.dist)
+  adonis2(Branch.only.dist ~ TagID*col.branch, data = samp.Branch.only.dist)
+
+  
+  
+  
+  
+  
+  
+  
 #Ordination NMDS for all colonies
 set.seed(30)
 ord.DIV_RelA<- ordinate(DIV_RelA, "NMDS", "bray", trymax = 100) 
@@ -563,6 +449,9 @@ Plots DIVS by colony
  plot_bar(Mcap_970,fill = "DIV")+
       geom_bar(aes(color=DIV, fill=DIV), stat="identity", position="stack")
 
+
+
+
 Mcap_970_plot<-plot_bar(Mcap_970, "Sample_name", fill="DIV", title="Mcap_970")+
    theme(legend.position="none");Mcap_970_plot
 Mcap_965_plot<-plot_bar(Mcap_965, "Sample_name", fill="DIV", title="Mcap_965")+
@@ -635,15 +524,15 @@ Mcap_985_plot,Mcap_964_plot,Mcap_985_plot,Mcap_964_plot,Mcap_985_plot,Mcap_959_p
 
 ```
 
-PROFILES
+#PROFILES
 Subset by colony PROFILE, data setup
-coral_Absolute_Pro.rare
+Pro_RelA is the rareified df
 ```{r}  
  
 library("RColorBrewer")
 getPalette = colorRampPalette(brewer.pal(8, "Dark2"))
 
-speciesList = unique(tax_table(coral_Absolute_Pro.rare)[,"its2_type_profile"])
+speciesList = unique(tax_table(Pro_RelA)[,"its2_type_profile"])
 speciesPalette = getPalette(length(speciesList))
 names(speciesPalette) = speciesList
 
@@ -656,263 +545,521 @@ names(speciesPalette) = speciesList
 
 
 
-sample_variables(coral_Absolute_Pro.rare) #what are the variables
+sample_variables(Pro_RelA) #what are the variables
 
-Mcap_970_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="970") #Subset by colony  
-Mcap_965_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="965") #Subset by colony  
-Mcap_969_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="969") #Subset by colony  
-Mcap_972_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="972") #Subset by colony  
-Mcap_971_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="971") #Subset by colony 
-Mcap_968_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="968") #Subset by colony 
-Mcap_966_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="966") #Subset by colony 
-Mcap_978_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="978") #Subset by colony 
-Mcap_963_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="963") #Subset by colony 
-Mcap_961_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="961") #Subset by colony 
-Mcap_981_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="981") #Subset by colony 
-Mcap_967_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="967") #Subset by colony 
-Mcap_983_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="983") #Subset by colony 
-Mcap_974_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="974") #Subset by colony 
-Mcap_984_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="984") #Subset by colony 
-Mcap_962_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="962") #Subset by colony 
-Mcap_957_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="957") #Subset by colony 
-Mcap_945_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="945") #Subset by colony 
-Mcap_960_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="960") #Subset by colony 
-Mcap_976_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="976") #Subset by colony 
-Mcap_985_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="985") #Subset by colony 
-Mcap_964_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="964") #Subset by colony 
-Mcap_959_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="959") #Subset by colony 
-Mcap_980_Pro <- subset_samples(coral_Absolute_Pro.rare, TagID =="980") #Subset by colony 
+Mcap_970_Pro <- subset_samples(Pro_RelA, TagID =="970") #Subset by colony  
+Mcap_965_Pro <- subset_samples(Pro_RelA, TagID =="965") #Subset by colony  
+Mcap_969_Pro <- subset_samples(Pro_RelA, TagID =="969") #Subset by colony  
+Mcap_972_Pro <- subset_samples(Pro_RelA, TagID =="972") #Subset by colony  
+Mcap_971_Pro <- subset_samples(Pro_RelA, TagID =="971") #Subset by colony 
+Mcap_968_Pro <- subset_samples(Pro_RelA, TagID =="968") #Subset by colony 
+Mcap_966_Pro <- subset_samples(Pro_RelA, TagID =="966") #Subset by colony 
+Mcap_978_Pro <- subset_samples(Pro_RelA, TagID =="978") #Subset by colony 
+Mcap_963_Pro <- subset_samples(Pro_RelA, TagID =="963") #Subset by colony 
+Mcap_961_Pro <- subset_samples(Pro_RelA, TagID =="961") #Subset by colony 
+Mcap_981_Pro <- subset_samples(Pro_RelA, TagID =="981") #Subset by colony 
+Mcap_967_Pro <- subset_samples(Pro_RelA, TagID =="967") #Subset by colony 
+Mcap_983_Pro <- subset_samples(Pro_RelA, TagID =="983") #Subset by colony 
+Mcap_974_Pro <- subset_samples(Pro_RelA, TagID =="974") #Subset by colony 
+Mcap_984_Pro <- subset_samples(Pro_RelA, TagID =="984") #Subset by colony 
+Mcap_962_Pro <- subset_samples(Pro_RelA, TagID =="962") #Subset by colony 
+Mcap_957_Pro <- subset_samples(Pro_RelA, TagID =="957") #Subset by colony 
+Mcap_945_Pro <- subset_samples(Pro_RelA, TagID =="945") #Subset by colony 
+Mcap_960_Pro <- subset_samples(Pro_RelA, TagID =="960") #Subset by colony 
+Mcap_976_Pro <- subset_samples(Pro_RelA, TagID =="976") #Subset by colony 
+Mcap_985_Pro <- subset_samples(Pro_RelA, TagID =="985") #Subset by colony 
+Mcap_964_Pro <- subset_samples(Pro_RelA, TagID =="964") #Subset by colony 
+Mcap_959_Pro <- subset_samples(Pro_RelA, TagID =="959") #Subset by colony 
+Mcap_980_Pro <- subset_samples(Pro_RelA, TagID =="980") #Subset by colony 
   
 ```
 Plots PRO
 ```{r} 
+library(RColorBrewer)
+profile.colors <- c("C31/C17d-C21-C21ac-C31a-C17e-C31.9-C17f" = "#0b17ff", 
+                    "C31-C17d-C31.1-C31a-C21-C17e-C21ac" = "#3e38f6",
+                    "C31-C17d-C21-C31.9-C21ac-C17e-C31h-C31a" ="#5350ed",
+                    "C17d/C31-C21-C21ac-C17e-C17f-C31.9" = "#6065e3",
+                    "C31/C17d-C21-C31.9-C31h-C31i-C21ac" = "#6879d9",
+                    "C31/C17d" = "#6c8dd0",
+                    "C31/C17d-C21-C21ac" = "#6da0c5",
+                    "C31/C17d-C21-C21ac-C31.9" = "#6bb3bb",
+                   "C1/C3" = "#64c6af",
+                   "C21/C3" = "#58d9a3",
+                   "C21" = "#44ec96",
+                   "C3" = "#09ff88",
+                   "D1/D4-D6-D1ab-D3h-D4d" = "#ff9422",
+                   "D4/D1/D6-D1ab-D3h" = "#ffaa20",
+                   "D1/D4/D6/D1ab" = "#ffc01e",
+                   "D4/D1-D6-D1ab-D17d-D17j-D3h" ="#ffd51a",
+                   "D1/D4" = "#feea15",
+                   "D1/D4/D6" = "#fbff0e")
+
+
+
 #for the legend
- plot_bar(Mcap_970_Pro,fill = "its2_type_profile")+
-      geom_bar(aes(color=its2_type_profile, fill=its2_type_profile), stat="identity", position="stack")
+  Mcap_970_PRO_plot<-plot_bar(Mcap_970_Pro, "LocSamp",fill="its2_type_profile", title="Mcap_970_Pro")+
+  scale_fill_manual(values=profile.colors)+
+  theme(axis.text.x = element_text(angle = 90))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_970_PRO_plot
+
+ 
+ 
+ Mcap_970_PRO_plot<-plot_bar(Mcap_970_Pro, "LocSamp",fill="its2_type_profile", title="Mcap_970_Pro")+
+  scale_fill_manual(values=profile.colors)+
+   theme(legend.position="none") + 
+  theme(axis.text.x = element_text(angle = 90))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_970_PRO_plot
+ggsave("Mcap_970_PRO_plot.pdf")
 
 
-Mcap_970_PRO_plot<-plot_bar(Mcap_970_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_970_Pro")+
+Mcap_970_PRO_plot<-plot_bar(Mcap_970_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_970_Pro")+
+    scale_fill_manual(values=profile.colors)+
+   theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_970_PRO_plot
-Mcap_965_PRO_plot<-plot_bar(Mcap_965_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_965_Pro")+
+ggsave("Mcap_970_PRO_plot.pdf")
+
+
+Mcap_965_PRO_plot<-plot_bar(Mcap_965_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_965_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_965_PRO_plot
-Mcap_969_PRO_plot<-plot_bar(Mcap_969_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_969_Pro")+
+ggsave("Mcap_965_PRO_plot.pdf")
+
+Mcap_969_PRO_plot<-plot_bar(Mcap_969_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_969_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_969_PRO_plot
-Mcap_972_PRO_plot<-plot_bar(Mcap_972_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_972_Pro")+
+ggsave("Mcap_969_PRO_plot.pdf")
+
+Mcap_972_PRO_plot<-plot_bar(Mcap_972_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_972_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_972_PRO_plot
-Mcap_971_PRO_plot<-plot_bar(Mcap_971_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_971_Pro")+
+ggsave("Mcap_972_PRO_plot.pdf")
+
+Mcap_971_PRO_plot<-plot_bar(Mcap_971_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_971_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_971_PRO_plot
-Mcap_968_PRO_plot<-plot_bar(Mcap_968_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_968_Pro")+
+ggsave("Mcap_971_PRO_plot.pdf")
+
+Mcap_968_PRO_plot<-plot_bar(Mcap_968_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_968_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_968_PRO_plot
-Mcap_966_PRO_plot<-plot_bar(Mcap_966_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_966_Pro")+
+ggsave("Mcap_968_PRO_plot.pdf")
+
+Mcap_966_PRO_plot<-plot_bar(Mcap_966_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_966_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_966_PRO_plot
-Mcap_978_PRO_plot<-plot_bar(Mcap_978_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_978_Pro")+
+ggsave("Mcap_966_PRO_plot.pdf")
+
+Mcap_978_PRO_plot<-plot_bar(Mcap_978_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_978_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_978_PRO_plot
-Mcap_963_PRO_plot<-plot_bar(Mcap_963_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_963_Pro")+
+ggsave("Mcap_978_PRO_plot.pdf")
+
+Mcap_963_PRO_plot<-plot_bar(Mcap_963_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_963_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_963_PRO_plot
-Mcap_961_PRO_plot<-plot_bar(Mcap_961_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_961_Pro")+
+ggsave("Mcap_963_PRO_plot.pdf")
+
+Mcap_961_PRO_plot<-plot_bar(Mcap_961_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_961_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_961_PRO_plot
-Mcap_981_PRO_plot<-plot_bar(Mcap_981_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_981_Pro")+
+ggsave("Mcap_961_PRO_plot.pdf")
+
+Mcap_981_PRO_plot<-plot_bar(Mcap_981_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_981_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_981_PRO_plot
-Mcap_967_PRO_plot<-plot_bar(Mcap_967_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_967_Pro")+
+ggsave("Mcap_981_PRO_plot.pdf")
+
+Mcap_967_PRO_plot<-plot_bar(Mcap_967_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_967_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_967_PRO_plot
-Mcap_983_PRO_plot<-plot_bar(Mcap_983_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_983_Pro")+
+ggsave("Mcap_967_PRO_plot.pdf")
+
+Mcap_983_PRO_plot<-plot_bar(Mcap_983_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_983_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_983_PRO_plot
-Mcap_974_PRO_plot<-plot_bar(Mcap_974_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_974_Pro")+
+ggsave("Mcap_983_PRO_plot.pdf")
+
+Mcap_974_PRO_plot<-plot_bar(Mcap_974_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_974_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_974_PRO_plot
-Mcap_984_PRO_plot<-plot_bar(Mcap_984_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_984_Pro")+
+ggsave("Mcap_974_PRO_plot.pdf")
+
+Mcap_984_PRO_plot<-plot_bar(Mcap_984_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_984_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_984_PRO_plot
-Mcap_962_PRO_plot<-plot_bar(Mcap_962_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_962_Pro")+
+ggsave("Mcap_984_PRO_plot.pdf")
+
+Mcap_962_PRO_plot<-plot_bar(Mcap_962_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_962_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_962_PRO_plot
-Mcap_957_PRO_plot<-plot_bar(Mcap_957_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_957_Pro")+
+ggsave("Mcap_962_PRO_plot.pdf")
+
+Mcap_957_PRO_plot<-plot_bar(Mcap_957_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_957_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_957_PRO_plot
-Mcap_945_PRO_plot<-plot_bar(Mcap_945_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_945_Pro")+
+ggsave("Mcap_957_PRO_plot.pdf")
+
+Mcap_945_PRO_plot<-plot_bar(Mcap_945_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_945_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_945_PRO_plot
-Mcap_960_PRO_plot<-plot_bar(Mcap_960_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_960_Pro")+
+ggsave("Mcap_945_PRO_plot.pdf")
+
+Mcap_960_PRO_plot<-plot_bar(Mcap_960_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_960_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_960_PRO_plot
-Mcap_976_PRO_plot<-plot_bar(Mcap_976_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_976_Pro")+
+ggsave("Mcap_960_PRO_plot.pdf")
+
+Mcap_976_PRO_plot<-plot_bar(Mcap_976_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_976_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_976_PRO_plot
-Mcap_985_PRO_plot<-plot_bar(Mcap_985_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_985_Pro")+
+ggsave("Mcap_976_PRO_plot.pdf")
+
+Mcap_985_PRO_plot<-plot_bar(Mcap_985_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_985_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_985_PRO_plot
-Mcap_964_PRO_plot<-plot_bar(Mcap_964_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_964_Pro")+
+ggsave("Mcap_985_PRO_plot.pdf")
+
+Mcap_964_PRO_plot<-plot_bar(Mcap_964_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_964_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_964_PRO_plot
-Mcap_985_PRO_plot<-plot_bar(Mcap_985_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_985_Pro")+
+ggsave("Mcap_964_PRO_plot.pdf")
+
+Mcap_985_PRO_plot<-plot_bar(Mcap_985_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_985_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_985_PRO_plot
-Mcap_959_PRO_plot<-plot_bar(Mcap_959_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_959_Pro")+
+ggsave("Mcap_985_PRO_plot.pdf")
+
+Mcap_959_PRO_plot<-plot_bar(Mcap_959_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_959_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_959_PRO_plot
-Mcap_980_PRO_plot<-plot_bar(Mcap_980_Pro, "Sample_name", fill="its2_type_profile", title="Mcap_980_Pro")+
+ggsave("Mcap_959_PRO_plot.pdf")
+
+Mcap_980_PRO_plot<-plot_bar(Mcap_980_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_980_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
    theme(legend.position="none");Mcap_980_PRO_plot
+ggsave("Mcap_980_PRO_plot.pdf")
 
 
-Mcap_DIV_PRO_plot1 <- ggarrange(Mcap_970_PRO_plot, Mcap_965_PRO_plot,Mcap_969_PRO_plot,Mcap_972_PRO_plot, Mcap_971_PRO_plot,Mcap_968_PRO_plot,Mcap_966_PRO_plot,Mcap_978_PRO_plot,
-                    #labels = c("A", "B", "C","D","E","F"),
-                    ncol = 4, nrow = 2);Mcap_DIV_PRO_plot1
-
-Mcap_DIV_PRO_plot2 <- ggarrange(Mcap_963_PRO_plot, Mcap_961_PRO_plot,Mcap_981_PRO_plot,Mcap_967_PRO_plot,
-Mcap_983_PRO_plot,Mcap_974_PRO_plot,Mcap_984_PRO_plot,Mcap_962_PRO_plot,
-                    #labels = c("A", "B", "C","D","E","F"),
-                    ncol = 4, nrow = 2);Mcap_DIV_PRO_plot2
-
-Mcap_DIV_PRO_plot3 <- ggarrange(Mcap_957_PRO_plot,Mcap_945_PRO_plot,Mcap_960_PRO_plot,Mcap_976_PRO_plot,
-Mcap_985_PRO_plot,Mcap_964_PRO_plot,Mcap_985_PRO_plot,Mcap_964_PRO_plot,Mcap_985_PRO_plot,Mcap_959_PRO_plot,Mcap_980_PRO_plot,
-                    #labels = c("A", "B", "C","D","E","F"),
-                    ncol = 4, nrow = 3);Mcap_DIV_PRO_plot3
+# 
+# Mcap_DIV_PRO_plot1 <- ggarrange(Mcap_970_PRO_plot, Mcap_965_PRO_plot,Mcap_969_PRO_plot,Mcap_972_PRO_plot, Mcap_971_PRO_plot,Mcap_968_PRO_plot,Mcap_966_PRO_plot,Mcap_978_PRO_plot,
+#                     #labels = c("A", "B", "C","D","E","F"),
+#                     ncol = 4, nrow = 2);Mcap_DIV_PRO_plot1
+# 
+# Mcap_DIV_PRO_plot2 <- ggarrange(Mcap_963_PRO_plot, Mcap_961_PRO_plot,Mcap_981_PRO_plot,Mcap_967_PRO_plot,
+# Mcap_983_PRO_plot,Mcap_974_PRO_plot,Mcap_984_PRO_plot,Mcap_962_PRO_plot,
+#                     #labels = c("A", "B", "C","D","E","F"),
+#                     ncol = 4, nrow = 2);Mcap_DIV_PRO_plot2
+# 
+# Mcap_DIV_PRO_plot3 <- ggarrange(Mcap_957_PRO_plot,Mcap_945_PRO_plot,Mcap_960_PRO_plot,Mcap_976_PRO_plot,
+# Mcap_985_PRO_plot,Mcap_964_PRO_plot,Mcap_985_PRO_plot,Mcap_964_PRO_plot,Mcap_985_PRO_plot,Mcap_959_PRO_plot,Mcap_980_PRO_plot,
+#                     #labels = c("A", "B", "C","D","E","F"),
+#                     ncol = 4, nrow = 3);Mcap_DIV_PRO_plot3
+# 
+# 
+# Mcap_DIV_PRO_plot1 <- ggarrange(Mcap_970_PRO_plot, Mcap_965_PRO_plot,Mcap_969_PRO_plot,Mcap_972_PRO_plot, 
+#                     ncol = 4, nrow = 2);Mcap_DIV_PRO_plot1
 
 ```
 Plots CLADE
 ```{r}   
 
-scale_color_manual(values=speciesPalette)
-scale_fill_manual(values= speciesPalette)
+# library("RColorBrewer")
+# getPalette = colorRampPalette(brewer.pal(8, "Dark2"))
+# 
+# speciesList = unique(tax_table(Pro_RelA)[,"clade"])
+# speciesPalette = getPalette(length(speciesList))
+# names(speciesPalette) = speciesList
+# 
+# scale_color_manual(values=speciesPalette)
+# scale_fill_manual(values= speciesPalette)
 
+#this works but you need better pallet color = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
+clade.colors <- c(C = "deepskyblue", D = "orange")
 
- Mcap_970_clade_plot<-plot_bar(Mcap_970_Pro, "LocSamp", fill="clade", title="Mcap_970_clade");Mcap_970_clade_plot
 
 
 # pretty the axis labels with ggplot2
-library("ggplot2")
-Mcap_970_clade_plot + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+# Mcap_970_clade_plot + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))+
+#   scale_fill_brewer(palette="Paired")
 
 
 Mcap_970_clade_plot<-plot_bar(Mcap_970_Pro, "LocSamp",fill="clade", title="Mcap_970_clade")+
+  scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") + 
   theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_970_clade_plot
+ggsave("Mcap_970_clade_plot.pdf")
+
 
 Mcap_965_clade_plot<-plot_bar(Mcap_965_Pro, "LocSamp", fill="clade", title="Mcap_965_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_965_clade_plot
+ggsave("Mcap_965_clade_plot.pdf")
+
 
 Mcap_969_clade_plot<-plot_bar(Mcap_969_Pro, "LocSamp", fill="clade", title="Mcap_969_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_969_clade_plot
+ggsave("Mcap_969_clade_plot.pdf")
+
 
 Mcap_972_clade_plot<-plot_bar(Mcap_972_Pro, "LocSamp", fill="clade", title="Mcap_972_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_972_clade_plot
+ggsave("Mcap_972_clade_plot.pdf")
+
 
 Mcap_971_clade_plot<-plot_bar(Mcap_971_Pro, "LocSamp", fill="clade", title="Mcap_971_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_971_clade_plot
+ggsave("Mcap_971_clade_plot.pdf")
+
 
 Mcap_968_clade_plot<-plot_bar(Mcap_968_Pro, "LocSamp", fill="clade", title="Mcap_968_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_968_clade_plot
+ggsave("Mcap_968_clade_plot.pdf")
+
 
 Mcap_966_clade_plot<-plot_bar(Mcap_966_Pro, "LocSamp", fill="clade", title="Mcap_966_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_966_clade_plot
+ggsave("Mcap_966_clade_plot.pdf")
+
 
 Mcap_978_clade_plot<-plot_bar(Mcap_978_Pro, "LocSamp", fill="clade", title="Mcap_978_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_978_clade_plot
+ggsave("Mcap_978_clade_plot.pdf")
+
 
 Mcap_963_clade_plot<-plot_bar(Mcap_963_Pro, "LocSamp", fill="clade", title="Mcap_963_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_963_clade_plot
+ggsave("Mcap_963_clade_plot.pdf")
+
 
 Mcap_961_clade_plot<-plot_bar(Mcap_961_Pro, "LocSamp", fill="clade", title="Mcap_961_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_961_clade_plot
+ggsave("Mcap_961_clade_plot.pdf")
+
 
 Mcap_981_clade_plot<-plot_bar(Mcap_981_Pro, "LocSamp", fill="clade", title="Mcap_981_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_981_clade_plot
+ggsave("Mcap_981_clade_plot.pdf")
+
 
 Mcap_967_clade_plot<-plot_bar(Mcap_967_Pro, "LocSamp", fill="clade", title="Mcap_967_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_967_clade_plot
+ggsave("Mcap_967_clade_plot.pdf")
+
 
 Mcap_983_clade_plot<-plot_bar(Mcap_983_Pro, "LocSamp", fill="clade", title="Mcap_983_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_983_clade_plot
+ggsave("Mcap_983_clade_plot.pdf")
+
 
 Mcap_974_clade_plot<-plot_bar(Mcap_974_Pro, "LocSamp", fill="clade", title="Mcap_974_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_974_clade_plot
+ggsave("Mcap_974_clade_plot.pdf")
+
 
 Mcap_984_clade_plot<-plot_bar(Mcap_984_Pro, "LocSamp", fill="clade", title="Mcap_984_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_984_clade_plot
+ggsave("Mcap_984_clade_plot.pdf")
+
 
 Mcap_962_clade_plot<-plot_bar(Mcap_962_Pro, "LocSamp", fill="clade", title="Mcap_962_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_962_clade_plot
+ggsave("Mcap_962_clade_plot.pdf")
+
 
 Mcap_957_clade_plot<-plot_bar(Mcap_957_Pro, "LocSamp", fill="clade", title="Mcap_957_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_957_clade_plot
+ggsave("Mcap_957_clade_plot.pdf")
+
 
 Mcap_945_clade_plot<-plot_bar(Mcap_945_Pro, "LocSamp", fill="clade", title="Mcap_945_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_945_clade_plot
+ggsave("Mcap_945_clade_plot.pdf")
+
 
 Mcap_960_clade_plot<-plot_bar(Mcap_960_Pro, "LocSamp", fill="clade", title="Mcap_960_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_960_clade_plot
+ggsave("Mcap_960_clade_plot.pdf")
+
 
 Mcap_976_clade_plot<-plot_bar(Mcap_976_Pro, "LocSamp", fill="clade", title="Mcap_976_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_976_clade_plot
+ggsave("Mcap_976_clade_plot.pdf")
+
 
 Mcap_985_clade_plot<-plot_bar(Mcap_985_Pro, "LocSamp", fill="clade", title="Mcap_985_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_985_clade_plot
+ggsave("Mcap_985_clade_plot.pdf")
+
 
 Mcap_964_clade_plot<-plot_bar(Mcap_964_Pro, "LocSamp", fill="clade", title="Mcap_964_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_964_clade_plot
+ggsave("Mcap_964_clade_plot.pdf")
+
 
 Mcap_985_clade_plot<-plot_bar(Mcap_985_Pro, "LocSamp", fill="clade", title="Mcap_985_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_985_clade_plot
+ggsave("Mcap_985_clade_plot.pdf")
+
 
 Mcap_959_clade_plot<-plot_bar(Mcap_959_Pro, "LocSamp", fill="clade", title="Mcap_959_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none") +  theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_959_clade_plot
+ggsave("Mcap_959_clade_plot.pdf")
+
 
 Mcap_980_clade_plot<-plot_bar(Mcap_980_Pro, "LocSamp", fill="clade", title="Mcap_980_clade")+
+    scale_fill_manual(values=clade.colors)+
    theme(legend.position="none")+theme(axis.text.x = element_text(angle = 90))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
 panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_980_clade_plot
+ggsave("Mcap_980_clade_plot.pdf")
 
-
-Mcap_DIV_clade_plot1 <- ggarrange(Mcap_970_clade_plot, Mcap_965_clade_plot,Mcap_969_clade_plot,Mcap_972_clade_plot, Mcap_971_clade_plot,Mcap_968_clade_plot,Mcap_966_clade_plot,Mcap_978_clade_plot,
-                    #labels = c("A", "B", "C","D","E","F"),
-                    ncol = 4, nrow = 2);Mcap_DIV_clade_plot1
-
-Mcap_DIV_clade_plot2 <- ggarrange(Mcap_963_clade_plot, Mcap_961_clade_plot,Mcap_981_clade_plot,Mcap_967_clade_plot,
-Mcap_983_clade_plot,Mcap_974_clade_plot,Mcap_984_clade_plot,Mcap_962_clade_plot,
-                    #labels = c("A", "B", "C","D","E","F"),
-                    ncol = 4, nrow = 2);Mcap_DIV_clade_plot2
-
-Mcap_DIV_clade_plot3 <- ggarrange(Mcap_957_clade_plot,Mcap_945_clade_plot,Mcap_960_clade_plot,Mcap_976_clade_plot,
-Mcap_985_clade_plot,Mcap_964_clade_plot,Mcap_985_clade_plot,Mcap_964_clade_plot,Mcap_985_clade_plot,Mcap_959_clade_plot,Mcap_980_clade_plot,
-                    #labels = c("A", "B", "C","D","E","F"),
-                    ncol = 4, nrow = 3);Mcap_DIV_clade_plot3
 ```
 
 #get %C and %D for each sample (telomere data as well)
@@ -1028,7 +1175,7 @@ p2 + geom_polygon(aes(fill=SampleType)) + geom_point(size=5) + ggtitle("samples"
 # PERMANOVA coralDIV2.prune (older)
 
 Write specific questions to answer:
--do algal communities differe between colonies? 
+-do algal communities differ between colonies? 
 -do algal communities differ within colonies
 -do they differ between C-only and D-only? 
 -is there a dominant C type or D type
