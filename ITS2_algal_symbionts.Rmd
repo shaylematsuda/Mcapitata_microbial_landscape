@@ -186,11 +186,123 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
 
 #adonis by broad location and colony ID
   adonis2(DIV_RelA.dist ~ SampLoc*TagID, data = samp.DIV_RelA.dist)
+  
+  
+# Split into groups of CD, C and D only ####
+#C only
 
+#adonis by colony by sample location by branch/plate 
+  C.DIV_RelA.dist <- subset_samples(DIV_RelA, Zoox =="C") #Subset by colony 
+  C.DIV_RelA.dist = prune_taxa(taxa_sums(C.DIV_RelA.dist) > 0, C.DIV_RelA.dist) #this removes any OTU with 0s
+
+  C.DIV_RelA.dist.dist <- phyloseq::distance(C.DIV_RelA.dist, method = "bray")
+  samp.C.DIV_RelA.dist.dist <- as(sample_data(C.DIV_RelA.dist), "data.frame") #sample df
+  
+#adonis 
+  adonis2(C.DIV_RelA.dist.dist ~ TagID, data = samp.C.DIV_RelA.dist.dist)
+  adonis2(C.DIV_RelA.dist.dist ~ Location, data = samp.C.DIV_RelA.dist.dist)
+  adonis2(C.DIV_RelA.dist.dist ~ TagID*Location, data = samp.C.DIV_RelA.dist.dist)
+
+  set.seed(30)
+ord.DIV_RelA.C.dist<- ordinate(C.DIV_RelA.dist, "NMDS", "bray", trymax = 100) 
+stressplot(ord.DIV_RelA.C.dist)
+scores.ord.DIV_RelA.C.dist <- as.data.frame(cbind(vegan::scores(ord.DIV_RelA.C.dist, display="sites"))) #make df
+scores.ord.DIV_RelA.C.dist$TagID <- samp.C.DIV_RelA.dist.dist$TagID
+scores.ord.DIV_RelA.C.dist$col.branch <- samp.C.DIV_RelA.dist.dist$col.branch
+scores.ord.DIV_RelA.C.dist$Location <- samp.C.DIV_RelA.dist.dist$Location
+
+a<-ggplot(scores.ord.DIV_RelA.C.dist, aes(x = NMDS1, y = NMDS2)) + 
+  geom_point(aes(colour = TagID), size = 4,show.legend=T) +
+  # scale_color_manual(values=Sp.colors)+
+  # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
+  stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
+  ggtitle("NMDS its2 Bray Curtis TagID C-only") +
+  theme_classic()
+#ggsave("bc_all.pdf")
+
+#D only
+
+#adonis by colony by sample location by branch/plate
+  D.DIV_RelA.dist <- subset_samples(DIV_RelA, Zoox =="D") #Subset by colony 
+  D.DIV_RelA.dist = prune_taxa(taxa_sums(D.DIV_RelA.dist) > 0, D.DIV_RelA.dist) #this removes any OTU with 0s
+
+  D.DIV_RelA.dist.dist <- phyloseq::distance(D.DIV_RelA.dist, method = "bray")
+  samp.D.DIV_RelA.dist.dist <- as(sample_data(D.DIV_RelA.dist), "data.frame") #sample df
+
+#adonis
+  samp.D.DIV_RelA.dist.dist$col.branch<-paste(samp.D.DIV_RelA.dist.dist$TagID,samp.D.DIV_RelA.dist.dist$branch.plate)
+  
+  adonis2(D.DIV_RelA.dist.dist ~ TagID, data = samp.D.DIV_RelA.dist.dist)
+  adonis2(D.DIV_RelA.dist.dist ~ Location, data = samp.D.DIV_RelA.dist.dist)
+  adonis2(D.DIV_RelA.dist.dist ~ TagID*Location, data = samp.D.DIV_RelA.dist.dist)
+
+
+  set.seed(30)
+ord.DIV_RelA.D.dist<- ordinate(D.DIV_RelA.dist, "NMDS", "bray", trymax = 100) 
+stressplot(ord.DIV_RelA.D.dist)
+scores.ord.DIV_RelA.D.dist <- as.data.frame(cbind(vegan::scores(ord.DIV_RelA.D.dist, display="sites"))) #make df
+scores.ord.DIV_RelA.D.dist$TagID <- samp.D.DIV_RelA.dist.dist$TagID
+scores.ord.DIV_RelA.D.dist$col.branch <- samp.D.DIV_RelA.dist.dist$col.branch
+scores.ord.DIV_RelA.D.dist$Location <- samp.D.DIV_RelA.dist.dist$Location
+
+b<-ggplot(scores.ord.DIV_RelA.D.dist, aes(x = NMDS1, y = NMDS2)) + 
+  geom_point(aes(colour = TagID), size = 4,show.legend=T) +
+  # scale_color_manual(values=Sp.colors)+
+  # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
+  stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
+  ggtitle("NMDS its2 Bray Curtis TagID D-only") +
+  theme_classic()
+#ggsave("bc_all.pdf")
+
+#CD only
+
+#adonis by colony by sample location by branch/plate
+  CD.DIV_RelA.dist <- subset_samples(DIV_RelA, Zoox =="CD") #Subset by colony 
+  CD.DIV_RelA.dist = prune_taxa(taxa_sums(CD.DIV_RelA.dist) > 0, CD.DIV_RelA.dist) #this removes any OTU with 0s
+
+  CD.DIV_RelA.dist.dist <- phyloseq::distance(CD.DIV_RelA.dist, method = "bray")
+  samp.CD.DIV_RelA.dist.dist <- as(sample_data(CD.DIV_RelA.dist), "data.frame") #sample df
+
+#adonis by colony level by branch
+  samp.CD.DIV_RelA.dist.dist$col.branch<-paste(samp.CD.DIV_RelA.dist.dist$TagID,samp.CD.DIV_RelA.dist.dist$branch.plate)
+  
+  adonis2(CD.DIV_RelA.dist.dist ~ TagID, data = samp.CD.DIV_RelA.dist.dist)
+  adonis2(CD.DIV_RelA.dist.dist ~ Location, data = samp.CD.DIV_RelA.dist.dist)
+  adonis2(CD.DIV_RelA.dist.dist ~ TagID*Location, data = samp.CD.DIV_RelA.dist.dist)
+
+  
+  set.seed(30)
+orCD.DIV_RelA.CD.dist<- ordinate(CD.DIV_RelA.dist, "NMDS", "bray", trymax = 100) 
+stressplot(orCD.DIV_RelA.CD.dist)
+scores.orCD.DIV_RelA.CD.dist <- as.data.frame(cbind(vegan::scores(orCD.DIV_RelA.CD.dist, display="sites"))) #make df
+scores.orCD.DIV_RelA.CD.dist$TagID <- samp.CD.DIV_RelA.dist.dist$TagID
+scores.orCD.DIV_RelA.CD.dist$col.branch <- samp.CD.DIV_RelA.dist.dist$col.branch
+scores.orCD.DIV_RelA.CD.dist$Location <- samp.CD.DIV_RelA.dist.dist$Location
+
+c<-ggplot(scores.orCD.DIV_RelA.CD.dist, aes(x = NMDS1, y = NMDS2)) + 
+  geom_point(aes(colour = TagID), size = 4,show.legend=T) +
+  # scale_color_manual(values=Sp.colors)+
+  # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
+  stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
+  ggtitle("NMDS its2 Bray Curtis TagID CD-only") +
+  theme_classic()
+#ggsave("bc_all.pdf")
+  
+  library(cowplot)
+
+  plot_grid(a, b, c)
+
+  
+  
+  
+
+```
 
 #subset only branches
+```{r}
 #adonis by colony by sample location by branch/plate
   Branch.only <- subset_samples(DIV_RelA, SampLoc =="Branch") #Subset by colony 
+  Branch.only = prune_taxa(taxa_sums(Branch.only) > 0, Branch.only) #this removes any OTU with 0s
 
   Branch.only.dist <- phyloseq::distance(Branch.only, method = "bray")
   samp.Branch.only.dist <- as(sample_data(Branch.only), "data.frame") #sample df
@@ -203,8 +315,87 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
   
   adonis2(Branch.only.dist ~ col.branch, data = samp.Branch.only.dist)
   adonis2(Branch.only.dist ~ TagID*col.branch, data = samp.Branch.only.dist)
+  
+
+
+set.seed(300)
+ord.Branch.only<- ordinate(Branch.only, "NMDS", "bray", trymax = 100) 
+stressplot(ord.Branch.only)
+scores.ord.ord.Branch.only <- as.data.frame(cbind(vegan::scores(ord.Branch.only, display="sites"))) #make df
+scores.ord.ord.Branch.only$TagID <- samp.Branch.only.dist$TagID
+scores.ord.ord.Branch.only$col.branch <- samp.Branch.only.dist$col.branch
+scores.ord.ord.Branch.only$Location <- samp.Branch.only.dist$Location
+
+ggplot(scores.ord.ord.Branch.only, aes(x = NMDS1, y = NMDS2)) + 
+  geom_point(aes(colour = TagID), size = 4,show.legend=T) +
+  # scale_color_manual(values=Sp.colors)+
+  # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
+  stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
+  ggtitle("NMDS its2 Bray Curtis TagID") +
+  theme_classic()
+#ggsave("bc_all.pdf")
+
+
+# Split into groups of CD, C and D only ####
+#C only
+
+#adonis by colony by sample location by branch/plate
+  C.Branch.only <- subset_samples(Branch.only, Zoox =="C") #Subset by colony 
+  C.Branch.only = prune_taxa(taxa_sums(C.Branch.only) > 0, C.Branch.only) #this removes any OTU with 0s
+
+  C.Branch.only.dist <- phyloseq::distance(C.Branch.only, method = "bray")
+  samp.C.Branch.only.dist <- as(sample_data(C.Branch.only), "data.frame") #sample df
+
+#adonis by colony level
+  adonis2(C.Branch.only.dist ~ TagID, data = samp.C.Branch.only.dist)
+  
+#adonis by colony level by branch
+  samp.C.Branch.only.dist$col.branch<-paste(samp.C.Branch.only.dist$TagID,samp.C.Branch.only.dist$branch.plate)
+  
+  adonis2(C.Branch.only.dist ~ col.branch, data = samp.C.Branch.only.dist)
+  adonis2(C.Branch.only.dist ~ TagID, data = samp.C.Branch.only.dist)
+  adonis2(C.Branch.only.dist ~ Sub.loc, data = samp.C.Branch.only.dist)
+
+#D only
+
+#adonis by colony by sample location by branch/plate
+  D.Branch.only <- subset_samples(Branch.only, Zoox =="D") #Subset by colony 
+  D.Branch.only = prune_taxa(taxa_sums(D.Branch.only) > 0, D.Branch.only) #this removes any OTU with 0s
+
+  D.Branch.only.dist <- phyloseq::distance(D.Branch.only, method = "bray")
+  samp.D.Branch.only.dist <- as(sample_data(D.Branch.only), "data.frame") #sample df
+
+#adonis
+  samp.D.Branch.only.dist$col.branch<-paste(samp.D.Branch.only.dist$TagID,samp.D.Branch.only.dist$branch.plate)
+  
+  adonis2(D.Branch.only.dist ~ col.branch, data = samp.D.Branch.only.dist)
+  adonis2(D.Branch.only.dist ~ TagID, data = samp.D.Branch.only.dist)
+  adonis2(D.Branch.only.dist ~ Sub.loc, data = samp.D.Branch.only.dist)
 
   
+#CD only
+
+#adonis by colony by sample location by branch/plate
+  CD.Branch.only <- subset_samples(Branch.only, Zoox =="CD") #Subset by colony 
+  CD.Branch.only = prune_taxa(taxa_sums(CD.Branch.only) > 0, CD.Branch.only) #this removes any OTU with 0s
+
+  CD.Branch.only.dist <- phyloseq::distance(CD.Branch.only, method = "bray")
+  samp.CD.Branch.only.dist <- as(sample_data(CD.Branch.only), "data.frame") #sample df
+
+#adonis by colony level by branch
+  samp.CD.Branch.only.dist$col.branch<-paste(samp.CD.Branch.only.dist$TagID,samp.CD.Branch.only.dist$branch.plate)
+  
+  adonis2(CD.Branch.only.dist ~ col.branch, data = samp.CD.Branch.only.dist)
+  adonis2(CD.Branch.only.dist ~ TagID, data = samp.CD.Branch.only.dist)
+    adonis2(CD.Branch.only.dist ~ Sub.loc, data = samp.CD.Branch.only.dist)
+
+  adonis2(CD.Branch.only.dist ~ Sub.loc*TagID, data = samp.CD.Branch.only.dist)
+  adonis2(CD.Branch.only.dist ~ TagID*Sub.loc, data = samp.CD.Branch.only.dist)
+
+  
+  
+  
+```  
   
   
   
@@ -212,6 +403,7 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
   
   
 #Ordination NMDS for all colonies
+```{r}
 set.seed(30)
 ord.DIV_RelA<- ordinate(DIV_RelA, "NMDS", "bray", trymax = 100) 
 stressplot(ord.DIV_RelA)
