@@ -134,7 +134,7 @@ coralDIV2.rare
 
 
 #Rareify Profiles/Clades coral_absolutePro.prune
-coral_Absolute_Pro.rare <- rarefy_even_depth(coral_absolutePro.prune, sample.size = 2000, rngseed = 711)   #C14 sample removedbc less than 2000 
+coral_Absolute_Pro.rare <- rarefy_even_depth(coral_absolutePro.prune, sample.size = 1600, rngseed = 711)   #C14 sample removedbc less than 2000 
 sample_sums(coral_Absolute_Pro.rare) #Double check that the sub-sampling worked, this should report 2000 for each sample
 coralPro.rare <- as(sample_data(coral_Absolute_Pro.rare), "data.frame")
 coralPro.rare
@@ -159,6 +159,65 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
    
 
 ```
+#get %C and %D for each sample (telomere data as well) df Pro_RelA
+```{r}
+#do tax glom in the data to group C and D 
+ data.clade<- tax_glom(Pro_RelA, taxrank="clade") 
+
+#coerce into df
+  # Extract abundance matrix from the phyloseq object
+  OTU1 = as(otu_table(data.clade), "matrix")
+  # transpose if necessary
+  if(taxa_are_rows(data.clade)){OTU1 <- t(OTU1)}
+  # Coerce to data.frame
+  OTUdf = as.data.frame(OTU1)
+
+  library(tidyverse)
+library(tibble)
+  
+OTUdf <- tibble::rownames_to_column(OTUdf, "sample.name")
+as_tibble(OTUdf)
+
+OTUdf<-OTUdf%>%
+  rename(C1 = `87732`) %>%
+  rename( C2 = `87257`) %>%
+  rename( D1 = `87918`) %>%
+  rename( D2 = `87537`)
+
+
+OTUdf<-
+  OTUdf %>% rowwise() %>%
+  mutate(Prop.C = sum(c(C1+C2))) %>%  #sum C
+    mutate(Prop.D = sum(c(D1+D2)))   #sum D
+        #select( c(1, 6:7))              # remove cols you don't want anymore, not working
+
+OTUdf<-OTUdf %>%
+    mutate(samp.num = as.numeric(str_extract(sample.name, "[0-9]+"))) %>%   #extract number in samp name
+      mutate(samp.let = as.character(str_extract(sample.name, "[A-Z]+")))   # extract letter in samp name
+#Next enter genotype letter combo
+
+tibble(OTUdf) 
+
+OTUdf<-OTUdf%>%              
+  rowwise() %>%
+      mutate(
+        C = sum(c_across(2:3)),
+        D = sum(c_across(4:5)))
+
+#write.csv(OTUdf, "Clade.samps2022.csv")     
+  
+OTUdf.PropCD<-OTUdf[,c("sample.name","Prop.C", "Prop.D")]
+head(OTUdf.PropCD)
+OTUdf.PropCD<-rename(OTUdf.PropCD,  Sample_name=sample.name)
+#write.csv(OTUdf.PropCD,"propCD.csv")
+```
+
+
+
+
+
+
+
 
 # make distance matrix
 (Code from TT17)
@@ -168,7 +227,10 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
   samp.DIV_RelA.dist <- as(sample_data(DIV_RelA), "data.frame") #sample df
 
 #adonis by colony level
+  set.seed(30)
   adonis2(DIV_RelA.dist ~ TagID, data = samp.DIV_RelA.dist)
+  set.seed(30)
+  adonis2(DIV_RelA.dist ~ Prop.D, data = samp.DIV_RelA.dist)
     
 
 # Homogeneity of dispersion test
@@ -188,6 +250,32 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
   adonis2(DIV_RelA.dist ~ SampLoc*TagID, data = samp.DIV_RelA.dist)
   
   
+set.seed(30)
+ord.DIV_RelA.dist<- ordinate(DIV_RelA, "NMDS", "bray", trymax = 100) 
+stressplot(ord.DIV_RelA.dist)
+scores.ord.DIV_RelA.dist <- as.data.frame(cbind(vegan::scores(ord.DIV_RelA.dist, display="sites"))) #make df
+scores.ord.DIV_RelA.dist$TagID <- samp.DIV_RelA.dist$TagID
+scores.ord.DIV_RelA.dist$col.branch <- samp.DIV_RelA.dist$col.branch
+scores.ord.DIV_RelA.dist$Location <- samp.DIV_RelA.dist$Location
+scores.ord.DIV_RelA.dist$Zoox <- samp.DIV_RelA.dist$Zoox
+
+
+ggplot(scores.ord.DIV_RelA.dist, aes(x = NMDS1, y = NMDS2)) + 
+  geom_point(aes(colour = TagID), size = 4,show.legend=T) +
+  # scale_color_manual(values=Sp.colors)+
+  # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
+  stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
+  ggtitle("NMDS its2 Bray Curtis TagID") +
+  theme_classic()
+  #facet_wrap(~Zoox)
+#ggsave("bc_all.pdf")  
+  
+  
+  
+  
+  
+  
+  
 # Split into groups of CD, C and D only ####
 #C only
 
@@ -199,8 +287,11 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
   samp.C.DIV_RelA.dist.dist <- as(sample_data(C.DIV_RelA.dist), "data.frame") #sample df
   
 #adonis 
+  set.seed(30)
   adonis2(C.DIV_RelA.dist.dist ~ TagID, data = samp.C.DIV_RelA.dist.dist)
+    set.seed(30)
   adonis2(C.DIV_RelA.dist.dist ~ Location, data = samp.C.DIV_RelA.dist.dist)
+    set.seed(30)
   adonis2(C.DIV_RelA.dist.dist ~ TagID*Location, data = samp.C.DIV_RelA.dist.dist)
 
   set.seed(30)
@@ -231,10 +322,12 @@ a<-ggplot(scores.ord.DIV_RelA.C.dist, aes(x = NMDS1, y = NMDS2)) +
 
 #adonis
   samp.D.DIV_RelA.dist.dist$col.branch<-paste(samp.D.DIV_RelA.dist.dist$TagID,samp.D.DIV_RelA.dist.dist$branch.plate)
-  
+  set.seed(30)
   adonis2(D.DIV_RelA.dist.dist ~ TagID, data = samp.D.DIV_RelA.dist.dist)
-  adonis2(D.DIV_RelA.dist.dist ~ Location, data = samp.D.DIV_RelA.dist.dist)
-  adonis2(D.DIV_RelA.dist.dist ~ TagID*Location, data = samp.D.DIV_RelA.dist.dist)
+   set.seed(30)
+ adonis2(D.DIV_RelA.dist.dist ~ Location, data = samp.D.DIV_RelA.dist.dist)
+    set.seed(30)
+adonis2(D.DIV_RelA.dist.dist ~ TagID*Location, data = samp.D.DIV_RelA.dist.dist)
 
 
   set.seed(30)
@@ -266,9 +359,12 @@ b<-ggplot(scores.ord.DIV_RelA.D.dist, aes(x = NMDS1, y = NMDS2)) +
 #adonis by colony level by branch
   samp.CD.DIV_RelA.dist.dist$col.branch<-paste(samp.CD.DIV_RelA.dist.dist$TagID,samp.CD.DIV_RelA.dist.dist$branch.plate)
   
+  set.seed(30)
   adonis2(CD.DIV_RelA.dist.dist ~ TagID, data = samp.CD.DIV_RelA.dist.dist)
-  adonis2(CD.DIV_RelA.dist.dist ~ Location, data = samp.CD.DIV_RelA.dist.dist)
-  adonis2(CD.DIV_RelA.dist.dist ~ TagID*Location, data = samp.CD.DIV_RelA.dist.dist)
+    set.seed(30)
+adonis2(CD.DIV_RelA.dist.dist ~ Location, data = samp.CD.DIV_RelA.dist.dist)
+    set.seed(30)
+adonis2(CD.DIV_RelA.dist.dist ~ TagID*Location, data = samp.CD.DIV_RelA.dist.dist)
 
   
   set.seed(30)
@@ -278,14 +374,16 @@ scores.orCD.DIV_RelA.CD.dist <- as.data.frame(cbind(vegan::scores(orCD.DIV_RelA.
 scores.orCD.DIV_RelA.CD.dist$TagID <- samp.CD.DIV_RelA.dist.dist$TagID
 scores.orCD.DIV_RelA.CD.dist$col.branch <- samp.CD.DIV_RelA.dist.dist$col.branch
 scores.orCD.DIV_RelA.CD.dist$Location <- samp.CD.DIV_RelA.dist.dist$Location
+scores.orCD.DIV_RelA.CD.dist$SampLoc <- samp.CD.DIV_RelA.dist.dist$SampLoc
+
 
 c<-ggplot(scores.orCD.DIV_RelA.CD.dist, aes(x = NMDS1, y = NMDS2)) + 
-  geom_point(aes(colour = TagID), size = 4,show.legend=T) +
+  geom_point(aes(colour = TagID,shape=SampLoc), size = 4,show.legend=T) +
   # scale_color_manual(values=Sp.colors)+
   # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
   stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
   ggtitle("NMDS its2 Bray Curtis TagID CD-only") +
-  theme_classic()
+  theme_classic();c
 #ggsave("bc_all.pdf")
   
   library(cowplot)
@@ -308,18 +406,25 @@ c<-ggplot(scores.orCD.DIV_RelA.CD.dist, aes(x = NMDS1, y = NMDS2)) +
   samp.Branch.only.dist <- as(sample_data(Branch.only), "data.frame") #sample df
 
 #adonis by colony level
+  set.seed(30)
   adonis2(Branch.only.dist ~ TagID*Sub.loc, data = samp.Branch.only.dist)
   
 #adonis by colony level by branch
   samp.Branch.only.dist$col.branch<-paste(samp.Branch.only.dist$TagID,samp.Branch.only.dist$branch.plate)
   
-  adonis2(Branch.only.dist ~ col.branch, data = samp.Branch.only.dist)
-  adonis2(Branch.only.dist ~ TagID*col.branch, data = samp.Branch.only.dist)
+    set.seed(30)
+adonis2(Branch.only.dist ~ col.branch, data = samp.Branch.only.dist)
+    set.seed(30)
+  adonis2(Branch.only.dist ~ Sub.loc, data = samp.Branch.only.dist)
   
+     set.seed(30)
+  adonis2(Branch.only.dist ~ TagID+col.branch+Sub.loc, data = samp.Branch.only.dist)
+    adonis2(Branch.only.dist ~ TagID:branch.plate+TagID*Sub.loc, data = samp.Branch.only.dist)
+
 
 
 set.seed(300)
-ord.Branch.only<- ordinate(Branch.only, "NMDS", "bray", trymax = 100) 
+ord.Branch.only<- ordinate(Branch.only, "NMDS", "bray", trymax = 150) #no convergence
 stressplot(ord.Branch.only)
 scores.ord.ord.Branch.only <- as.data.frame(cbind(vegan::scores(ord.Branch.only, display="sites"))) #make df
 scores.ord.ord.Branch.only$TagID <- samp.Branch.only.dist$TagID
@@ -351,7 +456,7 @@ ggplot(scores.ord.ord.Branch.only, aes(x = NMDS1, y = NMDS2)) +
   
 #adonis by colony level by branch
   samp.C.Branch.only.dist$col.branch<-paste(samp.C.Branch.only.dist$TagID,samp.C.Branch.only.dist$branch.plate)
-  
+  set.seed(30)
   adonis2(C.Branch.only.dist ~ col.branch, data = samp.C.Branch.only.dist)
   adonis2(C.Branch.only.dist ~ TagID, data = samp.C.Branch.only.dist)
   adonis2(C.Branch.only.dist ~ Sub.loc, data = samp.C.Branch.only.dist)
@@ -1254,56 +1359,6 @@ ggsave("Mcap_980_clade_plot.pdf")
 
 ```
 
-#get %C and %D for each sample (telomere data as well)
-```{r}
-#do tax glom in the data to group C and D 
- data.clade<- tax_glom(coral2.prune, taxrank="clade") 
-
-#coerce into df
-  # Extract abundance matrix from the phyloseq object
-  OTU1 = as(otu_table(data.clade), "matrix")
-  # transpose if necessary
-  if(taxa_are_rows(data.clade)){OTU1 <- t(OTU1)}
-  # Coerce to data.frame
-  OTUdf = as.data.frame(OTU1)
-
-  library(tidyverse)
-library(tibble)
-  
-OTUdf <- tibble::rownames_to_column(OTUdf, "sample.name")
-as_tibble(OTUdf)
-
-OTUdf<-OTUdf%>%
-  rename(C1 = `87732`) %>%
-  rename( C2 = `87257`) %>%
-  rename( D1 = `87918`) %>%
-  rename( D2 = `87537`)
-
-
-OTUdf<-
-  OTUdf %>% rowwise() %>%
-  mutate(C = sum(c(C1+C2))) %>%  #sum C
-    mutate(D = sum(c(D1+D2)))   #sum D
-        #select( c(1, 6:7))              # remove cols you don't want anymore, not working
-
-OTUdf<-OTUdf %>%
-    mutate(samp.num = as.numeric(str_extract(sample.name, "[0-9]+"))) %>%   #extract number in samp name
-      mutate(samp.let = as.character(str_extract(sample.name, "[A-Z]+")))   # extract letter in samp name
-#Next enter genotype letter combo
-
-tibble(OTUdf) 
-
-OTUdf<-OTUdf%>%              
-  rowwise() %>%
-      mutate(
-        C = sum(c_across(2:3)),
-        D = sum(c_across(4:5)))
-
-write.csv(OTUdf, "Clade.samps2022.csv")     
-  
-
-
-```
 
 
 Plot all clade level by colony
