@@ -372,13 +372,9 @@ scores.orCD.DIV_RelA.CD.dist$Location <- samp.CD.DIV_RelA.dist.dist$Location
 scores.orCD.DIV_RelA.CD.dist$SampLoc <- samp.CD.DIV_RelA.dist.dist$SampLoc
 scores.orCD.DIV_RelA.CD.dist$Prop.D <- samp.CD.DIV_RelA.dist.dist$Prop.D
 
+write.csv(CD.DIV_RelA.dist,"CD.DIV_RelA.dist_forHannah.csv")
 
-
-
-
-
-
-
+##can't figure out how to make this a gradient plot
 
 c<-ggplot(scores.orCD.DIV_RelA.CD.dist, aes(x = NMDS1, y = NMDS2)) + 
   geom_point(aes(colour = Prop.D), size = 4,show.legend=T) +
