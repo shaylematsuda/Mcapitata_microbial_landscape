@@ -32,17 +32,17 @@ load("data/Absolute_coral_phyloseq2022.RData") #absolute reads data
 Use: coral_absolutePro and coral_Absolute_DIV to create your RelA dfs
 
 
-Clean -dont run this yet for Raw
+Clean up (after checking low samps)
 ```{r}
-# coral2 <- coral %>% 
-#   subset_samples(!is.na(host_species))
-# coralDIV2 <- coralDIV %>% 
-#   subset_samples(!is.na(host_species))
+coral2 <- coral %>% 
+   subset_samples(!is.na(host_species))
+ coralDIV2 <- coralDIV %>% 
+   subset_samples(!is.na(host_species))
 # 
 # # HERE YOU MAKE RELA DATA ACTUALLY OUT OF 100% 
 # # Transform to relative abundance
-# coral2 <- transform_sample_counts(coral2, function(x) 100 * x/sum(x))
-# coralDIV2 <- transform_sample_counts(coralDIV2, function(x) 100 * x/sum(x))
+ coral2 <- transform_sample_counts(coral2, function(x) 100 * x/sum(x))
+ coralDIV2 <- transform_sample_counts(coralDIV2, function(x) 100 * x/sum(x))
 
 ```
 
@@ -84,12 +84,12 @@ coral_absolutePro
 coral_Absolute_DIV
 ```{r} 
 #DIVs 
-to_remove <- c("NTC", "NTC2", "S6", "G7","Q11","G8", "B13","B6") #make list of samples to remove with less than 2000 seqs
+to_remove <- c("NTC", "NTC2", "S6", "G7","Q11","G8", "B13","B6","C14") #make list of samples to remove with less than 2000 seqs
 coral_Absolute_DIV2.prune <- prune_samples(!(sample_names(coral_Absolute_DIV) %in% to_remove), coral_Absolute_DIV) #remove
 #sample_names(coralDIV2.prune) # check to see they are removed
 
 #Pros
-to_remove <- c("NTC", "NTC2", "S6", "G7","Q11","G8", "B13","B6") #make list of samples to remove with less than 2000 seqs
+to_remove <- c("NTC", "NTC2", "S6", "G7","Q11","G8", "B13","B6", "C14") #make list of samples to remove with less than 2000 seqs
 coral_absolutePro.prune <- prune_samples(!(sample_names(coral_absolutePro) %in% to_remove), coral_absolutePro) #remove
 #sample_names(coral2.prune) # check to see they are removed
 
@@ -140,7 +140,7 @@ coralPro.rare <- as(sample_data(coral_Absolute_Pro.rare), "data.frame")
 coralPro.rare
 ```
 
-Turn rarified df in to relative abundance: coral_Absolute_DIV2.rare
+Turn rarified df in to relative abundance: coral_Absolute_DIV2.rare 
 ```{r}
 #RELA 
 DIV_RelA  = transform_sample_counts(coral_Absolute_DIV2.rare, function(x) x / sum(x) )  #save as RELA DIVs
@@ -160,63 +160,58 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
 
 ```
 #get %C and %D for each sample (telomere data as well) df Pro_RelA
+Export the csv and add in metadata col in the ITS2 Symp to Phyloseq.RMD
 ```{r}
-#do tax glom in the data to group C and D 
- data.clade<- tax_glom(Pro_RelA, taxrank="clade") 
-
-#coerce into df
-  # Extract abundance matrix from the phyloseq object
-  OTU1 = as(otu_table(data.clade), "matrix")
-  # transpose if necessary
-  if(taxa_are_rows(data.clade)){OTU1 <- t(OTU1)}
-  # Coerce to data.frame
-  OTUdf = as.data.frame(OTU1)
-
-  library(tidyverse)
-library(tibble)
-  
-OTUdf <- tibble::rownames_to_column(OTUdf, "sample.name")
-as_tibble(OTUdf)
-
-OTUdf<-OTUdf%>%
-  rename(C1 = `87732`) %>%
-  rename( C2 = `87257`) %>%
-  rename( D1 = `87918`) %>%
-  rename( D2 = `87537`)
-
-
-OTUdf<-
-  OTUdf %>% rowwise() %>%
-  mutate(Prop.C = sum(c(C1+C2))) %>%  #sum C
-    mutate(Prop.D = sum(c(D1+D2)))   #sum D
-        #select( c(1, 6:7))              # remove cols you don't want anymore, not working
-
-OTUdf<-OTUdf %>%
-    mutate(samp.num = as.numeric(str_extract(sample.name, "[0-9]+"))) %>%   #extract number in samp name
-      mutate(samp.let = as.character(str_extract(sample.name, "[A-Z]+")))   # extract letter in samp name
-#Next enter genotype letter combo
-
-tibble(OTUdf) 
-
-OTUdf<-OTUdf%>%              
-  rowwise() %>%
-      mutate(
-        C = sum(c_across(2:3)),
-        D = sum(c_across(4:5)))
-
-#write.csv(OTUdf, "Clade.samps2022.csv")     
-  
-OTUdf.PropCD<-OTUdf[,c("sample.name","Prop.C", "Prop.D")]
-head(OTUdf.PropCD)
-OTUdf.PropCD<-rename(OTUdf.PropCD,  Sample_name=sample.name)
-#write.csv(OTUdf.PropCD,"propCD.csv")
+# #do tax glom in the data to group C and D
+#  data.clade<- tax_glom(Pro_RelA, taxrank="clade")
+# 
+# #coerce into df
+#   # Extract abundance matrix from the phyloseq object
+#   OTU1 = as(otu_table(data.clade), "matrix")
+#   # transpose if necessary
+#   if(taxa_are_rows(data.clade)){OTU1 <- t(OTU1)}
+#   # Coerce to data.frame
+#   OTUdf = as.data.frame(OTU1)
+# 
+#   library(tidyverse)
+# library(tibble)
+# 
+# OTUdf <- tibble::rownames_to_column(OTUdf, "sample.name")
+# as_tibble(OTUdf)
+# 
+# OTUdf<-OTUdf%>%
+#   rename(C1 = `87732`) %>%
+#   rename( C2 = `87257`) %>%
+#   rename( D1 = `87918`) %>%
+#   rename( D2 = `87537`)
+# 
+# 
+# OTUdf<-
+#   OTUdf %>% rowwise() %>%
+#   mutate(Prop.C = sum(c(C1+C2))) %>%  #sum C
+#     mutate(Prop.D = sum(c(D1+D2)))   #sum D
+#         #select( c(1, 6:7))              # remove cols you don't want anymore, not working
+# 
+# OTUdf<-OTUdf %>%
+#     mutate(samp.num = as.numeric(str_extract(sample.name, "[0-9]+"))) %>%   #extract number in samp name
+#       mutate(samp.let = as.character(str_extract(sample.name, "[A-Z]+")))   # extract letter in samp name
+# #Next enter genotype letter combo
+# 
+# tibble(OTUdf)
+# 
+# OTUdf<-OTUdf%>%
+#   rowwise() %>%
+#       mutate(
+#         C = sum(c_across(2:3)),
+#         D = sum(c_across(4:5)))
+# 
+# #write.csv(OTUdf, "Clade.samps2022.csv")
+# 
+# OTUdf.PropCD<-OTUdf[,c("sample.name","Prop.C", "Prop.D")]
+# head(OTUdf.PropCD)
+# OTUdf.PropCD<-rename(OTUdf.PropCD,  Sample_name=sample.name)
+# write.csv(OTUdf.PropCD,"propCD.csv")
 ```
-
-
-
-
-
-
 
 
 # make distance matrix
@@ -308,7 +303,7 @@ a<-ggplot(scores.ord.DIV_RelA.C.dist, aes(x = NMDS1, y = NMDS2)) +
   # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
   stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
   ggtitle("NMDS its2 Bray Curtis TagID C-only") +
-  theme_classic()
+  theme_classic();a
 #ggsave("bc_all.pdf")
 
 #D only
@@ -344,7 +339,7 @@ b<-ggplot(scores.ord.DIV_RelA.D.dist, aes(x = NMDS1, y = NMDS2)) +
   # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
   stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
   ggtitle("NMDS its2 Bray Curtis TagID D-only") +
-  theme_classic()
+  theme_classic();b
 #ggsave("bc_all.pdf")
 
 #CD only
@@ -375,13 +370,21 @@ scores.orCD.DIV_RelA.CD.dist$TagID <- samp.CD.DIV_RelA.dist.dist$TagID
 scores.orCD.DIV_RelA.CD.dist$col.branch <- samp.CD.DIV_RelA.dist.dist$col.branch
 scores.orCD.DIV_RelA.CD.dist$Location <- samp.CD.DIV_RelA.dist.dist$Location
 scores.orCD.DIV_RelA.CD.dist$SampLoc <- samp.CD.DIV_RelA.dist.dist$SampLoc
+scores.orCD.DIV_RelA.CD.dist$Prop.D <- samp.CD.DIV_RelA.dist.dist$Prop.D
+
+
+
+
+
+
+
 
 
 c<-ggplot(scores.orCD.DIV_RelA.CD.dist, aes(x = NMDS1, y = NMDS2)) + 
-  geom_point(aes(colour = TagID,shape=SampLoc), size = 4,show.legend=T) +
-  # scale_color_manual(values=Sp.colors)+
-  # geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
-  stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = TagID), linetype = 2,show.legend=F) +
+  geom_point(aes(colour = Prop.D), size = 4,show.legend=T) +
+  scale_colour_brewer(palette = 1)  +
+#geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
+    # stat_ellipse(aes(group = TagID), colour = "black") +
   ggtitle("NMDS its2 Bray Curtis TagID CD-only") +
   theme_classic();c
 #ggsave("bc_all.pdf")
