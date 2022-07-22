@@ -1,0 +1,572 @@
+	0-RawData	1-FilterAndTrim	2-ErrorModel	3.1-Dereplication	3.2-Denoising	4-ESV	5-MultipleSequenceAlignment	6-ChimeraRemoval	7-PreClassification	8-Clustering_100	9-TaxaFilter_100	10-MultipletonsFilter_100	11-Subsampling_100	12-Lulu_100
+PLATEIII_A_1	9301	8470	8470	8470 (3334 uniques)	8438 (77 uniques)	7746 (78 uniques)	5493 (47 uniques)	5493 (47 uniques)	5493 (47 uniques)	5493 (47 uniques)	3966 (42 uniques)	3966 (42 uniques)	3000 (42 uniques)	3000 (40 uniques)
+PLATEIII_A_10	17333	15523	15523	15523 (5173 uniques)	15375 (49 uniques)	15110 (55 uniques)	15110 (48 uniques)	15110 (48 uniques)	15110 (48 uniques)	15110 (48 uniques)	15095 (47 uniques)	15095 (47 uniques)	3000 (44 uniques)	3000 (31 uniques)
+PLATEIII_A_11	7520	6178	6178	6178 (2511 uniques)	6104 (44 uniques)	6038 (45 uniques)	6038 (44 uniques)	6038 (44 uniques)	6038 (44 uniques)	6038 (44 uniques)	3969 (20 uniques)	3965 (18 uniques)	3000 (18 uniques)	3000 (15 uniques)
+PLATEIII_A_12	5032	3625	3625	3625 (1245 uniques)	3530 (21 uniques)	3453 (15 uniques)	3429 (14 uniques)	3429 (14 uniques)	3429 (14 uniques)	3429 (14 uniques)	3427 (13 uniques)	3427 (13 uniques)	3000 (13 uniques)	3000 (11 uniques)
+PLATEIII_A_2	14789	13138	13138	13138 (4921 uniques)	13023 (75 uniques)	9135 (78 uniques)	8213 (62 uniques)	8213 (62 uniques)	8213 (62 uniques)	8213 (62 uniques)	6885 (59 uniques)	6885 (59 uniques)	3000 (58 uniques)	3000 (52 uniques)
+PLATEIII_A_3	13850	12363	12363	12363 (5069 uniques)	12241 (138 uniques)	11987 (144 uniques)	10041 (109 uniques)	10041 (109 uniques)	10041 (109 uniques)	10041 (109 uniques)	9821 (107 uniques)	9820 (106 uniques)	3000 (105 uniques)	3000 (96 uniques)
+PLATEIII_A_4	14322	12511	12511	12511 (4770 uniques)	12438 (74 uniques)	12286 (80 uniques)	12240 (71 uniques)	12240 (71 uniques)	12240 (71 uniques)	12240 (71 uniques)	12225 (70 uniques)	12222 (67 uniques)	3000 (66 uniques)	3000 (55 uniques)
+PLATEIII_A_5	24992	21497	21497	21497 (8569 uniques)	21403 (88 uniques)	20839 (93 uniques)	11291 (60 uniques)	11291 (60 uniques)	11291 (60 uniques)	11291 (60 uniques)	10950 (57 uniques)	10950 (57 uniques)	3000 (56 uniques)	3000 (51 uniques)
+PLATEIII_A_6	35524	31678	31678	31678 (10285 uniques)	31601 (105 uniques)	31108 (112 uniques)	22840 (83 uniques)	22840 (83 uniques)	22840 (83 uniques)	22840 (83 uniques)	22515 (80 uniques)	22512 (78 uniques)	3000 (74 uniques)	3000 (71 uniques)
+PLATEIII_A_7	19997	17998	17998	17998 (6479 uniques)	17949 (80 uniques)	17573 (83 uniques)	17312 (77 uniques)	17312 (77 uniques)	17312 (77 uniques)	17312 (77 uniques)	17214 (74 uniques)	17213 (73 uniques)	3000 (71 uniques)	3000 (60 uniques)
+PLATEIII_A_8	8971	7549	7549	7549 (3297 uniques)	7510 (81 uniques)	7356 (80 uniques)	7184 (75 uniques)	7184 (75 uniques)	7184 (75 uniques)	7184 (75 uniques)	6821 (70 uniques)	6821 (70 uniques)	3000 (68 uniques)	3000 (64 uniques)
+PLATEIII_A_9	235153	216858	216858	216858 (44229 uniques)	216212 (286 uniques)	211562 (576 uniques)	211544 (509 uniques)	201527 (228 uniques)	201527 (228 uniques)	201527 (228 uniques)	201476 (225 uniques)	201470 (220 uniques)	3000 (61 uniques)	3000 (15 uniques)
+PLATEIII_B_1	4517	4009	4009	4009 (1694 uniques)	3958 (42 uniques)	3902 (38 uniques)	3228 (29 uniques)	3228 (29 uniques)	3228 (29 uniques)	3228 (29 uniques)	3110 (28 uniques)	3110 (28 uniques)	3000 (28 uniques)	3000 (26 uniques)
+PLATEIII_B_10	25416	23119	23119	23119 (8432 uniques)	23017 (84 uniques)	21218 (90 uniques)	16426 (62 uniques)	16426 (62 uniques)	16426 (62 uniques)	16426 (62 uniques)	14728 (57 uniques)	14728 (57 uniques)	3000 (55 uniques)	3000 (49 uniques)
+PLATEIII_B_11	16932	14980	14980	14980 (5399 uniques)	14897 (82 uniques)	14741 (82 uniques)	11851 (53 uniques)	11851 (53 uniques)	11851 (53 uniques)	11851 (53 uniques)	11505 (48 uniques)	11505 (48 uniques)	3000 (48 uniques)	3000 (43 uniques)
+PLATEIII_B_12	23757	20644	20644	20644 (8062 uniques)	20468 (115 uniques)	20249 (120 uniques)	17851 (85 uniques)	17851 (85 uniques)	17851 (85 uniques)	17851 (85 uniques)	16267 (77 uniques)	16264 (74 uniques)	3000 (71 uniques)	3000 (60 uniques)
+PLATEIII_B_2	12594	11091	11091	11091 (4112 uniques)	11009 (48 uniques)	10921 (76 uniques)	10891 (53 uniques)	10891 (53 uniques)	10891 (53 uniques)	10891 (53 uniques)	10680 (52 uniques)	10677 (49 uniques)	3000 (47 uniques)	3000 (27 uniques)
+PLATEIII_B_3	14110	12533	12533	12533 (4816 uniques)	12466 (52 uniques)	12294 (60 uniques)	11786 (49 uniques)	11786 (49 uniques)	11786 (49 uniques)	11786 (49 uniques)	11786 (49 uniques)	11784 (48 uniques)	3000 (45 uniques)	3000 (42 uniques)
+PLATEIII_B_4	19085	16320	16320	16320 (5770 uniques)	16234 (45 uniques)	16100 (57 uniques)	15917 (47 uniques)	15917 (47 uniques)	15917 (47 uniques)	15917 (47 uniques)	15665 (45 uniques)	15662 (43 uniques)	3000 (43 uniques)	3000 (31 uniques)
+PLATEIII_B_5	30036	25319	25319	25319 (9386 uniques)	25127 (101 uniques)	24924 (115 uniques)	23833 (94 uniques)	23833 (94 uniques)	23833 (94 uniques)	23833 (94 uniques)	22520 (86 uniques)	22517 (84 uniques)	3000 (81 uniques)	3000 (72 uniques)
+PLATEIII_B_6	26515	21352	21352	21352 (7665 uniques)	21276 (67 uniques)	20903 (71 uniques)	17678 (39 uniques)	17678 (39 uniques)	17678 (39 uniques)	17678 (39 uniques)	17383 (37 uniques)	17383 (37 uniques)	3000 (37 uniques)	3000 (26 uniques)
+PLATEIII_B_7	32809	29905	29905	29905 (9543 uniques)	29718 (75 uniques)	28869 (92 uniques)	27790 (58 uniques)	27790 (58 uniques)	27790 (58 uniques)	27790 (58 uniques)	27556 (54 uniques)	27556 (54 uniques)	3000 (52 uniques)	3000 (38 uniques)
+PLATEIII_B_8	25294	21466	21466	21466 (7729 uniques)	21352 (57 uniques)	21136 (78 uniques)	20756 (57 uniques)	20756 (57 uniques)	20756 (57 uniques)	20756 (57 uniques)	20121 (55 uniques)	20120 (54 uniques)	3000 (53 uniques)	3000 (35 uniques)
+PLATEIII_B_9	36016	31836	31836	31836 (9367 uniques)	31642 (108 uniques)	29465 (120 uniques)	28918 (97 uniques)	28918 (97 uniques)	28918 (97 uniques)	28918 (97 uniques)	21565 (77 uniques)	21563 (76 uniques)	3000 (75 uniques)	3000 (71 uniques)
+PLATEIII_C_1	1102	1007	1007	1007 (441 uniques)	987 (26 uniques)	978 (25 uniques)	865 (24 uniques)	865 (24 uniques)	865 (24 uniques)	865 (24 uniques)	751 (21 uniques)	751 (21 uniques)	/	/
+PLATEIII_C_10	29046	23816	23816	23816 (8839 uniques)	23471 (110 uniques)	22157 (105 uniques)	17287 (55 uniques)	17287 (55 uniques)	17287 (55 uniques)	17287 (55 uniques)	11786 (49 uniques)	11786 (49 uniques)	3000 (48 uniques)	3000 (45 uniques)
+PLATEIII_C_11	34634	30873	30873	30873 (9375 uniques)	30822 (90 uniques)	30602 (96 uniques)	27243 (61 uniques)	27243 (61 uniques)	27243 (61 uniques)	27243 (61 uniques)	25986 (56 uniques)	25986 (56 uniques)	3000 (54 uniques)	3000 (44 uniques)
+PLATEIII_C_12	83621	74756	74756	74756 (20613 uniques)	74650 (149 uniques)	74144 (189 uniques)	66602 (133 uniques)	66602 (133 uniques)	66602 (133 uniques)	66602 (133 uniques)	40418 (113 uniques)	40415 (111 uniques)	3000 (105 uniques)	3000 (88 uniques)
+PLATEIII_C_2	25974	22973	22973	22973 (6440 uniques)	22917 (53 uniques)	22305 (59 uniques)	21708 (44 uniques)	21708 (44 uniques)	21708 (44 uniques)	21708 (44 uniques)	9423 (41 uniques)	9423 (41 uniques)	3000 (41 uniques)	3000 (37 uniques)
+PLATEIII_C_3	14856	13389	13389	13389 (4547 uniques)	13326 (50 uniques)	13202 (62 uniques)	12385 (43 uniques)	12385 (43 uniques)	12385 (43 uniques)	12385 (43 uniques)	12368 (40 uniques)	12367 (39 uniques)	3000 (37 uniques)	3000 (33 uniques)
+PLATEIII_C_4	31873	28098	28098	28098 (9104 uniques)	28025 (81 uniques)	27784 (86 uniques)	25021 (49 uniques)	25021 (49 uniques)	25021 (49 uniques)	25021 (49 uniques)	21720 (47 uniques)	21717 (45 uniques)	3000 (45 uniques)	3000 (38 uniques)
+PLATEIII_C_5	48535	42318	42318	42318 (12315 uniques)	42216 (110 uniques)	41765 (120 uniques)	37001 (85 uniques)	37001 (85 uniques)	37001 (85 uniques)	37001 (85 uniques)	25733 (81 uniques)	25733 (81 uniques)	3000 (76 uniques)	3000 (69 uniques)
+PLATEIII_C_6	51883	45609	45609	45609 (15459 uniques)	45444 (138 uniques)	44954 (167 uniques)	41521 (125 uniques)	41521 (125 uniques)	41521 (125 uniques)	41521 (125 uniques)	37735 (112 uniques)	37733 (110 uniques)	3000 (102 uniques)	3000 (82 uniques)
+PLATEIII_C_7	22951	20764	20764	20764 (6927 uniques)	20706 (67 uniques)	20528 (72 uniques)	19083 (46 uniques)	19083 (46 uniques)	19083 (46 uniques)	19083 (46 uniques)	18296 (44 uniques)	18295 (43 uniques)	3000 (43 uniques)	3000 (34 uniques)
+PLATEIII_C_8	16578	13866	13866	13866 (4922 uniques)	13820 (37 uniques)	13699 (52 uniques)	13658 (43 uniques)	13658 (43 uniques)	13658 (43 uniques)	13658 (43 uniques)	13628 (42 uniques)	13623 (38 uniques)	3000 (36 uniques)	3000 (24 uniques)
+PLATEIII_C_9	210120	189361	189361	189361 (34383 uniques)	188988 (277 uniques)	186138 (292 uniques)	185545 (268 uniques)	185455 (260 uniques)	185455 (260 uniques)	185455 (260 uniques)	73407 (222 uniques)	73404 (220 uniques)	3000 (179 uniques)	3000 (176 uniques)
+PLATEIII_D_1	6655	5956	5956	5956 (2369 uniques)	5875 (66 uniques)	3492 (62 uniques)	1607 (36 uniques)	1607 (36 uniques)	1607 (36 uniques)	1607 (36 uniques)	1263 (32 uniques)	1263 (32 uniques)	/	/
+PLATEIII_D_10	44753	41028	41028	41028 (11412 uniques)	40862 (95 uniques)	38977 (119 uniques)	36816 (80 uniques)	36816 (80 uniques)	36816 (80 uniques)	36816 (80 uniques)	36794 (79 uniques)	36794 (79 uniques)	3000 (68 uniques)	3000 (59 uniques)
+PLATEIII_D_11	46047	39419	39419	39419 (13826 uniques)	39224 (144 uniques)	38231 (158 uniques)	29616 (112 uniques)	29616 (112 uniques)	29616 (112 uniques)	29616 (112 uniques)	27966 (102 uniques)	27960 (98 uniques)	3000 (95 uniques)	3000 (85 uniques)
+PLATEIII_D_12	45295	40430	40430	40430 (12803 uniques)	40309 (127 uniques)	40011 (142 uniques)	32886 (101 uniques)	32886 (101 uniques)	32886 (101 uniques)	32886 (101 uniques)	32434 (97 uniques)	32432 (96 uniques)	3000 (92 uniques)	3000 (77 uniques)
+PLATEIII_D_2	32039	28437	28437	28437 (8993 uniques)	28333 (68 uniques)	19921 (70 uniques)	15549 (37 uniques)	15549 (37 uniques)	15549 (37 uniques)	15549 (37 uniques)	10310 (34 uniques)	10310 (34 uniques)	3000 (34 uniques)	3000 (28 uniques)
+PLATEIII_D_3	17442	15496	15496	15496 (5075 uniques)	15393 (39 uniques)	15199 (48 uniques)	14674 (35 uniques)	14674 (35 uniques)	14674 (35 uniques)	14674 (35 uniques)	14667 (34 uniques)	14666 (33 uniques)	3000 (33 uniques)	3000 (21 uniques)
+PLATEIII_D_4	16661	14225	14225	14225 (4935 uniques)	14145 (49 uniques)	13984 (58 uniques)	13514 (45 uniques)	13514 (45 uniques)	13514 (45 uniques)	13514 (45 uniques)	13086 (43 uniques)	13085 (42 uniques)	3000 (41 uniques)	3000 (34 uniques)
+PLATEIII_D_5	59149	52209	52209	52209 (19594 uniques)	52077 (261 uniques)	51526 (304 uniques)	49354 (253 uniques)	49354 (253 uniques)	49354 (253 uniques)	49354 (253 uniques)	46914 (242 uniques)	46909 (237 uniques)	3000 (220 uniques)	3000 (198 uniques)
+PLATEIII_D_6	35148	30058	30058	30058 (10527 uniques)	30008 (102 uniques)	29617 (109 uniques)	22779 (71 uniques)	22779 (71 uniques)	22779 (71 uniques)	22779 (71 uniques)	22285 (68 uniques)	22284 (67 uniques)	3000 (65 uniques)	3000 (55 uniques)
+PLATEIII_D_7	71704	65009	65009	65009 (20273 uniques)	64904 (132 uniques)	64168 (150 uniques)	58605 (108 uniques)	58605 (108 uniques)	58605 (108 uniques)	58605 (108 uniques)	48664 (103 uniques)	48662 (102 uniques)	3000 (92 uniques)	3000 (77 uniques)
+PLATEIII_D_8	25296	21038	21038	21038 (7254 uniques)	20960 (63 uniques)	20730 (79 uniques)	20188 (57 uniques)	20188 (57 uniques)	20188 (57 uniques)	20188 (57 uniques)	18148 (54 uniques)	18147 (53 uniques)	3000 (51 uniques)	3000 (33 uniques)
+PLATEIII_D_9	98217	88420	88420	88420 (16894 uniques)	88209 (111 uniques)	83475 (112 uniques)	82864 (98 uniques)	82864 (98 uniques)	82864 (98 uniques)	82864 (98 uniques)	47336 (90 uniques)	47336 (90 uniques)	3000 (84 uniques)	3000 (80 uniques)
+PLATEIII_E_1	1642	1486	1486	1486 (669 uniques)	1460 (30 uniques)	1422 (26 uniques)	1268 (25 uniques)	1268 (25 uniques)	1268 (25 uniques)	1268 (25 uniques)	1245 (24 uniques)	1245 (24 uniques)	/	/
+PLATEIII_E_10	87684	79611	79611	79611 (24714 uniques)	79364 (306 uniques)	55723 (345 uniques)	50178 (293 uniques)	50178 (293 uniques)	50178 (293 uniques)	50178 (293 uniques)	43829 (270 uniques)	43824 (265 uniques)	3000 (238 uniques)	3000 (226 uniques)
+PLATEIII_E_11	34487	31378	31378	31378 (9601 uniques)	31252 (251 uniques)	30973 (275 uniques)	30457 (249 uniques)	30457 (249 uniques)	30457 (249 uniques)	30457 (249 uniques)	29550 (234 uniques)	29549 (233 uniques)	3000 (219 uniques)	3000 (205 uniques)
+PLATEIII_E_12	45519	41271	41271	41271 (11193 uniques)	41129 (114 uniques)	40921 (130 uniques)	37956 (92 uniques)	37956 (92 uniques)	37956 (92 uniques)	37956 (92 uniques)	37052 (85 uniques)	37049 (82 uniques)	3000 (75 uniques)	3000 (57 uniques)
+PLATEIII_E_2	10282	8957	8957	8957 (3377 uniques)	8862 (46 uniques)	8594 (62 uniques)	8501 (49 uniques)	8501 (49 uniques)	8501 (49 uniques)	8501 (49 uniques)	8464 (48 uniques)	8463 (47 uniques)	3000 (45 uniques)	3000 (33 uniques)
+PLATEIII_E_3	18803	16927	16927	16927 (6402 uniques)	16808 (79 uniques)	16627 (92 uniques)	11532 (50 uniques)	11532 (50 uniques)	11532 (50 uniques)	11532 (50 uniques)	11532 (50 uniques)	11532 (50 uniques)	3000 (48 uniques)	3000 (38 uniques)
+PLATEIII_E_4	21184	18698	18698	18698 (6190 uniques)	18616 (75 uniques)	18514 (86 uniques)	16747 (50 uniques)	16747 (50 uniques)	16747 (50 uniques)	16747 (50 uniques)	16430 (47 uniques)	16430 (47 uniques)	3000 (45 uniques)	3000 (38 uniques)
+PLATEIII_E_5	54087	45300	45300	45300 (11748 uniques)	44761 (169 uniques)	43836 (142 uniques)	39162 (92 uniques)	39162 (92 uniques)	39162 (92 uniques)	39162 (92 uniques)	8465 (85 uniques)	8465 (85 uniques)	3000 (82 uniques)	3000 (75 uniques)
+PLATEIII_E_6	43906	38075	38075	38075 (12957 uniques)	37904 (143 uniques)	37401 (170 uniques)	32317 (113 uniques)	32317 (113 uniques)	32317 (113 uniques)	32317 (113 uniques)	31443 (109 uniques)	31443 (109 uniques)	3000 (106 uniques)	3000 (83 uniques)
+PLATEIII_E_7	26603	24073	24073	24073 (7606 uniques)	24010 (59 uniques)	23841 (67 uniques)	23218 (51 uniques)	23218 (51 uniques)	23218 (51 uniques)	23218 (51 uniques)	23067 (50 uniques)	23066 (49 uniques)	3000 (47 uniques)	3000 (34 uniques)
+PLATEIII_E_8	20009	17337	17337	17337 (5625 uniques)	17246 (52 uniques)	17113 (67 uniques)	17113 (54 uniques)	17113 (54 uniques)	17113 (54 uniques)	17113 (54 uniques)	17093 (52 uniques)	17087 (48 uniques)	3000 (47 uniques)	3000 (31 uniques)
+PLATEIII_E_9	95794	85945	85945	85945 (18881 uniques)	85667 (222 uniques)	79889 (235 uniques)	79180 (206 uniques)	79180 (206 uniques)	79180 (206 uniques)	79180 (206 uniques)	40168 (178 uniques)	40166 (176 uniques)	3000 (151 uniques)	3000 (145 uniques)
+PLATEIII_F_1	3475	3094	3094	3094 (1367 uniques)	3051 (54 uniques)	2900 (49 uniques)	2311 (39 uniques)	2311 (39 uniques)	2311 (39 uniques)	2311 (39 uniques)	2225 (37 uniques)	2225 (37 uniques)	/	/
+PLATEIII_F_10	62329	56369	56369	56369 (15377 uniques)	56175 (111 uniques)	52280 (116 uniques)	51404 (96 uniques)	51404 (96 uniques)	51404 (96 uniques)	51404 (96 uniques)	51244 (92 uniques)	51243 (91 uniques)	3000 (81 uniques)	3000 (69 uniques)
+PLATEIII_F_11	21068	18794	18794	18794 (6412 uniques)	18729 (73 uniques)	18436 (92 uniques)	17354 (60 uniques)	17354 (60 uniques)	17354 (60 uniques)	17354 (60 uniques)	16709 (57 uniques)	16706 (55 uniques)	3000 (55 uniques)	3000 (47 uniques)
+PLATEIII_F_12	47825	43249	43249	43249 (15480 uniques)	43011 (271 uniques)	42531 (305 uniques)	41088 (270 uniques)	41088 (270 uniques)	41088 (270 uniques)	41088 (270 uniques)	39316 (241 uniques)	39314 (240 uniques)	3000 (215 uniques)	3000 (199 uniques)
+PLATEIII_F_2	44451	39800	39800	39800 (10355 uniques)	39686 (117 uniques)	37867 (128 uniques)	36205 (95 uniques)	36205 (95 uniques)	36205 (95 uniques)	36205 (95 uniques)	14085 (81 uniques)	14085 (81 uniques)	3000 (77 uniques)	3000 (69 uniques)
+PLATEIII_F_3	32594	29441	29441	29441 (9930 uniques)	29335 (95 uniques)	29047 (110 uniques)	26185 (70 uniques)	26185 (70 uniques)	26185 (70 uniques)	26185 (70 uniques)	25886 (67 uniques)	25885 (66 uniques)	3000 (65 uniques)	3000 (54 uniques)
+PLATEIII_F_4	24502	21911	21911	21911 (7395 uniques)	21726 (81 uniques)	21345 (114 uniques)	21334 (87 uniques)	21334 (87 uniques)	21334 (87 uniques)	21334 (87 uniques)	20896 (82 uniques)	20890 (77 uniques)	3000 (69 uniques)	3000 (46 uniques)
+PLATEIII_F_5	19334	15987	15987	15987 (5932 uniques)	15914 (52 uniques)	15777 (60 uniques)	15542 (51 uniques)	15542 (51 uniques)	15542 (51 uniques)	15542 (51 uniques)	14660 (50 uniques)	14660 (50 uniques)	3000 (48 uniques)	3000 (40 uniques)
+PLATEIII_F_6	544	173	173	173 (141 uniques)	112 (9 uniques)	55 (3 uniques)	55 (3 uniques)	55 (3 uniques)	55 (3 uniques)	55 (3 uniques)	39 (2 uniques)	39 (2 uniques)	/	/
+PLATEIII_F_7	18916	16939	16939	16939 (5873 uniques)	16877 (46 uniques)	16671 (61 uniques)	16546 (48 uniques)	16546 (48 uniques)	16546 (48 uniques)	16546 (48 uniques)	15755 (41 uniques)	15753 (39 uniques)	3000 (38 uniques)	3000 (26 uniques)
+PLATEIII_F_8	26453	23239	23239	23239 (7977 uniques)	23143 (69 uniques)	22911 (75 uniques)	22901 (67 uniques)	22901 (67 uniques)	22901 (67 uniques)	22901 (67 uniques)	21695 (62 uniques)	21693 (60 uniques)	3000 (57 uniques)	3000 (45 uniques)
+PLATEIII_F_9	96413	85451	85451	85451 (16446 uniques)	85229 (130 uniques)	83216 (145 uniques)	82820 (123 uniques)	82820 (123 uniques)	82820 (123 uniques)	82820 (123 uniques)	29186 (116 uniques)	29185 (115 uniques)	3000 (110 uniques)	3000 (106 uniques)
+PLATEIII_G_1	1201	1057	1057	1057 (570 uniques)	1002 (40 uniques)	925 (32 uniques)	763 (30 uniques)	763 (30 uniques)	763 (30 uniques)	763 (30 uniques)	621 (27 uniques)	621 (27 uniques)	/	/
+PLATEIII_G_10	94366	85594	85594	85594 (20752 uniques)	85392 (164 uniques)	84419 (217 uniques)	83190 (165 uniques)	83190 (165 uniques)	83190 (165 uniques)	83190 (165 uniques)	58009 (153 uniques)	57993 (142 uniques)	3000 (124 uniques)	3000 (105 uniques)
+PLATEIII_G_11	81022	72547	72547	72547 (19746 uniques)	72361 (153 uniques)	71814 (202 uniques)	69355 (135 uniques)	69355 (135 uniques)	69355 (135 uniques)	69355 (135 uniques)	54491 (124 uniques)	54482 (118 uniques)	3000 (109 uniques)	3000 (81 uniques)
+PLATEIII_G_12	61865	54056	54056	54056 (17501 uniques)	53790 (174 uniques)	53313 (202 uniques)	44355 (144 uniques)	44355 (144 uniques)	44355 (144 uniques)	44355 (144 uniques)	41594 (137 uniques)	41587 (132 uniques)	3000 (118 uniques)	3000 (95 uniques)
+PLATEIII_G_2	26718	24207	24207	24207 (8987 uniques)	23966 (165 uniques)	19987 (161 uniques)	17180 (122 uniques)	17180 (122 uniques)	17180 (122 uniques)	17180 (122 uniques)	15841 (111 uniques)	15841 (111 uniques)	3000 (104 uniques)	3000 (88 uniques)
+PLATEIII_G_3	12761	11162	11162	11162 (3910 uniques)	11034 (45 uniques)	10902 (47 uniques)	10840 (40 uniques)	10840 (40 uniques)	10840 (40 uniques)	10840 (40 uniques)	9977 (38 uniques)	9977 (38 uniques)	3000 (36 uniques)	3000 (33 uniques)
+PLATEIII_G_4	37592	33250	33250	33250 (8750 uniques)	33165 (104 uniques)	32900 (107 uniques)	32177 (93 uniques)	32177 (93 uniques)	32177 (93 uniques)	32177 (93 uniques)	12885 (90 uniques)	12883 (88 uniques)	3000 (84 uniques)	3000 (77 uniques)
+PLATEIII_G_5	40720	35547	35547	35547 (10028 uniques)	35431 (119 uniques)	35180 (130 uniques)	33923 (100 uniques)	33866 (99 uniques)	33866 (99 uniques)	33866 (99 uniques)	19994 (91 uniques)	19994 (91 uniques)	3000 (87 uniques)	3000 (77 uniques)
+PLATEIII_G_6	43050	37005	37005	37005 (9663 uniques)	36924 (66 uniques)	36743 (86 uniques)	35813 (54 uniques)	35813 (54 uniques)	35813 (54 uniques)	35813 (54 uniques)	21486 (52 uniques)	21480 (48 uniques)	3000 (47 uniques)	3000 (38 uniques)
+PLATEIII_G_7	25434	23031	23031	23031 (7972 uniques)	22924 (84 uniques)	22703 (97 uniques)	22080 (72 uniques)	22080 (72 uniques)	22080 (72 uniques)	22080 (72 uniques)	21829 (70 uniques)	21829 (70 uniques)	3000 (66 uniques)	3000 (49 uniques)
+PLATEIII_G_8	35916	31376	31376	31376 (10296 uniques)	31308 (102 uniques)	31005 (122 uniques)	30833 (98 uniques)	30833 (98 uniques)	30833 (98 uniques)	30833 (98 uniques)	20649 (87 uniques)	20645 (84 uniques)	3000 (83 uniques)	3000 (63 uniques)
+PLATEIII_G_9	30986	27213	27213	27213 (8764 uniques)	26922 (103 uniques)	25827 (116 uniques)	24865 (91 uniques)	24865 (91 uniques)	24865 (91 uniques)	24865 (91 uniques)	14077 (83 uniques)	14077 (83 uniques)	3000 (81 uniques)	3000 (77 uniques)
+PLATEIII_H_1	4636	4156	4156	4156 (1782 uniques)	4028 (38 uniques)	3974 (32 uniques)	3558 (28 uniques)	3558 (28 uniques)	3558 (28 uniques)	3558 (28 uniques)	3387 (27 uniques)	3387 (27 uniques)	3000 (27 uniques)	3000 (25 uniques)
+PLATEIII_H_10	43205	38875	38875	38875 (11691 uniques)	38775 (109 uniques)	38281 (119 uniques)	37814 (96 uniques)	37814 (96 uniques)	37814 (96 uniques)	37814 (96 uniques)	21604 (80 uniques)	21604 (80 uniques)	3000 (76 uniques)	3000 (66 uniques)
+PLATEIII_H_11	18990	16472	16472	16472 (6081 uniques)	16401 (62 uniques)	16198 (69 uniques)	15770 (54 uniques)	15770 (54 uniques)	15770 (54 uniques)	15770 (54 uniques)	15196 (51 uniques)	15196 (51 uniques)	3000 (49 uniques)	3000 (42 uniques)
+PLATEIII_H_12	59534	52889	52889	52889 (17591 uniques)	52754 (187 uniques)	52307 (215 uniques)	48161 (161 uniques)	48161 (161 uniques)	48161 (161 uniques)	48161 (161 uniques)	46320 (145 uniques)	46320 (145 uniques)	3000 (140 uniques)	3000 (129 uniques)
+PLATEIII_H_2	222379	206971	206971	206971 (71279 uniques)	206412 (1037 uniques)	203803 (1427 uniques)	196713 (1278 uniques)	196669 (1274 uniques)	196669 (1274 uniques)	196669 (1274 uniques)	191551 (1246 uniques)	191430 (1144 uniques)	3000 (727 uniques)	3000 (645 uniques)
+PLATEIII_H_3	104937	91972	91972	91972 (27482 uniques)	91838 (144 uniques)	91040 (200 uniques)	89906 (144 uniques)	89906 (144 uniques)	89906 (144 uniques)	89906 (144 uniques)	89444 (141 uniques)	89434 (133 uniques)	3000 (121 uniques)	3000 (92 uniques)
+PLATEIII_H_4	130436	117037	117037	117037 (23790 uniques)	116932 (181 uniques)	113940 (188 uniques)	113086 (168 uniques)	113086 (168 uniques)	113086 (168 uniques)	113086 (168 uniques)	29443 (149 uniques)	29441 (148 uniques)	3000 (138 uniques)	3000 (127 uniques)
+PLATEIII_H_5	26271	22423	22423	22423 (7253 uniques)	22258 (56 uniques)	22107 (73 uniques)	21998 (60 uniques)	21998 (60 uniques)	21998 (60 uniques)	21998 (60 uniques)	20472 (58 uniques)	20467 (54 uniques)	3000 (51 uniques)	3000 (36 uniques)
+PLATEIII_H_6	39339	34159	34159	34159 (11077 uniques)	34017 (112 uniques)	33734 (126 uniques)	29017 (84 uniques)	29017 (84 uniques)	29017 (84 uniques)	29017 (84 uniques)	24173 (82 uniques)	24173 (82 uniques)	3000 (79 uniques)	3000 (67 uniques)
+PLATEIII_H_7	9576	8426	8426	8426 (3299 uniques)	8356 (38 uniques)	8243 (41 uniques)	8243 (34 uniques)	8243 (34 uniques)	8243 (34 uniques)	8243 (34 uniques)	7997 (32 uniques)	7995 (31 uniques)	3000 (31 uniques)	3000 (23 uniques)
+PLATEIII_H_8	14106	12132	12132	12132 (4586 uniques)	12064 (61 uniques)	11915 (74 uniques)	11777 (63 uniques)	11777 (63 uniques)	11777 (63 uniques)	11777 (63 uniques)	11400 (62 uniques)	11397 (59 uniques)	3000 (57 uniques)	3000 (43 uniques)
+PLATEIII_H_9	135118	120102	120102	120102 (25132 uniques)	119691 (308 uniques)	117258 (314 uniques)	116718 (294 uniques)	116705 (293 uniques)	116705 (293 uniques)	116705 (293 uniques)	38194 (263 uniques)	38185 (257 uniques)	3000 (224 uniques)	3000 (215 uniques)
+PLATEII_A_1	309	275	275	275 (161 uniques)	223 (22 uniques)	183 (13 uniques)	183 (13 uniques)	183 (13 uniques)	183 (13 uniques)	183 (13 uniques)	173 (12 uniques)	173 (12 uniques)	/	/
+PLATEII_A_10	16993	15506	15506	15506 (4799 uniques)	15432 (297 uniques)	15172 (319 uniques)	14990 (299 uniques)	14979 (298 uniques)	14979 (298 uniques)	14979 (298 uniques)	12881 (266 uniques)	12874 (260 uniques)	3000 (247 uniques)	3000 (235 uniques)
+PLATEII_A_11	7684	6798	6798	6798 (2035 uniques)	6763 (79 uniques)	6658 (78 uniques)	6618 (74 uniques)	6618 (74 uniques)	6618 (74 uniques)	6618 (74 uniques)	6578 (72 uniques)	6578 (72 uniques)	3000 (71 uniques)	3000 (69 uniques)
+PLATEII_A_12	13541	12188	12188	12188 (3762 uniques)	12108 (167 uniques)	11959 (169 uniques)	11669 (155 uniques)	11669 (155 uniques)	11669 (155 uniques)	11669 (155 uniques)	11163 (142 uniques)	11163 (142 uniques)	3000 (138 uniques)	3000 (130 uniques)
+PLATEII_A_2	29273	27013	27013	27013 (8627 uniques)	26804 (681 uniques)	26125 (660 uniques)	25765 (648 uniques)	25723 (646 uniques)	25723 (646 uniques)	25723 (646 uniques)	22459 (613 uniques)	22445 (602 uniques)	3000 (544 uniques)	3000 (505 uniques)
+PLATEII_A_3	7869	7113	7113	7113 (2080 uniques)	7069 (56 uniques)	7003 (57 uniques)	6967 (54 uniques)	6967 (54 uniques)	6967 (54 uniques)	6967 (54 uniques)	6662 (51 uniques)	6660 (49 uniques)	3000 (49 uniques)	3000 (45 uniques)
+PLATEII_A_4	8886	8056	8056	8056 (2404 uniques)	8017 (137 uniques)	7876 (144 uniques)	7876 (141 uniques)	7876 (141 uniques)	7876 (141 uniques)	7876 (141 uniques)	7389 (137 uniques)	7386 (134 uniques)	3000 (131 uniques)	3000 (122 uniques)
+PLATEII_A_5	21479	19873	19873	19873 (5225 uniques)	19807 (191 uniques)	19353 (199 uniques)	19084 (187 uniques)	19084 (187 uniques)	19084 (187 uniques)	19084 (187 uniques)	12315 (176 uniques)	12315 (176 uniques)	3000 (162 uniques)	3000 (157 uniques)
+PLATEII_A_6	11260	10302	10302	10302 (3205 uniques)	10269 (128 uniques)	10133 (129 uniques)	10086 (124 uniques)	10086 (124 uniques)	10086 (124 uniques)	10086 (124 uniques)	9753 (114 uniques)	9753 (114 uniques)	3000 (109 uniques)	3000 (106 uniques)
+PLATEII_A_7	14557	13314	13314	13314 (3807 uniques)	13238 (119 uniques)	13142 (132 uniques)	13101 (118 uniques)	13101 (118 uniques)	13101 (118 uniques)	13101 (118 uniques)	12409 (106 uniques)	12406 (103 uniques)	3000 (100 uniques)	3000 (96 uniques)
+PLATEII_A_8	28370	25690	25690	25690 (6893 uniques)	25643 (187 uniques)	25418 (203 uniques)	25200 (185 uniques)	25200 (185 uniques)	25200 (185 uniques)	25200 (185 uniques)	19506 (172 uniques)	19502 (169 uniques)	3000 (164 uniques)	3000 (155 uniques)
+PLATEII_A_9	8110	7222	7222	7222 (2260 uniques)	7101 (101 uniques)	6914 (103 uniques)	6847 (96 uniques)	6818 (95 uniques)	6818 (95 uniques)	6818 (95 uniques)	6569 (90 uniques)	6569 (90 uniques)	3000 (90 uniques)	3000 (82 uniques)
+PLATEII_B_1	9271	8256	8256	8256 (3374 uniques)	8212 (90 uniques)	8107 (83 uniques)	5013 (55 uniques)	5013 (55 uniques)	5013 (55 uniques)	5013 (55 uniques)	4665 (50 uniques)	4665 (50 uniques)	3000 (50 uniques)	3000 (49 uniques)
+PLATEII_B_10	39308	35990	35990	35990 (11985 uniques)	35859 (285 uniques)	35606 (295 uniques)	30611 (266 uniques)	30611 (266 uniques)	30611 (266 uniques)	30611 (266 uniques)	29742 (243 uniques)	29741 (242 uniques)	3000 (225 uniques)	3000 (218 uniques)
+PLATEII_B_11	18180	16485	16485	16485 (3515 uniques)	16418 (68 uniques)	16351 (77 uniques)	16267 (68 uniques)	16267 (68 uniques)	16267 (68 uniques)	16267 (68 uniques)	16202 (65 uniques)	16200 (64 uniques)	3000 (62 uniques)	3000 (60 uniques)
+PLATEII_B_12	38236	35283	35283	35283 (9002 uniques)	35185 (173 uniques)	34788 (203 uniques)	34606 (184 uniques)	34606 (184 uniques)	34606 (184 uniques)	34606 (184 uniques)	34416 (182 uniques)	34411 (178 uniques)	3000 (157 uniques)	3000 (148 uniques)
+PLATEII_B_2	5638	5053	5053	5053 (1496 uniques)	5012 (30 uniques)	4977 (30 uniques)	4977 (30 uniques)	4977 (30 uniques)	4977 (30 uniques)	4977 (30 uniques)	4389 (22 uniques)	4389 (22 uniques)	3000 (22 uniques)	3000 (18 uniques)
+PLATEII_B_3	20727	19064	19064	19064 (3838 uniques)	19012 (63 uniques)	18949 (68 uniques)	18930 (64 uniques)	18930 (64 uniques)	18930 (64 uniques)	18930 (64 uniques)	18900 (61 uniques)	18900 (61 uniques)	3000 (57 uniques)	3000 (55 uniques)
+PLATEII_B_4	23347	21327	21327	21327 (5358 uniques)	21283 (117 uniques)	21146 (135 uniques)	21146 (123 uniques)	21146 (123 uniques)	21146 (123 uniques)	21146 (123 uniques)	19886 (113 uniques)	19883 (110 uniques)	3000 (104 uniques)	3000 (101 uniques)
+PLATEII_B_5	15944	14343	14343	14343 (4243 uniques)	14287 (103 uniques)	14178 (119 uniques)	14097 (111 uniques)	14097 (111 uniques)	14097 (111 uniques)	14097 (111 uniques)	13987 (109 uniques)	13985 (107 uniques)	3000 (99 uniques)	3000 (93 uniques)
+PLATEII_B_6	24941	22037	22037	22037 (5885 uniques)	21993 (67 uniques)	21829 (81 uniques)	21767 (69 uniques)	21767 (69 uniques)	21767 (69 uniques)	21767 (69 uniques)	21699 (66 uniques)	21698 (65 uniques)	3000 (62 uniques)	3000 (55 uniques)
+PLATEII_B_7	48655	45559	45559	45559 (8867 uniques)	45469 (143 uniques)	45275 (159 uniques)	45230 (148 uniques)	45170 (147 uniques)	45170 (147 uniques)	45170 (147 uniques)	22332 (134 uniques)	22329 (131 uniques)	3000 (122 uniques)	3000 (118 uniques)
+PLATEII_B_8	27855	25163	25163	25163 (5960 uniques)	25093 (83 uniques)	24966 (99 uniques)	24966 (88 uniques)	24966 (88 uniques)	24966 (88 uniques)	24966 (88 uniques)	20799 (80 uniques)	20797 (79 uniques)	3000 (72 uniques)	3000 (69 uniques)
+PLATEII_B_9	11022	9759	9759	9759 (2609 uniques)	9669 (89 uniques)	9516 (84 uniques)	9516 (84 uniques)	9506 (83 uniques)	9506 (83 uniques)	9506 (83 uniques)	9130 (78 uniques)	9130 (78 uniques)	3000 (78 uniques)	3000 (76 uniques)
+PLATEII_C_1	2099	1933	1933	1933 (607 uniques)	1911 (31 uniques)	1886 (35 uniques)	1886 (30 uniques)	1886 (30 uniques)	1886 (30 uniques)	1886 (30 uniques)	1837 (27 uniques)	1837 (27 uniques)	/	/
+PLATEII_C_10	78902	71655	71655	71655 (9651 uniques)	71529 (83 uniques)	71321 (91 uniques)	71219 (82 uniques)	71219 (82 uniques)	71219 (82 uniques)	71219 (82 uniques)	34790 (74 uniques)	34788 (72 uniques)	3000 (67 uniques)	3000 (62 uniques)
+PLATEII_C_11	18813	17053	17053	17053 (3839 uniques)	17004 (41 uniques)	16922 (42 uniques)	16922 (41 uniques)	16922 (41 uniques)	16922 (41 uniques)	16922 (41 uniques)	16910 (40 uniques)	16910 (40 uniques)	3000 (38 uniques)	3000 (35 uniques)
+PLATEII_C_12	21595	19511	19511	19511 (4548 uniques)	19424 (63 uniques)	19339 (70 uniques)	19314 (59 uniques)	19314 (59 uniques)	19314 (59 uniques)	19314 (59 uniques)	14464 (53 uniques)	14464 (53 uniques)	3000 (50 uniques)	3000 (45 uniques)
+PLATEII_C_2	10182	9242	9242	9242 (2526 uniques)	9201 (47 uniques)	9137 (53 uniques)	9053 (45 uniques)	9053 (45 uniques)	9053 (45 uniques)	9053 (45 uniques)	8969 (43 uniques)	8969 (43 uniques)	3000 (42 uniques)	3000 (34 uniques)
+PLATEII_C_3	13277	12119	12119	12119 (3458 uniques)	12033 (65 uniques)	11921 (67 uniques)	11909 (63 uniques)	11909 (63 uniques)	11909 (63 uniques)	11909 (63 uniques)	11330 (59 uniques)	11329 (58 uniques)	3000 (58 uniques)	3000 (55 uniques)
+PLATEII_C_4	17807	16139	16139	16139 (4096 uniques)	16076 (83 uniques)	15972 (90 uniques)	15972 (82 uniques)	15972 (82 uniques)	15972 (82 uniques)	15972 (82 uniques)	15580 (77 uniques)	15578 (76 uniques)	3000 (71 uniques)	3000 (65 uniques)
+PLATEII_C_5	130220	118936	118936	118936 (29376 uniques)	118746 (392 uniques)	117376 (525 uniques)	117226 (447 uniques)	117127 (445 uniques)	117127 (445 uniques)	117127 (445 uniques)	116460 (434 uniques)	116425 (409 uniques)	3000 (329 uniques)	3000 (303 uniques)
+PLATEII_C_6	11672	10151	10151	10151 (2716 uniques)	10119 (39 uniques)	10010 (42 uniques)	10010 (36 uniques)	10010 (36 uniques)	10010 (36 uniques)	10010 (36 uniques)	9611 (32 uniques)	9611 (32 uniques)	3000 (32 uniques)	3000 (28 uniques)
+PLATEII_C_7	53644	49627	49627	49627 (10903 uniques)	49552 (92 uniques)	49272 (123 uniques)	49200 (96 uniques)	49200 (96 uniques)	49200 (96 uniques)	49200 (96 uniques)	41718 (77 uniques)	41717 (76 uniques)	3000 (73 uniques)	3000 (62 uniques)
+PLATEII_C_8	38845	34615	34615	34615 (8786 uniques)	34543 (107 uniques)	34305 (115 uniques)	34275 (106 uniques)	34275 (106 uniques)	34275 (106 uniques)	34275 (106 uniques)	19881 (96 uniques)	19880 (95 uniques)	3000 (92 uniques)	3000 (87 uniques)
+PLATEII_C_9	36636	32651	32651	32651 (6641 uniques)	32532 (107 uniques)	32169 (109 uniques)	32169 (101 uniques)	32169 (101 uniques)	32169 (101 uniques)	32169 (101 uniques)	15873 (90 uniques)	15873 (90 uniques)	3000 (87 uniques)	3000 (83 uniques)
+PLATEII_D_1	342	301	301	301 (196 uniques)	225 (35 uniques)	169 (22 uniques)	169 (22 uniques)	169 (22 uniques)	169 (22 uniques)	169 (22 uniques)	169 (22 uniques)	169 (22 uniques)	/	/
+PLATEII_D_10	15460	14077	14077	14077 (4086 uniques)	14022 (91 uniques)	13898 (105 uniques)	13853 (93 uniques)	13853 (93 uniques)	13853 (93 uniques)	13853 (93 uniques)	13630 (90 uniques)	13628 (89 uniques)	3000 (85 uniques)	3000 (76 uniques)
+PLATEII_D_11	16351	14916	14916	14916 (3971 uniques)	14860 (83 uniques)	14696 (84 uniques)	14605 (78 uniques)	14605 (78 uniques)	14605 (78 uniques)	14605 (78 uniques)	14488 (73 uniques)	14486 (72 uniques)	3000 (72 uniques)	3000 (65 uniques)
+PLATEII_D_12	17050	15117	15117	15117 (3949 uniques)	15053 (48 uniques)	14948 (60 uniques)	14948 (45 uniques)	14948 (45 uniques)	14948 (45 uniques)	14948 (45 uniques)	14948 (45 uniques)	14948 (45 uniques)	3000 (44 uniques)	3000 (31 uniques)
+PLATEII_D_2	16203	14676	14676	14676 (4252 uniques)	14616 (103 uniques)	14497 (116 uniques)	14378 (105 uniques)	14378 (105 uniques)	14378 (105 uniques)	14378 (105 uniques)	14182 (99 uniques)	14182 (99 uniques)	3000 (96 uniques)	3000 (88 uniques)
+PLATEII_D_3	81107	74933	74933	74933 (17083 uniques)	74748 (232 uniques)	74244 (271 uniques)	73948 (244 uniques)	73948 (244 uniques)	73948 (244 uniques)	73948 (244 uniques)	71170 (228 uniques)	71167 (225 uniques)	3000 (196 uniques)	3000 (184 uniques)
+PLATEII_D_4	46636	42460	42460	42460 (10878 uniques)	42376 (159 uniques)	41955 (194 uniques)	41882 (176 uniques)	41882 (176 uniques)	41882 (176 uniques)	41882 (176 uniques)	41723 (173 uniques)	41709 (163 uniques)	3000 (149 uniques)	3000 (132 uniques)
+PLATEII_D_5	26863	24137	24137	24137 (7609 uniques)	24016 (222 uniques)	23570 (236 uniques)	23070 (223 uniques)	23058 (222 uniques)	23058 (222 uniques)	23058 (222 uniques)	21463 (197 uniques)	21460 (195 uniques)	3000 (186 uniques)	3000 (178 uniques)
+PLATEII_D_6	525	80	80	80 (70 uniques)	32 (4 uniques)	2 (1 uniques)	2 (1 uniques)	2 (1 uniques)	2 (1 uniques)	2 (1 uniques)	2 (1 uniques)	2 (1 uniques)	/	/
+PLATEII_D_7	60584	56048	56048	56048 (13146 uniques)	55933 (142 uniques)	55628 (179 uniques)	55537 (153 uniques)	55537 (153 uniques)	55537 (153 uniques)	55537 (153 uniques)	51372 (141 uniques)	51368 (139 uniques)	3000 (131 uniques)	3000 (124 uniques)
+PLATEII_D_8	38880	35088	35088	35088 (9383 uniques)	35011 (99 uniques)	34658 (121 uniques)	34658 (104 uniques)	34658 (104 uniques)	34658 (104 uniques)	34658 (104 uniques)	34148 (99 uniques)	34146 (98 uniques)	3000 (89 uniques)	3000 (79 uniques)
+PLATEII_D_9	53993	49376	49376	49376 (9687 uniques)	49221 (163 uniques)	48613 (177 uniques)	48455 (165 uniques)	48455 (165 uniques)	48455 (165 uniques)	48455 (165 uniques)	47349 (154 uniques)	47347 (152 uniques)	3000 (131 uniques)	3000 (128 uniques)
+PLATEII_E_1	5	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_10	117	104	104	104 (68 uniques)	70 (7 uniques)	61 (3 uniques)	61 (3 uniques)	61 (3 uniques)	61 (3 uniques)	61 (3 uniques)	61 (3 uniques)	61 (3 uniques)	/	/
+PLATEII_E_11	19	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_12	37	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_2	35	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_3	27	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_4	30	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_5	42	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_6	35	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_7	33	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_E_8	63	60	60	60 (37 uniques)	39 (6 uniques)	30 (3 uniques)	30 (3 uniques)	30 (3 uniques)	30 (3 uniques)	30 (3 uniques)	12 (2 uniques)	12 (2 uniques)	/	/
+PLATEII_E_9	302	254	254	254 (187 uniques)	181 (17 uniques)	144 (11 uniques)	144 (11 uniques)	144 (11 uniques)	144 (11 uniques)	144 (11 uniques)	124 (9 uniques)	124 (9 uniques)	/	/
+PLATEII_F_1	972	881	881	881 (299 uniques)	861 (34 uniques)	832 (27 uniques)	832 (27 uniques)	832 (27 uniques)	832 (27 uniques)	832 (27 uniques)	824 (26 uniques)	824 (26 uniques)	/	/
+PLATEII_F_10	50369	46547	46547	46547 (11081 uniques)	46418 (342 uniques)	46087 (371 uniques)	46040 (350 uniques)	46040 (350 uniques)	46040 (350 uniques)	46040 (350 uniques)	45158 (327 uniques)	45151 (321 uniques)	3000 (272 uniques)	3000 (248 uniques)
+PLATEII_F_11	10614	9555	9555	9555 (2651 uniques)	9498 (41 uniques)	9422 (54 uniques)	9422 (44 uniques)	9422 (44 uniques)	9422 (44 uniques)	9422 (44 uniques)	9268 (42 uniques)	9266 (40 uniques)	3000 (40 uniques)	3000 (32 uniques)
+PLATEII_F_12	14848	13596	13596	13596 (3750 uniques)	13534 (89 uniques)	13429 (95 uniques)	13429 (93 uniques)	13429 (93 uniques)	13429 (93 uniques)	13429 (93 uniques)	13092 (88 uniques)	13090 (86 uniques)	3000 (81 uniques)	3000 (80 uniques)
+PLATEII_F_2	17645	15971	15971	15971 (5707 uniques)	15888 (63 uniques)	15812 (66 uniques)	15062 (53 uniques)	15062 (53 uniques)	15062 (53 uniques)	15062 (53 uniques)	14857 (52 uniques)	14854 (50 uniques)	3000 (48 uniques)	3000 (41 uniques)
+PLATEII_F_3	13000	11837	11837	11837 (3255 uniques)	11784 (71 uniques)	11709 (80 uniques)	11701 (73 uniques)	11701 (73 uniques)	11701 (73 uniques)	11701 (73 uniques)	11583 (69 uniques)	11583 (69 uniques)	3000 (67 uniques)	3000 (63 uniques)
+PLATEII_F_4	14450	13046	13046	13046 (3483 uniques)	12953 (62 uniques)	12833 (67 uniques)	12833 (58 uniques)	12833 (58 uniques)	12833 (58 uniques)	12833 (58 uniques)	12707 (55 uniques)	12707 (55 uniques)	3000 (54 uniques)	3000 (47 uniques)
+PLATEII_F_5	21704	19704	19704	19704 (6049 uniques)	19571 (177 uniques)	19351 (180 uniques)	19300 (171 uniques)	19300 (171 uniques)	19300 (171 uniques)	19300 (171 uniques)	17328 (148 uniques)	17325 (145 uniques)	3000 (139 uniques)	3000 (131 uniques)
+PLATEII_F_6	12678	11184	11184	11184 (3079 uniques)	11131 (40 uniques)	11028 (57 uniques)	11016 (43 uniques)	11016 (43 uniques)	11016 (43 uniques)	11016 (43 uniques)	10991 (42 uniques)	10989 (41 uniques)	3000 (40 uniques)	3000 (33 uniques)
+PLATEII_F_7	13746	12697	12697	12697 (3206 uniques)	12652 (44 uniques)	12584 (58 uniques)	12579 (46 uniques)	12579 (46 uniques)	12579 (46 uniques)	12579 (46 uniques)	12485 (44 uniques)	12485 (44 uniques)	3000 (43 uniques)	3000 (36 uniques)
+PLATEII_F_8	21065	18916	18916	18916 (4567 uniques)	18850 (57 uniques)	18703 (68 uniques)	18703 (57 uniques)	18703 (57 uniques)	18703 (57 uniques)	18703 (57 uniques)	13845 (55 uniques)	13845 (55 uniques)	3000 (52 uniques)	3000 (42 uniques)
+PLATEII_F_9	125174	114605	114605	114605 (38789 uniques)	112380 (2427 uniques)	105290 (2229 uniques)	105219 (2157 uniques)	104395 (2106 uniques)	104395 (2106 uniques)	104395 (2106 uniques)	88042 (2012 uniques)	87892 (1898 uniques)	3000 (894 uniques)	3000 (812 uniques)
+PLATEII_G_1	31	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEII_G_10	34748	31579	31579	31579 (8125 uniques)	31420 (206 uniques)	31167 (242 uniques)	31091 (223 uniques)	31064 (222 uniques)	31064 (222 uniques)	31064 (222 uniques)	26920 (215 uniques)	26909 (207 uniques)	3000 (196 uniques)	3000 (182 uniques)
+PLATEII_G_11	20674	18624	18624	18624 (4661 uniques)	18585 (124 uniques)	18395 (130 uniques)	18349 (123 uniques)	18349 (123 uniques)	18349 (123 uniques)	18349 (123 uniques)	13539 (116 uniques)	13537 (114 uniques)	3000 (111 uniques)	3000 (105 uniques)
+PLATEII_G_12	13789	12600	12600	12600 (2965 uniques)	12503 (64 uniques)	12399 (62 uniques)	12341 (58 uniques)	12341 (58 uniques)	12341 (58 uniques)	12341 (58 uniques)	10984 (56 uniques)	10983 (55 uniques)	3000 (55 uniques)	3000 (54 uniques)
+PLATEII_G_2	5373	4817	4817	4817 (1363 uniques)	4764 (38 uniques)	4705 (34 uniques)	4705 (32 uniques)	4705 (32 uniques)	4705 (32 uniques)	4705 (32 uniques)	4652 (31 uniques)	4652 (31 uniques)	3000 (31 uniques)	3000 (27 uniques)
+PLATEII_G_3	7888	7109	7109	7109 (2103 uniques)	7062 (50 uniques)	6977 (52 uniques)	6977 (48 uniques)	6977 (48 uniques)	6977 (48 uniques)	6977 (48 uniques)	6959 (46 uniques)	6959 (46 uniques)	3000 (44 uniques)	3000 (41 uniques)
+PLATEII_G_4	8744	7845	7845	7845 (2045 uniques)	7771 (54 uniques)	7627 (54 uniques)	7627 (50 uniques)	7627 (50 uniques)	7627 (50 uniques)	7627 (50 uniques)	7567 (48 uniques)	7567 (48 uniques)	3000 (48 uniques)	3000 (45 uniques)
+PLATEII_G_5	50152	45520	45520	45520 (13582 uniques)	45439 (461 uniques)	44728 (514 uniques)	44728 (491 uniques)	44688 (490 uniques)	44688 (490 uniques)	44688 (490 uniques)	41646 (449 uniques)	41631 (435 uniques)	3000 (371 uniques)	3000 (358 uniques)
+PLATEII_G_6	14255	12519	12519	12519 (2921 uniques)	12477 (57 uniques)	12413 (61 uniques)	12387 (57 uniques)	12387 (57 uniques)	12387 (57 uniques)	12387 (57 uniques)	11920 (52 uniques)	11917 (49 uniques)	3000 (49 uniques)	3000 (42 uniques)
+PLATEII_G_7	12843	11575	11575	11575 (2781 uniques)	11530 (54 uniques)	11440 (55 uniques)	11415 (50 uniques)	11415 (50 uniques)	11415 (50 uniques)	11415 (50 uniques)	5469 (45 uniques)	5469 (45 uniques)	3000 (45 uniques)	3000 (40 uniques)
+PLATEII_G_8	45007	40899	40899	40899 (9102 uniques)	40787 (167 uniques)	40470 (177 uniques)	40470 (163 uniques)	40467 (162 uniques)	40467 (162 uniques)	40467 (162 uniques)	26414 (152 uniques)	26414 (152 uniques)	3000 (137 uniques)	3000 (125 uniques)
+PLATEII_G_9	12680	11381	11381	11381 (3246 uniques)	11281 (71 uniques)	10956 (74 uniques)	10863 (67 uniques)	10832 (65 uniques)	10832 (65 uniques)	10832 (65 uniques)	10119 (62 uniques)	10118 (61 uniques)	3000 (60 uniques)	3000 (53 uniques)
+PLATEII_H_1	751	679	679	679 (246 uniques)	648 (22 uniques)	623 (19 uniques)	623 (18 uniques)	623 (18 uniques)	623 (18 uniques)	623 (18 uniques)	623 (18 uniques)	623 (18 uniques)	/	/
+PLATEII_H_10	3212	2789	2789	2789 (823 uniques)	2753 (14 uniques)	2640 (10 uniques)	2640 (10 uniques)	2640 (10 uniques)	2640 (10 uniques)	2640 (10 uniques)	2640 (10 uniques)	2640 (10 uniques)	/	/
+PLATEII_H_11	2698	2301	2301	2301 (673 uniques)	2270 (14 uniques)	2190 (12 uniques)	2190 (12 uniques)	2190 (12 uniques)	2190 (12 uniques)	2190 (12 uniques)	2035 (10 uniques)	2035 (10 uniques)	/	/
+PLATEII_H_12	21096	19195	19195	19195 (3677 uniques)	19149 (39 uniques)	19053 (54 uniques)	18722 (43 uniques)	18722 (43 uniques)	18722 (43 uniques)	18722 (43 uniques)	18722 (43 uniques)	18713 (36 uniques)	3000 (34 uniques)	3000 (14 uniques)
+PLATEII_H_2	8540	7710	7710	7710 (2267 uniques)	7673 (66 uniques)	7302 (64 uniques)	7216 (59 uniques)	7216 (59 uniques)	7216 (59 uniques)	7216 (59 uniques)	6940 (56 uniques)	6939 (55 uniques)	3000 (55 uniques)	3000 (52 uniques)
+PLATEII_H_3	16274	14722	14722	14722 (3928 uniques)	14648 (161 uniques)	14400 (163 uniques)	14368 (155 uniques)	14368 (155 uniques)	14368 (155 uniques)	14368 (155 uniques)	8919 (145 uniques)	8917 (143 uniques)	3000 (140 uniques)	3000 (135 uniques)
+PLATEII_H_4	4892	4287	4287	4287 (1385 uniques)	4236 (37 uniques)	4147 (37 uniques)	4133 (32 uniques)	4133 (32 uniques)	4133 (32 uniques)	4133 (32 uniques)	3280 (29 uniques)	3280 (29 uniques)	3000 (29 uniques)	3000 (26 uniques)
+PLATEII_H_5	12734	11216	11216	11216 (3678 uniques)	11133 (74 uniques)	10884 (78 uniques)	10884 (70 uniques)	10884 (70 uniques)	10884 (70 uniques)	10884 (70 uniques)	10480 (67 uniques)	10480 (67 uniques)	3000 (63 uniques)	3000 (57 uniques)
+PLATEII_H_6	36441	32891	32891	32891 (8839 uniques)	32832 (121 uniques)	32361 (130 uniques)	32138 (115 uniques)	32138 (115 uniques)	32138 (115 uniques)	32138 (115 uniques)	25563 (110 uniques)	25561 (108 uniques)	3000 (105 uniques)	3000 (97 uniques)
+PLATEII_H_7	9453	8529	8529	8529 (2369 uniques)	8462 (45 uniques)	8365 (45 uniques)	8365 (40 uniques)	8365 (40 uniques)	8365 (40 uniques)	8365 (40 uniques)	6269 (38 uniques)	6269 (38 uniques)	3000 (37 uniques)	3000 (34 uniques)
+PLATEII_H_8	62238	56845	56845	56845 (15521 uniques)	56632 (313 uniques)	55883 (364 uniques)	55861 (339 uniques)	55861 (339 uniques)	55861 (339 uniques)	55861 (339 uniques)	48894 (325 uniques)	48872 (310 uniques)	3000 (251 uniques)	3000 (229 uniques)
+PLATEII_H_9	571823	530102	530102	530102 (91265 uniques)	528859 (515 uniques)	515566 (1507 uniques)	515551 (1239 uniques)	469525 (560 uniques)	469525 (560 uniques)	469525 (560 uniques)	469511 (558 uniques)	469404 (478 uniques)	3000 (122 uniques)	3000 (22 uniques)
+PLATEIV_A_1	33	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_10	10	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_11	9	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_12	78	64	64	64 (50 uniques)	49 (4 uniques)	30 (2 uniques)	30 (2 uniques)	30 (2 uniques)	30 (2 uniques)	30 (2 uniques)	30 (2 uniques)	30 (2 uniques)	/	/
+PLATEIV_A_2	12	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_3	19	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_4	13	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_6	21	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_7	11	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_8	12	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_A_9	11	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_B_1	24624	21192	21192	21192 (7926 uniques)	21124 (98 uniques)	20249 (103 uniques)	15930 (70 uniques)	15930 (70 uniques)	15930 (70 uniques)	15930 (70 uniques)	15744 (66 uniques)	15743 (65 uniques)	3000 (60 uniques)	3000 (54 uniques)
+PLATEIV_B_10	71729	65432	65432	65432 (15058 uniques)	65348 (158 uniques)	65058 (179 uniques)	62448 (141 uniques)	62445 (140 uniques)	62445 (140 uniques)	62445 (140 uniques)	61093 (133 uniques)	61090 (130 uniques)	3000 (115 uniques)	3000 (109 uniques)
+PLATEIV_B_11	12902	10957	10957	10957 (3541 uniques)	10878 (42 uniques)	10838 (48 uniques)	10403 (37 uniques)	10403 (37 uniques)	10403 (37 uniques)	10403 (37 uniques)	10210 (35 uniques)	10210 (35 uniques)	3000 (34 uniques)	3000 (31 uniques)
+PLATEIV_B_12	22548	20102	20102	20102 (7057 uniques)	20016 (71 uniques)	19858 (87 uniques)	19346 (68 uniques)	19346 (68 uniques)	19346 (68 uniques)	19346 (68 uniques)	18464 (62 uniques)	18462 (61 uniques)	3000 (56 uniques)	3000 (47 uniques)
+PLATEIV_B_2	23260	20070	20070	20070 (6227 uniques)	20008 (74 uniques)	19681 (85 uniques)	18980 (64 uniques)	18980 (64 uniques)	18980 (64 uniques)	18980 (64 uniques)	18403 (61 uniques)	18403 (61 uniques)	3000 (58 uniques)	3000 (53 uniques)
+PLATEIV_B_3	15497	14144	14144	14144 (5167 uniques)	14078 (73 uniques)	14002 (78 uniques)	9018 (47 uniques)	9018 (47 uniques)	9018 (47 uniques)	9018 (47 uniques)	7978 (42 uniques)	7978 (42 uniques)	3000 (41 uniques)	3000 (39 uniques)
+PLATEIV_B_4	117660	106586	106586	106586 (25496 uniques)	106478 (148 uniques)	100482 (177 uniques)	74466 (129 uniques)	74466 (129 uniques)	74466 (129 uniques)	74466 (129 uniques)	47638 (116 uniques)	47637 (115 uniques)	3000 (108 uniques)	3000 (100 uniques)
+PLATEIV_B_5	17	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_B_6	25749	23447	23447	23447 (8214 uniques)	23367 (80 uniques)	22940 (106 uniques)	22408 (82 uniques)	22408 (82 uniques)	22408 (82 uniques)	22408 (82 uniques)	20613 (74 uniques)	20610 (71 uniques)	3000 (67 uniques)	3000 (49 uniques)
+PLATEIV_B_7	59315	54820	54820	54820 (16956 uniques)	54717 (119 uniques)	54160 (135 uniques)	43292 (100 uniques)	43292 (100 uniques)	43292 (100 uniques)	43292 (100 uniques)	29214 (88 uniques)	29212 (86 uniques)	3000 (79 uniques)	3000 (71 uniques)
+PLATEIV_B_8	40677	37163	37163	37163 (12461 uniques)	37076 (135 uniques)	35598 (154 uniques)	33291 (112 uniques)	33291 (112 uniques)	33291 (112 uniques)	33291 (112 uniques)	28252 (101 uniques)	28250 (99 uniques)	3000 (93 uniques)	3000 (78 uniques)
+PLATEIV_B_9	159376	146198	146198	146198 (29366 uniques)	146007 (140 uniques)	144863 (155 uniques)	137701 (115 uniques)	137641 (112 uniques)	137641 (112 uniques)	137641 (112 uniques)	130667 (103 uniques)	130666 (102 uniques)	3000 (84 uniques)	3000 (80 uniques)
+PLATEIV_C_1	20129	17494	17494	17494 (5961 uniques)	17294 (86 uniques)	16449 (100 uniques)	15202 (66 uniques)	15202 (66 uniques)	15202 (66 uniques)	15202 (66 uniques)	14201 (54 uniques)	14201 (54 uniques)	3000 (53 uniques)	3000 (44 uniques)
+PLATEIV_C_10	56106	49727	49727	49727 (13274 uniques)	49481 (120 uniques)	49259 (150 uniques)	46263 (103 uniques)	46263 (103 uniques)	46263 (103 uniques)	46263 (103 uniques)	30751 (91 uniques)	30751 (91 uniques)	3000 (85 uniques)	3000 (73 uniques)
+PLATEIV_C_11	25626	22596	22596	22596 (6661 uniques)	22508 (62 uniques)	22401 (68 uniques)	22262 (60 uniques)	22262 (60 uniques)	22262 (60 uniques)	22262 (60 uniques)	16904 (56 uniques)	16904 (56 uniques)	3000 (53 uniques)	3000 (48 uniques)
+PLATEIV_C_12	58052	52299	52299	52299 (15029 uniques)	52125 (132 uniques)	51778 (171 uniques)	51253 (139 uniques)	51224 (138 uniques)	51224 (138 uniques)	51224 (138 uniques)	33622 (129 uniques)	33616 (123 uniques)	3000 (119 uniques)	3000 (101 uniques)
+PLATEIV_C_2	38091	33420	33420	33420 (11646 uniques)	33329 (192 uniques)	25533 (214 uniques)	24219 (183 uniques)	24219 (183 uniques)	24219 (183 uniques)	24219 (183 uniques)	22554 (160 uniques)	22549 (156 uniques)	3000 (149 uniques)	3000 (140 uniques)
+PLATEIV_C_3	92831	84634	84634	84634 (20613 uniques)	84460 (131 uniques)	83241 (143 uniques)	70201 (111 uniques)	70201 (111 uniques)	70201 (111 uniques)	70201 (111 uniques)	54776 (96 uniques)	54776 (96 uniques)	3000 (83 uniques)	3000 (82 uniques)
+PLATEIV_C_4	19795	17679	17679	17679 (6817 uniques)	17592 (95 uniques)	17149 (102 uniques)	11374 (70 uniques)	11374 (70 uniques)	11374 (70 uniques)	11374 (70 uniques)	9954 (66 uniques)	9953 (65 uniques)	3000 (62 uniques)	3000 (57 uniques)
+PLATEIV_C_5	12	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_C_6	110042	100829	100829	100829 (27697 uniques)	100642 (259 uniques)	100015 (297 uniques)	96271 (246 uniques)	96271 (246 uniques)	96271 (246 uniques)	96271 (246 uniques)	80149 (238 uniques)	80147 (236 uniques)	3000 (207 uniques)	3000 (200 uniques)
+PLATEIV_C_7	70834	64885	64885	64885 (19193 uniques)	64665 (122 uniques)	64061 (141 uniques)	46446 (101 uniques)	46446 (101 uniques)	46446 (101 uniques)	46446 (101 uniques)	35080 (93 uniques)	35079 (92 uniques)	3000 (84 uniques)	3000 (72 uniques)
+PLATEIV_C_8	98448	87860	87860	87860 (21589 uniques)	87658 (143 uniques)	86924 (178 uniques)	76941 (126 uniques)	76941 (126 uniques)	76941 (126 uniques)	76941 (126 uniques)	33363 (117 uniques)	33360 (114 uniques)	3000 (103 uniques)	3000 (80 uniques)
+PLATEIV_C_9	46454	41696	41696	41696 (10244 uniques)	41591 (85 uniques)	41346 (96 uniques)	38852 (63 uniques)	38852 (63 uniques)	38852 (63 uniques)	38852 (63 uniques)	31182 (56 uniques)	31182 (56 uniques)	3000 (53 uniques)	3000 (42 uniques)
+PLATEIV_D_1	39544	35104	35104	35104 (13179 uniques)	34950 (200 uniques)	32353 (231 uniques)	30544 (191 uniques)	30544 (191 uniques)	30544 (191 uniques)	30544 (191 uniques)	28936 (175 uniques)	28935 (174 uniques)	3000 (159 uniques)	3000 (146 uniques)
+PLATEIV_D_10	143312	132518	132518	132518 (47488 uniques)	131851 (1176 uniques)	127900 (1361 uniques)	124055 (1279 uniques)	123989 (1276 uniques)	123989 (1276 uniques)	123989 (1276 uniques)	93480 (1164 uniques)	93402 (1095 uniques)	3000 (749 uniques)	3000 (695 uniques)
+PLATEIV_D_11	21160	18664	18664	18664 (7318 uniques)	18554 (133 uniques)	18161 (134 uniques)	15262 (100 uniques)	15262 (100 uniques)	15262 (100 uniques)	15262 (100 uniques)	12299 (93 uniques)	12299 (93 uniques)	3000 (93 uniques)	3000 (86 uniques)
+PLATEIV_D_12	149005	134847	134847	134847 (43158 uniques)	134534 (375 uniques)	132327 (442 uniques)	96248 (375 uniques)	96241 (374 uniques)	96241 (374 uniques)	96241 (374 uniques)	91656 (345 uniques)	91652 (341 uniques)	3000 (294 uniques)	3000 (270 uniques)
+PLATEIV_D_2	19765	16754	16754	16754 (6802 uniques)	16620 (81 uniques)	15356 (86 uniques)	11277 (54 uniques)	11277 (54 uniques)	11277 (54 uniques)	11277 (54 uniques)	10990 (51 uniques)	10990 (51 uniques)	3000 (51 uniques)	3000 (48 uniques)
+PLATEIV_D_3	87358	79872	79872	79872 (24772 uniques)	79699 (165 uniques)	69269 (185 uniques)	41823 (146 uniques)	41823 (146 uniques)	41823 (146 uniques)	41823 (146 uniques)	40754 (133 uniques)	40749 (129 uniques)	3000 (116 uniques)	3000 (110 uniques)
+PLATEIV_D_4	89646	81063	81063	81063 (27661 uniques)	80852 (362 uniques)	64152 (410 uniques)	51527 (359 uniques)	51527 (359 uniques)	51527 (359 uniques)	51527 (359 uniques)	40418 (322 uniques)	40405 (311 uniques)	3000 (290 uniques)	3000 (276 uniques)
+PLATEIV_D_5	17	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_D_6	23066	21026	21026	21026 (8159 uniques)	20928 (118 uniques)	20721 (133 uniques)	17860 (99 uniques)	17860 (99 uniques)	17860 (99 uniques)	17860 (99 uniques)	16635 (92 uniques)	16632 (90 uniques)	3000 (85 uniques)	3000 (70 uniques)
+PLATEIV_D_7	139393	126714	126714	126714 (36806 uniques)	126487 (207 uniques)	117750 (216 uniques)	69050 (177 uniques)	69046 (176 uniques)	69046 (176 uniques)	69046 (176 uniques)	35040 (168 uniques)	35033 (162 uniques)	3000 (146 uniques)	3000 (135 uniques)
+PLATEIV_D_8	137346	124821	124821	124821 (36207 uniques)	124411 (324 uniques)	111116 (394 uniques)	99698 (328 uniques)	99681 (326 uniques)	99681 (326 uniques)	99681 (326 uniques)	60577 (296 uniques)	60566 (288 uniques)	3000 (258 uniques)	3000 (231 uniques)
+PLATEIV_D_9	82103	73985	73985	73985 (21482 uniques)	73629 (214 uniques)	71202 (239 uniques)	60077 (184 uniques)	60077 (184 uniques)	60077 (184 uniques)	60077 (184 uniques)	58391 (164 uniques)	58387 (160 uniques)	3000 (135 uniques)	3000 (121 uniques)
+PLATEIV_E_1	23900	21102	21102	21102 (7048 uniques)	20998 (121 uniques)	19700 (122 uniques)	17885 (91 uniques)	17885 (91 uniques)	17885 (91 uniques)	17885 (91 uniques)	17493 (87 uniques)	17492 (86 uniques)	3000 (83 uniques)	3000 (75 uniques)
+PLATEIV_E_10	61807	56068	56068	56068 (14524 uniques)	55858 (143 uniques)	55590 (179 uniques)	51444 (128 uniques)	51444 (128 uniques)	51444 (128 uniques)	51444 (128 uniques)	45381 (113 uniques)	45380 (112 uniques)	3000 (102 uniques)	3000 (96 uniques)
+PLATEIV_E_11	22473	19795	19795	19795 (7101 uniques)	19725 (108 uniques)	19546 (116 uniques)	19242 (101 uniques)	19242 (101 uniques)	19242 (101 uniques)	19242 (101 uniques)	18450 (99 uniques)	18448 (98 uniques)	3000 (97 uniques)	3000 (85 uniques)
+PLATEIV_E_12	87861	80286	80286	80286 (16570 uniques)	80138 (131 uniques)	79803 (151 uniques)	78144 (113 uniques)	78134 (111 uniques)	78134 (111 uniques)	78134 (111 uniques)	53552 (100 uniques)	53547 (96 uniques)	3000 (88 uniques)	3000 (75 uniques)
+PLATEIV_E_2	33550	29370	29370	29370 (10296 uniques)	29282 (176 uniques)	28856 (196 uniques)	26734 (160 uniques)	26734 (160 uniques)	26734 (160 uniques)	26734 (160 uniques)	26173 (152 uniques)	26172 (151 uniques)	3000 (145 uniques)	3000 (130 uniques)
+PLATEIV_E_3	16656	14979	14979	14979 (4990 uniques)	14865 (69 uniques)	14621 (69 uniques)	12072 (45 uniques)	12072 (45 uniques)	12072 (45 uniques)	12072 (45 uniques)	10918 (42 uniques)	10918 (42 uniques)	3000 (41 uniques)	3000 (34 uniques)
+PLATEIV_E_4	15025	13395	13395	13395 (4856 uniques)	13325 (76 uniques)	13214 (84 uniques)	10045 (49 uniques)	10045 (49 uniques)	10045 (49 uniques)	10045 (49 uniques)	10045 (49 uniques)	10045 (49 uniques)	3000 (48 uniques)	3000 (36 uniques)
+PLATEIV_E_5	11	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_E_6	173929	160723	160723	160723 (47367 uniques)	160411 (476 uniques)	156600 (572 uniques)	130599 (474 uniques)	130599 (474 uniques)	130599 (474 uniques)	130599 (474 uniques)	103554 (440 uniques)	103542 (429 uniques)	3000 (349 uniques)	3000 (327 uniques)
+PLATEIV_E_7	33754	31044	31044	31044 (10673 uniques)	30956 (114 uniques)	30584 (144 uniques)	28371 (95 uniques)	28371 (95 uniques)	28371 (95 uniques)	28371 (95 uniques)	27633 (92 uniques)	27629 (89 uniques)	3000 (83 uniques)	3000 (64 uniques)
+PLATEIV_E_8	69575	63681	63681	63681 (18614 uniques)	63516 (152 uniques)	62651 (214 uniques)	57098 (137 uniques)	57098 (137 uniques)	57098 (137 uniques)	57098 (137 uniques)	50474 (124 uniques)	50470 (121 uniques)	3000 (111 uniques)	3000 (70 uniques)
+PLATEIV_E_9	65215	59890	59890	59890 (14960 uniques)	59627 (113 uniques)	59206 (157 uniques)	58244 (111 uniques)	58226 (109 uniques)	58226 (109 uniques)	58226 (109 uniques)	57124 (103 uniques)	57121 (100 uniques)	3000 (87 uniques)	3000 (68 uniques)
+PLATEIV_F_1	31039	27767	27767	27767 (9027 uniques)	27669 (124 uniques)	26583 (140 uniques)	25522 (115 uniques)	25522 (115 uniques)	25522 (115 uniques)	25522 (115 uniques)	22381 (100 uniques)	22380 (99 uniques)	3000 (89 uniques)	3000 (86 uniques)
+PLATEIV_F_10	26215	22410	22410	22410 (7087 uniques)	22313 (82 uniques)	22125 (85 uniques)	20123 (49 uniques)	20123 (49 uniques)	20123 (49 uniques)	20123 (49 uniques)	16063 (43 uniques)	16063 (43 uniques)	3000 (42 uniques)	3000 (37 uniques)
+PLATEIV_F_11	23938	21361	21361	21361 (7250 uniques)	21304 (77 uniques)	21185 (94 uniques)	21106 (80 uniques)	21106 (80 uniques)	21106 (80 uniques)	21106 (80 uniques)	19979 (76 uniques)	19976 (74 uniques)	3000 (72 uniques)	3000 (53 uniques)
+PLATEIV_F_12	141937	128716	128716	128716 (20542 uniques)	128568 (78 uniques)	128217 (91 uniques)	127564 (71 uniques)	127553 (70 uniques)	127553 (70 uniques)	127553 (70 uniques)	54435 (62 uniques)	54434 (61 uniques)	3000 (56 uniques)	3000 (47 uniques)
+PLATEIV_F_2	37173	33158	33158	33158 (10190 uniques)	32968 (132 uniques)	31974 (145 uniques)	31271 (125 uniques)	31271 (125 uniques)	31271 (125 uniques)	31271 (125 uniques)	29623 (112 uniques)	29622 (111 uniques)	3000 (106 uniques)	3000 (100 uniques)
+PLATEIV_F_3	16536	14974	14974	14974 (5573 uniques)	14929 (71 uniques)	14829 (86 uniques)	13660 (57 uniques)	13660 (57 uniques)	13660 (57 uniques)	13660 (57 uniques)	13293 (55 uniques)	13293 (55 uniques)	3000 (54 uniques)	3000 (42 uniques)
+PLATEIV_F_4	28519	25683	25683	25683 (9279 uniques)	25642 (105 uniques)	25421 (119 uniques)	20296 (79 uniques)	20296 (79 uniques)	20296 (79 uniques)	20296 (79 uniques)	18186 (73 uniques)	18184 (71 uniques)	3000 (69 uniques)	3000 (52 uniques)
+PLATEIV_F_5	7	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_F_6	27514	25387	25387	25387 (9430 uniques)	25252 (118 uniques)	24948 (132 uniques)	23789 (95 uniques)	23789 (95 uniques)	23789 (95 uniques)	23789 (95 uniques)	21543 (80 uniques)	21541 (78 uniques)	3000 (77 uniques)	3000 (69 uniques)
+PLATEIV_F_7	40846	37458	37458	37458 (12220 uniques)	37377 (112 uniques)	37102 (130 uniques)	31445 (88 uniques)	31445 (88 uniques)	31445 (88 uniques)	31445 (88 uniques)	28184 (80 uniques)	28181 (78 uniques)	3000 (71 uniques)	3000 (62 uniques)
+PLATEIV_F_8	28122	25343	25343	25343 (7380 uniques)	25169 (60 uniques)	24886 (77 uniques)	24443 (56 uniques)	24443 (56 uniques)	24443 (56 uniques)	24443 (56 uniques)	18512 (50 uniques)	18511 (49 uniques)	3000 (46 uniques)	3000 (35 uniques)
+PLATEIV_F_9	30103	26643	26643	26643 (7603 uniques)	26577 (71 uniques)	26267 (86 uniques)	25532 (64 uniques)	25532 (64 uniques)	25532 (64 uniques)	25532 (64 uniques)	13575 (58 uniques)	13573 (56 uniques)	3000 (52 uniques)	3000 (45 uniques)
+PLATEIV_G_1	24730	21424	21424	21424 (7855 uniques)	21308 (81 uniques)	21032 (85 uniques)	20471 (72 uniques)	20467 (71 uniques)	20467 (71 uniques)	20467 (71 uniques)	19946 (68 uniques)	19946 (68 uniques)	3000 (66 uniques)	3000 (54 uniques)
+PLATEIV_G_10	38577	34502	34502	34502 (12199 uniques)	34387 (198 uniques)	33990 (216 uniques)	30556 (181 uniques)	30556 (181 uniques)	30556 (181 uniques)	30556 (181 uniques)	26234 (171 uniques)	26231 (168 uniques)	3000 (162 uniques)	3000 (155 uniques)
+PLATEIV_G_11	33704	29459	29459	29459 (7439 uniques)	29329 (63 uniques)	29143 (69 uniques)	28857 (58 uniques)	28857 (58 uniques)	28857 (58 uniques)	28857 (58 uniques)	18740 (55 uniques)	18740 (55 uniques)	3000 (54 uniques)	3000 (49 uniques)
+PLATEIV_G_12	44297	39577	39577	39577 (8717 uniques)	39462 (75 uniques)	39011 (82 uniques)	38185 (58 uniques)	38185 (58 uniques)	38185 (58 uniques)	38185 (58 uniques)	24490 (54 uniques)	24488 (53 uniques)	3000 (52 uniques)	3000 (44 uniques)
+PLATEIV_G_2	38000	33687	33687	33687 (9178 uniques)	33583 (91 uniques)	32026 (92 uniques)	31399 (79 uniques)	31399 (79 uniques)	31399 (79 uniques)	31399 (79 uniques)	30645 (72 uniques)	30645 (72 uniques)	3000 (69 uniques)	3000 (64 uniques)
+PLATEIV_G_3	21964	19716	19716	19716 (7523 uniques)	19643 (150 uniques)	19084 (158 uniques)	14270 (120 uniques)	14270 (120 uniques)	14270 (120 uniques)	14270 (120 uniques)	10813 (109 uniques)	10813 (109 uniques)	3000 (107 uniques)	3000 (99 uniques)
+PLATEIV_G_4	30726	26904	26904	26904 (8959 uniques)	26832 (100 uniques)	26319 (114 uniques)	17551 (71 uniques)	17551 (71 uniques)	17551 (71 uniques)	17551 (71 uniques)	11349 (67 uniques)	11348 (66 uniques)	3000 (64 uniques)	3000 (55 uniques)
+PLATEIV_G_5	9	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_G_6	173935	161580	161580	161580 (34891 uniques)	161302 (258 uniques)	157144 (312 uniques)	156531 (267 uniques)	156240 (262 uniques)	156240 (262 uniques)	156240 (262 uniques)	38383 (215 uniques)	38375 (209 uniques)	3000 (184 uniques)	3000 (175 uniques)
+PLATEIV_G_7	49173	44986	44986	44986 (14653 uniques)	44884 (140 uniques)	44263 (155 uniques)	38189 (119 uniques)	38189 (119 uniques)	38189 (119 uniques)	38189 (119 uniques)	21442 (102 uniques)	21442 (102 uniques)	3000 (97 uniques)	3000 (94 uniques)
+PLATEIV_G_8	128095	115173	115173	115173 (27498 uniques)	114897 (324 uniques)	113200 (364 uniques)	108252 (314 uniques)	108166 (309 uniques)	108166 (309 uniques)	108166 (309 uniques)	68023 (271 uniques)	68015 (264 uniques)	3000 (213 uniques)	3000 (204 uniques)
+PLATEIV_G_9	58263	52071	52071	52071 (13337 uniques)	51930 (126 uniques)	51213 (137 uniques)	48188 (99 uniques)	48188 (99 uniques)	48188 (99 uniques)	48188 (99 uniques)	40455 (83 uniques)	40455 (83 uniques)	3000 (78 uniques)	3000 (73 uniques)
+PLATEIV_H_1	165081	152294	152294	152294 (31319 uniques)	151695 (196 uniques)	148793 (322 uniques)	148759 (290 uniques)	143216 (122 uniques)	143216 (122 uniques)	143216 (122 uniques)	143216 (122 uniques)	143216 (122 uniques)	3000 (44 uniques)	3000 (15 uniques)
+PLATEIV_H_10	60973	53938	53938	53938 (13757 uniques)	53857 (123 uniques)	53224 (130 uniques)	49278 (94 uniques)	49278 (94 uniques)	49278 (94 uniques)	49278 (94 uniques)	17861 (81 uniques)	17858 (78 uniques)	3000 (75 uniques)	3000 (68 uniques)
+PLATEIV_H_11	18137	15157	15157	15157 (5023 uniques)	15051 (47 uniques)	14967 (66 uniques)	14874 (48 uniques)	14874 (48 uniques)	14874 (48 uniques)	14874 (48 uniques)	12507 (46 uniques)	12506 (45 uniques)	3000 (43 uniques)	3000 (32 uniques)
+PLATEIV_H_12	41677	37306	37306	37306 (11279 uniques)	37223 (113 uniques)	36877 (136 uniques)	36462 (118 uniques)	36462 (118 uniques)	36462 (118 uniques)	36462 (118 uniques)	30455 (98 uniques)	30453 (97 uniques)	3000 (88 uniques)	3000 (78 uniques)
+PLATEIV_H_2	4733	3052	3052	3052 (1182 uniques)	3010 (13 uniques)	2960 (9 uniques)	2960 (9 uniques)	2960 (9 uniques)	2960 (9 uniques)	2960 (9 uniques)	2960 (9 uniques)	2960 (9 uniques)	/	/
+PLATEIV_H_3	610	383	383	383 (215 uniques)	329 (10 uniques)	260 (5 uniques)	260 (5 uniques)	260 (5 uniques)	260 (5 uniques)	260 (5 uniques)	260 (5 uniques)	260 (5 uniques)	/	/
+PLATEIV_H_4	2969	2492	2492	2492 (877 uniques)	2452 (10 uniques)	2407 (7 uniques)	2407 (7 uniques)	2407 (7 uniques)	2407 (7 uniques)	2407 (7 uniques)	2400 (6 uniques)	2400 (6 uniques)	/	/
+PLATEIV_H_5	11	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEIV_H_6	34532	31750	31750	31750 (11846 uniques)	31571 (180 uniques)	31168 (205 uniques)	30277 (182 uniques)	30277 (182 uniques)	30277 (182 uniques)	30277 (182 uniques)	24966 (156 uniques)	24961 (152 uniques)	3000 (146 uniques)	3000 (132 uniques)
+PLATEIV_H_7	24084	21950	21950	21950 (7384 uniques)	21850 (72 uniques)	21633 (79 uniques)	20311 (56 uniques)	20310 (55 uniques)	20310 (55 uniques)	20310 (55 uniques)	16533 (52 uniques)	16532 (51 uniques)	3000 (50 uniques)	3000 (45 uniques)
+PLATEIV_H_8	26306	23591	23591	23591 (6985 uniques)	23530 (74 uniques)	23329 (88 uniques)	23037 (71 uniques)	23037 (71 uniques)	23037 (71 uniques)	23037 (71 uniques)	13936 (66 uniques)	13933 (64 uniques)	3000 (62 uniques)	3000 (49 uniques)
+PLATEIV_H_9	47475	42219	42219	42219 (11185 uniques)	42131 (100 uniques)	41765 (110 uniques)	39599 (73 uniques)	39599 (73 uniques)	39599 (73 uniques)	39599 (73 uniques)	27002 (68 uniques)	27002 (68 uniques)	3000 (63 uniques)	3000 (58 uniques)
+PLATEI_A_1	1	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_10	95	79	79	79 (53 uniques)	49 (4 uniques)	36 (2 uniques)	36 (2 uniques)	36 (2 uniques)	36 (2 uniques)	36 (2 uniques)	28 (1 uniques)	28 (1 uniques)	/	/
+PLATEI_A_11	62	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_12	54	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_2	21	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_3	12	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_4	37	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_5	48	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_6	46	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_7	24	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_8	28	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_A_9	40	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEI_B_1	7693	6923	6923	6923 (2445 uniques)	6857 (44 uniques)	6701 (43 uniques)	6596 (40 uniques)	6596 (40 uniques)	6596 (40 uniques)	6596 (40 uniques)	6440 (38 uniques)	6440 (38 uniques)	3000 (38 uniques)	3000 (36 uniques)
+PLATEI_B_10	42015	38244	38244	38244 (8563 uniques)	38094 (77 uniques)	35642 (74 uniques)	34640 (54 uniques)	34640 (54 uniques)	34640 (54 uniques)	34640 (54 uniques)	25799 (45 uniques)	25799 (45 uniques)	3000 (44 uniques)	3000 (42 uniques)
+PLATEI_B_11	15793	14122	14122	14122 (4310 uniques)	14037 (57 uniques)	13906 (63 uniques)	13503 (50 uniques)	13503 (50 uniques)	13503 (50 uniques)	13503 (50 uniques)	13219 (48 uniques)	13213 (44 uniques)	3000 (43 uniques)	3000 (38 uniques)
+PLATEI_B_12	19900	17752	17752	17752 (5625 uniques)	17656 (83 uniques)	17536 (88 uniques)	16036 (58 uniques)	16036 (58 uniques)	16036 (58 uniques)	16036 (58 uniques)	14884 (52 uniques)	14882 (51 uniques)	3000 (47 uniques)	3000 (45 uniques)
+PLATEI_B_2	233	99	99	99 (81 uniques)	54 (5 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	/	/
+PLATEI_B_3	31415	28673	28673	28673 (7188 uniques)	28532 (85 uniques)	28295 (86 uniques)	27459 (69 uniques)	27459 (69 uniques)	27459 (69 uniques)	27459 (69 uniques)	20314 (59 uniques)	20314 (59 uniques)	3000 (55 uniques)	3000 (54 uniques)
+PLATEI_B_4	32239	29201	29201	29201 (10035 uniques)	29062 (240 uniques)	28031 (273 uniques)	27497 (246 uniques)	27418 (244 uniques)	27418 (244 uniques)	27418 (244 uniques)	27169 (239 uniques)	27154 (228 uniques)	3000 (217 uniques)	3000 (183 uniques)
+PLATEI_B_5	18753	16116	16116	16116 (5410 uniques)	15992 (59 uniques)	15841 (58 uniques)	14640 (35 uniques)	14640 (35 uniques)	14640 (35 uniques)	14640 (35 uniques)	14374 (33 uniques)	14374 (33 uniques)	3000 (33 uniques)	3000 (26 uniques)
+PLATEI_B_6	338	161	161	161 (119 uniques)	94 (8 uniques)	50 (1 uniques)	50 (1 uniques)	50 (1 uniques)	50 (1 uniques)	50 (1 uniques)	50 (1 uniques)	50 (1 uniques)	/	/
+PLATEI_B_7	32816	30098	30098	30098 (9632 uniques)	30042 (107 uniques)	29874 (125 uniques)	23597 (87 uniques)	23597 (87 uniques)	23597 (87 uniques)	23597 (87 uniques)	21396 (75 uniques)	21396 (75 uniques)	3000 (67 uniques)	3000 (59 uniques)
+PLATEI_B_8	24291	21094	21094	21094 (6288 uniques)	21015 (48 uniques)	20859 (56 uniques)	20459 (46 uniques)	20459 (46 uniques)	20459 (46 uniques)	20459 (46 uniques)	19040 (43 uniques)	19040 (43 uniques)	3000 (41 uniques)	3000 (33 uniques)
+PLATEI_B_9	20358	18008	18008	18008 (5409 uniques)	17852 (60 uniques)	17148 (54 uniques)	16675 (46 uniques)	16675 (46 uniques)	16675 (46 uniques)	16675 (46 uniques)	14294 (41 uniques)	14294 (41 uniques)	3000 (40 uniques)	3000 (37 uniques)
+PLATEI_C_1	7537	6899	6899	6899 (2361 uniques)	6847 (96 uniques)	6036 (89 uniques)	5856 (85 uniques)	5856 (85 uniques)	5856 (85 uniques)	5856 (85 uniques)	5077 (71 uniques)	5077 (71 uniques)	3000 (70 uniques)	3000 (68 uniques)
+PLATEI_C_10	38771	35137	35137	35137 (10290 uniques)	34992 (155 uniques)	34353 (166 uniques)	33706 (147 uniques)	33706 (147 uniques)	33706 (147 uniques)	33706 (147 uniques)	21359 (137 uniques)	21358 (136 uniques)	3000 (131 uniques)	3000 (127 uniques)
+PLATEI_C_11	63894	58029	58029	58029 (11797 uniques)	57727 (66 uniques)	57305 (72 uniques)	57182 (67 uniques)	57182 (67 uniques)	57182 (67 uniques)	57182 (67 uniques)	57019 (64 uniques)	57004 (54 uniques)	3000 (45 uniques)	3000 (20 uniques)
+PLATEI_C_12	49129	44600	44600	44600 (12528 uniques)	44462 (184 uniques)	44070 (215 uniques)	43692 (181 uniques)	43692 (181 uniques)	43692 (181 uniques)	43692 (181 uniques)	32478 (176 uniques)	32472 (170 uniques)	3000 (160 uniques)	3000 (134 uniques)
+PLATEI_C_2	15789	14341	14341	14341 (4700 uniques)	14257 (47 uniques)	13936 (49 uniques)	13633 (42 uniques)	13633 (42 uniques)	13633 (42 uniques)	13633 (42 uniques)	13448 (41 uniques)	13448 (41 uniques)	3000 (41 uniques)	3000 (37 uniques)
+PLATEI_C_3	11523	10216	10216	10216 (3512 uniques)	10123 (43 uniques)	9980 (45 uniques)	9202 (30 uniques)	9202 (30 uniques)	9202 (30 uniques)	9202 (30 uniques)	8544 (28 uniques)	8544 (28 uniques)	3000 (27 uniques)	3000 (22 uniques)
+PLATEI_C_4	27809	25055	25055	25055 (7889 uniques)	24971 (88 uniques)	23156 (99 uniques)	20750 (63 uniques)	20750 (63 uniques)	20750 (63 uniques)	20750 (63 uniques)	16569 (47 uniques)	16568 (46 uniques)	3000 (45 uniques)	3000 (35 uniques)
+PLATEI_C_5	31492	27567	27567	27567 (7332 uniques)	27390 (75 uniques)	27164 (86 uniques)	26003 (60 uniques)	26003 (60 uniques)	26003 (60 uniques)	26003 (60 uniques)	24212 (50 uniques)	24212 (50 uniques)	3000 (48 uniques)	3000 (44 uniques)
+PLATEI_C_6	24800	21958	21958	21958 (6502 uniques)	21860 (64 uniques)	21703 (78 uniques)	20992 (54 uniques)	20992 (54 uniques)	20992 (54 uniques)	20992 (54 uniques)	20002 (50 uniques)	20002 (50 uniques)	3000 (47 uniques)	3000 (37 uniques)
+PLATEI_C_7	41525	37982	37982	37982 (8571 uniques)	37867 (61 uniques)	37728 (73 uniques)	36684 (44 uniques)	36684 (44 uniques)	36684 (44 uniques)	36684 (44 uniques)	32892 (39 uniques)	32890 (38 uniques)	3000 (34 uniques)	3000 (26 uniques)
+PLATEI_C_8	33108	29591	29591	29591 (7269 uniques)	29507 (59 uniques)	29339 (70 uniques)	29091 (59 uniques)	29091 (59 uniques)	29091 (59 uniques)	29091 (59 uniques)	16994 (50 uniques)	16994 (50 uniques)	3000 (46 uniques)	3000 (37 uniques)
+PLATEI_C_9	15620	13281	13281	13281 (4263 uniques)	13071 (41 uniques)	12692 (39 uniques)	12587 (33 uniques)	12587 (33 uniques)	12587 (33 uniques)	12587 (33 uniques)	10832 (30 uniques)	10832 (30 uniques)	3000 (28 uniques)	3000 (25 uniques)
+PLATEI_D_1	1692	1504	1504	1504 (701 uniques)	1439 (53 uniques)	1031 (39 uniques)	738 (35 uniques)	738 (35 uniques)	738 (35 uniques)	738 (35 uniques)	709 (34 uniques)	709 (34 uniques)	/	/
+PLATEI_D_10	27157	24580	24580	24580 (8594 uniques)	24422 (213 uniques)	20127 (226 uniques)	16026 (193 uniques)	16026 (193 uniques)	16026 (193 uniques)	16026 (193 uniques)	10726 (172 uniques)	10723 (169 uniques)	3000 (163 uniques)	3000 (158 uniques)
+PLATEI_D_11	12685	11342	11342	11342 (4089 uniques)	11254 (77 uniques)	10980 (77 uniques)	8067 (43 uniques)	8067 (43 uniques)	8067 (43 uniques)	8067 (43 uniques)	5598 (38 uniques)	5598 (38 uniques)	3000 (37 uniques)	3000 (35 uniques)
+PLATEI_D_12	9142	8051	8051	8051 (3007 uniques)	7943 (72 uniques)	7850 (69 uniques)	5415 (43 uniques)	5415 (43 uniques)	5415 (43 uniques)	5415 (43 uniques)	4962 (39 uniques)	4962 (39 uniques)	3000 (38 uniques)	3000 (37 uniques)
+PLATEI_D_2	37462	34102	34102	34102 (11454 uniques)	33937 (202 uniques)	24168 (216 uniques)	21574 (178 uniques)	21574 (178 uniques)	21574 (178 uniques)	21574 (178 uniques)	19198 (162 uniques)	19195 (160 uniques)	3000 (153 uniques)	3000 (149 uniques)
+PLATEI_D_3	13493	12022	12022	12022 (4155 uniques)	11877 (50 uniques)	11710 (52 uniques)	10940 (35 uniques)	10940 (35 uniques)	10940 (35 uniques)	10940 (35 uniques)	10226 (32 uniques)	10226 (32 uniques)	3000 (32 uniques)	3000 (25 uniques)
+PLATEI_D_4	13587	11875	11875	11875 (4064 uniques)	11763 (48 uniques)	11536 (51 uniques)	11161 (42 uniques)	11161 (42 uniques)	11161 (42 uniques)	11161 (42 uniques)	11129 (41 uniques)	11127 (39 uniques)	3000 (37 uniques)	3000 (29 uniques)
+PLATEI_D_5	26560	23048	23048	23048 (8878 uniques)	22892 (138 uniques)	22154 (141 uniques)	17563 (107 uniques)	17563 (107 uniques)	17563 (107 uniques)	17563 (107 uniques)	17183 (101 uniques)	17183 (101 uniques)	3000 (98 uniques)	3000 (91 uniques)
+PLATEI_D_6	24471	21333	21333	21333 (7780 uniques)	21200 (139 uniques)	20340 (149 uniques)	14260 (112 uniques)	14260 (112 uniques)	14260 (112 uniques)	14260 (112 uniques)	10818 (90 uniques)	10816 (89 uniques)	3000 (87 uniques)	3000 (82 uniques)
+PLATEI_D_7	25277	22670	22670	22670 (8395 uniques)	22526 (143 uniques)	21907 (142 uniques)	15592 (113 uniques)	15592 (113 uniques)	15592 (113 uniques)	15592 (113 uniques)	15192 (107 uniques)	15190 (105 uniques)	3000 (101 uniques)	3000 (100 uniques)
+PLATEI_D_8	497	159	159	159 (135 uniques)	68 (5 uniques)	31 (2 uniques)	31 (2 uniques)	31 (2 uniques)	31 (2 uniques)	31 (2 uniques)	10 (1 uniques)	10 (1 uniques)	/	/
+PLATEI_D_9	52478	46514	46514	46514 (13132 uniques)	46235 (184 uniques)	34325 (198 uniques)	32084 (159 uniques)	32084 (159 uniques)	32084 (159 uniques)	32084 (159 uniques)	31333 (140 uniques)	31332 (139 uniques)	3000 (116 uniques)	3000 (112 uniques)
+PLATEI_E_1	247	209	209	209 (110 uniques)	187 (14 uniques)	162 (10 uniques)	162 (10 uniques)	162 (10 uniques)	162 (10 uniques)	162 (10 uniques)	162 (10 uniques)	162 (10 uniques)	/	/
+PLATEI_E_10	23965	21918	21918	21918 (6605 uniques)	21818 (72 uniques)	19514 (77 uniques)	17761 (50 uniques)	17761 (50 uniques)	17761 (50 uniques)	17761 (50 uniques)	15764 (45 uniques)	15760 (43 uniques)	3000 (42 uniques)	3000 (39 uniques)
+PLATEI_E_11	16498	14699	14699	14699 (5115 uniques)	14611 (76 uniques)	13756 (70 uniques)	8378 (44 uniques)	8378 (44 uniques)	8378 (44 uniques)	8378 (44 uniques)	6727 (35 uniques)	6727 (35 uniques)	3000 (35 uniques)	3000 (33 uniques)
+PLATEI_E_12	13778	12315	12315	12315 (3874 uniques)	12259 (78 uniques)	11653 (74 uniques)	9991 (50 uniques)	9991 (50 uniques)	9991 (50 uniques)	9991 (50 uniques)	4749 (46 uniques)	4749 (46 uniques)	3000 (46 uniques)	3000 (46 uniques)
+PLATEI_E_2	18167	16376	16376	16376 (4848 uniques)	16304 (47 uniques)	10479 (51 uniques)	10132 (43 uniques)	10132 (43 uniques)	10132 (43 uniques)	10132 (43 uniques)	9693 (39 uniques)	9693 (39 uniques)	3000 (38 uniques)	3000 (37 uniques)
+PLATEI_E_3	6526	5790	5790	5790 (1847 uniques)	5688 (23 uniques)	5592 (17 uniques)	5592 (16 uniques)	5592 (16 uniques)	5592 (16 uniques)	5592 (16 uniques)	4225 (13 uniques)	4225 (13 uniques)	3000 (12 uniques)	3000 (12 uniques)
+PLATEI_E_4	51915	46271	46271	46271 (9211 uniques)	46182 (82 uniques)	45710 (92 uniques)	45026 (70 uniques)	45026 (70 uniques)	45026 (70 uniques)	45026 (70 uniques)	10239 (62 uniques)	10239 (62 uniques)	3000 (59 uniques)	3000 (55 uniques)
+PLATEI_E_5	21242	18133	18133	18133 (5256 uniques)	18032 (67 uniques)	17785 (64 uniques)	16107 (38 uniques)	16107 (38 uniques)	16107 (38 uniques)	16107 (38 uniques)	15694 (35 uniques)	15692 (34 uniques)	3000 (34 uniques)	3000 (34 uniques)
+PLATEI_E_6	15110	12640	12640	12640 (4142 uniques)	12579 (60 uniques)	12490 (68 uniques)	10550 (37 uniques)	10550 (37 uniques)	10550 (37 uniques)	10550 (37 uniques)	9712 (33 uniques)	9710 (32 uniques)	3000 (32 uniques)	3000 (24 uniques)
+PLATEI_E_7	23596	21540	21540	21540 (6631 uniques)	21486 (81 uniques)	21327 (87 uniques)	18599 (55 uniques)	18599 (55 uniques)	18599 (55 uniques)	18599 (55 uniques)	18461 (54 uniques)	18459 (53 uniques)	3000 (53 uniques)	3000 (51 uniques)
+PLATEI_E_8	289	130	130	130 (101 uniques)	67 (6 uniques)	39 (2 uniques)	39 (2 uniques)	39 (2 uniques)	39 (2 uniques)	39 (2 uniques)	24 (1 uniques)	24 (1 uniques)	/	/
+PLATEI_E_9	17854	15622	15622	15622 (5302 uniques)	15464 (80 uniques)	14929 (103 uniques)	14402 (75 uniques)	14402 (75 uniques)	14402 (75 uniques)	14402 (75 uniques)	10655 (42 uniques)	10652 (40 uniques)	3000 (39 uniques)	3000 (35 uniques)
+PLATEI_F_1	2645	2387	2387	2387 (882 uniques)	2354 (30 uniques)	2322 (26 uniques)	2322 (26 uniques)	2322 (26 uniques)	2322 (26 uniques)	2322 (26 uniques)	2296 (25 uniques)	2296 (25 uniques)	/	/
+PLATEI_F_10	22168	20227	20227	20227 (6577 uniques)	20146 (60 uniques)	19904 (58 uniques)	19853 (54 uniques)	19853 (54 uniques)	19853 (54 uniques)	19853 (54 uniques)	18414 (37 uniques)	18414 (37 uniques)	3000 (37 uniques)	3000 (31 uniques)
+PLATEI_F_11	15754	14232	14232	14232 (4547 uniques)	14167 (54 uniques)	14003 (55 uniques)	13009 (35 uniques)	13009 (35 uniques)	13009 (35 uniques)	13009 (35 uniques)	13000 (34 uniques)	13000 (34 uniques)	3000 (31 uniques)	3000 (25 uniques)
+PLATEI_F_12	20694	18405	18405	18405 (5352 uniques)	18332 (49 uniques)	18247 (71 uniques)	17693 (51 uniques)	17693 (51 uniques)	17693 (51 uniques)	17693 (51 uniques)	17514 (50 uniques)	17512 (48 uniques)	3000 (44 uniques)	3000 (34 uniques)
+PLATEI_F_2	34050	31256	31256	31256 (10539 uniques)	31159 (100 uniques)	25266 (108 uniques)	24296 (88 uniques)	24296 (88 uniques)	24296 (88 uniques)	24296 (88 uniques)	23861 (84 uniques)	23860 (83 uniques)	3000 (83 uniques)	3000 (76 uniques)
+PLATEI_F_3	32411	30084	30084	30084 (6415 uniques)	29938 (42 uniques)	29794 (47 uniques)	29774 (39 uniques)	29774 (39 uniques)	29774 (39 uniques)	29774 (39 uniques)	27450 (34 uniques)	27448 (33 uniques)	3000 (31 uniques)	3000 (27 uniques)
+PLATEI_F_4	48636	43487	43487	43487 (9346 uniques)	43362 (79 uniques)	41615 (87 uniques)	40348 (50 uniques)	40348 (50 uniques)	40348 (50 uniques)	40348 (50 uniques)	8825 (46 uniques)	8823 (45 uniques)	3000 (45 uniques)	3000 (39 uniques)
+PLATEI_F_5	28239	24283	24283	24283 (7776 uniques)	24107 (66 uniques)	23887 (67 uniques)	22324 (44 uniques)	22324 (44 uniques)	22324 (44 uniques)	22324 (44 uniques)	20439 (35 uniques)	20439 (35 uniques)	3000 (33 uniques)	3000 (32 uniques)
+PLATEI_F_6	32465	28552	28552	28552 (8528 uniques)	28480 (82 uniques)	28286 (97 uniques)	26281 (58 uniques)	26281 (58 uniques)	26281 (58 uniques)	26281 (58 uniques)	20920 (52 uniques)	20920 (52 uniques)	3000 (47 uniques)	3000 (40 uniques)
+PLATEI_F_7	24436	21929	21929	21929 (6956 uniques)	21855 (49 uniques)	21637 (59 uniques)	21637 (47 uniques)	21637 (47 uniques)	21637 (47 uniques)	21637 (47 uniques)	21618 (46 uniques)	21618 (46 uniques)	3000 (46 uniques)	3000 (38 uniques)
+PLATEI_F_8	29669	26210	26210	26210 (6935 uniques)	26058 (37 uniques)	25889 (42 uniques)	25734 (31 uniques)	25734 (31 uniques)	25734 (31 uniques)	25734 (31 uniques)	15608 (29 uniques)	15608 (29 uniques)	3000 (29 uniques)	3000 (26 uniques)
+PLATEI_F_9	35265	31265	31265	31265 (8112 uniques)	31160 (73 uniques)	30423 (78 uniques)	30237 (65 uniques)	30237 (65 uniques)	30237 (65 uniques)	30237 (65 uniques)	22145 (59 uniques)	22145 (59 uniques)	3000 (54 uniques)	3000 (50 uniques)
+PLATEI_G_1	256	198	198	198 (126 uniques)	152 (14 uniques)	115 (7 uniques)	115 (7 uniques)	115 (7 uniques)	115 (7 uniques)	115 (7 uniques)	115 (7 uniques)	115 (7 uniques)	/	/
+PLATEI_G_10	14438	12903	12903	12903 (3759 uniques)	12805 (31 uniques)	12609 (30 uniques)	12512 (27 uniques)	12512 (27 uniques)	12512 (27 uniques)	12512 (27 uniques)	11100 (26 uniques)	11100 (26 uniques)	3000 (25 uniques)	3000 (25 uniques)
+PLATEI_G_11	12296	10691	10691	10691 (3445 uniques)	10570 (41 uniques)	10309 (34 uniques)	9594 (26 uniques)	9594 (26 uniques)	9594 (26 uniques)	9594 (26 uniques)	9068 (24 uniques)	9068 (24 uniques)	3000 (24 uniques)	3000 (22 uniques)
+PLATEI_G_12	12591	11077	11077	11077 (3044 uniques)	11013 (29 uniques)	10902 (25 uniques)	10637 (23 uniques)	10637 (23 uniques)	10637 (23 uniques)	10637 (23 uniques)	9131 (22 uniques)	9131 (22 uniques)	3000 (22 uniques)	3000 (22 uniques)
+PLATEI_G_2	14710	13268	13268	13268 (4094 uniques)	13189 (34 uniques)	12773 (38 uniques)	12673 (33 uniques)	12673 (33 uniques)	12673 (33 uniques)	12673 (33 uniques)	8571 (27 uniques)	8570 (26 uniques)	3000 (26 uniques)	3000 (24 uniques)
+PLATEI_G_3	19135	17256	17256	17256 (6093 uniques)	16854 (278 uniques)	15792 (205 uniques)	15792 (199 uniques)	15758 (196 uniques)	15758 (196 uniques)	15758 (196 uniques)	15754 (195 uniques)	15750 (192 uniques)	3000 (181 uniques)	3000 (132 uniques)
+PLATEI_G_4	26854	23988	23988	23988 (7857 uniques)	23900 (187 uniques)	23391 (197 uniques)	23346 (184 uniques)	23346 (184 uniques)	23346 (184 uniques)	23346 (184 uniques)	20074 (176 uniques)	20062 (167 uniques)	3000 (164 uniques)	3000 (148 uniques)
+PLATEI_G_5	27309	24040	24040	24040 (7085 uniques)	23946 (57 uniques)	23609 (68 uniques)	23481 (52 uniques)	23481 (52 uniques)	23481 (52 uniques)	23481 (52 uniques)	22940 (51 uniques)	22940 (51 uniques)	3000 (49 uniques)	3000 (37 uniques)
+PLATEI_G_6	32427	28504	28504	28504 (6810 uniques)	28341 (53 uniques)	28035 (56 uniques)	27342 (40 uniques)	27342 (40 uniques)	27342 (40 uniques)	27342 (40 uniques)	21931 (34 uniques)	21929 (33 uniques)	3000 (33 uniques)	3000 (32 uniques)
+PLATEI_G_7	23763	21449	21449	21449 (6202 uniques)	21299 (47 uniques)	21028 (43 uniques)	19998 (31 uniques)	19998 (31 uniques)	19998 (31 uniques)	19998 (31 uniques)	18483 (29 uniques)	18483 (29 uniques)	3000 (29 uniques)	3000 (25 uniques)
+PLATEI_G_8	26741	23471	23471	23471 (7602 uniques)	23376 (85 uniques)	22977 (98 uniques)	22705 (81 uniques)	22705 (81 uniques)	22705 (81 uniques)	22705 (81 uniques)	22038 (78 uniques)	22035 (76 uniques)	3000 (72 uniques)	3000 (61 uniques)
+PLATEI_G_9	24075	20636	20636	20636 (6715 uniques)	20494 (100 uniques)	17571 (96 uniques)	15692 (64 uniques)	15692 (64 uniques)	15692 (64 uniques)	15692 (64 uniques)	13486 (59 uniques)	13486 (59 uniques)	3000 (58 uniques)	3000 (57 uniques)
+PLATEI_H_1	6574	5912	5912	5912 (2169 uniques)	5892 (65 uniques)	5550 (61 uniques)	4999 (52 uniques)	4999 (52 uniques)	4999 (52 uniques)	4999 (52 uniques)	4210 (45 uniques)	4210 (45 uniques)	3000 (45 uniques)	3000 (43 uniques)
+PLATEI_H_10	5996	5044	5044	5044 (1564 uniques)	4976 (18 uniques)	4813 (10 uniques)	4813 (10 uniques)	4813 (10 uniques)	4813 (10 uniques)	4813 (10 uniques)	4797 (9 uniques)	4797 (9 uniques)	3000 (9 uniques)	3000 (9 uniques)
+PLATEI_H_11	7545	6561	6561	6561 (2007 uniques)	6516 (23 uniques)	6398 (20 uniques)	6398 (17 uniques)	6398 (17 uniques)	6398 (17 uniques)	6398 (17 uniques)	6398 (17 uniques)	6398 (17 uniques)	3000 (17 uniques)	3000 (16 uniques)
+PLATEI_H_12	9266	7796	7796	7796 (2320 uniques)	7725 (24 uniques)	7585 (21 uniques)	7585 (20 uniques)	7585 (20 uniques)	7585 (20 uniques)	7585 (20 uniques)	7585 (20 uniques)	7585 (20 uniques)	3000 (20 uniques)	3000 (19 uniques)
+PLATEI_H_2	14411	12938	12938	12938 (4100 uniques)	12844 (29 uniques)	12321 (38 uniques)	12321 (28 uniques)	12321 (28 uniques)	12321 (28 uniques)	12321 (28 uniques)	12309 (27 uniques)	12309 (27 uniques)	3000 (27 uniques)	3000 (22 uniques)
+PLATEI_H_3	19343	17382	17382	17382 (4914 uniques)	17281 (65 uniques)	17146 (73 uniques)	16395 (57 uniques)	16395 (57 uniques)	16395 (57 uniques)	16395 (57 uniques)	15547 (54 uniques)	15546 (53 uniques)	3000 (50 uniques)	3000 (45 uniques)
+PLATEI_H_4	13631	11994	11994	11994 (3820 uniques)	11938 (36 uniques)	11779 (39 uniques)	11779 (36 uniques)	11779 (36 uniques)	11779 (36 uniques)	11779 (36 uniques)	11769 (35 uniques)	11769 (35 uniques)	3000 (33 uniques)	3000 (29 uniques)
+PLATEI_H_5	25542	22447	22447	22447 (6767 uniques)	22366 (70 uniques)	22163 (92 uniques)	21301 (65 uniques)	21301 (65 uniques)	21301 (65 uniques)	21301 (65 uniques)	20225 (61 uniques)	20217 (54 uniques)	3000 (53 uniques)	3000 (41 uniques)
+PLATEI_H_6	23313	20209	20209	20209 (6687 uniques)	20131 (76 uniques)	19810 (77 uniques)	17424 (45 uniques)	17424 (45 uniques)	17424 (45 uniques)	17424 (45 uniques)	11767 (40 uniques)	11767 (40 uniques)	3000 (39 uniques)	3000 (31 uniques)
+PLATEI_H_7	24551	22597	22597	22597 (6379 uniques)	22505 (66 uniques)	22299 (70 uniques)	19858 (39 uniques)	19858 (39 uniques)	19858 (39 uniques)	19858 (39 uniques)	19858 (39 uniques)	19857 (38 uniques)	3000 (36 uniques)	3000 (29 uniques)
+PLATEI_H_8	31268	27480	27480	27480 (9094 uniques)	27355 (109 uniques)	26987 (112 uniques)	26742 (107 uniques)	26742 (107 uniques)	26742 (107 uniques)	26742 (107 uniques)	20641 (98 uniques)	20640 (97 uniques)	3000 (93 uniques)	3000 (80 uniques)
+PLATEI_H_9	178793	164385	164385	164385 (32479 uniques)	163913 (255 uniques)	159869 (428 uniques)	159869 (384 uniques)	152295 (168 uniques)	152295 (168 uniques)	152295 (168 uniques)	152240 (167 uniques)	152240 (167 uniques)	3000 (57 uniques)	3000 (13 uniques)
+PLATEVI_A_1	44419	39076	39076	39076 (14194 uniques)	38957 (131 uniques)	25468 (133 uniques)	12948 (99 uniques)	12948 (99 uniques)	12948 (99 uniques)	12948 (99 uniques)	11727 (89 uniques)	11723 (86 uniques)	3000 (84 uniques)	3000 (77 uniques)
+PLATEVI_A_10	87949	80388	80388	80388 (30397 uniques)	80150 (628 uniques)	64969 (720 uniques)	51709 (661 uniques)	51684 (660 uniques)	51684 (660 uniques)	51684 (660 uniques)	45184 (586 uniques)	45139 (549 uniques)	3000 (476 uniques)	3000 (443 uniques)
+PLATEVI_A_11	21372	19281	19281	19281 (7766 uniques)	19168 (90 uniques)	18556 (96 uniques)	13193 (67 uniques)	13193 (67 uniques)	13193 (67 uniques)	13193 (67 uniques)	10531 (57 uniques)	10530 (56 uniques)	3000 (55 uniques)	3000 (51 uniques)
+PLATEVI_A_12	53833	48478	48478	48478 (13995 uniques)	48395 (175 uniques)	47559 (191 uniques)	39959 (155 uniques)	39959 (155 uniques)	39959 (155 uniques)	39959 (155 uniques)	13892 (152 uniques)	13889 (150 uniques)	3000 (141 uniques)	3000 (128 uniques)
+PLATEVI_A_2	32172	27837	27837	27837 (10699 uniques)	27740 (141 uniques)	20431 (151 uniques)	19188 (127 uniques)	19188 (127 uniques)	19188 (127 uniques)	19188 (127 uniques)	17984 (122 uniques)	17982 (121 uniques)	3000 (115 uniques)	3000 (107 uniques)
+PLATEVI_A_3	13099	11839	11839	11839 (4117 uniques)	11755 (49 uniques)	11643 (44 uniques)	9561 (22 uniques)	9561 (22 uniques)	9561 (22 uniques)	9561 (22 uniques)	9535 (21 uniques)	9535 (21 uniques)	3000 (20 uniques)	3000 (20 uniques)
+PLATEVI_A_4	15075	13365	13365	13365 (4357 uniques)	13307 (48 uniques)	13223 (51 uniques)	10459 (20 uniques)	10459 (20 uniques)	10459 (20 uniques)	10459 (20 uniques)	6244 (18 uniques)	6243 (17 uniques)	3000 (16 uniques)	3000 (15 uniques)
+PLATEVI_A_5	8	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_A_6	220	115	115	115 (110 uniques)	57 (4 uniques)	16 (1 uniques)	/	/	/	/	/	/	/	/
+PLATEVI_A_7	19419	17672	17672	17672 (7302 uniques)	17600 (105 uniques)	17384 (117 uniques)	13655 (85 uniques)	13655 (85 uniques)	13655 (85 uniques)	13655 (85 uniques)	12695 (80 uniques)	12689 (76 uniques)	3000 (71 uniques)	3000 (63 uniques)
+PLATEVI_A_8	21947	19855	19855	19855 (7323 uniques)	19782 (86 uniques)	19346 (81 uniques)	16265 (53 uniques)	16265 (53 uniques)	16265 (53 uniques)	16265 (53 uniques)	12935 (50 uniques)	12935 (50 uniques)	3000 (49 uniques)	3000 (44 uniques)
+PLATEVI_A_9	39291	34996	34996	34996 (12843 uniques)	34837 (141 uniques)	23125 (139 uniques)	11457 (109 uniques)	11457 (109 uniques)	11457 (109 uniques)	11457 (109 uniques)	10602 (97 uniques)	10600 (95 uniques)	3000 (93 uniques)	3000 (90 uniques)
+PLATEVI_B_1	121003	109528	109528	109528 (44113 uniques)	108938 (1245 uniques)	105481 (1449 uniques)	101963 (1347 uniques)	101863 (1339 uniques)	101863 (1339 uniques)	101863 (1339 uniques)	80886 (1254 uniques)	80786 (1176 uniques)	3000 (867 uniques)	3000 (769 uniques)
+PLATEVI_B_10	16384	14884	14884	14884 (6063 uniques)	14781 (117 uniques)	14537 (121 uniques)	9386 (90 uniques)	9386 (90 uniques)	9386 (90 uniques)	9386 (90 uniques)	9099 (84 uniques)	9099 (84 uniques)	3000 (81 uniques)	3000 (77 uniques)
+PLATEVI_B_11	1796	764	764	764 (294 uniques)	730 (4 uniques)	715 (2 uniques)	715 (2 uniques)	715 (2 uniques)	715 (2 uniques)	715 (2 uniques)	715 (2 uniques)	715 (2 uniques)	/	/
+PLATEVI_B_12	1184	917	917	917 (381 uniques)	850 (7 uniques)	809 (4 uniques)	809 (4 uniques)	809 (4 uniques)	809 (4 uniques)	809 (4 uniques)	800 (3 uniques)	800 (3 uniques)	/	/
+PLATEVI_B_2	27094	23030	23030	23030 (8704 uniques)	22839 (114 uniques)	22463 (127 uniques)	21667 (112 uniques)	21667 (112 uniques)	21667 (112 uniques)	21667 (112 uniques)	16176 (97 uniques)	16173 (94 uniques)	3000 (93 uniques)	3000 (87 uniques)
+PLATEVI_B_3	15529	14169	14169	14169 (5355 uniques)	14123 (89 uniques)	13981 (87 uniques)	9430 (60 uniques)	9430 (60 uniques)	9430 (60 uniques)	9430 (60 uniques)	9037 (57 uniques)	9037 (57 uniques)	3000 (57 uniques)	3000 (56 uniques)
+PLATEVI_B_4	27606	24751	24751	24751 (5747 uniques)	24680 (58 uniques)	24601 (62 uniques)	22775 (31 uniques)	22775 (31 uniques)	22775 (31 uniques)	22775 (31 uniques)	10552 (29 uniques)	10552 (29 uniques)	3000 (29 uniques)	3000 (27 uniques)
+PLATEVI_B_5	4	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_B_6	32008	28633	28633	28633 (11308 uniques)	28558 (117 uniques)	26803 (116 uniques)	11861 (86 uniques)	11861 (86 uniques)	11861 (86 uniques)	11861 (86 uniques)	11113 (78 uniques)	11113 (78 uniques)	3000 (76 uniques)	3000 (75 uniques)
+PLATEVI_B_7	36795	33264	33264	33264 (12618 uniques)	33166 (146 uniques)	22071 (139 uniques)	11715 (112 uniques)	11715 (112 uniques)	11715 (112 uniques)	11715 (112 uniques)	8479 (100 uniques)	8477 (98 uniques)	3000 (98 uniques)	3000 (94 uniques)
+PLATEVI_B_8	37561	33694	33694	33694 (11895 uniques)	33533 (156 uniques)	20927 (153 uniques)	13434 (127 uniques)	13434 (127 uniques)	13434 (127 uniques)	13434 (127 uniques)	12615 (118 uniques)	12614 (117 uniques)	3000 (114 uniques)	3000 (110 uniques)
+PLATEVI_B_9	20346	18139	18139	18139 (5838 uniques)	18031 (89 uniques)	17862 (100 uniques)	15467 (69 uniques)	15467 (69 uniques)	15467 (69 uniques)	15467 (69 uniques)	14886 (65 uniques)	14885 (64 uniques)	3000 (62 uniques)	3000 (56 uniques)
+PLATEVI_C_1	6395	5054	5054	5054 (1969 uniques)	4990 (29 uniques)	4903 (25 uniques)	4424 (18 uniques)	4424 (18 uniques)	4424 (18 uniques)	4424 (18 uniques)	4015 (16 uniques)	4015 (16 uniques)	3000 (16 uniques)	3000 (16 uniques)
+PLATEVI_C_10	26101	22964	22964	22964 (6719 uniques)	22884 (60 uniques)	22793 (64 uniques)	19078 (33 uniques)	19078 (33 uniques)	19078 (33 uniques)	19078 (33 uniques)	18819 (30 uniques)	18819 (30 uniques)	3000 (30 uniques)	3000 (29 uniques)
+PLATEVI_C_11	7860	6654	6654	6654 (2732 uniques)	6600 (44 uniques)	6484 (44 uniques)	5905 (35 uniques)	5905 (35 uniques)	5905 (35 uniques)	5905 (35 uniques)	5002 (25 uniques)	5002 (25 uniques)	3000 (25 uniques)	3000 (21 uniques)
+PLATEVI_C_12	13845	12489	12489	12489 (3690 uniques)	12451 (63 uniques)	12348 (65 uniques)	12126 (59 uniques)	12126 (59 uniques)	12126 (59 uniques)	12126 (59 uniques)	12006 (56 uniques)	12006 (56 uniques)	3000 (55 uniques)	3000 (52 uniques)
+PLATEVI_C_2	9025	6612	6612	6612 (2606 uniques)	6586 (26 uniques)	6495 (25 uniques)	6368 (23 uniques)	6368 (23 uniques)	6368 (23 uniques)	6368 (23 uniques)	6368 (23 uniques)	6368 (23 uniques)	3000 (23 uniques)	3000 (20 uniques)
+PLATEVI_C_3	10236	9119	9119	9119 (3215 uniques)	9065 (37 uniques)	8944 (37 uniques)	8633 (33 uniques)	8633 (33 uniques)	8633 (33 uniques)	8633 (33 uniques)	8267 (30 uniques)	8267 (30 uniques)	3000 (30 uniques)	3000 (26 uniques)
+PLATEVI_C_4	17473	15573	15573	15573 (5522 uniques)	15533 (66 uniques)	13949 (69 uniques)	12347 (40 uniques)	12347 (40 uniques)	12347 (40 uniques)	12347 (40 uniques)	11964 (37 uniques)	11964 (37 uniques)	3000 (37 uniques)	3000 (32 uniques)
+PLATEVI_C_5	4	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_C_6	10068	9164	9164	9164 (3209 uniques)	9116 (33 uniques)	8996 (33 uniques)	8047 (23 uniques)	8047 (23 uniques)	8047 (23 uniques)	8047 (23 uniques)	7757 (21 uniques)	7757 (21 uniques)	3000 (21 uniques)	3000 (20 uniques)
+PLATEVI_C_7	5304	4728	4728	4728 (1857 uniques)	4680 (18 uniques)	4626 (19 uniques)	4567 (17 uniques)	4567 (17 uniques)	4567 (17 uniques)	4567 (17 uniques)	4504 (15 uniques)	4504 (15 uniques)	3000 (15 uniques)	3000 (15 uniques)
+PLATEVI_C_8	8419	7398	7398	7398 (2729 uniques)	7332 (30 uniques)	7282 (35 uniques)	7224 (30 uniques)	7224 (30 uniques)	7224 (30 uniques)	7224 (30 uniques)	7193 (29 uniques)	7193 (29 uniques)	3000 (28 uniques)	3000 (23 uniques)
+PLATEVI_C_9	9379	8289	8289	8289 (3178 uniques)	8227 (63 uniques)	8080 (57 uniques)	6603 (39 uniques)	6603 (39 uniques)	6603 (39 uniques)	6603 (39 uniques)	6260 (35 uniques)	6260 (35 uniques)	3000 (35 uniques)	3000 (34 uniques)
+PLATEVI_D_1	10218	8282	8282	8282 (3144 uniques)	8218 (36 uniques)	8076 (31 uniques)	8057 (30 uniques)	8057 (30 uniques)	8057 (30 uniques)	8057 (30 uniques)	7943 (28 uniques)	7943 (28 uniques)	3000 (28 uniques)	3000 (26 uniques)
+PLATEVI_D_10	79025	71584	71584	71584 (21155 uniques)	71410 (130 uniques)	52639 (162 uniques)	35213 (118 uniques)	35213 (118 uniques)	35213 (118 uniques)	35213 (118 uniques)	34421 (111 uniques)	34418 (108 uniques)	3000 (97 uniques)	3000 (82 uniques)
+PLATEVI_D_11	41465	37171	37171	37171 (13677 uniques)	37040 (164 uniques)	30157 (175 uniques)	17072 (137 uniques)	17072 (137 uniques)	17072 (137 uniques)	17072 (137 uniques)	15799 (129 uniques)	15798 (128 uniques)	3000 (124 uniques)	3000 (117 uniques)
+PLATEVI_D_12	52916	47806	47806	47806 (19064 uniques)	47743 (174 uniques)	46986 (198 uniques)	40958 (149 uniques)	40958 (149 uniques)	40958 (149 uniques)	40958 (149 uniques)	34902 (131 uniques)	34901 (130 uniques)	3000 (125 uniques)	3000 (114 uniques)
+PLATEVI_D_2	15432	12182	12182	12182 (4361 uniques)	12133 (35 uniques)	11988 (40 uniques)	11835 (35 uniques)	11835 (35 uniques)	11835 (35 uniques)	11835 (35 uniques)	10113 (27 uniques)	10113 (27 uniques)	3000 (26 uniques)	3000 (22 uniques)
+PLATEVI_D_3	14185	12943	12943	12943 (4440 uniques)	12857 (50 uniques)	12753 (47 uniques)	11333 (27 uniques)	11333 (27 uniques)	11333 (27 uniques)	11333 (27 uniques)	10865 (25 uniques)	10865 (25 uniques)	3000 (25 uniques)	3000 (21 uniques)
+PLATEVI_D_4	18384	16400	16400	16400 (5651 uniques)	16316 (49 uniques)	16206 (59 uniques)	16040 (50 uniques)	16040 (50 uniques)	16040 (50 uniques)	16040 (50 uniques)	15266 (48 uniques)	15265 (47 uniques)	3000 (45 uniques)	3000 (37 uniques)
+PLATEVI_D_5	6	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_D_6	31224	28772	28772	28772 (7548 uniques)	28692 (51 uniques)	27967 (58 uniques)	27742 (49 uniques)	27742 (49 uniques)	27742 (49 uniques)	27742 (49 uniques)	27281 (43 uniques)	27280 (42 uniques)	3000 (39 uniques)	3000 (32 uniques)
+PLATEVI_D_7	15693	14050	14050	14050 (5609 uniques)	13973 (66 uniques)	12165 (63 uniques)	9525 (36 uniques)	9525 (36 uniques)	9525 (36 uniques)	9525 (36 uniques)	8920 (32 uniques)	8920 (32 uniques)	3000 (31 uniques)	3000 (29 uniques)
+PLATEVI_D_8	33431	30215	30215	30215 (10711 uniques)	30112 (95 uniques)	24989 (105 uniques)	20242 (69 uniques)	20242 (69 uniques)	20242 (69 uniques)	20242 (69 uniques)	18622 (61 uniques)	18622 (61 uniques)	3000 (59 uniques)	3000 (54 uniques)
+PLATEVI_D_9	57681	52068	52068	52068 (16820 uniques)	51895 (144 uniques)	36803 (165 uniques)	30243 (125 uniques)	30243 (125 uniques)	30243 (125 uniques)	30243 (125 uniques)	27767 (107 uniques)	27767 (107 uniques)	3000 (100 uniques)	3000 (93 uniques)
+PLATEVI_E_1	49383	44651	44651	44651 (15996 uniques)	44528 (172 uniques)	43328 (190 uniques)	35439 (153 uniques)	35439 (153 uniques)	35439 (153 uniques)	35439 (153 uniques)	25057 (121 uniques)	25056 (120 uniques)	3000 (110 uniques)	3000 (107 uniques)
+PLATEVI_E_10	59236	53947	53947	53947 (19233 uniques)	53842 (255 uniques)	53215 (300 uniques)	48392 (249 uniques)	48392 (249 uniques)	48392 (249 uniques)	48392 (249 uniques)	35107 (227 uniques)	35097 (220 uniques)	3000 (204 uniques)	3000 (195 uniques)
+PLATEVI_E_11	28321	25548	25548	25548 (8933 uniques)	25450 (107 uniques)	24988 (128 uniques)	24381 (108 uniques)	24381 (108 uniques)	24381 (108 uniques)	24381 (108 uniques)	22368 (102 uniques)	22366 (100 uniques)	3000 (95 uniques)	3000 (84 uniques)
+PLATEVI_E_12	2727	2021	2021	2021 (771 uniques)	1956 (14 uniques)	1900 (11 uniques)	1900 (11 uniques)	1900 (11 uniques)	1900 (11 uniques)	1900 (11 uniques)	1876 (9 uniques)	1876 (9 uniques)	/	/
+PLATEVI_E_2	61915	55748	55748	55748 (17965 uniques)	55595 (163 uniques)	51905 (170 uniques)	26314 (137 uniques)	26314 (137 uniques)	26314 (137 uniques)	26314 (137 uniques)	10583 (127 uniques)	10581 (126 uniques)	3000 (122 uniques)	3000 (117 uniques)
+PLATEVI_E_3	31722	28341	28341	28341 (10618 uniques)	28211 (123 uniques)	27359 (125 uniques)	13336 (93 uniques)	13336 (93 uniques)	13336 (93 uniques)	13336 (93 uniques)	12621 (82 uniques)	12621 (82 uniques)	3000 (80 uniques)	3000 (79 uniques)
+PLATEVI_E_4	46085	39739	39739	39739 (14587 uniques)	39595 (136 uniques)	37869 (139 uniques)	14751 (99 uniques)	14751 (99 uniques)	14751 (99 uniques)	14751 (99 uniques)	13678 (92 uniques)	13676 (91 uniques)	3000 (86 uniques)	3000 (82 uniques)
+PLATEVI_E_5	6	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_E_6	34829	31917	31917	31917 (12309 uniques)	31778 (141 uniques)	31305 (151 uniques)	20733 (114 uniques)	20733 (114 uniques)	20733 (114 uniques)	20733 (114 uniques)	17123 (102 uniques)	17123 (102 uniques)	3000 (96 uniques)	3000 (94 uniques)
+PLATEVI_E_7	53297	48939	48939	48939 (17419 uniques)	48767 (151 uniques)	47972 (163 uniques)	42314 (127 uniques)	42314 (127 uniques)	42314 (127 uniques)	42314 (127 uniques)	36259 (100 uniques)	36258 (99 uniques)	3000 (93 uniques)	3000 (88 uniques)
+PLATEVI_E_8	17361	15617	15617	15617 (5567 uniques)	15535 (59 uniques)	13465 (58 uniques)	11620 (32 uniques)	11620 (32 uniques)	11620 (32 uniques)	11620 (32 uniques)	11571 (30 uniques)	11571 (30 uniques)	3000 (30 uniques)	3000 (28 uniques)
+PLATEVI_E_9	16944	15176	15176	15176 (4859 uniques)	15037 (53 uniques)	14792 (54 uniques)	14025 (38 uniques)	14025 (38 uniques)	14025 (38 uniques)	14025 (38 uniques)	13983 (34 uniques)	13982 (33 uniques)	3000 (33 uniques)	3000 (28 uniques)
+PLATEVI_F_1	198597	182845	182845	182845 (37963 uniques)	182399 (213 uniques)	178195 (332 uniques)	178112 (306 uniques)	171712 (130 uniques)	171712 (130 uniques)	171712 (130 uniques)	171712 (130 uniques)	171712 (130 uniques)	3000 (50 uniques)	3000 (17 uniques)
+PLATEVI_F_10	9397	7654	7654	7654 (2562 uniques)	7579 (31 uniques)	7453 (21 uniques)	7453 (21 uniques)	7453 (21 uniques)	7453 (21 uniques)	7453 (21 uniques)	7389 (19 uniques)	7389 (19 uniques)	3000 (19 uniques)	3000 (17 uniques)
+PLATEVI_F_11	6387	5410	5410	5410 (1936 uniques)	5363 (20 uniques)	5196 (14 uniques)	5196 (14 uniques)	5196 (14 uniques)	5196 (14 uniques)	5196 (14 uniques)	5187 (13 uniques)	5187 (13 uniques)	3000 (13 uniques)	3000 (11 uniques)
+PLATEVI_F_12	15793	13898	13898	13898 (4488 uniques)	13782 (25 uniques)	13640 (23 uniques)	13640 (22 uniques)	13640 (22 uniques)	13640 (22 uniques)	13640 (22 uniques)	10461 (19 uniques)	10461 (19 uniques)	3000 (18 uniques)	3000 (18 uniques)
+PLATEVI_F_2	8665	6595	6595	6595 (2504 uniques)	6565 (24 uniques)	6474 (25 uniques)	6474 (20 uniques)	6474 (20 uniques)	6474 (20 uniques)	6474 (20 uniques)	6474 (20 uniques)	6474 (20 uniques)	3000 (19 uniques)	3000 (15 uniques)
+PLATEVI_F_3	6948	6248	6248	6248 (2125 uniques)	6209 (23 uniques)	5853 (18 uniques)	5853 (17 uniques)	5853 (17 uniques)	5853 (17 uniques)	5853 (17 uniques)	5853 (17 uniques)	5853 (17 uniques)	3000 (16 uniques)	3000 (14 uniques)
+PLATEVI_F_4	10162	8522	8522	8522 (2807 uniques)	8493 (21 uniques)	8404 (18 uniques)	8404 (18 uniques)	8404 (18 uniques)	8404 (18 uniques)	8404 (18 uniques)	8404 (18 uniques)	8404 (18 uniques)	3000 (18 uniques)	3000 (15 uniques)
+PLATEVI_F_5	3	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_F_6	255	150	150	150 (136 uniques)	66 (8 uniques)	33 (2 uniques)	33 (2 uniques)	33 (2 uniques)	33 (2 uniques)	33 (2 uniques)	14 (1 uniques)	14 (1 uniques)	/	/
+PLATEVI_F_7	5238	4649	4649	4649 (1627 uniques)	4593 (18 uniques)	4480 (15 uniques)	4480 (14 uniques)	4480 (14 uniques)	4480 (14 uniques)	4480 (14 uniques)	4458 (12 uniques)	4458 (12 uniques)	3000 (12 uniques)	3000 (11 uniques)
+PLATEVI_F_8	14636	12819	12819	12819 (4359 uniques)	12743 (33 uniques)	12482 (31 uniques)	12482 (27 uniques)	12482 (27 uniques)	12482 (27 uniques)	12482 (27 uniques)	11825 (24 uniques)	11825 (24 uniques)	3000 (23 uniques)	3000 (21 uniques)
+PLATEVI_F_9	17185	15380	15380	15380 (4824 uniques)	15319 (37 uniques)	15156 (37 uniques)	15156 (32 uniques)	15156 (32 uniques)	15156 (32 uniques)	15156 (32 uniques)	14509 (30 uniques)	14508 (29 uniques)	3000 (28 uniques)	3000 (23 uniques)
+PLATEVI_G_1	29721	25260	25260	25260 (9451 uniques)	25148 (114 uniques)	24735 (122 uniques)	24727 (113 uniques)	24574 (112 uniques)	24574 (112 uniques)	24574 (112 uniques)	24574 (112 uniques)	24572 (111 uniques)	3000 (108 uniques)	3000 (92 uniques)
+PLATEVI_G_10	246	105	105	105 (92 uniques)	51 (4 uniques)	26 (2 uniques)	26 (2 uniques)	26 (2 uniques)	26 (2 uniques)	26 (2 uniques)	26 (2 uniques)	26 (2 uniques)	/	/
+PLATEVI_G_11	513	425	425	425 (206 uniques)	398 (10 uniques)	349 (9 uniques)	349 (9 uniques)	349 (9 uniques)	349 (9 uniques)	349 (9 uniques)	349 (9 uniques)	349 (9 uniques)	/	/
+PLATEVI_G_12	102611	94604	94604	94604 (20437 uniques)	94153 (136 uniques)	92289 (205 uniques)	92201 (189 uniques)	89455 (83 uniques)	89455 (83 uniques)	89455 (83 uniques)	89435 (82 uniques)	89435 (82 uniques)	3000 (37 uniques)	3000 (19 uniques)
+PLATEVI_G_2	9002	5699	5699	5699 (2149 uniques)	5664 (21 uniques)	5587 (17 uniques)	5587 (15 uniques)	5587 (15 uniques)	5587 (15 uniques)	5587 (15 uniques)	5587 (15 uniques)	5587 (15 uniques)	3000 (14 uniques)	3000 (11 uniques)
+PLATEVI_G_3	8320	7391	7391	7391 (2431 uniques)	7341 (21 uniques)	7256 (20 uniques)	7256 (18 uniques)	7256 (18 uniques)	7256 (18 uniques)	7256 (18 uniques)	7241 (17 uniques)	7241 (17 uniques)	3000 (16 uniques)	3000 (14 uniques)
+PLATEVI_G_4	13973	12495	12495	12495 (4129 uniques)	12441 (37 uniques)	12364 (51 uniques)	12069 (39 uniques)	12069 (39 uniques)	12069 (39 uniques)	12069 (39 uniques)	12000 (36 uniques)	11998 (35 uniques)	3000 (35 uniques)	3000 (20 uniques)
+PLATEVI_G_5	6	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_G_6	5284	4492	4492	4492 (1721 uniques)	4456 (19 uniques)	4411 (23 uniques)	4411 (19 uniques)	4411 (19 uniques)	4411 (19 uniques)	4411 (19 uniques)	4403 (18 uniques)	4403 (18 uniques)	3000 (18 uniques)	3000 (15 uniques)
+PLATEVI_G_7	6373	5756	5756	5756 (2114 uniques)	5680 (22 uniques)	5580 (20 uniques)	5580 (18 uniques)	5580 (18 uniques)	5580 (18 uniques)	5580 (18 uniques)	5059 (16 uniques)	5059 (16 uniques)	3000 (15 uniques)	3000 (13 uniques)
+PLATEVI_G_8	313	130	130	130 (106 uniques)	66 (4 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	/	/	/	/
+PLATEVI_G_9	292	132	132	132 (109 uniques)	88 (7 uniques)	34 (1 uniques)	34 (1 uniques)	34 (1 uniques)	34 (1 uniques)	34 (1 uniques)	34 (1 uniques)	34 (1 uniques)	/	/
+PLATEVI_H_1	371	165	165	165 (144 uniques)	84 (9 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	/	/
+PLATEVI_H_10	248	87	87	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_H_11	113	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_H_12	313	132	132	132 (102 uniques)	59 (2 uniques)	58 (2 uniques)	58 (2 uniques)	58 (2 uniques)	58 (2 uniques)	58 (2 uniques)	18 (1 uniques)	18 (1 uniques)	/	/
+PLATEVI_H_2	136	52	52	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_H_3	166	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_H_4	218	73	73	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_H_5	3	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_H_6	204	73	73	73 (58 uniques)	37 (4 uniques)	26 (2 uniques)	26 (2 uniques)	26 (2 uniques)	26 (2 uniques)	26 (2 uniques)	9 (1 uniques)	9 (1 uniques)	/	/
+PLATEVI_H_7	318	140	140	/	/	/	/	/	/	/	/	/	/	/
+PLATEVI_H_8	330	129	129	129 (107 uniques)	49 (3 uniques)	37 (2 uniques)	37 (2 uniques)	37 (2 uniques)	37 (2 uniques)	37 (2 uniques)	9 (1 uniques)	9 (1 uniques)	/	/
+PLATEVI_H_9	372	151	151	151 (131 uniques)	63 (4 uniques)	26 (1 uniques)	26 (1 uniques)	26 (1 uniques)	26 (1 uniques)	26 (1 uniques)	26 (1 uniques)	26 (1 uniques)	/	/
+PLATEV_A_1	118	67	67	67 (57 uniques)	24 (3 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	/	/
+PLATEV_A_10	274	57	57	57 (45 uniques)	25 (5 uniques)	12 (1 uniques)	12 (1 uniques)	12 (1 uniques)	12 (1 uniques)	12 (1 uniques)	12 (1 uniques)	12 (1 uniques)	/	/
+PLATEV_A_11	4933	4483	4483	4483 (1239 uniques)	4454 (26 uniques)	4431 (27 uniques)	4431 (24 uniques)	4431 (24 uniques)	4431 (24 uniques)	4431 (24 uniques)	4133 (23 uniques)	4133 (23 uniques)	3000 (23 uniques)	3000 (21 uniques)
+PLATEV_A_12	92	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_A_2	1926	1540	1540	1540 (424 uniques)	1518 (18 uniques)	1507 (16 uniques)	1507 (16 uniques)	1507 (16 uniques)	1507 (16 uniques)	1507 (16 uniques)	1507 (16 uniques)	1507 (16 uniques)	/	/
+PLATEV_A_3	161	123	123	123 (67 uniques)	98 (6 uniques)	96 (6 uniques)	96 (6 uniques)	96 (6 uniques)	96 (6 uniques)	96 (6 uniques)	96 (6 uniques)	96 (6 uniques)	/	/
+PLATEV_A_4	2390	2078	2078	2078 (699 uniques)	2038 (52 uniques)	1917 (31 uniques)	1917 (31 uniques)	1917 (31 uniques)	1917 (31 uniques)	1917 (31 uniques)	1899 (30 uniques)	1899 (30 uniques)	/	/
+PLATEV_A_6	1622	1434	1434	1434 (466 uniques)	1419 (23 uniques)	1391 (24 uniques)	1391 (23 uniques)	1391 (23 uniques)	1391 (23 uniques)	1391 (23 uniques)	1391 (23 uniques)	1391 (23 uniques)	/	/
+PLATEV_A_7	92	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_A_8	6312	5675	5675	5675 (1600 uniques)	5560 (78 uniques)	5474 (76 uniques)	5474 (72 uniques)	5474 (72 uniques)	5474 (72 uniques)	5474 (72 uniques)	5471 (71 uniques)	5471 (71 uniques)	3000 (70 uniques)	3000 (67 uniques)
+PLATEV_A_9	1430	1183	1183	1183 (399 uniques)	1136 (35 uniques)	1086 (29 uniques)	1086 (28 uniques)	1086 (28 uniques)	1086 (28 uniques)	1086 (28 uniques)	1086 (28 uniques)	1086 (28 uniques)	/	/
+PLATEV_B_1	187	95	95	95 (84 uniques)	32 (3 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	/	/
+PLATEV_B_10	2158	1720	1720	1720 (732 uniques)	1633 (107 uniques)	1425 (79 uniques)	1425 (79 uniques)	1425 (79 uniques)	1425 (79 uniques)	1425 (79 uniques)	1425 (79 uniques)	1424 (78 uniques)	/	/
+PLATEV_B_11	94	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_B_12	2137	1825	1825	1825 (483 uniques)	1788 (13 uniques)	1770 (14 uniques)	1770 (11 uniques)	1770 (11 uniques)	1770 (11 uniques)	1770 (11 uniques)	1763 (10 uniques)	1763 (10 uniques)	/	/
+PLATEV_B_2	340	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_B_3	250	205	205	205 (99 uniques)	171 (11 uniques)	156 (9 uniques)	156 (9 uniques)	156 (9 uniques)	156 (9 uniques)	156 (9 uniques)	156 (9 uniques)	156 (9 uniques)	/	/
+PLATEV_B_4	959	797	797	797 (291 uniques)	762 (21 uniques)	738 (19 uniques)	738 (18 uniques)	738 (18 uniques)	738 (18 uniques)	738 (18 uniques)	738 (18 uniques)	738 (18 uniques)	/	/
+PLATEV_B_5	2	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_B_6	3267	2929	2929	2929 (953 uniques)	2864 (64 uniques)	2798 (60 uniques)	2798 (58 uniques)	2798 (58 uniques)	2798 (58 uniques)	2798 (58 uniques)	2679 (55 uniques)	2679 (55 uniques)	/	/
+PLATEV_B_7	8611	7868	7868	7868 (2495 uniques)	7790 (193 uniques)	7609 (189 uniques)	7609 (184 uniques)	7609 (184 uniques)	7609 (184 uniques)	7609 (184 uniques)	7515 (176 uniques)	7510 (172 uniques)	3000 (172 uniques)	3000 (166 uniques)
+PLATEV_B_8	1443	1200	1200	1200 (423 uniques)	1155 (39 uniques)	1119 (35 uniques)	1119 (35 uniques)	1119 (35 uniques)	1119 (35 uniques)	1119 (35 uniques)	1114 (34 uniques)	1114 (34 uniques)	/	/
+PLATEV_B_9	886	678	678	678 (258 uniques)	638 (21 uniques)	593 (18 uniques)	593 (18 uniques)	593 (18 uniques)	593 (18 uniques)	593 (18 uniques)	585 (17 uniques)	585 (17 uniques)	/	/
+PLATEV_C_1	349	213	213	213 (156 uniques)	124 (14 uniques)	91 (7 uniques)	91 (7 uniques)	91 (7 uniques)	91 (7 uniques)	91 (7 uniques)	91 (7 uniques)	91 (7 uniques)	/	/
+PLATEV_C_10	385	77	77	77 (56 uniques)	39 (7 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	/	/
+PLATEV_C_11	1094	888	888	888 (256 uniques)	868 (20 uniques)	856 (18 uniques)	759 (16 uniques)	759 (16 uniques)	759 (16 uniques)	759 (16 uniques)	759 (16 uniques)	757 (15 uniques)	/	/
+PLATEV_C_12	3170	2694	2694	2694 (758 uniques)	2657 (24 uniques)	2611 (19 uniques)	2611 (19 uniques)	2611 (19 uniques)	2611 (19 uniques)	2611 (19 uniques)	2595 (18 uniques)	2595 (18 uniques)	/	/
+PLATEV_C_2	22056	19672	19672	19672 (5230 uniques)	19603 (86 uniques)	19508 (94 uniques)	19508 (87 uniques)	19508 (87 uniques)	19508 (87 uniques)	19508 (87 uniques)	19451 (84 uniques)	19451 (84 uniques)	3000 (83 uniques)	3000 (69 uniques)
+PLATEV_C_3	169	102	102	102 (65 uniques)	61 (6 uniques)	47 (4 uniques)	47 (4 uniques)	47 (4 uniques)	47 (4 uniques)	47 (4 uniques)	47 (4 uniques)	47 (4 uniques)	/	/
+PLATEV_C_4	400	300	300	300 (146 uniques)	273 (19 uniques)	241 (14 uniques)	241 (14 uniques)	241 (14 uniques)	241 (14 uniques)	241 (14 uniques)	241 (14 uniques)	241 (14 uniques)	/	/
+PLATEV_C_5	4	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_C_6	1340	1079	1079	1079 (385 uniques)	1039 (43 uniques)	962 (30 uniques)	962 (30 uniques)	962 (30 uniques)	962 (30 uniques)	962 (30 uniques)	954 (29 uniques)	952 (28 uniques)	/	/
+PLATEV_C_7	2831	2488	2488	2488 (695 uniques)	2454 (24 uniques)	2397 (18 uniques)	2397 (18 uniques)	2397 (18 uniques)	2397 (18 uniques)	2397 (18 uniques)	2397 (18 uniques)	2397 (18 uniques)	/	/
+PLATEV_C_8	2406	2059	2059	2059 (614 uniques)	2029 (30 uniques)	1994 (28 uniques)	1994 (27 uniques)	1994 (27 uniques)	1994 (27 uniques)	1994 (27 uniques)	1979 (26 uniques)	1978 (25 uniques)	/	/
+PLATEV_C_9	913	691	691	691 (261 uniques)	646 (27 uniques)	600 (21 uniques)	600 (21 uniques)	600 (21 uniques)	600 (21 uniques)	600 (21 uniques)	600 (21 uniques)	600 (21 uniques)	/	/
+PLATEV_D_1	335	218	218	218 (171 uniques)	159 (12 uniques)	47 (3 uniques)	47 (3 uniques)	47 (3 uniques)	47 (3 uniques)	47 (3 uniques)	47 (3 uniques)	47 (3 uniques)	/	/
+PLATEV_D_10	197	103	103	103 (95 uniques)	59 (4 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	17 (1 uniques)	/	/
+PLATEV_D_11	93	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_D_12	197	100	100	100 (91 uniques)	50 (4 uniques)	27 (1 uniques)	27 (1 uniques)	27 (1 uniques)	27 (1 uniques)	27 (1 uniques)	27 (1 uniques)	27 (1 uniques)	/	/
+PLATEV_D_2	7774	6213	6213	6213 (1473 uniques)	6172 (27 uniques)	6103 (22 uniques)	6103 (22 uniques)	6103 (22 uniques)	6103 (22 uniques)	6103 (22 uniques)	6103 (22 uniques)	6103 (22 uniques)	3000 (22 uniques)	3000 (20 uniques)
+PLATEV_D_3	129	76	76	76 (69 uniques)	33 (2 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	/	/
+PLATEV_D_4	561	70	70	70 (62 uniques)	45 (4 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	13 (1 uniques)	/	/
+PLATEV_D_5	7	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_D_6	315	173	173	173 (104 uniques)	143 (6 uniques)	113 (4 uniques)	113 (4 uniques)	113 (4 uniques)	113 (4 uniques)	113 (4 uniques)	113 (4 uniques)	113 (4 uniques)	/	/
+PLATEV_D_7	237794	221751	221751	221751 (47670 uniques)	220397 (530 uniques)	213783 (1683 uniques)	213783 (1350 uniques)	177639 (670 uniques)	177639 (670 uniques)	177639 (670 uniques)	177639 (670 uniques)	177438 (519 uniques)	3000 (177 uniques)	3000 (24 uniques)
+PLATEV_D_8	244	103	103	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_D_9	273	132	132	132 (121 uniques)	68 (6 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	/	/
+PLATEV_E_1	8	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_10	5	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_11	3	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_12	5	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_2	3	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_3	2	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_4	2	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_6	1	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_8	3	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_E_9	3	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_F_1	186	97	97	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_F_10	214	108	108	108 (95 uniques)	42 (6 uniques)	6 (1 uniques)	/	/	/	/	/	/	/	/
+PLATEV_F_11	75	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_F_12	225	120	120	120 (96 uniques)	76 (4 uniques)	65 (3 uniques)	65 (3 uniques)	65 (3 uniques)	65 (3 uniques)	65 (3 uniques)	30 (2 uniques)	30 (2 uniques)	/	/
+PLATEV_F_2	118	67	67	67 (59 uniques)	20 (6 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	3 (1 uniques)	/	/
+PLATEV_F_3	137	73	73	73 (65 uniques)	20 (3 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	11 (1 uniques)	/	/
+PLATEV_F_4	104	51	51	51 (44 uniques)	17 (2 uniques)	15 (1 uniques)	15 (1 uniques)	15 (1 uniques)	15 (1 uniques)	15 (1 uniques)	15 (1 uniques)	15 (1 uniques)	/	/
+PLATEV_F_6	218	143	143	143 (127 uniques)	65 (5 uniques)	40 (3 uniques)	40 (3 uniques)	40 (3 uniques)	40 (3 uniques)	40 (3 uniques)	19 (2 uniques)	19 (2 uniques)	/	/
+PLATEV_F_7	183	117	117	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_F_8	203	93	93	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_F_9	224	121	121	121 (101 uniques)	41 (4 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	/	/
+PLATEV_G_1	118	59	59	59 (53 uniques)	22 (3 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	/	/
+PLATEV_G_10	99	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_G_11	47	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_G_12	114	52	52	52 (43 uniques)	27 (3 uniques)	10 (1 uniques)	10 (1 uniques)	10 (1 uniques)	10 (1 uniques)	10 (1 uniques)	/	/	/	/
+PLATEV_G_2	57	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_G_3	68	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_G_4	63	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_G_5	2	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_G_6	59	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_G_7	122	57	57	57 (49 uniques)	22 (3 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	7 (1 uniques)	/	/
+PLATEV_G_8	120	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_G_9	113	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_H_1	434	279	279	279 (211 uniques)	249 (9 uniques)	105 (4 uniques)	105 (4 uniques)	105 (4 uniques)	105 (4 uniques)	105 (4 uniques)	105 (4 uniques)	105 (4 uniques)	/	/
+PLATEV_H_10	224	103	103	103 (76 uniques)	82 (7 uniques)	41 (2 uniques)	41 (2 uniques)	41 (2 uniques)	41 (2 uniques)	41 (2 uniques)	41 (2 uniques)	41 (2 uniques)	/	/
+PLATEV_H_11	105	55	55	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_H_12	283	141	141	141 (108 uniques)	131 (9 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	14 (1 uniques)	/	/
+PLATEV_H_2	147	74	74	74 (63 uniques)	53 (4 uniques)	21 (1 uniques)	21 (1 uniques)	21 (1 uniques)	21 (1 uniques)	21 (1 uniques)	21 (1 uniques)	21 (1 uniques)	/	/
+PLATEV_H_3	354	188	188	188 (134 uniques)	176 (8 uniques)	77 (3 uniques)	77 (3 uniques)	77 (3 uniques)	77 (3 uniques)	77 (3 uniques)	77 (3 uniques)	77 (3 uniques)	/	/
+PLATEV_H_4	182	73	73	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_H_5	3	/	/	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_H_6	197	77	77	/	/	/	/	/	/	/	/	/	/	/
+PLATEV_H_7	312	162	162	162 (124 uniques)	134 (9 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	24 (1 uniques)	/	/
+PLATEV_H_8	330	136	136	136 (110 uniques)	110 (6 uniques)	40 (1 uniques)	40 (1 uniques)	40 (1 uniques)	40 (1 uniques)	40 (1 uniques)	40 (1 uniques)	40 (1 uniques)	/	/
+PLATEV_H_9	341	153	153	153 (120 uniques)	110 (6 uniques)	61 (2 uniques)	61 (2 uniques)	61 (2 uniques)	61 (2 uniques)	61 (2 uniques)	61 (2 uniques)	61 (2 uniques)	/	/
