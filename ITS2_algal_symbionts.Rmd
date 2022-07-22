@@ -372,13 +372,12 @@ scores.orCD.DIV_RelA.CD.dist$Location <- samp.CD.DIV_RelA.dist.dist$Location
 scores.orCD.DIV_RelA.CD.dist$SampLoc <- samp.CD.DIV_RelA.dist.dist$SampLoc
 scores.orCD.DIV_RelA.CD.dist$Prop.D <- samp.CD.DIV_RelA.dist.dist$Prop.D
 
-write.csv(CD.DIV_RelA.dist,"CD.DIV_RelA.dist_forHannah.csv")
 
 ##can't figure out how to make this a gradient plot
 
 c<-ggplot(scores.orCD.DIV_RelA.CD.dist, aes(x = NMDS1, y = NMDS2)) + 
   geom_point(aes(colour = Prop.D), size = 4,show.legend=T) +
-  scale_colour_brewer(palette = 1)  +
+  #scale_colour_brewer(palette = 1)  +
 #geom_text(label = rownames(Clade), nudge_x = 0.05, nudge_y = 0.05,check_overlap = T) +
     # stat_ellipse(aes(group = TagID), colour = "black") +
   ggtitle("NMDS its2 Bray Curtis TagID CD-only") +
@@ -389,7 +388,21 @@ c<-ggplot(scores.orCD.DIV_RelA.CD.dist, aes(x = NMDS1, y = NMDS2)) +
 
   plot_grid(a, b, c)
 
-  
+  #hannah
+  library(ecodist)
+  bray_pcoa <- ecodist::pco(CD.DIV_RelA.dist.dist)
+bray_pcoa_df <- data.frame(pcoa1 = bray_pcoa$vectors[,1],
+                           pcoa2 = bray_pcoa$vectors[,2])
+head(bray_pcoa_df)
+bray_pcoa_df$Prop.D <- samp.CD.DIV_RelA.dist.dist$Prop.D
+bray_pcoa_df$Prop.D<-as.numeric(bray_pcoa_df$Prop.D)
+
+pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = Prop.D)) + 
+  geom_point(size = 3) +
+  labs(x = "PC1",
+       y = "PC2",
+       title = "PCoA of ITS2 vs PropD") +
+  theme_bw();pcoa
   
   
 

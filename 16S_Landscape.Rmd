@@ -1,0 +1,168 @@
+---
+title: "16S_Landscape"
+author: "Shayle Matsuda"
+date: "7/15/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#16S landscape data first pass
+
+```{r}  
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+
+setwd("~/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/MCL19Summer_16S-pipeline_outputs USE THIS ONE")
+
+library(plyr) 
+library(dplyr)
+library(ggplot2)
+library(ggpubr)
+library(lmerTest)
+library(car)
+library(emmeans)
+library(gridExtra)
+library(multcomp)
+library(reshape)
+library(factoextra)
+library(reshape2)
+library(vegan) 
+library(pairwiseAdonis)
+library("scales")
+packageVersion("scales")
+library(RColorBrewer)
+library(colorRamps)
+library(devtools)
+library(phyloseq)
+library(readr)
+library(microbiome)
+library(vegan)
+
+library(geosphere)
+library(ade4)
+library(tidyverse)
+
+```
+
+#Load in data and get into phyloseq
+```{r}       
+ 
+#load in 3000 rare instead
+#read in sample data
+MetaData16<-read.csv("~/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/ITS2_Summer_symportal2020/MCL19_metadata_20220621.csv") #same for ITS2
+MetaData16$TagID<-as.factor(as.character(MetaData16$TagID))
+MetaData16$Samp.Date<-as.POSIXct(MetaData16$Samp.Date, format="%m/%d/%y")
+MetaData16$UNIQUEID<-as.factor(as.character(MetaData16$UNIQUEID))
+MetaData16$Land_Ocean<-as.factor(as.character(MetaData16$Land_Ocean))
+MetaData16$SampLoc<-as.factor(as.character(MetaData16$SampLoc))
+MetaData16$Sub.loc<-as.factor(as.character(MetaData16$Sub.loc))
+MetaData16$SampleNum<-as.factor(as.character(MetaData16$SampleNum))
+MetaData16$BranchLoc<-as.factor(as.character(MetaData16$BranchLoc))
+MetaData16$branch.plate<-as.factor(as.character(MetaData16$branch.plate))
+MetaData16$Zoox<-as.factor(as.character(MetaData16$Zoox))
+MetaData16$Location<-as.factor(as.character(MetaData16$Location))
+MetaData16$LocSamp<-as.factor(as.character(MetaData16$LocSamp))
+
+
+sam0 <- MetaData16
+sam1 <- as.matrix(sam0[, -1])
+rownames(sam1) <- sam0$Sample_name
+sam <- sample_data(data.frame(sam1))
+
+#load in OUT:raw_abundanceTable_100.shared
+
+OTU3k<-read.table("/Users/shayle/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/MCL19Summer_16S-pipeline_outputs USE THIS ONE/Results/main/details/abundance_table_100.shared", sep=',', header=T)
+
+#from its  
+#otu
+otu3k1 <- as.matrix(OTU3k[, -1])
+rownames(otu3k1) <- OTU3k$sample_name
+otu <- otu_table(otu3k1, taxa_are_rows = FALSE)
+
+
+#tax table annotations_100.taxonomy.csv
+TAX<- read.csv("Data/TT17_3000_summer_16S-pipeline_outputs/annotations_100.taxonomy.csv", colClasses = "character")
+tax1 <- as.matrix(TAX[, -1], dimnames = list(TAX$OTU, colnames(TAX[-1])))
+rownames(tax1) <- TAX$OTU
+tax <- tax_table(tax1)
+
+
+# Read the data into phyloseq
+Bac.seq = phyloseq(otu, tax,sam) #THIS WORKS
+Bac.seq
+Bac.seq.df <- sample_data(Bac.seq)
+
+
+#load your .tre otu_repr_100.tre
+library(ape)
+treefile<- read.tree("Data/TT17_3000_summer_16S-pipeline_outputs/Results/postprocessing/unifrac/otu_repr_100.tre")
+
+phy_tree(Bac.seq) <- treefile
+Bac.seq
+
+#save(Bac.seq, file = "Data/Bac.seq_phyloseq.RData")
+
+
+
+########################################################
+# ## THIS IS FOR INCLUDING ALL SAMPLES YOU NEED FOR phylotype analysis.
+# #read in sample data
+# MetaData16<-read.csv("Data/Meta_16s_new.csv") #run in physio script first
+# MetaData16$Parent.ID<-as.factor(as.character(MetaData16$Parent.ID))
+# MetaData16$Tank.num<-as.factor(as.character(MetaData16$Tank.num))
+# 
+# sam0 <- MetaData16
+# sam1 <- as.matrix(sam0[, -1])
+# rownames(sam1) <- sam0$sample_name
+# sam <- sample_data(data.frame(sam1))
+# 
+# 
+# #load in OUT:raw_abundanceTable_100.shared
+# OTU2<-read.table("Data/TT17_3000_summer_16S-pipeline_outputs/raw_abundanceTable_100_shared.csv", sep=',', header=T)
+# 
+# #from its3
+# #otu
+# otu5 <- as.matrix(OTU2[, -1])
+# rownames(otu5) <- OTU2$sample_name
+# otu <- otu_table(otu5, taxa_are_rows = FALSE)
+# 
+# 
+# #tax
+# TAX<- read.csv("Data/TT17_3000_summer_16S-pipeline_outputs/raw_consensusClassification_100_taxonomy.csv", colClasses = "character")
+# tax1 <- as.matrix(TAX[, -1], dimnames = list(TAX$OTU, colnames(TAX[-1])))
+# rownames(tax1) <- TAX$OTU
+# tax <- tax_table(tax1)
+# 
+# # Read the data into phyloseq
+# Bac.seqAll = phyloseq(otu, tax,sam) #THIS WORKS
+# Bac.seqAll
+# 
+# save(Bac.seqAll, file = "Data/Bac.seqAll_phyloseq.RData")
+ 
+```  
+Look at the data, Bac.seq for 3k
+```{r}       
+## check out data
+ntaxa(Bac.seq)  #num taxa
+nsamples(Bac.seq)   #num samples
+sample_names(Bac.seq)[1:300] #samp names
+ #sampsy<-sample_names(physeq)[1:300]
+#write.csv(sampsy,"sampsy.csv")
+
+# OK Now you need to do the steps in the pipeline. ONLY for >3K dfs
+#1 filter out taxa: get rid of unknown, mitochondria and chloroplast
+# Bac.seq<-subset_taxa(Bac.seq, Family !="Mitochondria")
+# Bac.seq<-subset_taxa(Bac.seq, Order !="Chloroplast")
+# Bac.seq<-subset_taxa(Bac.seq, Domain !="unknown")
+# Bac.seq<-subset_taxa(Bac.seq, Domain !="Archaea")
+
+# now get rid of things not represnted 2x or more
+#Prune singletons (these are reads that are only found once)
+# Bac.seq.prune <- prune_taxa(taxa_sums(Bac.seq) > 2, Bac.seq)
+# 
+#   save(Bac.seq, file = "Data/Bac.seq.prune.RData")
+  
+```
+
+
