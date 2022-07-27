@@ -72,12 +72,17 @@ sam <- sample_data(data.frame(sam1))
 
 #load in OUT:raw_abundanceTable_100.shared
 
-OTU3k<-read.table("/Users/shayle/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/MCL19Summer_16S-pipeline_outputs USE THIS ONE/Results/main/details/abundance_table_100.shared", sep=',', header=T)
+OTU3k<-read.table("/Users/shayle/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/MCL19Summer_16S-pipeline_outputs USE THIS ONE/Results/main/details/abundance_table_100.shared", sep='', header=T)
 
-#from its  
 #otu
-otu3k1 <- as.matrix(OTU3k[, -1])
-rownames(otu3k1) <- OTU3k$sample_name
+#otu3k1 <- as.matrix(OTU3k[, -(1:3)]) # remove first col "label"
+# replace the "Group" col with actual sample IDs.
+indexes<-read.csv("16s_index_ID.csv")   #upload the sample ids
+otu3k2<-merge(indexes,OTU3k, by="Group") #add sample names
+otu3k2 <- as.matrix(otu3k2[, -(3:4)]) # remove first col "Group"
+
+otu3k2<-as.data.frame(otu3k2)
+rownames(otu3k2) <- otu3k2$sample_name
 otu <- otu_table(otu3k1, taxa_are_rows = FALSE)
 
 

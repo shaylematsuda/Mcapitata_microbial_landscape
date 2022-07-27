@@ -54,7 +54,7 @@ tax1 <- as.matrix(tax0[, -1], dimnames = list(tax0$uid, colnames(tax0[-1])))
 rownames(tax1) <- tax0$uid
 tax <- tax_table(tax1)
 
-otu0 <- read_tsv(
+otu0 <- reaxd_tsv(
   file  = "20201214_matsuda_MCL/its2_type_profiles/133_20201216_DBV_20201216T011417.profiles.relative.abund_and_meta.txt") %>% 
   rename(sample_name = ...2) %>% #rename column "...2", previously "X2" in symportal language
   select(-1) %>%
