@@ -1,0 +1,570 @@
+sample_name,tag.id,colony.color,depth.ft,samp.date,colonyDNA.id,UNIQUEID,land_ocean,sample_num,sensor_num,octo_num,samp_loc,sub_loc,branch_loc,branch_plate,sample.name,dom,cd_few,location,loc_samp_nam,dups,sample type
+A1,970,Orange,7,7/3/19,A,A1,Ocean,1,NA,,Branch,tip,,A,A1,CD,,Branch tip,Branch tip_A1,,sample
+A10,970,Orange,7,7/3/19,A,A10,Land,10,5,Octo_2,Branch,mid,Outer,C,A10,CD,,Branch mid,Branch mid_A10,,sample
+A11,970,Orange,7,7/3/19,A,A11,Land,11,NA,,Branch,base,Inner,C,A11,CD,,Branch base,Branch base_A11,,sample
+A12,970,Orange,7,7/3/19,A,A12,Land,12,NA,,Branch,tip,,D,A12,CD,,Branch tip,Branch tip_A12,,sample
+A13,970,Orange,7,7/3/19,A,A13,Land,13,NA,,Branch,mid,Outer,D,A13,CD,,Branch mid,Branch mid_A13,,sample
+A14,970,Orange,7,7/3/19,A,A14,Land,14,NA,,Branch,base,Inner,D,A14,CD,,Branch base,Branch base_A14,,sample
+A15,970,Orange,7,7/3/19,A,A15,Land,15,6,Octo_2,Deepest,,,,A15,CD,,Deepest,Deepest_A15,,sample
+A16,970,Orange,7,7/3/19,A,A16,Land,16,7,Octo_2,Lowest,,,,A16,CD,,Lowest,Lowest_A16,,sample
+A2,970,Orange,7,7/3/19,A,A2,Ocean,2,NA,,Branch,mid,Inner,A,A2,CD,,Branch mid,Branch mid_A2,,sample
+A3,970,Orange,7,7/3/19,A,A3,Ocean,3,NA,,Branch,base,Inner,A,A3,CD,,Branch base,Branch base_A3,,sample
+A4,970,Orange,7,7/3/19,A,A4,Ocean,4,0,Octo_2,Branch,tip,,B,A4,CD,,Branch tip,Branch tip_A4,,sample
+A5,970,Orange,7,7/3/19,A,A5,Ocean,5,NA,,Branch,mid,Outer,B,A5,CD,,Branch mid,Branch mid_A5,,sample
+A6,970,Orange,7,7/3/19,A,A6,Ocean,6,1,Octo_2,Branch,base,Inner,B,A6,CD,,Branch base,Branch base_A6,,sample
+A7,970,Orange,7,7/3/19,A,A7,Ocean,7,3,Octo_2,Deepest,,,,A7,CD,,Deepest,Deepest_A7,,sample
+A8,970,Orange,7,7/3/19,A,A8,Ocean,8,2,Octo_2,Lowest,,,,A8,CD,,Lowest,Lowest_A8,,sample
+A9,970,Orange,7,7/3/19,A,A9,Land,9,4,Octo_2,Branch,tip,,C,A9,CD,,Branch tip,Branch tip_A9,,sample
+B1,965,Brown,7,7/5/19,B,B1,Ocean,1,0,Octo_3,Branch,tip,,A,B1,C,,Branch tip,Branch tip_B1,,sample
+B10,965,Brown,7,7/5/19,B,B10,Land,10,NA,,Branch,mid,Inner,C,B10,C,,Branch mid,Branch mid_B10,,sample
+B11,965,Brown,7,7/5/19,B,B11,Land,11,5,Octo_3,Branch,base,Inner,C,B11,C,,Branch base,Branch base_B11,,sample
+B12,965,Brown,7,7/5/19,B,B12,Land,12,NA,,Branch,tip,,D,B12,C,,Branch tip,Branch tip_B12,,sample
+B13,965,Brown,7,7/5/19,B,B13,Land,13,NA,,Branch,mid,Outer,D,B13,C,,Branch mid,Branch mid_B13,,sample
+B14,965,Brown,7,7/5/19,B,B14,Land,14,NA,,Branch,base,Outer,D,B14,C,,Branch base,Branch base_B14,,sample
+B15,965,Brown,7,7/5/19,B,B15,Land,15,6,Octo_3,Deepest,,,,B15,C,,Deepest,Deepest_B15,,sample
+B16,965,Brown,7,7/5/19,B,B16,Land,16,7,Octo_3,Lowest,,,,B16,C,,Lowest,Lowest_B16,,sample
+B2,965,Brown,7,7/5/19,B,B2,Ocean,2,NA,,Branch,mid,Inner,A,B2,C,,Branch mid,Branch mid_B2,,sample
+B3,965,Brown,7,7/5/19,B,B3,Ocean,3,1,Octo_3,Branch,base,Inner,A,B3,C,,Branch base,Branch base_B3,,sample
+B4,965,Brown,7,7/5/19,B,B4,Ocean,4,NA,,Branch,tip,,B,B4,C,,Branch tip,Branch tip_B4,,sample
+B5,965,Brown,7,7/5/19,B,B5,Ocean,5,NA,,Branch,mid,Outer,B,B5,C,,Branch mid,Branch mid_B5,,sample
+B6,965,Brown,7,7/5/19,B,B6,Ocean,6,NA,,Branch,base,Outer,B,B6,C,,Branch base,Branch base_B6,,sample
+B7,965,Brown,7,7/5/19,B,B7,Ocean,7,2,Octo_3,Deepest,,,,B7,C,,Deepest,Deepest_B7,,sample
+B8,965,Brown,7,7/5/19,B,B8,Ocean,8,3,Octo_3,Lowest,,,,B8,C,,Lowest,Lowest_B8,,sample
+B9,965,Brown,7,7/5/19,B,B9,Land,9,4,Octo_3,Branch,tip,,C,B9,C,,Branch tip,Branch tip_B9,,sample
+C1,969,Orange,5,7/8/19,C,C1,Ocean,1,0,Octo_1,Branch,tip,,A,C1,D,Few,Branch tip,Branch tip_C1,,sample
+C10,969,Orange,5,7/8/19,C,C10,Land,10,NA,,Branch,mid,Outer,C,C10,D,Few,Branch mid,Branch mid_C10,,sample
+C11,969,Orange,5,7/8/19,C,C11,Land,11,5,Octo_1,Branch,base,Inner,C,C11,D,Few,Branch base,Branch base_C11,,sample
+C12,969,Orange,5,7/8/19,C,C12,Land,12,NA,,Branch,tip,,D,C12,D,Few,Branch tip,Branch tip_C12,yes,sample
+C12b,969,Orange,5,7/8/19,C,C12,Land,12,NA,,Branch,tip,,D,C12,D,Few,Branch tip,Branch tip_C12,yes,sample
+C13,969,Orange,5,7/8/19,C,C13,Land,13,NA,,Branch,mid,Inner,D,C13,D,Few,Branch mid,Branch mid_C13,,sample
+C14,969,Orange,5,7/8/19,C,C14,Land,14,NA,,Branch,base,Outer,D,C14,D,Few,Branch base,Branch base_C14,,sample
+C15,969,Orange,5,7/8/19,C,C15,Land,15,6,Octo_1,Deepest,,,,C15,D,Few,Deepest,Deepest_C15,,sample
+C16,969,Orange,5,7/8/19,C,C16,Land,16,7,Octo_1,Lowest,,,,C16,D,Few,Lowest,Lowest_C16,,sample
+C2,969,Orange,5,7/8/19,C,C2,Ocean,2,NA,,Branch,mid,Outer,A,C2,D,Few,Branch mid,Branch mid_C2,,sample
+C3,969,Orange,5,7/8/19,C,C3,Ocean,3,1,Octo_1,Branch,base,Outer,A,C3,D,Few,Branch base,Branch base_C3,,sample
+C4,969,Orange,5,7/8/19,C,C4,Ocean,4,NA,,Branch,tip,,B,C4,D,Few,Branch tip,Branch tip_C4,,sample
+C5,969,Orange,5,7/8/19,C,C5,Ocean,5,NA,,Branch,mid,Outer,B,C5,D,Few,Branch mid,Branch mid_C5,,sample
+C6,969,Orange,5,7/8/19,C,C6,Ocean,6,NA,,Branch,base,Inner,B,C6,D,Few,Branch base,Branch base_C6,,sample
+C7,969,Orange,5,7/8/19,C,C7,Ocean,7,2,Octo_1,Deepest,,,,C7,D,Few,Deepest,Deepest_C7,,sample
+C8,969,Orange,5,7/8/19,C,C8,Ocean,8,3,Octo_1,Lowest,,,,C8,D,Few,Lowest,Lowest_C8,,sample
+C9,969,Orange,5,7/8/19,C,C9,Land,9,4,Octo_1,Branch,tip,,C,C9,D,Few,Branch tip,Branch tip_C9,,sample
+D1,972,Orange,4,7/16/19,D,D1,Ocean,1,0,Octo_5,Branch,tip,,A,D1,D,,Branch tip,Branch tip_D1,,sample
+D10,972,Orange,4,7/16/19,D,D10,Land,10,NA,,Branch,mid,Outer,C,D10,D,,Branch mid,Branch mid_D10,,sample
+D11,972,Orange,4,7/16/19,D,D11,Land,11,NA,,Branch,base,Inner,C,D11,D,,Branch base,Branch base_D11,,sample
+D12,972,Orange,4,7/16/19,D,D12,Land,12,4,Octo_5,Plate,top,,D,D12,D,,Plate top,Plate top_D12,,sample
+D13,972,Orange,4,7/16/19,D,D13,Land,13,5,Octo_5,Plate,edge,,D,D13,D,,Plate edge,Plate edge_D13,,sample
+D14,972,Orange,4,7/16/19,D,D14,Land,14,6,Octo_5,Plate,underside,,D,D14,D,,Plate underside,Plate underside_D14,,sample
+D15,972,Orange,4,7/16/19,D,D15,Land,15,NA,,Deepest,,,,D15,D,,Deepest,Deepest_D15,,sample
+D16,972,Orange,4,7/16/19,D,D16,Land,16,7,Octo_5,Lowest,,,,D16,D,,Lowest,Lowest_D16,,sample
+D2,972,Orange,4,7/16/19,D,D2,Ocean,2,NA,,Branch,mid,Outer,A,D2,D,,Branch mid,Branch mid_D2,,sample
+D3,972,Orange,4,7/16/19,D,D3,Ocean,3,1,Octo_5,Branch,base,Inner,A,D3,D,,Branch base,Branch base_D3,,sample
+D4,972,Orange,4,7/16/19,D,D4,Ocean,4,NA,,Plate,top,,B,D4,D,,Plate top,Plate top_D4,,sample
+D5,972,Orange,4,7/16/19,D,D5,Ocean,5,NA,,Plate,edge,,B,D5,D,,Plate edge,Plate edge_D5,,sample
+D6,972,Orange,4,7/16/19,D,D6,Ocean,6,NA,,Plate,underside,,B,D6,D,,Plate underside,Plate underside_D6,,sample
+D7,972,Orange,4,7/16/19,D,D7,Ocean,7,2,Octo_5,Deepest,,,,D7,D,,Deepest,Deepest_D7,,sample
+D8,972,Orange,4,7/16/19,D,D8,Ocean,8,3,Octo_5,Lowest,,,,D8,D,,Lowest,Lowest_D8,,sample
+D9,972,Orange,4,7/16/19,D,D9,Land,9,NA,,Branch,tip,,C,D9,D,,Branch tip,Branch tip_D9,,sample
+DNA_NTC1,,,,,,,,,,,,,,,,,,,,,NTC
+DNA_NTC2,,,,,,,,,,,,,,,,,,,,,NTC
+E1,971,Brown,5,7/16/19,E,E1,Ocean,1,0,Octo_4,Branch,tip,,A,E1,C,,Branch tip,Branch tip_E1,,sample
+E10,971,Brown,5,7/16/19,E,E10,Land,10,NA,,Branch,mid,Outer,C,E10,C,,Branch mid,Branch mid_E10,,sample
+E11,971,Brown,5,7/16/19,E,E11,Land,11,NA,,Branch,base,Outer,C,E11,C,,Branch base,Branch base_E11,,sample
+E12,971,Brown,5,7/16/19,E,E12,Land,12,4,Octo_4,Branch,tip,,D,E12,C,,Branch tip,Branch tip_E12,,sample
+E13,971,Brown,5,7/16/19,E,E13,Land,13,NA,,Branch,mid,Inner,D,E13,C,,Branch mid,Branch mid_E13,,sample
+E14,971,Brown,5,7/16/19,E,E14,Land,14,5,Octo_4,Branch,base,Inner,D,E14,C,,Branch base,Branch base_E14,,sample
+E15,971,Brown,5,7/16/19,E,E15,Land,15,2,Octo_4,Deepest,,,,E15,C,,Deepest,Deepest_E15,,sample
+E16,971,Brown,5,7/16/19,E,E16,Land,16,7,Octo_4,Lowest,,,,E16,C,,Lowest,Lowest_E16,,sample
+E2,971,Brown,5,7/16/19,E,E2,Ocean,2,NA,,Branch,mid,Inner,A,E2,C,,Branch mid,Branch mid_E2,,sample
+E3,971,Brown,5,7/16/19,E,E3,Ocean,3,1,Octo_4,Branch,base,Inner,A,E3,C,,Branch base,Branch base_E3,,sample
+E4,971,Brown,5,7/16/19,E,E4,Ocean,4,NA,,Branch,tip,,B,E4,C,,Branch tip,Branch tip_E4,,sample
+E5,971,Brown,5,7/16/19,E,E5,Ocean,5,NA,,Branch,mid,Outer,B,E5,C,,Branch mid,Branch mid_E5,,sample
+E6,971,Brown,5,7/16/19,E,E6,Ocean,6,NA,,Branch,base,Outer,B,E6,C,,Branch base,Branch base_E6,,sample
+E7,971,Brown,5,7/16/19,E,E7,Ocean,7,6,Octo_4,Deepest,,,,E7,C,,Deepest,Deepest_E7,,sample
+E8,971,Brown,5,7/16/19,E,E8,Ocean,8,3,Octo_4,Lowest,,,,E8,C,,Lowest,Lowest_E8,,sample
+E9,971,Brown,5,7/16/19,E,E9,Land,9,NA,,Branch,tip,,C,E9,C,,Branch tip,Branch tip_E9,,sample
+F1,968,Orange,6,7/17/19,F,F1,Ocean,1,0,Octo_3,Branch,tip,,A,F1,D,,Branch tip,Branch tip_F1,,sample
+F10,968,Orange,6,7/17/19,F,F10,Land,10,NA,,Branch,mid,Outer,C,F10,D,,Branch mid,Branch mid_F10,yes,sample
+F10b,968,Orange,6,7/17/19,F,F10,Land,10,NA,,Branch,mid,Outer,C,F10,D,,Branch mid,Branch mid_F10,yes,sample
+F11,968,Orange,6,7/17/19,F,F11,Land,11,5,Octo_3,Branch,base,Inner,C,F11,D,,Branch base,Branch base_F11,,sample
+F12,968,Orange,6,7/17/19,F,F12,Land,12,NA,,Branch,tip,,D,F12,D,,Branch tip,Branch tip_F12,,sample
+F13,968,Orange,6,7/17/19,F,F13,Land,13,NA,,Branch,mid,Outer,D,F13,D,,Branch mid,Branch mid_F13,,sample
+F14,968,Orange,6,7/17/19,F,F14,Land,14,NA,,Branch,base,Inner,D,F14,D,,Branch base,Branch base_F14,,sample
+F15,968,Orange,6,7/17/19,F,F15,Land,15,6,Octo_3,Deepest,,,,F15,D,,Deepest,Deepest_F15,yes,sample
+F15b,968,Orange,6,7/17/19,F,F15,Land,15,6,Octo_3,Deepest,,,,F15,D,,Deepest,Deepest_F15,yes,sample
+F16,968,Orange,6,7/17/19,F,F16,Land,16,7,Octo_3,Lowest,,,,F16,D,,Lowest,Lowest_F16,,sample
+F2,968,Orange,6,7/17/19,F,F2,Ocean,2,NA,,Branch,mid,Outer,A,F2,D,,Branch mid,Branch mid_F2,yes,sample
+F2b,968,Orange,6,7/17/19,F,F2,Ocean,2,NA,,Branch,mid,Outer,A,F2,D,,Branch mid,Branch mid_F2,yes,sample
+F3,968,Orange,6,7/17/19,F,F3,Ocean,3,1,Octo_3,Branch,base,Inner,A,F3,D,,Branch base,Branch base_F3,,sample
+F4,968,Orange,6,7/17/19,F,F4,Ocean,4,NA,,Branch,tip,,B,F4,D,,Branch tip,Branch tip_F4,yes,sample
+F4b,968,Orange,6,7/17/19,F,F4,Ocean,4,NA,,Branch,tip,,B,F4,D,,Branch tip,Branch tip_F4,yes,sample
+F5,968,Orange,6,7/17/19,F,F5,Ocean,5,NA,,Branch,mid,Outer,B,F5,D,,Branch mid,Branch mid_F5,yes,sample
+F5b,968,Orange,6,7/17/19,F,F5,Ocean,5,NA,,Branch,mid,Outer,B,F5,D,,Branch mid,Branch mid_F5,yes,sample
+F6,968,Orange,6,7/17/19,F,F6,Ocean,6,NA,,Branch,base,Outer,B,F6,D,,Branch base,Branch base_F6,yes,sample
+F6b,968,Orange,6,7/17/19,F,F6,Ocean,6,NA,,Branch,base,Outer,B,F6,D,,Branch base,Branch base_F6,yes,sample
+F7,968,Orange,6,7/17/19,F,F7,Ocean,7,2,Octo_3,Deepest,,,,F7,D,,Deepest,Deepest_F7,yes,sample
+F7b,968,Orange,6,7/17/19,F,F7,Ocean,7,2,Octo_3,Deepest,,,,F7,D,,Deepest,Deepest_F7,yes,sample
+F8,968,Orange,6,7/17/19,F,F8,Ocean,8,3,Octo_3,Lowest,,,,F8,D,,Lowest,Lowest_F8,yes,sample
+F8b,968,Orange,6,7/17/19,F,F8,Ocean,8,3,Octo_3,Lowest,,,,F8,D,,Lowest,Lowest_F8,yes,sample
+F9,968,Orange,6,7/17/19,F,F9,Land,9,4,Octo_3,Branch,tip,,C,F9,D,,Branch tip,Branch tip_F9,,sample
+G10,966,Orange,10,7/17/19,G,G10,Land,10,NA,,Branch,mid,Outer,C,G10,CD,,Branch mid,Branch mid_G10,,sample
+G11,966,Orange,10,7/17/19,G,G11,Land,11,NA,,Branch,base,Inner,C,G11,CD,,Branch base,Branch base_G11,,sample
+G12,966,Orange,10,7/17/19,G,G12,Land,12,NA,,Plate,top,,D,G12,CD,,Plate top,Plate top_G12,,sample
+G13,966,Orange,10,7/17/19,G,G13,Land,13,NA,,Plate,edge,,D,G13,CD,,Plate edge,Plate edge_G13,,sample
+G14,966,Orange,10,7/17/19,G,G14,Land,14,NA,,Plate,underside,,D,G14,CD,,Plate underside,Plate underside_G14,,sample
+G15,966,Orange,10,7/17/19,G,G15,Land,15,7,Octo_1,Deepest,,,,G15,CD,,Deepest,Deepest_G15,,sample
+G16,966,Orange,10,7/17/19,G,G16,Land,16,5,Octo_1,Lowest,,,,G16,CD,,Lowest,Lowest_G16,,sample
+G2,966,Orange,10,7/17/19,G,G2,Ocean,2,NA,,Branch,mid,Inner,A,G2,CD,,Branch mid,Branch mid_G2,,sample
+G3,966,Orange,10,7/17/19,G,G3,Ocean,3,1,Octo_1,Branch,base,Inner,A,G3,CD,,Branch base,Branch base_G3,,sample
+G4,966,Orange,10,7/17/19,G,G4,Ocean,4,4,Octo_1,Plate,top,,B,G4,CD,,Plate top,Plate top_G4,,sample
+G6,966,Orange,10,7/17/19,G,G6,Ocean,6,6,Octo_1,Plate,underside,,B,G6,CD,,Plate underside,Plate underside_G6,,sample
+G7b,966,Orange,10,7/17/19,G,G7,Ocean,7,2,Octo_1,Deepest,,,,G7,CD,,Deepest,Deepest_G7,yes,sample
+G8,966,Orange,10,7/17/19,G,G8,Ocean,8,3,Octo_1,Lowest,,,,G8,CD,,Lowest,Lowest_G8,,sample
+G9,966,Orange,10,7/17/19,G,G9,Land,9,NA,,Branch,tip,,C,G9,CD,,Branch tip,Branch tip_G9,yes,sample
+G9b,966,Orange,10,7/17/19,G,G9,Land,9,NA,,Branch,tip,,C,G9,CD,,Branch tip,Branch tip_G9,yes,sample
+H1,978,Brown,8,7/18/19,H,H1,Ocean,1,0,,Branch,tip,,A,H1,C,,Branch tip,Branch tip_H1,yes,sample
+H10,978,Brown,8,7/18/19,H,H10,Land,10,NA,,Branch,mid,Outer,C,H10,C,,Branch mid,Branch mid_H10,,sample
+H11,978,Brown,8,7/18/19,H,H11,Land,11,NA,,Branch,base,Outer,C,H11,C,,Branch base,Branch base_H11,,sample
+H12,978,Brown,8,7/18/19,H,H12,Land,12,4,,Branch,tip,,D,H12,C,,Branch tip,Branch tip_H12,,sample
+H13,978,Brown,8,7/18/19,H,H13,Land,13,NA,,Branch,mid,Outer,D,H13,C,,Branch mid,Branch mid_H13,,sample
+H14,978,Brown,8,7/18/19,H,H14,Land,14,5,,Branch,base,Outer,D,H14,C,,Branch base,Branch base_H14,,sample
+H15,978,Brown,8,7/18/19,H,H15,Land,15,6,,Deepest,,,,H15,C,,Deepest,Deepest_H15,,sample
+H16,978,Brown,8,7/18/19,H,H16,Land,16,7,,Lowest,,,,H16,C,,Lowest,Lowest_H16,,sample
+H1b,978,Brown,8,7/18/19,H,H1,Ocean,1,0,,Branch,tip,,A,H1,C,,Branch tip,Branch tip_H1,yes,sample
+H2,978,Brown,8,7/18/19,H,H2,Ocean,2,NA,,Branch,mid,Outer,A,H2,C,,Branch mid,Branch mid_H2,,sample
+H3,978,Brown,8,7/18/19,H,H3,Ocean,3,1,,Branch,base,Outer,A,H3,C,,Branch base,Branch base_H3,yes,sample
+H3b,978,Brown,8,7/18/19,H,H3,Ocean,3,1,,Branch,base,Outer,A,H3,C,,Branch base,Branch base_H3,yes,sample
+H4,978,Brown,8,7/18/19,H,H4,Ocean,4,NA,,Branch,tip,,B,H4,C,,Branch tip,Branch tip_H4,yes,sample
+H4b,978,Brown,8,7/18/19,H,H4,Ocean,4,NA,,Branch,tip,,B,H4,C,,Branch tip,Branch tip_H4,yes,sample
+H5,978,Brown,8,7/18/19,H,H5,Ocean,5,NA,,Branch,mid,Inner,B,H5,C,,Branch mid,Branch mid_H5,,sample
+H6,978,Brown,8,7/18/19,H,H6,Ocean,6,NA,,Branch,base,Inner,B,H6,C,,Branch base,Branch base_H6,yes,sample
+H6b,978,Brown,8,7/18/19,H,H6,Ocean,6,NA,,Branch,base,Inner,B,H6,C,,Branch base,Branch base_H6,yes,sample
+H7,978,Brown,8,7/18/19,H,H7,Ocean,7,2,,Deepest,,,,H7,C,,Deepest,Deepest_H7,yes,sample
+H7b,978,Brown,8,7/18/19,H,H7,Ocean,7,2,,Deepest,,,,H7,C,,Deepest,Deepest_H7,yes,sample
+H8,978,Brown,8,7/18/19,H,H8,Ocean,8,3,,Lowest,,,,H8,C,,Lowest,Lowest_H8,yes,sample
+H8b,978,Brown,8,7/18/19,H,H8,Ocean,8,3,,Lowest,,,,H8,C,,Lowest,Lowest_H8,yes,sample
+H9,978,Brown,8,7/18/19,H,H9,Land,9,NA,,Branch,tip,,C,H9,C,,Branch tip,Branch tip_H9,,sample
+I1,963,Orange,7,7/18/19,I,I1,Ocean,1,0,,Branch,tip,,A,I1,D,Few,Branch tip,Branch tip_I1,,sample
+I10,963,Orange,7,7/18/19,I,I10,Land,10,NA,,Branch,mid,Outer,C,I10,D,Few,Branch mid,Branch mid_I10,,sample
+I11,963,Orange,7,7/18/19,I,I11,Land,11,NA,,Branch,base,Inner,C,I11,D,Few,Branch base,Branch base_I11,,sample
+I12,963,Orange,7,7/18/19,I,I12,Land,12,4,,Branch,tip,,D,I12,D,Few,Branch tip,Branch tip_I12,,sample
+I13,963,Orange,7,7/18/19,I,I13,Land,13,NA,,Branch,mid,Inner,D,I13,D,Few,Branch mid,Branch mid_I13,,sample
+I14,963,Orange,7,7/18/19,I,I14,Land,14,5,,Branch,base,Inner,D,I14,D,Few,Branch base,Branch base_I14,,sample
+I15,963,Orange,7,7/18/19,I,I15,Land,15,6,,Deepest,,,,I15,D,Few,Deepest,Deepest_I15,,sample
+I16,963,Orange,7,7/18/19,I,I16,Land,16,7,,Lowest,,,,I16,D,Few,Lowest,Lowest_I16,,sample
+I2,963,Orange,7,7/18/19,I,I2,Ocean,2,NA,,Branch,mid,Outer,A,I2,D,Few,Branch mid,Branch mid_I2,,sample
+I3,963,Orange,7,7/18/19,I,I3,Ocean,3,1,,Branch,base,Inner,A,I3,D,Few,Branch base,Branch base_I3,,sample
+I4,963,Orange,7,7/18/19,I,I4,Ocean,4,NA,,Branch,tip,,B,I4,D,Few,Branch tip,Branch tip_I4,,sample
+I5,963,Orange,7,7/18/19,I,I5,Ocean,5,NA,,Branch,mid,Outer,B,I5,D,Few,Branch mid,Branch mid_I5,,sample
+I6,963,Orange,7,7/18/19,I,I6,Ocean,6,NA,,Branch,base,Outer,B,I6,D,Few,Branch base,Branch base_I6,,sample
+I7,963,Orange,7,7/18/19,I,I7,Ocean,7,2,,Deepest,,,,I7,D,Few,Deepest,Deepest_I7,,sample
+I8,963,Orange,7,7/18/19,I,I8,Ocean,8,3,,Lowest,,,,I8,D,Few,Lowest,Lowest_I8,,sample
+I9,963,Orange,7,7/18/19,I,I9,Land,9,NA,,Branch,tip,,C,I9,D,Few,Branch tip,Branch tip_I9,,sample
+J1,961,Brown,6,7/19/19,J,J1,Ocean,1,0,Octo_3,Branch,tip,,A,J1,C,,Branch tip,Branch tip_J1,,sample
+J10,961,Brown,6,7/19/19,J,J10,Land,10,NA,,Branch,mid,Inner,C,J10,C,,Branch mid,Branch mid_J10,,sample
+J11,961,Brown,6,7/19/19,J,J11,Land,11,NA,,Branch,base,Inner,C,J11,C,,Branch base,Branch base_J11,,sample
+J12,961,Brown,6,7/19/19,J,J12,Land,12,4,Octo_3,Plate,top,,D,J12,C,,Plate top,Plate top_J12,,sample
+J13,961,Brown,6,7/19/19,J,J13,Land,13,NA,,Plate,edge,,D,J13,C,,Plate edge,Plate edge_J13,,sample
+J14,961,Brown,6,7/19/19,J,J14,Land,14,5,Octo_3,Plate,underside,,D,J14,C,,Plate underside,Plate underside_J14,,sample
+J15,961,Brown,6,7/19/19,J,J15,Land,15,6,Octo_3,Deepest,,,,J15,C,,Deepest,Deepest_J15,,sample
+J16,961,Brown,6,7/19/19,J,J16,Land,16,7,Octo_3,Lowest,,,,J16,C,,Lowest,Lowest_J16,,sample
+J2,961,Brown,6,7/19/19,J,J2,Ocean,2,NA,,Branch,mid,Outer,A,J2,C,,Branch mid,Branch mid_J2,,sample
+J3,961,Brown,6,7/19/19,J,J3,Ocean,3,1,Octo_3,Branch,base,Inner,A,J3,C,,Branch base,Branch base_J3,,sample
+J4,961,Brown,6,7/19/19,J,J4,Ocean,4,NA,,Plate,top,,B,J4,C,,Plate top,Plate top_J4,,sample
+J5,961,Brown,6,7/19/19,J,J5,Ocean,5,NA,,Plate,edge,,B,J5,C,,Plate edge,Plate edge_J5,,sample
+J6,961,Brown,6,7/19/19,J,J6,Ocean,6,NA,,Plate,underside,,B,J6,C,,Plate underside,Plate underside_J6,,sample
+J7,961,Brown,6,7/19/19,J,J7,Ocean,7,2,Octo_3,Deepest,,,,J7,C,,Deepest,Deepest_J7,,sample
+J8,961,Brown,6,7/19/19,J,J8,Ocean,8,3,Octo_3,Lowest,,,,J8,C,,Lowest,Lowest_J8,,sample
+J9,961,Brown,6,7/19/19,J,J9,Land,9,NA,,Branch,tip,,C,J9,C,,Branch tip,Branch tip_J9,,sample
+K1,981,Brown,8,7/19/19,K,K1,Ocean,1,0,Octo_1,Branch,tip,,A,K1,CD,,Branch tip,Branch tip_K1,,sample
+K10,981,Brown,8,7/19/19,K,K10,Land,10,NA,,Branch,mid,Outer,C,K10,CD,,Branch mid,Branch mid_K10,,sample
+K11,981,Brown,8,7/19/19,K,K11,Land,11,NA,,Branch,base,Inner,C,K11,CD,,Branch base,Branch base_K11,,sample
+K12,981,Brown,8,7/19/19,K,K12,Land,12,4,Octo_1,Branch,tip,,D,K12,CD,,Branch tip,Branch tip_K12,,sample
+K13,981,Brown,8,7/19/19,K,K13,Land,13,NA,,Branch,mid,Inner,D,K13,CD,,Branch mid,Branch mid_K13,,sample
+K14,981,Brown,8,7/19/19,K,K14,Land,14,5,Octo_1,Branch,base,Outer,D,K14,CD,,Branch base,Branch base_K14,,sample
+K15,981,Brown,8,7/19/19,K,K15,Land,15,6,Octo_1,Deepest,,,,K15,CD,,Deepest,Deepest_K15,,sample
+K16,981,Brown,8,7/19/19,K,K16,Land,16,7,Octo_1,Lowest,,,,K16,CD,,Lowest,Lowest_K16,,sample
+K2,981,Brown,8,7/19/19,K,K2,Ocean,2,NA,,Branch,mid,Inner,A,K2,CD,,Branch mid,Branch mid_K2,,sample
+K3,981,Brown,8,7/19/19,K,K3,Ocean,3,1,Octo_1,Branch,base,Outer,A,K3,CD,,Branch base,Branch base_K3,,sample
+K4,981,Brown,8,7/19/19,K,K4,Ocean,4,NA,,Branch,tip,,B,K4,CD,,Branch tip,Branch tip_K4,,sample
+K5,981,Brown,8,7/19/19,K,K5,Ocean,5,NA,,Branch,mid,Outer,B,K5,CD,,Branch mid,Branch mid_K5,,sample
+K6,981,Brown,8,7/19/19,K,K6,Ocean,6,NA,,Branch,base,Inner,B,K6,CD,,Branch base,Branch base_K6,,sample
+K7,981,Brown,8,7/19/19,K,K7,Ocean,7,2,Octo_1,Deepest,,,,K7,CD,,Deepest,Deepest_K7,,sample
+K8,981,Brown,8,7/19/19,K,K8,Ocean,8,3,Octo_1,Lowest,,,,K8,CD,,Lowest,Lowest_K8,,sample
+K9,981,Brown,8,7/19/19,K,K9,Land,9,NA,,Branch,tip,,C,K9,CD,,Branch tip,Branch tip_K9,,sample
+L1,967,Orange,7,7/22/19,L,L1,Ocean,1,0,Octo_4,Branch,tip,,A,L1,C,,Branch tip,Branch tip_L1,,sample
+L10,967,Orange,7,7/22/19,L,L10,Land,10,NA,,Branch,mid,Outer,C,L10,C,,Branch mid,Branch mid_L10,,sample
+L11,967,Orange,7,7/22/19,L,L11,Land,11,NA,,Branch,base,Outer,C,L11,C,,Branch base,Branch base_L11,,sample
+L12,967,Orange,7,7/22/19,L,L12,Land,12,4,Octo_4,Branch,tip,,D,L12,C,,Branch tip,Branch tip_L12,,sample
+L13,967,Orange,7,7/22/19,L,L13,Land,13,NA,,Branch,mid,Outer,D,L13,C,,Branch mid,Branch mid_L13,,sample
+L14,967,Orange,7,7/22/19,L,L14,Land,14,5,Octo_4,Branch,base,Inner,D,L14,C,,Branch base,Branch base_L14,,sample
+L15,967,Orange,7,7/22/19,L,L15,Land,15,6,Octo_4,Deepest,,,,L15,C,,Deepest,Deepest_L15,,sample
+L16,967,Orange,7,7/22/19,L,L16,Land,16,7,Octo_4,Lowest,,,,L16,C,,Lowest,Lowest_L16,,sample
+L2,967,Orange,7,7/22/19,L,L2,Ocean,2,NA,,Branch,mid,Outer,A,L2,C,,Branch mid,Branch mid_L2,,sample
+L3,967,Orange,7,7/22/19,L,L3,Ocean,3,1,Octo_4,Branch,base,Inner,A,L3,C,,Branch base,Branch base_L3,,sample
+L4,967,Orange,7,7/22/19,L,L4,Ocean,4,NA,,Branch,tip,,B,L4,C,,Branch tip,Branch tip_L4,,sample
+L5,967,Orange,7,7/22/19,L,L5,Ocean,5,NA,,Branch,mid,Outer,B,L5,C,,Branch mid,Branch mid_L5,,sample
+L6,967,Orange,7,7/22/19,L,L6,Ocean,6,NA,,Branch,base,Outer,B,L6,C,,Branch base,Branch base_L6,,sample
+L7,967,Orange,7,7/22/19,L,L7,Ocean,7,2,Octo_4,Deepest,,,,L7,C,,Deepest,Deepest_L7,,sample
+L8,967,Orange,7,7/22/19,L,L8,Ocean,8,3,Octo_4,Lowest,,,,L8,C,,Lowest,Lowest_L8,,sample
+L9,967,Orange,7,7/22/19,L,L9,Land,9,NA,,Branch,tip,,C,L9,C,,Branch tip,Branch tip_L9,,sample
+M1,983,Brown,8,7/22/19,M,M1,Ocean,1,0,Octo_5,Branch,tip,,A,M1,C,,Branch tip,Branch tip_M1,,sample
+M10,983,Brown,8,7/22/19,M,M10,Land,10,NA,,Branch,mid,Outer,C,M10,C,,Branch mid,Branch mid_M10,,sample
+M11,983,Brown,8,7/22/19,M,M11,Land,11,NA,,Branch,base,Outer,C,M11,C,,Branch base,Branch base_M11,,sample
+M12,983,Brown,8,7/22/19,M,M12,Land,12,4,Octo_5,Branch,tip,,D,M12,C,,Branch tip,Branch tip_M12,,sample
+M13,983,Brown,8,7/22/19,M,M13,Land,13,NA,,Branch,mid,Inner,D,M13,C,,Branch mid,Branch mid_M13,,sample
+M14,983,Brown,8,7/22/19,M,M14,Land,14,5,Octo_5,Branch,base,Outer,D,M14,C,,Branch base,Branch base_M14,,sample
+M15,983,Brown,8,7/22/19,M,M15,Land,15,6,Octo_5,Deepest,,,,M15,C,,Deepest,Deepest_M15,,sample
+M16,983,Brown,8,7/22/19,M,M16,Land,16,7,Octo_5,Lowest,,,,M16,C,,Lowest,Lowest_M16,,sample
+M2,983,Brown,8,7/22/19,M,M2,Ocean,2,NA,,Branch,mid,Outer,A,M2,C,,Branch mid,Branch mid_M2,,sample
+M3,983,Brown,8,7/22/19,M,M3,Ocean,3,1,Octo_5,Branch,base,Inner,A,M3,C,,Branch base,Branch base_M3,,sample
+M4,983,Brown,8,7/22/19,M,M4,Ocean,4,NA,,Branch,tip,,B,M4,C,,Branch tip,Branch tip_M4,,sample
+M5,983,Brown,8,7/22/19,M,M5,Ocean,5,NA,,Branch,mid,Outer,B,M5,C,,Branch mid,Branch mid_M5,,sample
+M6,983,Brown,8,7/22/19,M,M6,Ocean,6,NA,,Branch,base,Outer,B,M6,C,,Branch base,Branch base_M6,,sample
+M7,983,Brown,8,7/22/19,M,M7,Ocean,7,2,Octo_5,Deepest,,,,M7,C,,Deepest,Deepest_M7,,sample
+M8,983,Brown,8,7/22/19,M,M8,Ocean,8,3,Octo_5,Lowest,,,,M8,C,,Lowest,Lowest_M8,,sample
+M9,983,Brown,8,7/22/19,M,M9,Land,9,NA,,Branch,tip,,C,M9,C,,Branch tip,Branch tip_M9,,sample
+MOCK_PI,,,,,,,,,,,,,,,,,,,,,Mock
+MOCK_PII,,,,,,,,,,,,,,,,,,,,,Mock
+MOCK_PIII,,,,,,,,,,,,,,,,,,,,,Mock
+MOCK_PIV,,,,,,,,,,,,,,,,,,,,,Mock
+MOCK_PV,,,,,,,,,,,,,,,,,,,,,Mock
+MOCK_PVIa,,,,,,,,,,,,,,,,,,,,,Mock
+MOCK_PVIb,,,,,,,,,,,,,,,,,,,,,Mock
+N1,974,Brown,15,7/23/19,N,N1,Ocean,1,0,Octo_3,Branch,tip,,A,N1,CD,Few,Branch tip,Branch tip_N1,,sample
+N10,974,Brown,15,7/23/19,N,N10,Land,10,NA,,Branch,mid,Outer,C,N10,CD,Few,Branch mid,Branch mid_N10,,sample
+N11,974,Brown,15,7/23/19,N,N11,Land,11,NA,,Branch,base,Inner,C,N11,CD,Few,Branch base,Branch base_N11,,sample
+N12,974,Brown,15,7/23/19,N,N12,Land,12,4,Octo_3,Plate,top,,D,N12,CD,Few,Plate top,Plate top_N12,,sample
+N13,974,Brown,15,7/23/19,N,N13,Land,13,NA,,Plate,edge,,D,N13,CD,Few,Plate edge,Plate edge_N13,,sample
+N14,974,Brown,15,7/23/19,N,N14,Land,14,5,Octo_3,Plate,underside,,D,N14,CD,Few,Plate underside,Plate underside_N14,,sample
+N15,974,Brown,15,7/23/19,N,N15,Land,15,6,Octo_3,Deepest,,,,N15,CD,Few,Deepest,Deepest_N15,,sample
+N16,974,Brown,15,7/23/19,N,N16,Land,16,7,Octo_3,Lowest,,,,N16,CD,Few,Lowest,Lowest_N16,,sample
+N2,974,Brown,15,7/23/19,N,N2,Ocean,2,NA,,Branch,mid,Outer,A,N2,CD,Few,Branch mid,Branch mid_N2,,sample
+N3,974,Brown,15,7/23/19,N,N3,Ocean,3,1,Octo_3,Branch,base,Outer,A,N3,CD,Few,Branch base,Branch base_N3,,sample
+N4,974,Brown,15,7/23/19,N,N4,Ocean,4,NA,,Plate,top,,B,N4,CD,Few,Plate top,Plate top_N4,,sample
+N5,974,Brown,15,7/23/19,N,N5,Ocean,5,NA,,Plate,edge,,B,N5,CD,Few,Plate edge,Plate edge_N5,,sample
+N6,974,Brown,15,7/23/19,N,N6,Ocean,6,NA,,Plate,underside,,B,N6,CD,Few,Plate underside,Plate underside_N6,,sample
+N7,974,Brown,15,7/23/19,N,N7,Ocean,7,2,Octo_3,Deepest,,,,N7,CD,Few,Deepest,Deepest_N7,,sample
+N8,974,Brown,15,7/23/19,N,N8,Ocean,8,3,Octo_3,Lowest,,,,N8,CD,Few,Lowest,Lowest_N8,,sample
+N9,974,Brown,15,7/23/19,N,N9,Land,9,NA,,Branch,tip,,C,N9,CD,Few,Branch tip,Branch tip_N9,,sample
+NTC_PIa,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIb,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIc,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIIa,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIIb,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIIc,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIIIa,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIIIb,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIIIc,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIVa,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIVb,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PIVc,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_Pva,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PVb,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PVc,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PVIa,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PVIb,,,,,,,,,,,,,,,,,,,,,NTC
+NTC_PVIc,,,,,,,,,,,,,,,,,,,,,NTC
+O1,984,Orange,9,7/23/19,O,O1,Ocean,1,0,Octo_1,Branch,tip,,A,O1,D,,Branch tip,Branch tip_O1,,sample
+O10,984,Orange,9,7/23/19,O,O10,Land,10,NA,,Branch,mid,Outer,C,O10,D,,Branch mid,Branch mid_O10,,sample
+O11,984,Orange,9,7/23/19,O,O11,Land,11,5,Octo_1,Branch,base,Outer,C,O11,D,,Branch base,Branch base_O11,,sample
+O12,984,Orange,9,7/23/19,O,O12,Land,12,NA,,Branch,tip,,D,O12,D,,Branch tip,Branch tip_O12,,sample
+O13,984,Orange,9,7/23/19,O,O13,Land,13,NA,,Branch,mid,Outer,D,O13,D,,Branch mid,Branch mid_O13,,sample
+O14,984,Orange,9,7/23/19,O,O14,Land,14,NA,,Branch,base,Outer,D,O14,D,,Branch base,Branch base_O14,,sample
+O15,984,Orange,9,7/23/19,O,O15,Land,15,6,Octo_1,Deepest,,,,O15,D,,Deepest,Deepest_O15,,sample
+O16,984,Orange,9,7/23/19,O,O16,Land,16,7,Octo_1,Lowest,,,,O16,D,,Lowest,Lowest_O16,,sample
+O2,984,Orange,9,7/23/19,O,O2,Ocean,2,NA,,Branch,mid,Inner,A,O2,D,,Branch mid,Branch mid_O2,yes,sample
+O2b,984,Orange,9,7/23/19,O,O2,Ocean,2,NA,,Branch,mid,Inner,A,O2,D,,Branch mid,Branch mid_O2,yes,sample
+O3,984,Orange,9,7/23/19,O,O3,Ocean,3,1,Octo_1,Branch,base,Inner,A,O3,D,,Branch base,Branch base_O3,yes,sample
+O3b,984,Orange,9,7/23/19,O,O3,Ocean,3,1,Octo_1,Branch,base,Inner,A,O3,D,,Branch base,Branch base_O3,yes,sample
+O4,984,Orange,9,7/23/19,O,O4,Ocean,4,NA,,Branch,tip,,B,O4,D,,Branch tip,Branch tip_O4,,sample
+O5,984,Orange,9,7/23/19,O,O5,Ocean,5,NA,,Branch,mid,Outer,B,O5,D,,Branch mid,Branch mid_O5,yes,sample
+O5b,984,Orange,9,7/23/19,O,O5,Ocean,5,NA,,Branch,mid,Outer,B,O5,D,,Branch mid,Branch mid_O5,yes,sample
+O6,984,Orange,9,7/23/19,O,O6,Ocean,6,NA,,Branch,base,Inner,B,O6,D,,Branch base,Branch base_O6,yes,sample
+O6b,984,Orange,9,7/23/19,O,O6,Ocean,6,NA,,Branch,base,Inner,B,O6,D,,Branch base,Branch base_O6,yes,sample
+O7,984,Orange,9,7/23/19,O,O7,Ocean,7,2,Octo_1,Deepest,,,,O7,D,,Deepest,Deepest_O7,yes,sample
+O7b,984,Orange,9,7/23/19,O,O7,Ocean,7,2,Octo_1,Deepest,,,,O7,D,,Deepest,Deepest_O7,yes,sample
+O8,984,Orange,9,7/23/19,O,O8,Ocean,8,3,Octo_1,Lowest,,,,O8,D,,Lowest,Lowest_O8,,sample
+O9,984,Orange,9,7/23/19,O,O9,Land,9,4,Octo_1,Branch,tip,,C,O9,D,,Branch tip,Branch tip_O9,,sample
+P1,962,Brown,8,7/30/19,P,P1,Ocean,1,0,Octo_1,Branch,tip,,A,P1,C,,Branch tip,Branch tip_P1,,sample
+P10,962,Brown,8,7/30/19,P,P10,Land,10,NA,,Branch,mid,Inner,C,P10,C,,Branch mid,Branch mid_P10,,sample
+P11,962,Brown,8,7/30/19,P,P11,Land,11,NA,,Branch,base,Outer,C,P11,C,,Branch base,Branch base_P11,,sample
+P12,962,Brown,8,7/30/19,P,P12,Land,12,4,Octo_1,Plate,top,,D,P12,C,,Plate top,Plate top_P12,,sample
+P13,962,Brown,8,7/30/19,P,P13,Land,13,NA,,Plate,edge,,D,P13,C,,Plate edge,Plate edge_P13,,sample
+P14,962,Brown,8,7/30/19,P,P14,Land,14,5,Octo_1,Plate,underside,,D,P14,C,,Plate underside,Plate underside_P14,yes,sample
+P14b,962,Brown,8,7/30/19,P,P14,Land,14,5,Octo_1,Plate,underside,,D,P14,C,,Plate underside,Plate underside_P14,yes,sample
+P15,962,Brown,8,7/30/19,P,P15,Land,16,6,Octo_1,Deepest,,,,P15,C,,Deepest,Deepest_P15,,sample
+P16,962,Brown,8,7/30/19,P,P16,Land,15,7,Octo_1,Lowest,,,,P16,C,,Lowest,Lowest_P16,,sample
+P2,962,Brown,8,7/30/19,P,P2,Ocean,2,NA,,Branch,mid,Outer,A,P2,C,,Branch mid,Branch mid_P2,,sample
+P3,962,Brown,8,7/30/19,P,P3,Ocean,3,1,Octo_1,Branch,base,Outer,A,P3,C,,Branch base,Branch base_P3,,sample
+P4,962,Brown,8,7/30/19,P,P4,Ocean,4,NA,,Plate,top,,B,P4,C,,Plate top,Plate top_P4,,sample
+P5,962,Brown,8,7/30/19,P,P5,Ocean,5,NA,,Plate,edge,,B,P5,C,,Plate edge,Plate edge_P5,,sample
+P6,962,Brown,8,7/30/19,P,P6,Ocean,6,NA,,Plate,underside,,B,P6,C,,Plate underside,Plate underside_P6,,sample
+P7,962,Brown,8,7/30/19,P,P7,Ocean,7,2,Octo_1,Deepest,,,,P7,C,,Deepest,Deepest_P7,,sample
+P8,962,Brown,8,7/30/19,P,P8,Ocean,8,3,Octo_1,Lowest,,,,P8,C,,Lowest,Lowest_P8,,sample
+P9,962,Brown,8,7/30/19,P,P9,Land,9,NA,,Branch,tip,,C,P9,C,,Branch tip,Branch tip_P9,,sample
+PLATEI_A_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_2,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_3,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_4,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_6,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_7,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEI_A_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_2,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_3,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_4,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_6,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_7,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEII_E_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_2,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_3,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_4,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_6,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_7,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_A_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_B_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_C_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_D_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_E_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_F_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_G_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEIV_H_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_A_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_B_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_B_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_C_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_C_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_D_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_D_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_D_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_D_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_D_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_D_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_D_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_2,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_3,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_4,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_6,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_E_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_2,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_3,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_4,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_6,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_7,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_F_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_2,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_3,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_4,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_6,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_7,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_G_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_2,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_3,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_4,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_6,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_7,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEV_H_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_A_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_B_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_C_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_D_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_E_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_F_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_G_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_G_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_G_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_G_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_G_9,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_1,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_10,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_11,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_12,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_2,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_3,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_4,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_5,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_6,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_7,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_8,,,,,,,,,,,,,,,,,,,,,Empty
+PLATEVI_H_9,,,,,,,,,,,,,,,,,,,,,Empty
+Q1,957,Brown,NA,7/30/19,Q,Q1,Ocean,1,NA,,Branch,tip,,A,Q1,CD,,Branch tip,Branch tip_Q1,,sample
+Q10,957,Brown,NA,7/30/19,Q,Q10,Land,10,NA,,Branch,mid,Inner,C,Q10,CD,,Branch mid,Branch mid_Q10,,sample
+Q11,957,Brown,NA,7/30/19,Q,Q11,Land,11,5,Octo_3,Branch,base,Outer,C,Q11,CD,,Branch base,Branch base_Q11,,sample
+Q12,957,Brown,NA,7/30/19,Q,Q12,Land,12,NA,,Branch,tip,,D,Q12,CD,,Branch tip,Branch tip_Q12,,sample
+Q13,957,Brown,NA,7/30/19,Q,Q13,Land,13,NA,,Branch,mid,Inner,D,Q13,CD,,Branch mid,Branch mid_Q13,,sample
+Q14,957,Brown,NA,7/30/19,Q,Q14,Land,14,NA,,Branch,base,Outer,D,Q14,CD,,Branch base,Branch base_Q14,,sample
+Q15,957,Brown,NA,7/30/19,Q,Q15,Land,15,6,Octo_3,Deepest,,,,Q15,CD,,Deepest,Deepest_Q15,,sample
+Q16,957,Brown,NA,7/30/19,Q,Q16,Land,16,7,Octo_3,Lowest,,,,Q16,CD,,Lowest,Lowest_Q16,,sample
+Q2,957,Brown,NA,7/30/19,Q,Q2,Ocean,2,NA,,Branch,mid,Inner,A,Q2,CD,,Branch mid,Branch mid_Q2,,sample
+Q3,957,Brown,NA,7/30/19,Q,Q3,Ocean,3,NA,,Branch,base,Outer,A,Q3,CD,,Branch base,Branch base_Q3,,sample
+Q4,957,Brown,NA,7/30/19,Q,Q4,Ocean,4,0,Octo_3,Branch,tip,,B,Q4,CD,,Branch tip,Branch tip_Q4,,sample
+Q5,957,Brown,NA,7/30/19,Q,Q5,Ocean,5,NA,,Branch,mid,Inner,B,Q5,CD,,Branch mid,Branch mid_Q5,,sample
+Q6,957,Brown,NA,7/30/19,Q,Q6,Ocean,6,1,Octo_3,Branch,base,Outer,B,Q6,CD,,Branch base,Branch base_Q6,,sample
+Q7,957,Brown,NA,7/30/19,Q,Q7,Ocean,7,2,Octo_3,Deepest,,,,Q7,CD,,Deepest,Deepest_Q7,,sample
+Q8,957,Brown,NA,7/30/19,Q,Q8,Ocean,8,3,Octo_3,Lowest,,,,Q8,CD,,Lowest,Lowest_Q8,,sample
+Q9,957,Brown,NA,7/30/19,Q,Q9,Land,9,4,Octo_3,Branch,tip,,C,Q9,CD,,Branch tip,Branch tip_Q9,,sample
+R1,945,Orange,9,7/31/19,R,R1,Ocean,1,0,Octo_4,Branch,tip,,A,R1,C,,Branch tip,Branch tip_R1,,sample
+R10,945,Orange,9,7/31/19,R,R10,Land,10,NA,,Branch,mid,Outer,C,R10,C,,Branch mid,Branch mid_R10,yes,sample
+R10b,945,Orange,9,7/31/19,R,R10,Land,10,NA,,Branch,mid,Outer,C,R10,C,,Branch mid,Branch mid_R10,yes,sample
+R11,945,Orange,9,7/31/19,R,R11,Land,11,NA,,Branch,base,Inner,C,R11,C,,Branch base,Branch base_R11,,sample
+R12,945,Orange,9,7/31/19,R,R12,Land,12,5,Octo_4,Branch,tip,,D,R12,C,,Branch tip,Branch tip_R12,,sample
+R13,945,Orange,9,7/31/19,R,R13,Land,13,NA,,Branch,mid,Inner,D,R13,C,,Branch mid,Branch mid_R13,,sample
+R14,945,Orange,9,7/31/19,R,R14,Land,14,NA,,Branch,base,Outer,D,R14,C,,Branch base,Branch base_R14,,sample
+R15,945,Orange,9,7/31/19,R,R15,Land,15,6,Octo_4,Deepest,,,,R15,C,,Deepest,Deepest_R15,,sample
+R16,945,Orange,9,7/31/19,R,R16,Land,16,7,Octo_4,Lowest,,,,R16,C,,Lowest,Lowest_R16,,sample
+R2,945,Orange,9,7/31/19,R,R2,Ocean,2,NA,,Branch,mid,Outer,A,R2,C,,Branch mid,Branch mid_R2,,sample
+R3,945,Orange,9,7/31/19,R,R3,Ocean,3,1,Octo_4,Branch,base,Inner,A,R3,C,,Branch base,Branch base_R3,,sample
+R4,945,Orange,9,7/31/19,R,R4,Ocean,4,NA,,Branch,tip,,B,R4,C,,Branch tip,Branch tip_R4,,sample
+R5,945,Orange,9,7/31/19,R,R5,Ocean,5,NA,,Branch,mid,Inner,B,R5,C,,Branch mid,Branch mid_R5,,sample
+R6,945,Orange,9,7/31/19,R,R6,Ocean,6,NA,,Branch,base,Outer,B,R6,C,,Branch base,Branch base_R6,,sample
+R7,945,Orange,9,7/31/19,R,R7,Ocean,7,2,Octo_4,Deepest,,,,R7,C,,Deepest,Deepest_R7,,sample
+R8,945,Orange,9,7/31/19,R,R8,Ocean,8,3,Octo_4,Lowest,,,,R8,C,,Lowest,Lowest_R8,,sample
+R9,945,Orange,9,7/31/19,R,R9,Land,9,4,Octo_4,Branch,tip,,C,R9,C,,Branch tip,Branch tip_R9,yes,sample
+R9b,945,Orange,9,7/31/19,R,R9,Land,9,4,Octo_4,Branch,tip,,C,R9,C,,Branch tip,Branch tip_R9,yes,sample
+S1,960,Brown,6,7/31/19,S,S1,Ocean,1,0,Octo_5,Branch,tip,,A,S1,C,,Branch tip,Branch tip_S1,,sample
+S10,960,Brown,6,7/31/19,S,S10,Land,10,NA,,Branch,mid,Outer,C,S10,C,,Branch mid,Branch mid_S10,,sample
+S11,960,Brown,6,7/31/19,S,S11,Land,11,5,Octo_5,Branch,base,Inner,C,S11,C,,Branch base,Branch base_S11,,sample
+S12,960,Brown,6,7/31/19,S,S12,Land,12,NA,,Branch,tip,,D,S12,C,,Branch tip,Branch tip_S12,yes,sample
+S12b,960,Brown,6,7/31/19,S,S12,Land,12,NA,,Branch,tip,,D,S12,C,,Branch tip,Branch tip_S12,yes,sample
+S13,960,Brown,6,7/31/19,S,S13,Land,13,NA,,Branch,mid,Outer,D,S13,C,,Branch mid,Branch mid_S13,yes,sample
+S13b,960,Brown,6,7/31/19,S,S13,Land,13,NA,,Branch,mid,Outer,D,S13,C,,Branch mid,Branch mid_S13,yes,sample
+S14,960,Brown,6,7/31/19,S,S14,Land,14,NA,,Branch,base,Outer,D,S14,C,,Branch base,Branch base_S14,,sample
+S15,960,Brown,6,7/31/19,S,S15,Land,15,6,Octo_5,Deepest,,,,S15,C,,Deepest,Deepest_S15,,sample
+S16,960,Brown,6,7/31/19,S,S16,Land,16,5,Octo_5,Lowest,,,,S16,C,,Lowest,Lowest_S16,,sample
+S2,960,Brown,6,7/31/19,S,S2,Ocean,2,NA,,Branch,mid,Outer,A,S2,C,,Branch mid,Branch mid_S2,,sample
+S3,960,Brown,6,7/31/19,S,S3,Ocean,3,1,Octo_5,Branch,base,Outer,A,S3,C,,Branch base,Branch base_S3,,sample
+S4,960,Brown,6,7/31/19,S,S4,Ocean,4,NA,,Branch,tip,,B,S4,C,,Branch tip,Branch tip_S4,,sample
+S5,960,Brown,6,7/31/19,S,S5,Ocean,5,NA,,Branch,mid,Outer,B,S5,C,,Branch mid,Branch mid_S5,,sample
+S6,960,Brown,6,7/31/19,S,S6,Ocean,6,NA,,Branch,base,Inner,B,S6,C,,Branch base,Branch base_S6,,sample
+S7,960,Brown,6,7/31/19,S,S7,Ocean,7,2,Octo_5,Deepest,,,,S7,C,,Deepest,Deepest_S7,yes,sample
+S7b,960,Brown,6,7/31/19,S,S7,Ocean,7,2,Octo_5,Deepest,,,,S7,C,,Deepest,Deepest_S7,yes,sample
+S8,960,Brown,6,7/31/19,S,S8,Land,8,3,Octo_5,Lowest,,,,S8,C,,Lowest,Lowest_S8,,sample
+S9,960,Brown,6,7/31/19,S,S9,Land,9,4,Octo_5,Branch,tip,,C,S9,C,,Branch tip,Branch tip_S9,,sample
+T1,976,Orange,8,8/1/19,T,T1,Ocean,1,0,Octo_3,Branch,tip,,A,T1,D,,Branch tip,Branch tip_T1,,sample
+T10,976,Orange,8,8/1/19,T,T10,Land,10,NA,,Branch,mid,Inner,C,T10,D,,Branch mid,Branch mid_T10,,sample
+T11,976,Orange,8,8/1/19,T,T11,Land,11,NA,,Branch,base,Outer,C,T11,D,,Branch base,Branch base_T11,,sample
+T12,976,Orange,8,8/1/19,T,T12,Land,12,4,Octo_3,Branch,tip,,D,T12,D,,Branch tip,Branch tip_T12,,sample
+T13,976,Orange,8,8/1/19,T,T13,Land,13,NA,,Branch,mid,Outer,D,T13,D,,Branch mid,Branch mid_T13,,sample
+T14,976,Orange,8,8/1/19,T,T14,Land,14,5,Octo_3,Branch,base,Outer,D,T14,D,,Branch base,Branch base_T14,,sample
+T15,976,Orange,8,8/1/19,T,T15,Land,15,6,Octo_3,Deepest,,,,T15,D,,Deepest,Deepest_T15,yes,sample
+T15b,976,Orange,8,8/1/19,T,T15,Land,15,6,Octo_3,Deepest,,,,T15,D,,Deepest,Deepest_T15,yes,sample
+T16,976,Orange,8,8/1/19,T,T16,Land,16,7,Octo_3,Lowest,,,,T16,D,,Lowest,Lowest_T16,,sample
+T2,976,Orange,8,8/1/19,T,T2,Ocean,2,NA,,Branch,mid,Outer,A,T2,D,,Branch mid,Branch mid_T2,,sample
+T3,976,Orange,8,8/1/19,T,T3,Ocean,3,1,Octo_3,Branch,base,Outer,A,T3,D,,Branch base,Branch base_T3,,sample
+T4,976,Orange,8,8/1/19,T,T4,Ocean,4,NA,,Branch,tip,,B,T4,D,,Branch tip,Branch tip_T4,,sample
+T5,976,Orange,8,8/1/19,T,T5,Ocean,5,NA,,Branch,mid,Outer,B,T5,D,,Branch mid,Branch mid_T5,,sample
+T6,976,Orange,8,8/1/19,T,T6,Ocean,6,NA,,Branch,base,Outer,B,T6,D,,Branch base,Branch base_T6,,sample
+T7,976,Orange,8,8/1/19,T,T7,Ocean,7,2,Octo_3,Deepest,,,,T7,D,,Deepest,Deepest_T7,,sample
+T8,976,Orange,8,8/1/19,T,T8,Ocean,8,3,Octo_3,Lowest,,,,T8,D,,Lowest,Lowest_T8,,sample
+T9,976,Orange,8,8/1/19,T,T9,Land,9,NA,,Branch,tip,,C,T9,D,,Branch tip,Branch tip_T9,,sample
+U1,985,Brown,6,8/1/19,U,U1,Ocean,1,0,Octo_1,Branch,tip,,A,U1,CD,,Branch tip,Branch tip_U1,,sample
+U10,985,Brown,6,8/1/19,U,U10,Land,10,NA,,Branch,mid,Inner,C,U10,CD,,Branch mid,Branch mid_U10,,sample
+U11,985,Brown,6,8/1/19,U,U11,Land,11,NA,,Branch,base,Inner,C,U11,CD,,Branch base,Branch base_U11,,sample
+U12,985,Brown,6,8/1/19,U,U12,Land,12,4,Octo_1,Plate,top,,D,U12,CD,,Plate top,Plate top_U12,,sample
+U13,985,Brown,6,8/1/19,U,U13,Land,13,NA,,Plate,edge,,D,U13,CD,,Plate edge,Plate edge_U13,,sample
+U14,985,Brown,6,8/1/19,U,U14,Land,14,5,Octo_1,Plate,underside,,D,U14,CD,,Plate underside,Plate underside_U14,,sample
+U15,985,Brown,6,8/1/19,U,U15,Land,15,6,Octo_1,Deepest,,,,U15,CD,,Deepest,Deepest_U15,,sample
+U16,985,Brown,6,8/1/19,U,U16,Land,16,7,Octo_1,Lowest,,,,U16,CD,,Lowest,Lowest_U16,,sample
+U2,985,Brown,6,8/1/19,U,U2,Ocean,2,NA,,Branch,mid,Outer,A,U2,CD,,Branch mid,Branch mid_U2,,sample
+U3,985,Brown,6,8/1/19,U,U3,Ocean,3,1,Octo_1,Branch,base,Outer,A,U3,CD,,Branch base,Branch base_U3,,sample
+U4,985,Brown,6,8/1/19,U,U4,Ocean,4,NA,,Plate,top,,B,U4,CD,,Plate top,Plate top_U4,,sample
+U5,985,Brown,6,8/1/19,U,U5,Ocean,5,NA,,Plate,edge,,B,U5,CD,,Plate edge,Plate edge_U5,,sample
+U6,985,Brown,6,8/1/19,U,U6,Ocean,6,NA,,Plate,underside,,B,U6,CD,,Plate underside,Plate underside_U6,,sample
+U7,985,Brown,6,8/1/19,U,U7,Ocean,7,2,Octo_1,Deepest,,,,U7,CD,,Deepest,Deepest_U7,yes,sample
+U7b,985,Brown,6,8/1/19,U,U7,Ocean,7,2,Octo_1,Deepest,,,,U7,CD,,Deepest,Deepest_U7,yes,sample
+U8,985,Brown,6,8/1/19,U,U8,Ocean,8,3,Octo_1,Lowest,,,,U8,CD,,Lowest,Lowest_U8,,sample
+U9,985,Brown,6,8/1/19,U,U9,Land,9,NA,,Branch,tip,,C,U9,CD,,Branch tip,Branch tip_U9,,sample
+V1,964,Brown,8,8/5/19,V,V1,Ocean,1,NA,,Branch,tip,,A,V1,CD,,Branch tip,Branch tip_V1,,sample
+V10,964,Brown,8,8/5/19,V,V10,Land,10,NA,,Branch,mid,Outer,C,V10,CD,,Branch mid,Branch mid_V10,,sample
+V11,964,Brown,8,8/5/19,V,V11,Land,11,1,Octo_4,Branch,base,Inner,C,V11,CD,,Branch base,Branch base_V11,,sample
+V12,964,Brown,8,8/5/19,V,V12,Land,12,4,Octo_4,Plate,top,,D,V12,CD,,Plate top,Plate top_V12,,sample
+V13,964,Brown,8,8/5/19,V,V13,Land,13,NA,,Plate,edge,,D,V13,CD,,Plate edge,Plate edge_V13,,sample
+V14,964,Brown,8,8/5/19,V,V14,Land,14,5,Octo_4,Plate,underside,,D,V14,CD,,Plate underside,Plate underside_V14,,sample
+V15,964,Brown,8,8/5/19,V,V15,Land,15,6,Octo_4,Deepest,,,,V15,CD,,Deepest,Deepest_V15,,sample
+V16,964,Brown,8,8/5/19,V,V16,Land,16,7,Octo_4,Lowest,,,,V16,CD,,Lowest,Lowest_V16,,sample
+V9,964,Brown,8,8/5/19,V,V9,Land,9,0,Octo_4,Branch,tip,,C,V9,CD,,Branch tip,Branch tip_V9,,sample
+W1,959,Orange,6,8/5/19,W,W1,Ocean,1,0,Octo_5,Branch,tip,,A,W1,CD,,Branch tip,Branch tip_W1,,sample
+W10,959,Orange,6,8/5/19,W,W10,Land,10,NA,,Branch,mid,Inner,C,W10,CD,,Branch mid,Branch mid_W10,,sample
+W11,959,Orange,6,8/5/19,W,W11,Land,11,NA,,Branch,base,Outer,C,W11,CD,,Branch base,Branch base_W11,,sample
+W12,959,Orange,6,8/5/19,W,W12,Land,12,4,Octo_5,Branch,tip,,D,W12,CD,,Branch tip,Branch tip_W12,,sample
+W13,959,Orange,6,8/5/19,W,W13,Land,13,NA,,Branch,mid,Inner,D,W13,CD,,Branch mid,Branch mid_W13,,sample
+W14,959,Orange,6,8/5/19,W,W14,Land,14,5,Octo_5,Branch,base,Outer,D,W14,CD,,Branch base,Branch base_W14,,sample
+W15,959,Orange,6,8/5/19,W,W15,Land,15,6,Octo_5,Deepest,,,,W15,CD,,Deepest,Deepest_W15,,sample
+W16,959,Orange,6,8/5/19,W,W16,Land,16,7,Octo_5,Lowest,,,,W16,CD,,Lowest,Lowest_W16,,sample
+W2,959,Orange,6,8/5/19,W,W2,Ocean,2,NA,,Branch,mid,Inner,A,W2,CD,,Branch mid,Branch mid_W2,,sample
+W3,959,Orange,6,8/5/19,W,W3,Ocean,3,1,Octo_5,Branch,base,Outer,A,W3,CD,,Branch base,Branch base_W3,,sample
+W4,959,Orange,6,8/5/19,W,W4,Ocean,4,NA,,Branch,tip,,B,W4,CD,,Branch tip,Branch tip_W4,,sample
+W5,959,Orange,6,8/5/19,W,W5,Ocean,5,NA,,Branch,mid,Outer,B,W5,CD,,Branch mid,Branch mid_W5,,sample
+W6,959,Orange,6,8/5/19,W,W6,Ocean,6,NA,,Branch,base,Inner,B,W6,CD,,Branch base,Branch base_W6,,sample
+W7,959,Orange,6,8/5/19,W,W7,Ocean,7,2,Octo_5,Deepest,,,,W7,CD,,Deepest,Deepest_W7,,sample
+W8,959,Orange,6,8/5/19,W,W8,Ocean,8,3,Octo_5,Lowest,,,,W8,CD,,Lowest,Lowest_W8,,sample
+WATER1,,,,,,,,,,,,,,,,,,,,,Water
+WATER10,,,,,,,,,,,,,,,,,,,,,Water
+WATER11,,,,,,,,,,,,,,,,,,,,,Water
+WATER12,,,,,,,,,,,,,,,,,,,,,Water
+WATER13,,,,,,,,,,,,,,,,,,,,,Water
+WATER14,,,,,,,,,,,,,,,,,,,,,Water
+WATER15,,,,,,,,,,,,,,,,,,,,,Water
+WATER16,,,,,,,,,,,,,,,,,,,,,Water
+WATER2A,,,,,,,,,,,,,,,,,,,,,Water
+WATER2b,,,,,,,,,,,,,,,,,,,,,Water
+WATER3,,,,,,,,,,,,,,,,,,,,,Water
+WATER4,,,,,,,,,,,,,,,,,,,,,Water
+WATER5,,,,,,,,,,,,,,,,,,,,,Water
+WATER6,,,,,,,,,,,,,,,,,,,,,Water
+WATER7,,,,,,,,,,,,,,,,,,,,,Water
+WATER8,,,,,,,,,,,,,,,,,,,,,Water
+WATER9,,,,,,,,,,,,,,,,,,,,,Water
+X1,980,Brown,6,8/6/19,X,X1,Ocean,1,NA,,Branch,tip,,A,X1,CD,,Branch tip,Branch tip_X1,,sample
+X10,980,Brown,6,8/6/19,X,X10,Land,9,NA,,Branch,mid,Inner,C,X10,CD,,Branch mid,Branch mid_X10,,sample
+X11,980,Brown,6,8/6/19,X,X11,Land,10,1,Octo_1,Branch,base,Outer,C,X11,CD,,Branch base,Branch base_X11,,sample
+X12,980,Brown,6,8/6/19,X,X12,Land,11,3,Octo_1,Plate,top,,D,X12,CD,,Plate top,Plate top_X12,,sample
+X13,980,Brown,6,8/6/19,X,X13,Land,12,4,Octo_1,Plate,edge,,D,X13,CD,,Plate edge,Plate edge_X13,,sample
+X14,980,Brown,6,8/6/19,X,X14,Land,14,5,Octo_1,Plate,underside,,D,X14,CD,,Plate underside,Plate underside_X14,,sample
+X15,980,Brown,6,8/6/19,X,X15,Land,15,6,Octo_1,Deepest,,,,X15,CD,,Deepest,Deepest_X15,,sample
+X16,980,Brown,6,8/6/19,X,X16,Land,16,7,Octo_1,Lowest,,,,X16,CD,,Lowest,Lowest_X16,,sample
+X2,980,Brown,6,8/6/19,X,X2,Ocean,2,NA,,Branch,mid,Outer,A,X2,CD,,Branch mid,Branch mid_X2,,sample
+X3,980,Brown,6,8/6/19,X,X3,Ocean,3,NA,,Branch,base,Inner,A,X3,CD,,Branch base,Branch base_X3,,sample
+X4,980,Brown,6,8/6/19,X,X4,Ocean,4,NA,,Plate,top,,B,X4,CD,,Plate top,Plate top_X4,,sample
+X5,980,Brown,6,8/6/19,X,X5,Ocean,13,NA,,Plate,edge,,B,X5,CD,,Plate edge,Plate edge_X5,,sample
+X6,980,Brown,6,8/6/19,X,X6,Ocean,5,NA,,Plate,underside,,B,X6,CD,,Plate underside,Plate underside_X6,,sample
+X7,980,Brown,6,8/6/19,X,X7,Ocean,6,NA,,Deepest,,,,X7,CD,,Deepest,Deepest_X7,,sample
+X8,980,Brown,6,8/6/19,X,X8,Ocean,7,2,Octo_1,Lowest,,,,X8,CD,,Lowest,Lowest_X8,,sample
+X9,980,Brown,6,8/6/19,X,X9,Land,8,0,Octo_1,Branch,tip,,C,X9,CD,,Branch tip,Branch tip_X9,,sample

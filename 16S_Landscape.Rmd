@@ -15,7 +15,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}  
 knitr::opts_chunk$set(warning=FALSE, message=FALSE)
 
-setwd("~/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/MCL19Summer_16S-pipeline_outputs USE THIS ONE")
 
 library(plyr) 
 library(dplyr)
@@ -40,6 +39,7 @@ library(phyloseq)
 library(readr)
 library(microbiome)
 library(vegan)
+library(ape)
 
 library(geosphere)
 library(ade4)
@@ -52,24 +52,46 @@ library(tidyverse)
  
 #load in 3000 rare instead
 #read in sample data
-MetaData16<-read.csv("ITS2_Summer_symportal2020/MCL19_metadata_20220621.csv") #same for ITS2
-MetaData16$TagID<-as.factor(as.character(MetaData16$TagID))
-MetaData16$Samp.Date<-as.POSIXct(MetaData16$Samp.Date, format="%m/%d/%y")
+MetaData16<-read.csv("MCL19Summer_16S-pipeline_outputs USE THIS ONE/Metadata16index.csv") #same for ITS2
+MetaData16$tag.id<-as.factor(as.character(MetaData16$tag.id))
+MetaData16$colony.color<-as.factor(as.character(MetaData16$colony.color))
+MetaData16$colonyDNA.id<-as.factor(as.character(MetaData16$colonyDNA.id))
+MetaData16$sensor_num<-as.factor(as.character(MetaData16$sensor_num))
+MetaData16$octo_num<-as.factor(as.character(MetaData16$octo_num))
+MetaData16$sample.name<-as.factor(as.character(MetaData16$sample.name))
+MetaData16$sample.type<-as.factor(as.character(MetaData16$sample.type))
+MetaData16$samp.date<-as.POSIXct(MetaData16$samp.date, format="%m/%d/%y")
 MetaData16$UNIQUEID<-as.factor(as.character(MetaData16$UNIQUEID))
-MetaData16$Land_Ocean<-as.factor(as.character(MetaData16$Land_Ocean))
-MetaData16$SampLoc<-as.factor(as.character(MetaData16$SampLoc))
-MetaData16$Sub.loc<-as.factor(as.character(MetaData16$Sub.loc))
-MetaData16$SampleNum<-as.factor(as.character(MetaData16$SampleNum))
-MetaData16$BranchLoc<-as.factor(as.character(MetaData16$BranchLoc))
-MetaData16$branch.plate<-as.factor(as.character(MetaData16$branch.plate))
-MetaData16$Zoox<-as.factor(as.character(MetaData16$Zoox))
-MetaData16$Location<-as.factor(as.character(MetaData16$Location))
-MetaData16$LocSamp<-as.factor(as.character(MetaData16$LocSamp))
+MetaData16$land_ocean<-as.factor(as.character(MetaData16$land_ocean))
+MetaData16$samp_loc<-as.factor(as.character(MetaData16$samp_loc))
+MetaData16$sub_loc<-as.factor(as.character(MetaData16$sub_loc))
+MetaData16$sample_num<-as.factor(as.character(MetaData16$sample_num))
+MetaData16$branch_loc<-as.factor(as.character(MetaData16$branch_loc))
+MetaData16$branch_plate<-as.factor(as.character(MetaData16$branch_plate))
+MetaData16$dom<-as.factor(as.character(MetaData16$dom))
+MetaData16$location<-as.factor(as.character(MetaData16$location))
+MetaData16$loc_samp_nam<-as.factor(as.character(MetaData16$loc_samp_nam))
 
+#add percent D and percent C into metadata propCD.csv
+propCD<-read.csv("propCD.csv")
+propCD<-propCD[c(2:4)] #get rid of unneeded col
+
+MetaData16<-merge(MetaData16, propCD, by="sample_name", all.x = T, all.y = F)
+
+
+
+ggplot(MetaData16, aes(x = dom, y = tag.id)) + 
+  geom_point(aes(colour = location), size = 4) +
+  ggtitle("NMDS 16s by colony") +
+  theme_classic()+
+  facet_wrap(~samp_loc)
+
+
+#write.csv(MetaData16, "Metadata16index.csv") edited for index duplicates and loaded above
 
 sam0 <- MetaData16
 sam1 <- as.matrix(sam0[, -1])
-rownames(sam1) <- sam0$Sample_name
+rownames(sam1) <- sam0$sample_name
 sam <- sample_data(data.frame(sam1))
 
 #load in OUT:raw_abundanceTable_100.shared
@@ -79,97 +101,348 @@ OTU3k<-read.table("MCL19Summer_16S-pipeline_outputs USE THIS ONE/Results/main/de
 #otu
 #otu3k1 <- as.matrix(OTU3k[, -(1:3)]) # remove first col "label"
 # replace the "Group" col with actual sample IDs.
-indexes<-read.csv("16s_index_ID.csv")   #upload the sample ids
+indexes<-read.csv("MCL19Summer_16S-pipeline_outputs USE THIS ONE/Metadata.16s.indexgroup.csv")   #upload the sample ids
 otu3k2<-merge(indexes,OTU3k, by="Group") #add sample names
 otu3k2 <- as.matrix(otu3k2[, -(3:4)]) # remove first col "Group"
 
-otu3k2<-as.data.frame(otu3k2)
-rownames(otu3k2) <- otu3k2$sample_name
-otu <- otu_table(otu3k1, taxa_are_rows = FALSE)
+otu3k2.df<-as.data.frame(otu3k2) #make df copy to make samp names as row names in matrix
+rownames(otu3k2) <- otu3k2.df$sample_name
+otu3k2 <- as.matrix(otu3k2[, -(1:2)]) # remove first col "Group" and sec col samplename
 
+## something is preventing phyloseq from taking otu3k2 as the otu table. but if you save and then reupload it works. 
+#write.csv(otu3k2,"otu3k2check.csv")
+testOtu<-read.csv("otu3k2check.csv")
+testOtu2 <- as.matrix(testOtu[, -(1)]) 
+rownames(testOtu2)<- otu3k2.df$sample_name
+otu <- otu_table(testOtu2, taxa_are_rows = FALSE)
 
-#tax table annotations_100.taxonomy.csv
-TAX<- read.csv("Data/TT17_3000_summer_16S-pipeline_outputs/annotations_100.taxonomy.csv", colClasses = "character")
+#tax table annotations_100_taxonomy.csv (edited to be in proper format with proper col names)
+TAX<- read.csv("MCL19Summer_16S-pipeline_outputs USE THIS ONE/Results/main/details/annotations_100_taxonomy.csv", colClasses = "character")
 tax1 <- as.matrix(TAX[, -1], dimnames = list(TAX$OTU, colnames(TAX[-1])))
 rownames(tax1) <- TAX$OTU
 tax <- tax_table(tax1)
-
 
 # Read the data into phyloseq
 Bac.seq = phyloseq(otu, tax,sam) #THIS WORKS
 Bac.seq
 Bac.seq.df <- sample_data(Bac.seq)
 
-
 #load your .tre otu_repr_100.tre
-library(ape)
-treefile<- read.tree("Data/TT17_3000_summer_16S-pipeline_outputs/Results/postprocessing/unifrac/otu_repr_100.tre")
-
+treefile<- read.tree("MCL19Summer_16S-pipeline_outputs USE THIS ONE/Results/postprocessing/unifrac/otu_repr_100.tre")
 phy_tree(Bac.seq) <- treefile
 Bac.seq
 
 #save(Bac.seq, file = "Data/Bac.seq_phyloseq.RData")
+```
 
+QC data
+```{r}
+# Load data (see data_exploration.Rmd)
+#load("Data/Bac.seq_phyloseq.RData") #use RAW data that has been pruned. 
+# the df is Bac.seq
 
-
-########################################################
-# ## THIS IS FOR INCLUDING ALL SAMPLES YOU NEED FOR phylotype analysis.
-# #read in sample data
-# MetaData16<-read.csv("Data/Meta_16s_new.csv") #run in physio script first
-# MetaData16$Parent.ID<-as.factor(as.character(MetaData16$Parent.ID))
-# MetaData16$Tank.num<-as.factor(as.character(MetaData16$Tank.num))
-# 
-# sam0 <- MetaData16
-# sam1 <- as.matrix(sam0[, -1])
-# rownames(sam1) <- sam0$sample_name
-# sam <- sample_data(data.frame(sam1))
-# 
-# 
-# #load in OUT:raw_abundanceTable_100.shared
-# OTU2<-read.table("Data/TT17_3000_summer_16S-pipeline_outputs/raw_abundanceTable_100_shared.csv", sep=',', header=T)
-# 
-# #from its3
-# #otu
-# otu5 <- as.matrix(OTU2[, -1])
-# rownames(otu5) <- OTU2$sample_name
-# otu <- otu_table(otu5, taxa_are_rows = FALSE)
-# 
-# 
-# #tax
-# TAX<- read.csv("Data/TT17_3000_summer_16S-pipeline_outputs/raw_consensusClassification_100_taxonomy.csv", colClasses = "character")
-# tax1 <- as.matrix(TAX[, -1], dimnames = list(TAX$OTU, colnames(TAX[-1])))
-# rownames(tax1) <- TAX$OTU
-# tax <- tax_table(tax1)
-# 
-# # Read the data into phyloseq
-# Bac.seqAll = phyloseq(otu, tax,sam) #THIS WORKS
-# Bac.seqAll
-# 
-# save(Bac.seqAll, file = "Data/Bac.seqAll_phyloseq.RData")
- 
-```  
-Look at the data, Bac.seq for 3k
-```{r}       
+rank_names(Bac.seq) #ranks are DIV and clade
 ## check out data
 ntaxa(Bac.seq)  #num taxa
 nsamples(Bac.seq)   #num samples
-sample_names(Bac.seq)[1:300] #samp names
- #sampsy<-sample_names(physeq)[1:300]
-#write.csv(sampsy,"sampsy.csv")
+sample_names(Bac.seq) #samp names
+rank_names(Bac.seq) 
+sample_variables(Bac.seq) # metadata cats
 
-# OK Now you need to do the steps in the pipeline. ONLY for >3K dfs
-#1 filter out taxa: get rid of unknown, mitochondria and chloroplast
-# Bac.seq<-subset_taxa(Bac.seq, Family !="Mitochondria")
-# Bac.seq<-subset_taxa(Bac.seq, Order !="Chloroplast")
-# Bac.seq<-subset_taxa(Bac.seq, Domain !="unknown")
-# Bac.seq<-subset_taxa(Bac.seq, Domain !="Archaea")
+# create df of sample data to view 
+sample.data <- as(sample_data(Bac.seq), "data.frame") #create sample data frame to view
+sample.data$LibrarySize <- sample_sums(Bac.seq)
+sample.data <- sample.data[order(sample.data$LibrarySize),]
+sample.data$Index <- seq(nrow(sample.data))  # check 3k for all 
+ggplot(data = sample.data, aes(x=Index, y=LibrarySize, color = colonyDNA.id)) +
+  geom_point()
 
-# now get rid of things not represnted 2x or more
-#Prune singletons (these are reads that are only found once)
-# Bac.seq.prune <- prune_taxa(taxa_sums(Bac.seq) > 2, Bac.seq)
-# 
-#   save(Bac.seq, file = "Data/Bac.seq.prune.RData")
+ggplot(data = sample.data, aes(x=Index, y=LibrarySize, color = colonyDNA.id)) +
+  geom_point()+
+  facet_wrap(~samp_loc)
+
+
+#Check duplicates: Only 2 from F15 and F2 need to be chosen (the rest filtered out already). F15 and F2 are fine
+dups<-subset_samples(Bac.seq, dups=="yes")
+TopNOTUsB = names(sort(taxa_sums(dups), TRUE)[1:200])
+bac50 = prune_taxa(TopNOTUsB, dups)
+bacBarPlot<-plot_bar(bac50,  fill="Phylum");bacBarPlot
+
+#remove dups F15b and F2b
+Bac.seq <- subset_samples(Bac.seq, sampleID != "F15b")
+Bac.seq <- subset_samples(Bac.seq, sample.name != "F2b" )
+
+bad.samples <-  c("F15b", "F2b") 
+all.samples<- sample_names(Bac.seq) 
+all.samples <- all.samples[!(all.samples %in% bad.samples)]
+ 
+Bac.seq<- prune_samples(all.samples, Bac.seq)
+
+richness(Bac.seq)
+plot_richness(Bac.seq, measures = c("Observed","Shannon")) + facet_wrap(~sample.type)
+evenness(Bac.seq)
+
+#water samples
+  water<-subset_samples(Bac.seq, sample.type=="Water")
+  TopNOTUswater = names(sort(taxa_sums(water), TRUE)[1:200])
+  bac50 = prune_taxa(TopNOTUswater, water)
+  bacBarPlot<-plot_bar(bac50,  fill="Phylum");bacBarPlot
+
+richness(water)
+plot_richness(water, measures = c("Observed","Shannon"))
+evenness(water)
+
+#NTC
+NTCs<-subset_samples(Bac.seq, sample.type=="NTC")
+TopNOTUsNTC = names(sort(taxa_sums(NTCs), TRUE)[1:200])
+bac50 = prune_taxa(TopNOTUsNTC, NTCs)
+bacBarPlot<-plot_bar(bac50,  fill="Phylum");bacBarPlot
+
+richness(NTCs)
+plot_richness(NTCs, measures = c("Observed","Shannon"))
+evenness(NTCs)
+
+#Mock
+Mock<-subset_samples(Bac.seq, sample.type=="Mock")
+TopNOTUsMock = names(sort(taxa_sums(NTCs), TRUE)[1:200])
+bac50 = prune_taxa(TopNOTUsMock, Mock)
+bacBarPlot<-plot_bar(bac50,  fill="Phylum");bacBarPlot
+
+richness(Mock)
+plot_richness(Mock, measures = c("Observed","Shannon"))
+evenness(Mock)
+
+```
+
+
+#Set up, Bac.s relative abundaces: Bac.seq.rel (Bac.seq for alpha)
+```{r}        
+#make relative abundance df Bac.seq
+Bac.seq.rel  = transform_sample_counts(Bac.seq, function(x) x / sum(x) )  #save as RELA DIVs
+data.Bac.seq.rel <- as(sample_data(Bac.seq.rel), "data.frame") #look at samp data
+data.Bac.seq.rel = prune_taxa(taxa_sums(Bac.seq.rel) > 0, Bac.seq.rel) #this removes any OTU with 0s
+
+#heatmap
+  #plot_heatmap(Bac.s.rel, method = "NMDS", distance = "bray")# way too much data
+
+``` 
+
+Look at all samples + water and ntc
+```{r}
+# data.Bac.seq.rel df
+
+#make unifrac matrix
+Bac.seq.wu.all <- phyloseq::distance(Bac.seq.rel, method = "wunifrac")
+s.u.samp.df <- as(sample_data(Bac.seq.rel), "data.frame") #sample df
+
+#adonis test between sample types (this takes a long time to run so comment out): p=0.001 between sample types
+set.seed(30)
+#adonis2(Bac.seq.wu.all ~ sample.type, data = s.u.samp.df)
+
+# Homogeneity of dispersion test  
+    set.seed(30)
+    permutest(betadisper(Bac.seq.wu.all, s.u.samp.df$sample.type, type = "centroid"))  # p =0.001
+  ball<-  betadisper(Bac.seq.wu.all, s.u.samp.df$sample.type, type = "centroid")
+  TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)  
+  
+  ## Every comparison is significantly difference except NTC and Water. Possibly not enough water in water sample filter to catch diffs.
+
+#Plot
+sample.type.colors <- c("sample"= "#D43F3AFF","ntc"="#EEA236FF","water"="#5CB85CFF")
+
+#nmds
+
+unifrac.all <- ordinate(Bac.seq, method="NMDS", "unifrac",weighted=TRUE, set.seed(30)) 
+stressplot(unifrac.all)
+scores.ord.u_RelA_stats<-as.data.frame(cbind(vegan::scores(unifrac.all, display="sites")))  
+     unifrac.all.sd <- as(sample_data(Bac.seq), "data.frame") #sample df
+
+scores.ord.u_RelA_stats$sample.type <- unifrac.all.sd$sample.type
+
+ggplot(scores.ord.u_RelA_stats, aes(x = NMDS1, y = NMDS2)) + 
+  geom_point(aes(colour = sample.type), size = 4) +
+  stat_ellipse(aes(x = NMDS1, y = NMDS2, colour = sample.type), linetype = 2) +
+  ggtitle("NMDS 16s by sample type") +
+  theme_classic()
+```
+
+
+# Mcap sample data: df of just mcap called "bac"
+```{r}
+Bac = subset_samples(Bac.seq.rel, sample.type== "sample" ) #only Mcap samples
+Bac = prune_taxa(taxa_sums(Bac) > 0, Bac) #this removes any OTU with 0s
+
+```
+
+Stats: beta diversity
+```{r}
+#make unifrac matrix
+Bac.wu <- phyloseq::distance(Bac, method = "wunifrac")
+samp.df <- as(sample_data(Bac), "data.frame") #sample df
+samp.df$tag.id<-as.factor(samp.df$tag.id)
+samp.df$location<-as.factor(samp.df$location)
+
+
+
+#adonis
+
+#between colonies: p=0.001 colonies are different
+set.seed(30)
+adonis2(Bac.wu ~ tag.id, data = samp.df)
+
+#           Df SumOfSqs      R2      F Pr(>F)    
+# tag.id    23    5.846 0.15405 2.6206  0.001 ***
+# Residual 331   32.106 0.84595                  
+# Total    354   37.952 1.00000  
+
+# Homogeneity of dispersion test  
+    set.seed(30)
+    permutest(betadisper(Bac.wu, samp.df$tag.id, type = "centroid"))  # p =0.001
+  ball<-  betadisper(Bac.wu, samp.df$tag.id, type = "centroid")
+  TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)
+  
+# tag.id*location
+set.seed(30)
+adonis2(Bac.wu ~ tag.id*location, data = samp.df)
+
+#                  Df SumOfSqs      R2      F Pr(>F)    
+# tag.id           23    5.846 0.15405 3.0724  0.001 ***
+# location          7    3.500 0.09221 6.0431  0.001 ***
+# tag.id:location 113   11.149 0.29378 1.1926  0.002 ** 
+# Residual        211   17.457 0.45996                  
+# Total           354   37.952 1.00000                
+
+
+# Homogeneity of dispersion test  
+    set.seed(30)
+    permutest(betadisper(Bac.wu, samp.df$location, type = "centroid"))  # p =0.021
+  ball<-  betadisper(Bac.wu, samp.df$location, type = "centroid")
+  TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)
+  
+  #Lowest-Branch mid            0.0469759914  0.010776146 0.08317584 0.0023182
+```
+NMDS
+
+```{r}
+#nmds
+
+unifrac.b <- ordinate(Bac, method="NMDS", "unifrac",weighted=TRUE, set.seed(30)) 
+stressplot(unifrac.b)
+scores.b<-as.data.frame(cbind(vegan::scores(unifrac.b, display="sites")))  
+     unifrac.sd <- as(sample_data(Bac), "data.frame") #sample df
+
+scores.b$tag.id <- as.factor(unifrac.sd$tag.id)
+scores.b$location <- as.factor(unifrac.sd$location)
+scores.b$dom <- as.factor(unifrac.sd$dom)
+scores.b$samp_loc <- as.factor(unifrac.sd$samp_loc)
+scores.b$Prop.D <- as.numeric(as.character(unifrac.sd$Prop.D))
+
+
+###### Ross help
+ggplot(scores.b, aes(x = NMDS1, y = NMDS2, color=Prop.D)) + 
+  geom_point(aes(Prop.D),size = 4) +
+scale_color_gradient2(low="gray", high= "orange")+
+ # stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
+  ggtitle("NMDS 16s by colony") +
+  theme_classic()
+
+ggplot(scores.b, aes(x = NMDS1, y = NMDS2)) + 
+  geom_point(aes(Prop.D),size = 4) +
+#scale_color_gradient2(low="gray", high= "orange")+
+ # stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
+  ggtitle("NMDS 16s by colony") +
+  theme_classic()
+
+
+
+```
+Branches only
+```{r}
+#adonis by colony by sample location by branch/plate
+  Branch <- subset_samples(Bac, samp_loc =="Branch") #Subset by colony 
+  Branch = prune_taxa(taxa_sums(Branch) > 0, Branch) #this removes any OTU with 0s
+
+  Branch.dist <- phyloseq::distance(Branch, method = "wunifrac")
+  samp.Branch.dist <- as(sample_data(Branch), "data.frame") #sample df
+
+  samp.Branch.dist$tag.id<-as.factor(samp.Branch.dist$tag.id)
+    samp.Branch.dist$sub_loc<-as.factor(samp.Branch.dist$sub_loc)
+        samp.Branch.dist$dom<-as.factor(samp.Branch.dist$dom)
+    samp.Branch.dist$Prop.D<-as.numeric(samp.Branch.dist$Prop.D)
+
+#adonis by colony level and branch location
+  set.seed(30)
+  adonis2(Branch.dist ~ tag.id*sub_loc, data = samp.Branch.dist)
+#                  Df SumOfSqs      R2       F Pr(>F)    
+# tag.id          23   4.6163 0.19810  2.6298  0.001 ***
+# sub_loc          2   2.7297 0.11714 17.8833  0.001 ***
+# tag.id:sub_loc  46   4.5084 0.19347  1.2842  0.002 ** 
+# Residual       150  11.4481 0.49128                   
+# Total          221  23.3025 1.00000 
+  
+  # Homogeneity of dispersion test  
+    set.seed(30)
+    permutest(betadisper(Branch.dist, samp.Branch.dist$tag.id, type = "centroid"))  # p =0.001
+  ball<-  betadisper(Branch.dist, samp.Branch.dist$tag.id, type = "centroid")
+  TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)
+  
+  
+  
+#adonis
+  set.seed(30)
+  adonis2(Branch.dist ~ tag.id*branch_plate*sub_loc, data = samp.Branch.dist)
+#   
+#   tag.id                       23   4.6163 0.19810  7.4949  0.003 ** 
+# branch_plate                  3   0.3351 0.01438  4.1712  0.023 *  
+# sub_loc                       2   2.7115 0.11636 50.6264  0.001 ***
+# tag.id:branch_plate          51   3.9256 0.16846  2.8743  0.058 .  
+# tag.id:sub_loc               46   4.5125 0.19365  3.6632  0.035 *  
+# branch_plate:sub_loc          6   0.5637 0.02419  3.5085  0.037 *  
+# tag.id:branch_plate:sub_loc  89   6.6110 0.28371  2.7738  0.056 .  
+# Residual                      1   0.0268 0.00115                   
+# Total                       221  23.3025 1.00000      
   
 ```
 
+C-dom
+```{r}
+
+#subset C-dom
+  C.dom <- subset_samples(Bac, dom =="C") #Subset by colony 
+  C.dom = prune_taxa(taxa_sums(C.dom) > 0, C.dom) #this removes any OTU with 0s
+
+#make unifrac matrix
+C.dom.wu <- phyloseq::distance(C.dom, method = "wunifrac")
+samp.df.C.dom <- as(sample_data(C.dom), "data.frame") #sample df
+
+samp.df.C.dom$tag.id<-as.factor(samp.df.C.dom$tag.id)
+samp.df.C.dom$location<-as.factor(samp.df.C.dom$location)
+
+#adonis
+set.seed(30)
+adonis2(C.dom.wu ~ tag.id*location, data = samp.df.C.dom)
+#                  Df SumOfSqs      R2      F Pr(>F)    
+# tag.id            8   1.6351 0.12024 2.5530  0.001 ***
+# location          7   2.1148 0.15551 3.7737  0.001 ***
+# tag.id:location  35   3.1245 0.22976 1.1151  0.096 .  
+# Residual         84   6.7247 0.49450                  
+# Total           134  13.5990 1.00000   
+
+#nmds
+unifrac.C.dom <- ordinate(C.dom, method="NMDS", "unifrac",weighted=TRUE, set.seed(30)) 
+stressplot(unifrac.C.dom)
+scores.C.dom<-as.data.frame(cbind(vegan::scores(unifrac.C.dom, display="sites")))  
+     unifrac.sd.C.dom <- as(sample_data(C.dom), "data.frame") #sample df
+
+scores.C.dom$tag.id <- as.factor(unifrac.sd.C.dom$tag.id)
+scores.C.dom$location <- as.factor(unifrac.sd.C.dom$location)
+scores.C.dom$dom <- as.factor(unifrac.sd.C.dom$dom)
+scores.C.dom$samp_loc <- as.factor(unifrac.sd.C.dom$samp_loc)
+
+ggplot(scores.C.dom, aes(x = NMDS1, y = NMDS2)) + 
+  geom_point(aes(fill = "location"), size = 4) +
+ stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
+  ggtitle("NMDS C-dom") +
+  theme_classic()
+```
 

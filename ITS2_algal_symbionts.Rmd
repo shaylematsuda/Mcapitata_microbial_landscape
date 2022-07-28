@@ -12,9 +12,8 @@ Last updated:20220622
 
 #Analysis
 ```{r} 
-setwd("~/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/ITS2_Summer_symportal2020")
+#setwd("~/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/ITS2_Summer_symportal2020")
 
-library(tidyverse)
 library(janitor)
 library(phyloseq)  # source('http://bioconductor.org/biocLite.R'); biocLite('phyloseq')
 library(zoo)
@@ -22,10 +21,11 @@ library(stringr)
 library(vegan)
 library(multcompView)
 library("ggpubr")
+library(tidyverse)
 
 # Load data (see data_exploration.Rmd)
-load("data/coral_phyloseq_2022.RData") # Rel A data
-load("data/Absolute_coral_phyloseq2022.RData") #absolute reads data
+load("ITS2_Summer_symportal2020/data/coral_phyloseq_2022.RData") # Rel A data
+load("ITS2_Summer_symportal2020/data/Absolute_coral_phyloseq2022.RData") #absolute reads data
 
 ```
 
@@ -159,58 +159,57 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
    
 
 ```
-#get %C and %D for each sample (telomere data as well) df Pro_RelA
+
+
+
+# Side note: get %C and %D for each sample (telomere data as well) df Pro_RelA
 Export the csv and add in metadata col in the ITS2 Symp to Phyloseq.RMD
 ```{r}
-# #do tax glom in the data to group C and D
-#  data.clade<- tax_glom(Pro_RelA, taxrank="clade")
-# 
-# #coerce into df
-#   # Extract abundance matrix from the phyloseq object
-#   OTU1 = as(otu_table(data.clade), "matrix")
-#   # transpose if necessary
-#   if(taxa_are_rows(data.clade)){OTU1 <- t(OTU1)}
-#   # Coerce to data.frame
-#   OTUdf = as.data.frame(OTU1)
-# 
-#   library(tidyverse)
-# library(tibble)
-# 
-# OTUdf <- tibble::rownames_to_column(OTUdf, "sample.name")
-# as_tibble(OTUdf)
-# 
-# OTUdf<-OTUdf%>%
-#   rename(C1 = `87732`) %>%
-#   rename( C2 = `87257`) %>%
-#   rename( D1 = `87918`) %>%
-#   rename( D2 = `87537`)
-# 
-# 
-# OTUdf<-
-#   OTUdf %>% rowwise() %>%
-#   mutate(Prop.C = sum(c(C1+C2))) %>%  #sum C
-#     mutate(Prop.D = sum(c(D1+D2)))   #sum D
-#         #select( c(1, 6:7))              # remove cols you don't want anymore, not working
-# 
-# OTUdf<-OTUdf %>%
-#     mutate(samp.num = as.numeric(str_extract(sample.name, "[0-9]+"))) %>%   #extract number in samp name
-#       mutate(samp.let = as.character(str_extract(sample.name, "[A-Z]+")))   # extract letter in samp name
-# #Next enter genotype letter combo
-# 
-# tibble(OTUdf)
-# 
-# OTUdf<-OTUdf%>%
-#   rowwise() %>%
-#       mutate(
-#         C = sum(c_across(2:3)),
-#         D = sum(c_across(4:5)))
-# 
-# #write.csv(OTUdf, "Clade.samps2022.csv")
-# 
-# OTUdf.PropCD<-OTUdf[,c("sample.name","Prop.C", "Prop.D")]
-# head(OTUdf.PropCD)
-# OTUdf.PropCD<-rename(OTUdf.PropCD,  Sample_name=sample.name)
-# write.csv(OTUdf.PropCD,"propCD.csv")
+#do tax glom in the data to group C and D
+ data.clade<- tax_glom(Pro_RelA, taxrank="clade")
+
+#coerce into df
+  # Extract abundance matrix from the phyloseq object
+  OTU1 = as(otu_table(data.clade), "matrix")
+  # transpose if necessary
+  if(taxa_are_rows(data.clade)){OTU1 <- t(OTU1)}
+  # Coerce to data.frame
+  OTUdf = as.data.frame(OTU1)
+
+  library(tidyverse)
+library(tibble)
+
+OTUdf <- tibble::rownames_to_column(OTUdf, "sample.name")
+as_tibble(OTUdf)
+
+OTUdf<-OTUdf%>%
+  rename(C1 = `87732`) %>%
+  rename( C2 = `87257`) %>%
+  rename( D2 = `87537`)%>%
+  rename( D1 = `87918`) 
+  
+
+
+OTUdf<-
+  OTUdf %>% rowwise() %>%
+  mutate(Prop.C = sum(c(C1+C2))) %>%  #sum C
+    mutate(Prop.D = sum(c(D1+D2)))   #sum D
+
+OTUdf<-OTUdf %>%
+    mutate(samp.num = as.numeric(str_extract(sample.name, "[0-9]+"))) %>%   #extract number in samp name
+      mutate(samp.let = as.character(str_extract(sample.name, "[A-Z]+")))   # extract letter in samp name
+#Next enter genotype letter combo
+
+OTUdf<-OTUdf%>%
+  rowwise() %>%
+      mutate(
+        C = sum(c_across(2:3)),
+        D = sum(c_across(4:5)))
+
+OTUdf.PropCD<-OTUdf[,c("sample.name","Prop.C", "Prop.D")]
+head(OTUdf.PropCD)
+OTUdf.PropCD<-rename(OTUdf.PropCD,  sample_name=sample.name)
+#write.csv(OTUdf.PropCD,"propCD.csv")
 ```
 
 
