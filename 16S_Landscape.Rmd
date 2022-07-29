@@ -179,7 +179,7 @@ all.samples <- all.samples[!(all.samples %in% bad.samples)]
 Bac.seq<- prune_samples(all.samples, Bac.seq)
 
 richness(Bac.seq)
-plot_richness(Bac.seq, measures = c("Observed","Shannon")) + facet_wrap(~sample.type)
+plot_richness(Bac.seq, measures = c("Observed","Shannon"), color="sample.type") 
 evenness(Bac.seq)
 
 #water samples
@@ -265,6 +265,245 @@ ggplot(scores.ord.u_RelA_stats, aes(x = NMDS1, y = NMDS2)) +
   ggtitle("NMDS 16s by sample type") +
   theme_classic()
 ```
+#M cap only - alpha diversity use non-relA df: Bac.seq
+```{r}
+Bac.seq.c<-subset_samples(Bac.seq, sample.type=="sample") #subset only Mcap
+Bac.seq.c.sd <- as(sample_data(Bac.seq.c), "data.frame") #sample df
+
+
+# Richness ####
+#phyloseq
+b.rich<-richness(Bac.seq.c)
+plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="tag.id")
+plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="tag.id") + facet_wrap(~location)
+plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="location") 
+
+GPst = merge_samples(Bac.seq.c, "samp_loc", fun = mean)
+plot_richness(GPst,  measures=c("Observed", "Shannon"))
+
+GPst = merge_samples(Bac.seq.c, "location", fun = "mean")
+p<-plot_richness(GPst,  color="location",measures=c("Observed", "Shannon")) #why no color
+p + geom_point(size=5, alpha=0.7)
+ 
+# try in microbiome package
+
+library(microbiome)  
+library(knitr)
+
+erich.tab <-microbiome::alpha(Bac.seq.c, index = "all") # pull out: observed, diversity_shannon, evenness_pielou
+
+erich.tab2<-erich.tab[-c(2:4,6:8,10:22)] #keep the cols you need
+
+ erich.tab2$location <- as.factor(Bac.seq.c.sd$location)       #add back in meta
+  erich.tab2$tag.id <- as.factor(Bac.seq.c.sd$tag.id)
+  erich.tab2$samp_loc <- as.factor(Bac.seq.c.sd$samp_loc)
+  erich.tab2$dom <- as.factor(Bac.seq.c.sd$dom)
+  erich.tab2$Prop.D <- as.numeric(Bac.seq.c.sd$Prop.D)
+  erich.tab2$samp.date <- as.factor(Bac.seq.c.sd$samp.date)
+erich.tab2$location <- factor(erich.tab2$location, levels=c("Branch tip", "Branch mid", "Branch base", "Plate top", "Plate edge", "Plate underside", "Deepest","Lowest")) #reorder factors
+
+#ANOVA
+#shannon ####
+  aov.shannon.species = aov(diversity_shannon ~ tag.id*location*Prop.D, data=erich.tab2)
+    summary(aov.shannon.species) # only location sig
+
+    aov.shannon.species = aov(diversity_shannon ~ samp.date, data=erich.tab2) #date doesn't matter
+  summary(aov.shannon.species) # only location sig
+
+   aov.shannon.species = aov(diversity_shannon ~ location, data=erich.tab2)
+  summary(aov.shannon.species) # <0.001
+  TukeyHSD(aov.shannon.species)# surprise, branch tips sig differ from all other locations
+
+  hist(erich.tab2$diversity_shannon)
+  ggqqplot(erich.tab2$diversity_shannon)
+  
+  shannon_mean <- ddply(erich.tab2, c("location"), summarise, #summarize cell counts
+                 N    = length(diversity_shannon[!is.na(diversity_shannon)]), #calculate the length of the data frame, excluding NA’s
+                 mean = mean(diversity_shannon, na.rm=TRUE), #calculate mean of response variable, removing NA's
+                 sd   = sd(diversity_shannon, na.rm=TRUE), #calculate standard deviation
+                 se   = sd / sqrt(N), #calculate standard error
+                 max = max(diversity_shannon, na.rm=TRUE) #calculate max, could also calculate min () if desired
+);shannon_mean
+
+shannon_plot<-ggplot(data=shannon_mean, aes(x=location, y=mean, color=location)) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se),
+                width=0.1, show.legend = F)+
+  geom_point(aes(color=location), size=4, show.legend = F)+
+  xlab("") + #Label the X Axis
+    ylab("") + #Label the X Axis
+  theme_bw() + #Set the background color
+  theme(axis.line = element_line(color = 'black'), #Set the axes color
+        axis.title=element_text(size=14,face="bold"), #Set axis format
+        panel.border = element_blank(), #Set the border
+        panel.grid.major = element_blank(), #Set the major gridlines
+        panel.grid.minor = element_blank(), #Set the minor gridlines
+        text = element_text(size=18),  # set element text
+        plot.background =element_blank(), #Set the plot background
+        legend.key = element_blank()) + #Set plot legend key
+  # theme(panel.grid.major = element_blank(), 
+  #       panel.grid.minor = element_blank(),
+  #       panel.background = element_rect(colour = "black", size=1))+
+        theme(aspect.ratio=1)+
+   ylab(expression(paste("Shannon Diversity"))) +
+   ggtitle("Shannon")+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(plot.title = element_text(size=20, face = "italic"));shannon_plot
+
+#observed   ####
+  
+ aov.observed.species = aov(observed ~ tag.id*location*Prop.D, data=erich.tab2)
+  summary(aov.observed.species) # only location sig
+  
+   aov.observed.species = aov(observed ~ samp.date, data=erich.tab2)
+  summary(aov.observed.species) # only location sig
+
+   aov.observed.species = aov(observed ~ location, data=erich.tab2)
+  summary(aov.observed.species) # =0.00176
+  TukeyHSD(aov.observed.species)# surprise, branch tips sig differ from all other locations
+
+  hist(erich.tab2$observed)
+  ggqqplot(erich.tab2$observed)
+  
+  observed_mean <- ddply(erich.tab2, c("location"), summarise, #summarize cell counts
+                 N    = length(observed[!is.na(observed)]), #calculate the length of the data frame, excluding NA’s
+                 mean = mean(observed, na.rm=TRUE), #calculate mean of response variable, removing NA's
+                 sd   = sd(observed, na.rm=TRUE), #calculate standard deviation
+                 se   = sd / sqrt(N), #calculate standard error
+                 max = max(observed, na.rm=TRUE) #calculate max, could also calculate min () if desired
+);observed_mean
+
+observed_plot<-ggplot(data=observed_mean, aes(x=location, y=mean, color=location)) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se),
+                width=0.1, show.legend = F)+
+  geom_point(aes(color=location), size=4, show.legend = F)+
+  xlab("") + #Label the X Axis
+    ylab("") + #Label the X Axis
+  theme_bw() + #Set the background color
+  theme(axis.line = element_line(color = 'black'), #Set the axes color
+        axis.title=element_text(size=14,face="bold"), #Set axis format
+        panel.border = element_blank(), #Set the border
+        panel.grid.major = element_blank(), #Set the major gridlines
+        panel.grid.minor = element_blank(), #Set the minor gridlines
+        text = element_text(size=18),  # set element text
+        plot.background =element_blank(), #Set the plot background
+        legend.key = element_blank()) + #Set plot legend key
+  # theme(panel.grid.major = element_blank(), 
+  #       panel.grid.minor = element_blank(),
+  #       panel.background = element_rect(colour = "black", size=1))+
+        theme(aspect.ratio=1)+
+   ylab(expression(paste("observed Diversity"))) +
+   ggtitle("observed")+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(plot.title = element_text(size=20, face = "italic"));observed_plot
+ 
+ #evenness ####
+  aov.evenness_pielou.species = aov(evenness_pielou ~ tag.id*location*Prop.D, data=erich.tab2)
+  summary(aov.evenness_pielou.species) # Tag ID and location significant
+  
+    aov.evenness_pielou.species = aov(evenness_pielou ~ samp.date, data=erich.tab2)
+  summary(aov.evenness_pielou.species) # sample date is significant.....hmmmm
+
+   aov.evenness_pielou.species = aov(evenness_pielou ~ location, data=erich.tab2)
+  summary(aov.evenness_pielou.species) # p = 0.00502
+  TukeyHSD(aov.evenness_pielou.species)#
+
+  aov.evenness_pielou.species = aov(evenness_pielou ~ tag.id, data=erich.tab2)
+  summary(aov.evenness_pielou.species) # p < 0.001
+  TukeyHSD(aov.evenness_pielou.species)# 
+  
+  hist(erich.tab2$evenness_pielou)
+  ggqqplot(erich.tab2$evenness_pielou)
+  
+  evenness_pielou_mean <- ddply(erich.tab2, c("location"), summarise, #summarize cell counts
+                 N    = length(evenness_pielou[!is.na(evenness_pielou)]), #calculate the length of the data frame, excluding NA’s
+                 mean = mean(evenness_pielou, na.rm=TRUE), #calculate mean of response variable, removing NA's
+                 sd   = sd(evenness_pielou, na.rm=TRUE), #calculate standard deviation
+                 se   = sd / sqrt(N), #calculate standard error
+                 max = max(evenness_pielou, na.rm=TRUE) #calculate max, could also calculate min () if desired
+);evenness_pielou_mean
+
+evenness_pielou_plot<-ggplot(data=evenness_pielou_mean, aes(x=location, y=mean, color=location)) +
+  geom_errorbar(aes(ymin=mean-se, ymax=mean+se),
+                width=0.1, show.legend = F)+
+  geom_point(aes(color=location), size=4, show.legend = F)+
+  xlab("") + #Label the X Axis
+    ylab("") + #Label the X Axis
+  theme_bw() + #Set the background color
+  theme(axis.line = element_line(color = 'black'), #Set the axes color
+        axis.title=element_text(size=14,face="bold"), #Set axis format
+        panel.border = element_blank(), #Set the border
+        panel.grid.major = element_blank(), #Set the major gridlines
+        panel.grid.minor = element_blank(), #Set the minor gridlines
+        text = element_text(size=18),  # set element text
+        plot.background =element_blank(), #Set the plot background
+        legend.key = element_blank()) + #Set plot legend key
+  # theme(panel.grid.major = element_blank(), 
+  #       panel.grid.minor = element_blank(),
+  #       panel.background = element_rect(colour = "black", size=1))+
+        theme(aspect.ratio=1)+
+   ylab(expression(paste("evenness_pielou Diversity"))) +
+   ggtitle("evenness_pielou")+
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  theme(plot.title = element_text(size=20, face = "italic"));evenness_pielou_plot 
+  
+#plot together  
+
+grid.arrange(evenness_pielou_plot, observed_plot, shannon_plot, nrow = 1)
+
+  
+#regular box  
+#evenness
+  aov.evenness.species = aov(evenness_pielou ~ tag.id, data=erich.tab2)
+  summary(aov.evenness.species) # sig diff between species
+  TukeyHSD(aov.evenness.species)  
+
+  #Plot
+  boxplot(diversity_shannon ~ location, data=erich.tab2, ylab="Shannon's diversity") 
+  boxplot(observed ~ location, data=erich.tab2, ylab="Observed") 
+  boxplot(evenness_pielou ~ location, data=erich.tab2, ylab="Evenness_pielou") 
+
+#violin plots
+  # create a list of pairwise comaprisons
+al.species <- levels(erich.tab2$location) # get the variables
+
+# make a pairwise list that we want to compare.
+  al.species.pairs <- combn(seq_along(al.species), 2, simplify = FALSE, FUN = function(i)al.species[i])
+  print(al.species.pairs)
+
+#observed
+p1 <- ggviolin(erich.tab2, x = "location", y = "observed",
+   add = "boxplot", fill = "location") 
+  print(p1)
+
+    p1 <- ggviolin(erich.tab2, x = "tag.id", y = "observed",
+   add = "boxplot", fill = "location") 
+  print(p1)
+
+  #Shannon
+p1 <- ggviolin(erich.tab2, x = "location", y = "diversity_shannon",
+   add = "boxplot", fill = "location") 
+  print(p1)
+  
+p1 <- p1 + stat_compare_means(comparisons = "tag.id") #non-parametric test (Wilcoxon test)
+  print(p1)
+  
+p1 <- ggviolin(erich.tab2, x = "tag.id", y = "diversity_shannon",
+   add = "boxplot", fill = "location") 
+  print(p1)
+  
+#Evenness
+p1 <- ggviolin(erich.tab2, x = "location", y = "evenness_pielou",
+   add = "boxplot", fill = "location") 
+  print(p1)
+  
+  
+p1 <- p1 + stat_compare_means(comparisons = "location") #non-parametric test (Wilcoxon test)
+  print(p1)
+
+
+
+```
+
 
 
 # Mcap sample data: df of just mcap called "bac"
