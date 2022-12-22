@@ -232,12 +232,12 @@ Look at all samples + water and ntc
 # data.Bac.seq.rel df
 
 #make unifrac matrix
-Bac.seq.wu.all <- phyloseq::distance(Bac.seq.rel, method = "wunifrac")
+#Bac.seq.wu.all <- phyloseq::distance(Bac.seq.rel, method = "wunifrac")
 s.u.samp.df <- as(sample_data(Bac.seq.rel), "data.frame") #sample df
 
 #adonis test between sample types (this takes a long time to run so comment out): p=0.001 between sample types
 set.seed(30)
-#adonis2(Bac.seq.wu.all ~ sample.type, data = s.u.samp.df)
+adonis2(Bac.seq.wu.all ~ sample.type, data = s.u.samp.df)
 
 # Homogeneity of dispersion test  
     set.seed(30)
@@ -448,7 +448,7 @@ evenness_pielou_plot<-ggplot(data=evenness_pielou_mean, aes(x=location, y=mean, 
   
 #plot together  
 
-grid.arrange(evenness_pielou_plot, observed_plot, shannon_plot, nrow = 1)
+grid.arrange( observed_plot, evenness_pielou_plot,shannon_plot, nrow = 1)
 
   
 #regular box  
@@ -507,6 +507,7 @@ p1 <- p1 + stat_compare_means(comparisons = "location") #non-parametric test (Wi
 
 
 # Mcap sample data: df of just mcap called "bac"
+You already did this but prob just rename stuff above
 ```{r}
 Bac = subset_samples(Bac.seq.rel, sample.type== "sample" ) #only Mcap samples
 Bac = prune_taxa(taxa_sums(Bac) > 0, Bac) #this removes any OTU with 0s
@@ -554,8 +555,8 @@ adonis2(Bac.wu ~ tag.id*location, data = samp.df)
 
 # Homogeneity of dispersion test  
     set.seed(30)
-    permutest(betadisper(Bac.wu, samp.df$location, type = "centroid"))  # p =0.021
-  ball<-  betadisper(Bac.wu, samp.df$location, type = "centroid")
+    permutest(betadisper(Bac.wu, samp.df$tag.id, type = "centroid"))  # p =0.021
+  ball<-  betadisper(Bac.wu, samp.df$tag.id, type = "centroid")
   TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)
   
   #Lowest-Branch mid            0.0469759914  0.010776146 0.08317584 0.0023182
@@ -578,19 +579,14 @@ scores.b$Prop.D <- as.numeric(as.character(unifrac.sd$Prop.D))
 
 
 ###### Ross help
-ggplot(scores.b, aes(x = NMDS1, y = NMDS2, color=Prop.D)) + 
-  geom_point(aes(Prop.D),size = 4) +
-scale_color_gradient2(low="gray", high= "orange")+
- # stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
-  ggtitle("NMDS 16s by colony") +
+ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=location)) + 
+  geom_point(aes(color=location),size = 4) +
+#scale_color_gradient2(low="black", high= "orange")+
+stat_ellipse(geom="polygon", alpha=1/6, aes(fill=location)) +
+  ggtitle("NMDS 16s") +
   theme_classic()
 
-ggplot(scores.b, aes(x = NMDS1, y = NMDS2)) + 
-  geom_point(aes(Prop.D),size = 4) +
-#scale_color_gradient2(low="gray", high= "orange")+
- # stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
-  ggtitle("NMDS 16s by colony") +
-  theme_classic()
+
 
 
 
@@ -678,9 +674,9 @@ scores.C.dom$location <- as.factor(unifrac.sd.C.dom$location)
 scores.C.dom$dom <- as.factor(unifrac.sd.C.dom$dom)
 scores.C.dom$samp_loc <- as.factor(unifrac.sd.C.dom$samp_loc)
 
-ggplot(scores.C.dom, aes(x = NMDS1, y = NMDS2)) + 
-  geom_point(aes(fill = "location"), size = 4) +
- stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
+ggplot(scores.C.dom, aes(x = NMDS1, y = NMDS2, fill=location)) + 
+  geom_point(aes(color = location), size = 4) +
+ stat_ellipse(geom="polygon", alpha=1/4, aes(fill=location)) +
   ggtitle("NMDS C-dom") +
   theme_classic()
 ```

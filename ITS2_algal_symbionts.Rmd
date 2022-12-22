@@ -243,7 +243,6 @@ OTUdf.PropCD<-rename(OTUdf.PropCD,  sample_name=sample.name)
 #adonis by broad location and colony ID
   adonis2(DIV_RelA.dist ~ SampLoc*TagID, data = samp.DIV_RelA.dist)
   
-  
 set.seed(30)
 ord.DIV_RelA.dist<- ordinate(DIV_RelA, "NMDS", "bray", trymax = 100) 
 stressplot(ord.DIV_RelA.dist)
@@ -262,14 +261,55 @@ ggplot(scores.ord.DIV_RelA.dist, aes(x = NMDS1, y = NMDS2)) +
   ggtitle("NMDS its2 Bray Curtis TagID") +
   theme_classic()
   #facet_wrap(~Zoox)
-#ggsave("bc_all.pdf")  
+#ggsave("NMDS_ITS2_allsamps.pdf")  
   
+ ### plot by Proportion D ##############3
+
+ #Color points by proportion of D
+  library(ecodist)
+  bray_pcoa <- ecodist::pco(DIV_RelA.dist)
+bray_pcoa_df <- data.frame(pcoa1 = bray_pcoa$vectors[,1],
+                           pcoa2 = bray_pcoa$vectors[,2])
+head(bray_pcoa_df)
+bray_pcoa_df$Prop.D <- samp.DIV_RelA.dist$Prop.D
+bray_pcoa_df$Prop.D<-as.numeric(bray_pcoa_df$Prop.D)
+bray_pcoa_df$TagID <-samp.DIV_RelA.dist$TagID
+bray_pcoa_df$Location <-samp.DIV_RelA.dist$Location
+
+pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = Prop.D)) + 
+  geom_point(size = 3,show.legend = F) +
+  labs(x = "PC1",
+       y = "PC2",
+       title = "PCoA of ITS2 vs PropD") +
+  theme_bw();pcoa
   
+#same by genotype (for slides)
+
+library(tidyverse)
+library(qualpalr) #generate diverging colors
+pal = qualpal(24, colorspace=list(h=c(10,350), s=c(0.3,1), l=c(0.2,0.8)))
+
+
+  pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = TagID)) + 
+  geom_point(size = 3,show.legend = F) +
+    scale_color_manual(values=pal$hex)+
+  labs(x = "PC1",
+       y = "PC2",
+       title = "PCoA of ITS2 vs PropD") +
+  theme_bw();pcoa
+
+  #same by location (for slides)
+  pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = Location)) + 
+  geom_point(size = 3,show.legend = F) +
+  labs(x = "PC1",
+       y = "PC2",
+       title = "PCoA of ITS2 vs PropD") +
+  theme_bw();pcoa
   
+```  
   
-  
-  
-  
+ Split into C-, D-, CD <-what is the deciding factor??? 
+```{r}  
 # Split into groups of CD, C and D only ####
 #C only
 
@@ -387,7 +427,7 @@ c<-ggplot(scores.orCD.DIV_RelA.CD.dist, aes(x = NMDS1, y = NMDS2)) +
 
   plot_grid(a, b, c)
 
-  #hannah
+  #Color points by proportion of D
   library(ecodist)
   bray_pcoa <- ecodist::pco(CD.DIV_RelA.dist.dist)
 bray_pcoa_df <- data.frame(pcoa1 = bray_pcoa$vectors[,1],
@@ -395,6 +435,8 @@ bray_pcoa_df <- data.frame(pcoa1 = bray_pcoa$vectors[,1],
 head(bray_pcoa_df)
 bray_pcoa_df$Prop.D <- samp.CD.DIV_RelA.dist.dist$Prop.D
 bray_pcoa_df$Prop.D<-as.numeric(bray_pcoa_df$Prop.D)
+bray_pcoa_df$TagID <-samp.CD.DIV_RelA.dist.dist$TagID
+  bray_pcoa_df$Location <-samp.CD.DIV_RelA.dist.dist$Location
 
 pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = Prop.D)) + 
   geom_point(size = 3) +
@@ -403,8 +445,21 @@ pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = Prop.D)) +
        title = "PCoA of ITS2 vs PropD") +
   theme_bw();pcoa
   
-  
+#same by genotype (for slides)
+  pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = TagID)) + 
+  geom_point(size = 3) +
+  labs(x = "PC1",
+       y = "PC2",
+       title = "PCoA of ITS2 vs PropD") +
+  theme_bw();pcoa
 
+  #same by location (for slides)
+  pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = Location)) + 
+  geom_point(size = 3) +
+  labs(x = "PC1",
+       y = "PC2",
+       title = "PCoA of ITS2 vs PropD") +
+  theme_bw();pcoa
 ```
 
 #subset only branches
@@ -518,7 +573,7 @@ ggplot(scores.ord.ord.Branch.only, aes(x = NMDS1, y = NMDS2)) +
   
   
   
-#Ordination NMDS for all colonies
+#Ordination NMDS for all colonies <- dont need
 ```{r}
 set.seed(30)
 ord.DIV_RelA<- ordinate(DIV_RelA, "NMDS", "bray", trymax = 100) 
@@ -561,7 +616,7 @@ Mcap_970 <- subset_samples(DIV_RelA, TagID =="970") #Subset by colony
   
     #adonis by colony level
     adonis2(Mcap_970.dist ~ Location, data = samp.Mcap_970)
-    
+
 #965
 Mcap_965 <- subset_samples(DIV_RelA, TagID =="965") #Subset by colony  
   Mcap_965.dist <- phyloseq::distance(Mcap_965, method = "bray")
