@@ -679,5 +679,147 @@ ggplot(scores.C.dom, aes(x = NMDS1, y = NMDS2, fill=location)) +
  stat_ellipse(geom="polygon", alpha=1/4, aes(fill=location)) +
   ggtitle("NMDS C-dom") +
   theme_classic()
+
+ggplot(scores.C.dom, aes(x = NMDS1, y = NMDS2, color=tag.id)) + 
+  geom_point(aes(fill = tag.id), size = 4) +
+ #stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
+  ggtitle("NMDS C-dom") +
+  theme_classic()
+
+ggplot(scores.C.dom, aes(x = NMDS1, y = NMDS2, color=location)) + 
+  geom_point(aes(color=location), size = 4) +
+# stat_ellipse(geom="polygon", alpha=1/8, aes(fill=location, color=location)) +
+
+ggplot(scores.C.dom, aes(x = NMDS1, y = NMDS2, fill=location)) + 
+  geom_point(aes(color = location), size = 4) +
+ stat_ellipse(geom="polygon", alpha=1/4, aes(fill=location)) +
+
+    ggtitle("NMDS C-dom") +
+  theme_classic()
+
+ggplot(scores.C.dom, aes(x = NMDS1, y = NMDS2, color=Prop.D)) + 
+  geom_point(aes(color=Prop.D), size = 4) +
+# stat_ellipse(geom="polygon", alpha=1/8, aes(fill=location, color=location)) +
+  ggtitle("NMDS C-dom") +
+  theme_classic()
+```
+ 
+D-dom
+```{r}
+
+#subset D-dom
+  D.dom <- subset_samples(Bac, dom =="D") #Subset by colony 
+  D.dom = prune_taxa(taxa_sums(D.dom) > 0, D.dom) #this removes any OTU with 0s
+
+#make unifrac matrix
+D.dom.wu <- phyloseq::distance(D.dom, method = "wunifrac")
+samp.df.D.dom <- as(sample_data(D.dom), "data.frame") #sample df
+
+samp.df.D.dom$tag.id<-as.factor(samp.df.D.dom$tag.id)
+samp.df.D.dom$location<-as.factor(samp.df.D.dom$location)
+
+#adonis
+set.seed(30)
+adonis2(D.dom.wu ~ tag.id*location, data = samp.df.D.dom)
+#                  Df SumOfSqs      R2      F Pr(>F)    
+# tag.id            8   1.6351 0.12024 2.5530  0.001 ***
+# location          7   2.1148 0.15551 3.7737  0.001 ***
+# tag.id:location  35   3.1245 0.22976 1.1151  0.096 .  
+# Residual         84   6.7247 0.49450                  
+# Total           134  13.5990 1.00000   
+
+#nmds
+unifrac.D.dom <- ordinate(D.dom, method="NMDS", "unifrac",weighted=TRUE, set.seed(30)) 
+stressplot(unifrac.D.dom)
+scores.D.dom<-as.data.frame(cbind(vegan::scores(unifrac.D.dom, display="sites")))  
+     unifrac.sd.D.dom <- as(sample_data(D.dom), "data.frame") #sample df
+
+scores.D.dom$tag.id <- as.factor(unifrac.sd.D.dom$tag.id)
+scores.D.dom$location <- as.factor(unifrac.sd.D.dom$location)
+scores.D.dom$dom <- as.factor(unifrac.sd.D.dom$dom)
+scores.D.dom$samp_loc <- as.factor(unifrac.sd.D.dom$samp_loc)
+scores.D.dom$Prop.C <- as.factor(unifrac.sd.D.dom$Prop.C)
+
+ggplot(scores.D.dom, aes(x = NMDS1, y = NMDS2, color=tag.id)) + 
+  geom_point(aes(fill = tag.id), size = 4) +
+ stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
+  ggtitle("NMDS D-dom") +
+  theme_classic()
+
+ggplot(scores.D.dom, aes(x = NMDS1, y = NMDS2, color=location)) + 
+  geom_point(aes(fill = location), size = 4) +
+ stat_ellipse(geom="polygon", alpha=1/4, aes(fill=location, color=location)) +
+  ggtitle("NMDS D-dom") +
+  theme_classic()
+
+ggplot(scores.D.dom, aes(x = NMDS1, y = NMDS2, color=Prop.C)) + 
+  geom_point(aes(fill = Prop.C), size = 4) +
+ #stat_ellipse(geom="polygon", alpha=1/4, aes(fill=Prop.C, color=Prop.C)) +
+  ggtitle("NMDS D-dom") +
+  theme_classic()
+```
+
+CD-mix
+```{r}
+
+#subset CD-mix
+  CD.dom <- subset_samples(Bac, dom =="CD") #Subset by colony 
+  CD.dom = prune_taxa(taxa_sums(CD.dom) > 0, CD.dom) #this removes any OTU with 0s
+
+#make unifrac matrix
+CD.dom.wu <- phyloseq::distance(CD.dom, method = "wunifrac")
+samp.df.CD.dom <- as(sample_data(CD.dom), "data.frame") #sample df
+
+samp.df.CD.dom$tag.id<-as.factor(samp.df.CD.dom$tag.id)
+samp.df.CD.dom$location<-as.factor(samp.df.CD.dom$location)
+
+#adonis
+set.seed(30)
+adonis2(CD.dom.wu ~ tag.id*location, data = samp.df.CD.dom)
+#                  Df SumOfSqs      R2      F Pr(>F)    
+# tag.id            8   2.5502 0.17978 4.0035  0.001 ***
+# location          7   1.3693 0.09653 2.4566  0.001 ***
+# tag.id:location  44   4.4529 0.31391 1.2710  0.004 ** 
+# Residual         73   5.8127 0.40978                  
+# Total           132  14.1850 1.00000    
+
+#nmds
+unifrac.CD.dom <- ordinate(CD.dom, method="NMDS", "unifrac",weighted=TRUE, set.seed(30)) 
+stressplot(unifrac.CD.dom)
+scores.CD.dom<-as.data.frame(cbind(vegan::scores(unifrac.CD.dom, display="sites")))  
+     unifrac.sd.CD.dom <- as(sample_data(CD.dom), "data.frame") #sample df
+
+scores.CD.dom$tag.id <- as.factor(unifrac.sd.CD.dom$tag.id)
+scores.CD.dom$location <- as.factor(unifrac.sd.CD.dom$location)
+scores.CD.dom$dom <- as.factor(unifrac.sd.CD.dom$dom)
+scores.CD.dom$samp_loc <- as.factor(unifrac.sd.CD.dom$samp_loc)
+scores.CD.dom$Prop.D <- as.factor(unifrac.sd.CD.dom$Prop.D)
+
+ggplot(scores.CD.dom, aes(x = NMDS1, y = NMDS2, color=tag.id)) + 
+  geom_point(aes(fill = tag.id), size = 4) +
+ stat_ellipse(geom="polygon", alpha=1/4, aes(fill=tag.id, color=tag.id)) +
+  ggtitle("NMDS D-dom") +
+  theme_classic()
+
+ggplot(scores.CD.dom, aes(x = NMDS1, y = NMDS2, color=location)) + 
+  geom_point(aes(fill = location), size = 4) +
+ stat_ellipse(geom="polygon", alpha=1/4, aes(fill=location, color=location)) +
+  ggtitle("NMDS D-dom") +
+  theme_classic()+
+  facet_wrap(~samp_loc)
+
+ggplot(scores.CD.dom, aes(x = NMDS1, y = NMDS2, color=Prop.D)) + 
+  geom_point(aes(color = Prop.D), size = 4) +
+ #stat_ellipse(geom="polygon", alpha=1/4, aes(fill=Prop.C, color=Prop.C)) +
+  ggtitle("NMDS D-dom") +
+  theme_classic()
+
+ggplot(scores.b, aes(x = NMDS1, y = NMDS2, color=Prop.D)) + 
+  geom_point(aes(color=Prop.D,shape=samp_loc),size = 4) +
+#scale_color_gradient2(low="gray", high= "orange")+
+  #stat_ellipse(geom="polygon", alpha=0, aes(fill=location, color=location)) +
+  ggtitle("NMDS 16s by colony") +
+  theme_classic()+ facet_wrap(~tag.id)
+
 ```
 
