@@ -12,7 +12,6 @@ test
 
 #Analysis
 ```{r} 
-#setwd("~/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/ITS2_Summer_symportal2020")
 
 library(janitor)
 library(phyloseq)  # source('http://bioconductor.org/biocLite.R'); biocLite('phyloseq')
@@ -50,7 +49,7 @@ Data wrangle: look at low samples
 ```{r} 
 #lets see what is up with the low samps
 
-LowSamps<-readxl::read_xlsx("20201214_matsuda_MCL/post_med_seqs/133_20201216_DBV_20201216T011417.seqs.absolute.meta_only.xlsx")
+LowSamps<-readxl::read_xlsx("/Users/shaylematsuda/Desktop/Projects/Mcapitata_microbial_landscape/ITS2_Summer_symportal2020/20201214_matsuda_MCL/post_med_seqs/133_20201216_DBV_20201216T011417.seqs.absolute.meta_only.xlsx")
 
 LowSamps$post_taxa_id_absolute_symbiodiniaceae_seqs_log<-log10(LowSamps$post_taxa_id_absolute_symbiodiniaceae_seqs)
 hist(LowSamps$post_taxa_id_absolute_symbiodiniaceae_seqs_log, breaks=20)
@@ -76,7 +75,8 @@ LOWtest <- subset_samples(coralDIV2, Sample_name =="S6"| Sample_name =="G7"|Samp
      
    plot_bar(LOWtest.prune,fill = "clade")+                     # plot Clades
       geom_bar(aes(color=clade, fill=clade), stat="identity", position="stack")
-     
+   
+     readcount(LOWtest.prune)
 ```
  
 Remove low samples from the datasets (less than 2000)
@@ -123,10 +123,8 @@ coral_Absolute_DIV2.prune_nonrare <- prune_samples(sample_sums(coral_Absolute_DI
 coral_Absolute_DIV2.prune_nonrare_sd <- as(sample_data(coral_Absolute_DIV2.prune_nonrare), "data.frame")
 
 
-
-
 #Make a rarefied phyloseq object for alpha diversity analyses
-coral_Absolute_DIV2.rare <- rarefy_even_depth(coral_Absolute_DIV2.prune, sample.size = 2000, rngseed = 711)   #C14 sample removedbc less than 2000 
+coral_Absolute_DIV2.rare <- rarefy_even_depth(coralDIV2, sample.size = 2000, rngseed = 711)   #C14 sample removedbc less than 2000 
 sample_sums(coral_Absolute_DIV2.rare) #Double check that the sub-sampling worked, this should report 2000 for each sample
 coralDIV2.rare <- as(sample_data(coral_Absolute_DIV2.rare), "data.frame")
 coralDIV2.rare
@@ -138,6 +136,9 @@ coral_Absolute_Pro.rare <- rarefy_even_depth(coral_absolutePro.prune, sample.siz
 sample_sums(coral_Absolute_Pro.rare) #Double check that the sub-sampling worked, this should report 2000 for each sample
 coralPro.rare <- as(sample_data(coral_Absolute_Pro.rare), "data.frame")
 coralPro.rare
+
+
+
 ```
 
 Turn rarified df in to relative abundance: coral_Absolute_DIV2.rare 
@@ -155,15 +156,12 @@ data.ra <- as(sample_data(Pro_RelA), "data.frame") #look at samp data
 #write.csv(data.ra, "DIV_its2_sampledata.csv")
 
    Pro_RelA = prune_taxa(taxa_sums(Pro_RelA) > 0, Pro_RelA) #this removes any OTU with 0s  
-   
-   
-
+  
 ```
-
-
 
 # Side note: get %C and %D for each sample (telomere data as well) df Pro_RelA
 Export the csv and add in metadata col in the ITS2 Symp to Phyloseq.RMD
+Pro_RelA2 df has all samples (even low count samples not used in ITS2 analysis)
 ```{r}
 #do tax glom in the data to group C and D
  data.clade<- tax_glom(Pro_RelA, taxrank="clade")
@@ -183,10 +181,10 @@ OTUdf <- tibble::rownames_to_column(OTUdf, "sample.name")
 as_tibble(OTUdf)
 
 OTUdf<-OTUdf%>%
-  rename(C1 = `87732`) %>%
-  rename( C2 = `87257`) %>%
-  rename( D2 = `87537`)%>%
-  rename( D1 = `87918`) 
+  dplyr::rename(C1 = 2,
+  C2 = 3,
+  D2 = 4,
+  D1 = 5) 
   
 
 
@@ -208,8 +206,55 @@ OTUdf<-OTUdf%>%
 
 OTUdf.PropCD<-OTUdf[,c("sample.name","Prop.C", "Prop.D")]
 head(OTUdf.PropCD)
-OTUdf.PropCD<-rename(OTUdf.PropCD,  sample_name=sample.name)
+OTUdf.PropCD<-dplyr::rename(OTUdf.PropCD,  sample_name=sample.name)
 #write.csv(OTUdf.PropCD,"propCD.csv")
+
+
+
+
+
+
+
+##Low samps only ####
+
+#get the clade-only level designation for the low samples to use in 16S. these are not used for the ITS2 DIVs or further clade
+#get prop CD for all samples JUST for genus designation DF coral_absolutePro
+
+#Profile samples removed due to low counts. S6, G7, G8, Q11, B6, B13, C14
+  #create phylo obj with just these samples
+  new_phy_obj  <- coral_absolutePro %>%
+    subset_samples(Sample_name %in% c("S6", "G7", "G13","Q11","G8", "B13","B6", "C14"))
+
+sample_sums(new_phy_obj) #view sample sums
+new_phy_obj_sd <- as(sample_data(new_phy_obj), "data.frame")
+new_phy_obj_sd
+
+#Pro_RelA JUST for PropCD designations df 
+new_phy_objRA  = transform_sample_counts(new_phy_obj, function(x) x / sum(x) )  #save as RELA DIVs
+new_phy_objRA2 <- as(sample_data(new_phy_objRA), "data.frame") #look at samp data
+   new_phy_objRA = prune_taxa(taxa_sums(new_phy_objRA) > 0, new_phy_objRA) #this removes any OTU with 0s  
+
+#do tax glom in the data to group C and D
+ data.cladeL<- tax_glom(new_phy_objRA, taxrank="clade")
+
+#coerce into df
+  # Extract abundance matrix from the phyloseq object
+  OTU1 = as(otu_table(data.cladeL), "matrix")
+  # transpose if necessary
+  if(taxa_are_rows(data.cladeL)){OTU1 <- t(OTU1)}
+  # Coerce to data.frame
+  OTUdf = as.data.frame(OTU1)
+
+OTUdf <- tibble::rownames_to_column(OTUdf, "sample.name")
+as_tibble(OTUdf)
+
+OTUdf<-OTUdf%>%
+  dplyr::rename(C = 2,  #no C2 in these samples
+  D = 3) 
+
+#write.csv(OTUdf,"propCD_lowSamps.csv")
+
+
 ```
 
 

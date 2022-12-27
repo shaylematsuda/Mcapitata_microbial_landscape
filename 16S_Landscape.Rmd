@@ -37,17 +37,17 @@ library(colorRamps)
 library(devtools)
 library(phyloseq)
 library(readr)
-library(microbiome)
 library(vegan)
 library(ape)
-
 library(geosphere)
 library(ade4)
+library(microbiome)  
+library(knitr)
 library(tidyverse)
 
 ```
 
-#Load in data and get into phyloseq
+#Load in data and get into phyloseq (save RData file)
 ```{r}       
  
 #load in 3000 rare instead
@@ -78,14 +78,12 @@ propCD<-propCD[c(2:4)] #get rid of unneeded col
 
 MetaData16<-merge(MetaData16, propCD, by="sample_name", all.x = T, all.y = F)
 
-
-
+#plot
 ggplot(MetaData16, aes(x = dom, y = tag.id)) + 
   geom_point(aes(colour = location), size = 4) +
   ggtitle("NMDS 16s by colony") +
   theme_classic()+
-  facet_wrap(~samp_loc)
-
+  facet_wrap(~samp_loc) #the first plot are empty wells, filtered out later
 
 #write.csv(MetaData16, "Metadata16index.csv") edited for index duplicates and loaded above
 
@@ -116,8 +114,8 @@ testOtu2 <- as.matrix(testOtu[, -(1)])
 rownames(testOtu2)<- otu3k2.df$sample_name
 otu <- otu_table(testOtu2, taxa_are_rows = FALSE)
 
-#tax table annotations_100_taxonomy.csv (edited to be in proper format with proper col names)
-TAX<- read.csv("MCL19Summer_16S-pipeline_outputs USE THIS ONE/Results/main/details/annotations_100_taxonomy.csv", colClasses = "character")
+#tax table annotations_100_taxonomy.csv (edited to be in proper format with proper col names in excel (remove ";"))
+TAX<- read.csv("annotations_100.taxonomy_format.csv", colClasses = "character") #copied from 16S and put in main folder (trouble accessing)
 tax1 <- as.matrix(TAX[, -1], dimnames = list(TAX$OTU, colnames(TAX[-1])))
 rownames(tax1) <- TAX$OTU
 tax <- tax_table(tax1)
@@ -133,6 +131,11 @@ phy_tree(Bac.seq) <- treefile
 Bac.seq
 
 #save(Bac.seq, file = "Data/Bac.seq_phyloseq.RData")
+```
+
+#Start analysis here: load in RData if needed
+```{r}
+#load("Data/Bac.seq_phyloseq.RData") #use RAW data that has been pruned. 
 ```
 
 QC data
@@ -169,7 +172,7 @@ bac50 = prune_taxa(TopNOTUsB, dups)
 bacBarPlot<-plot_bar(bac50,  fill="Phylum");bacBarPlot
 
 #remove dups F15b and F2b
-Bac.seq <- subset_samples(Bac.seq, sampleID != "F15b")
+Bac.seq <- subset_samples(Bac.seq, sample.name != "F15b")
 Bac.seq <- subset_samples(Bac.seq, sample.name != "F2b" )
 
 bad.samples <-  c("F15b", "F2b") 
@@ -227,15 +230,15 @@ data.Bac.seq.rel = prune_taxa(taxa_sums(Bac.seq.rel) > 0, Bac.seq.rel) #this rem
 
 ``` 
 
-Look at all samples + water and ntc
+Look at all samples + water and ntc - samples separate out well
 ```{r}
 # data.Bac.seq.rel df
 
 #make unifrac matrix
-#Bac.seq.wu.all <- phyloseq::distance(Bac.seq.rel, method = "wunifrac")
+Bac.seq.wu.all <- phyloseq::distance(Bac.seq.rel, method = "wunifrac")
 s.u.samp.df <- as(sample_data(Bac.seq.rel), "data.frame") #sample df
 
-#adonis test between sample types (this takes a long time to run so comment out): p=0.001 between sample types
+#adonis test between sample types: p=0.001 between sample types
 set.seed(30)
 adonis2(Bac.seq.wu.all ~ sample.type, data = s.u.samp.df)
 
@@ -245,13 +248,12 @@ adonis2(Bac.seq.wu.all ~ sample.type, data = s.u.samp.df)
   ball<-  betadisper(Bac.seq.wu.all, s.u.samp.df$sample.type, type = "centroid")
   TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)  
   
-  ## Every comparison is significantly difference except NTC and Water. Possibly not enough water in water sample filter to catch diffs.
+## Every comparison is significantly difference except NTC and Water. Possibly not enough water in water sample filter to catch diffs.
 
 #Plot
 sample.type.colors <- c("sample"= "#D43F3AFF","ntc"="#EEA236FF","water"="#5CB85CFF")
 
 #nmds
-
 unifrac.all <- ordinate(Bac.seq, method="NMDS", "unifrac",weighted=TRUE, set.seed(30)) 
 stressplot(unifrac.all)
 scores.ord.u_RelA_stats<-as.data.frame(cbind(vegan::scores(unifrac.all, display="sites")))  
@@ -265,33 +267,29 @@ ggplot(scores.ord.u_RelA_stats, aes(x = NMDS1, y = NMDS2)) +
   ggtitle("NMDS 16s by sample type") +
   theme_classic()
 ```
-#M cap only - alpha diversity use non-relA df: Bac.seq
+
+#Coral only - alpha diversity use non-relA df: Bac.seq
 ```{r}
 Bac.seq.c<-subset_samples(Bac.seq, sample.type=="sample") #subset only Mcap
+Bac.seq.c = prune_taxa(taxa_sums(Bac.seq.c) > 0, Bac.seq.c) #this removes any OTU with 0s
 Bac.seq.c.sd <- as(sample_data(Bac.seq.c), "data.frame") #sample df
 
-
 # Richness ####
-#phyloseq
-b.rich<-richness(Bac.seq.c)
-plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="tag.id")
-plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="tag.id") + facet_wrap(~location)
-plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="location") 
-
-GPst = merge_samples(Bac.seq.c, "samp_loc", fun = mean)
-plot_richness(GPst,  measures=c("Observed", "Shannon"))
-
-GPst = merge_samples(Bac.seq.c, "location", fun = "mean")
-p<-plot_richness(GPst,  color="location",measures=c("Observed", "Shannon")) #why no color
-p + geom_point(size=5, alpha=0.7)
+# in phyloseq
+# b.rich<-richness(Bac.seq.c)
+# plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="tag.id")
+# plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="tag.id") + facet_wrap(~location)
+# plot_richness(Bac.seq.c, measures = c("Observed","Shannon"), color="location") 
+# 
+# GPst = merge_samples(Bac.seq.c, "samp_loc", fun = mean)
+# plot_richness(GPst,  measures=c("Observed", "Shannon"))
+# 
+# GPst = merge_samples(Bac.seq.c, "location", fun = "mean")
+# p<-plot_richness(GPst,  color="location",measures=c("Observed", "Shannon")) #why no color
+# p + geom_point(size=5, alpha=0.7)
  
-# try in microbiome package
-
-library(microbiome)  
-library(knitr)
-
+# Do in microbiome package (USING THIS) ####
 erich.tab <-microbiome::alpha(Bac.seq.c, index = "all") # pull out: observed, diversity_shannon, evenness_pielou
-
 erich.tab2<-erich.tab[-c(2:4,6:8,10:22)] #keep the cols you need
 
  erich.tab2$location <- as.factor(Bac.seq.c.sd$location)       #add back in meta
@@ -299,24 +297,30 @@ erich.tab2<-erich.tab[-c(2:4,6:8,10:22)] #keep the cols you need
   erich.tab2$samp_loc <- as.factor(Bac.seq.c.sd$samp_loc)
   erich.tab2$dom <- as.factor(Bac.seq.c.sd$dom)
   erich.tab2$Prop.D <- as.numeric(Bac.seq.c.sd$Prop.D)
-  erich.tab2$samp.date <- as.factor(Bac.seq.c.sd$samp.date)
-erich.tab2$location <- factor(erich.tab2$location, levels=c("Branch tip", "Branch mid", "Branch base", "Plate top", "Plate edge", "Plate underside", "Deepest","Lowest")) #reorder factors
+  erich.tab2$date<-as.character(Bac.seq.c.sd$samp.date)
+  erich.tab2$date<-as.Date(erich.tab2$date)
 
-#ANOVA
+  erich.tab2$location <- factor(erich.tab2$location, levels=c("Branch tip", "Branch mid", "Branch base", "Plate top", "Plate edge", "Plate underside", "Deepest","Lowest")) #reorder factors
+
+#ANOVAS
 #shannon ####
+  hist(erich.tab2$diversity_shannon)
+
+  set.seed(30)
   aov.shannon.species = aov(diversity_shannon ~ tag.id*location*Prop.D, data=erich.tab2)
     summary(aov.shannon.species) # only location sig
-
-    aov.shannon.species = aov(diversity_shannon ~ samp.date, data=erich.tab2) #date doesn't matter
-  summary(aov.shannon.species) # only location sig
-
-   aov.shannon.species = aov(diversity_shannon ~ location, data=erich.tab2)
+  set.seed(30)
+    aov.shannon.species = aov(diversity_shannon ~ date, data=erich.tab2) 
+  summary(aov.shannon.species) #date doesn't matter
+  
+   aov.shannon.species = aov(diversity_shannon ~ location, data=erich.tab2) #run for posthoc
   summary(aov.shannon.species) # <0.001
   TukeyHSD(aov.shannon.species)# surprise, branch tips sig differ from all other locations
 
-  hist(erich.tab2$diversity_shannon)
-  ggqqplot(erich.tab2$diversity_shannon)
-  
+    #look at residuals
+    car::qqPlot(residuals(aov.shannon.species))
+    car::leveneTest(residuals(aov.shannon.species)~location, data=erich.tab2) #passes
+    
   shannon_mean <- ddply(erich.tab2, c("location"), summarise, #summarize cell counts
                  N    = length(diversity_shannon[!is.na(diversity_shannon)]), #calculate the length of the data frame, excluding NA’s
                  mean = mean(diversity_shannon, na.rm=TRUE), #calculate mean of response variable, removing NA's
@@ -350,20 +354,28 @@ shannon_plot<-ggplot(data=shannon_mean, aes(x=location, y=mean, color=location))
   theme(plot.title = element_text(size=20, face = "italic"));shannon_plot
 
 #observed   ####
-  
- aov.observed.species = aov(observed ~ tag.id*location*Prop.D, data=erich.tab2)
-  summary(aov.observed.species) # only location sig
-  
-   aov.observed.species = aov(observed ~ samp.date, data=erich.tab2)
-  summary(aov.observed.species) # only location sig
-
-   aov.observed.species = aov(observed ~ location, data=erich.tab2)
-  summary(aov.observed.species) # =0.00176
-  TukeyHSD(aov.observed.species)# surprise, branch tips sig differ from all other locations
-
-  hist(erich.tab2$observed)
+   hist(erich.tab2$observed) #heavily skewed
   ggqqplot(erich.tab2$observed)
   
+  erich.tab2$observed_log<-log10(erich.tab2$observed)
+  hist(erich.tab2$observed_log) #good
+  
+  set.seed(30)
+    aov.observed.species = aov(observed_log ~ tag.id*location*Prop.D, data=erich.tab2)
+      summary(aov.observed.species) # only location sig
+  
+  set.seed(30)
+   aov.observed.species = aov(observed_log ~ date, data=erich.tab2)
+    summary(aov.observed.species) #date not important
+  
+  set.seed(30) #run for tukey
+   aov.observed.species = aov(observed ~ location, data=erich.tab2)
+    summary(aov.observed.species) #sig
+    
+  TukeyHSD(aov.observed.species)# surprise, branch tips sig differ from all other locations
+    car::qqPlot(residuals(aov.observed.species))
+    car::leveneTest(residuals(aov.observed.species)~location, data=erich.tab2) #passes
+
   observed_mean <- ddply(erich.tab2, c("location"), summarise, #summarize cell counts
                  N    = length(observed[!is.na(observed)]), #calculate the length of the data frame, excluding NA’s
                  mean = mean(observed, na.rm=TRUE), #calculate mean of response variable, removing NA's
@@ -397,22 +409,33 @@ observed_plot<-ggplot(data=observed_mean, aes(x=location, y=mean, color=location
   theme(plot.title = element_text(size=20, face = "italic"));observed_plot
  
  #evenness ####
-  aov.evenness_pielou.species = aov(evenness_pielou ~ tag.id*location*Prop.D, data=erich.tab2)
-  summary(aov.evenness_pielou.species) # Tag ID and location significant
-  
-    aov.evenness_pielou.species = aov(evenness_pielou ~ samp.date, data=erich.tab2)
-  summary(aov.evenness_pielou.species) # sample date is significant.....hmmmm
 
-   aov.evenness_pielou.species = aov(evenness_pielou ~ location, data=erich.tab2)
-  summary(aov.evenness_pielou.species) # p = 0.00502
+ hist(erich.tab2$evenness_pielou)
+  ggqqplot(erich.tab2$evenness_pielou)
+   hist(erich.tab2$evenness_pielou_log10)#hist of data looks best of all transformations but not great. 
+
+  set.seed(30)
+    aov.evenness_pielou.species = aov(evenness_pielou ~ tag.id*location*Prop.D, data=erich.tab2)
+      summary(aov.evenness_pielou.species) # Tag ID and location significant
+  
+    car::qqPlot(residuals(aov.evenness_pielou.species))
+    car::leveneTest(residuals(aov.evenness_pielou.species)~location, data=erich.tab2) #fails
+
+    #transformed data also fails, stick with original data (sqrt fails, log fails, in fails, arcsqrt fails)
+    
+  aov.evenness_pielou.species = aov(evenness_pielou ~ date, data=erich.tab2)
+  summary(aov.evenness_pielou.species) #not sig
+  
+  aov.evenness_pielou.species = aov(evenness_pielou ~ location, data=erich.tab2)
+  summary(aov.evenness_pielou.species) # sig
   TukeyHSD(aov.evenness_pielou.species)#
 
   aov.evenness_pielou.species = aov(evenness_pielou ~ tag.id, data=erich.tab2)
   summary(aov.evenness_pielou.species) # p < 0.001
   TukeyHSD(aov.evenness_pielou.species)# 
   
-  hist(erich.tab2$evenness_pielou)
-  ggqqplot(erich.tab2$evenness_pielou)
+  aov.evenness_pielou.species = aov(evenness_pielou ~ Prop.D, data=erich.tab2)
+  summary(aov.evenness_pielou.species) # p =.43
   
   evenness_pielou_mean <- ddply(erich.tab2, c("location"), summarise, #summarize cell counts
                  N    = length(evenness_pielou[!is.na(evenness_pielou)]), #calculate the length of the data frame, excluding NA’s
@@ -504,62 +527,42 @@ p1 <- p1 + stat_compare_means(comparisons = "location") #non-parametric test (Wi
 
 ```
 
-
-
 # Mcap sample data: df of just mcap called "bac"
-You already did this but prob just rename stuff above
 ```{r}
-Bac = subset_samples(Bac.seq.rel, sample.type== "sample" ) #only Mcap samples
+Bac = subset_samples(Bac.seq.rel, sample.type== "sample" ) #Coral only, copy
 Bac = prune_taxa(taxa_sums(Bac) > 0, Bac) #this removes any OTU with 0s
 
 ```
-
-Stats: beta diversity
+#Stats: beta diversity
 ```{r}
 #make unifrac matrix
 Bac.wu <- phyloseq::distance(Bac, method = "wunifrac")
 samp.df <- as(sample_data(Bac), "data.frame") #sample df
 samp.df$tag.id<-as.factor(samp.df$tag.id)
 samp.df$location<-as.factor(samp.df$location)
-
-
+samp.df$depth.ft<-as.numeric(samp.df$depth.ft)
+samp.df$date<-as.Date(samp.df$samp.date)
+samp.df$samp_loc<-as.factor(samp.df$samp_loc)
+samp.df$sample_num<-as.factor(samp.df$sample_num)
+samp.df$Prop.D<-as.numeric(samp.df$Prop.D)
 
 #adonis
 
-#between colonies: p=0.001 colonies are different
+#between colonies: 
 set.seed(30)
-adonis2(Bac.wu ~ tag.id, data = samp.df)
-
-#           Df SumOfSqs      R2      F Pr(>F)    
-# tag.id    23    5.846 0.15405 2.6206  0.001 ***
-# Residual 331   32.106 0.84595                  
-# Total    354   37.952 1.00000  
+adonis2(Bac.wu ~ tag.id*location*Prop.D, data = samp.df)
 
 # Homogeneity of dispersion test  
-    set.seed(30)
+    set.seed(30) # genotype
     permutest(betadisper(Bac.wu, samp.df$tag.id, type = "centroid"))  # p =0.001
   ball<-  betadisper(Bac.wu, samp.df$tag.id, type = "centroid")
   TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)
   
-# tag.id*location
-set.seed(30)
-adonis2(Bac.wu ~ tag.id*location, data = samp.df)
-
-#                  Df SumOfSqs      R2      F Pr(>F)    
-# tag.id           23    5.846 0.15405 3.0724  0.001 ***
-# location          7    3.500 0.09221 6.0431  0.001 ***
-# tag.id:location 113   11.149 0.29378 1.1926  0.002 ** 
-# Residual        211   17.457 0.45996                  
-# Total           354   37.952 1.00000                
-
-
-# Homogeneity of dispersion test  
-    set.seed(30)
-    permutest(betadisper(Bac.wu, samp.df$tag.id, type = "centroid"))  # p =0.021
-  ball<-  betadisper(Bac.wu, samp.df$tag.id, type = "centroid")
-  TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)
+   set.seed(30) # location
+    permutest(betadisper(Bac.wu, samp.df$location, type = "centroid"))  # p =0.001
+  ball<-  betadisper(Bac.wu, samp.df$location, type = "centroid")
+  TukeyHSD(ball,  ordered = T,conf.level = 0.95)
   
-  #Lowest-Branch mid            0.0469759914  0.010776146 0.08317584 0.0023182
 ```
 NMDS
 
@@ -575,26 +578,49 @@ scores.b$tag.id <- as.factor(unifrac.sd$tag.id)
 scores.b$location <- as.factor(unifrac.sd$location)
 scores.b$dom <- as.factor(unifrac.sd$dom)
 scores.b$samp_loc <- as.factor(unifrac.sd$samp_loc)
+scores.b$dom <- as.factor(unifrac.sd$dom)
+
 scores.b$Prop.D <- as.numeric(as.character(unifrac.sd$Prop.D))
 
 
-###### Ross help
+###### plots
+library(qualpalr) #generate diverging colors
+pal = qualpal(24, colorspace=list(h=c(13,350), s=c(0.3,1), l=c(0.2,0.8)))
+
 ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=location)) + 
   geom_point(aes(color=location),size = 4) +
-#scale_color_gradient2(low="black", high= "orange")+
+        scale_color_manual(values=pal$hex)+
 stat_ellipse(geom="polygon", alpha=1/6, aes(fill=location)) +
   ggtitle("NMDS 16s") +
   theme_classic()
 
+ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=location)) + 
+  geom_point(aes(color=location),size = 4) +
+      scale_color_manual(values=pal$hex)+
+#stat_ellipse(geom="polygon", alpha=1/6, aes(fill=tag.id)) +
+  ggtitle("NMDS 16s") +
+  theme_classic()+
+  facet_wrap(~tag.id)
 
+ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=tag.id)) + 
+  geom_point(aes(color=tag.id),size = 4) +
+        scale_color_manual(values=pal$hex)+
+stat_ellipse(geom="polygon", alpha=1/6, aes(fill=tag.id)) +
+  ggtitle("NMDS 16s") +
+  theme_classic()
 
-
+ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=Prop.D)) + 
+  geom_point(aes(color=Prop.D),size = 4) +
+  scale_color_gradient(low = "#003366", high = "steelblue3")+
+#stat_ellipse(geom="polygon", alpha=1/6, aes(fill=dom)) +
+  ggtitle("NMDS 16s") +
+  theme_classic()
 
 ```
-Branches only
+Branches and plates only
 ```{r}
 #adonis by colony by sample location by branch/plate
-  Branch <- subset_samples(Bac, samp_loc =="Branch") #Subset by colony 
+  Branch <- subset_samples(Bac, samp_loc =="Branch"|samp_loc=="Plate") #Subset by colony 
   Branch = prune_taxa(taxa_sums(Branch) > 0, Branch) #this removes any OTU with 0s
 
   Branch.dist <- phyloseq::distance(Branch, method = "wunifrac")
@@ -608,12 +634,6 @@ Branches only
 #adonis by colony level and branch location
   set.seed(30)
   adonis2(Branch.dist ~ tag.id*sub_loc, data = samp.Branch.dist)
-#                  Df SumOfSqs      R2       F Pr(>F)    
-# tag.id          23   4.6163 0.19810  2.6298  0.001 ***
-# sub_loc          2   2.7297 0.11714 17.8833  0.001 ***
-# tag.id:sub_loc  46   4.5084 0.19347  1.2842  0.002 ** 
-# Residual       150  11.4481 0.49128                   
-# Total          221  23.3025 1.00000 
   
   # Homogeneity of dispersion test  
     set.seed(30)
@@ -621,24 +641,17 @@ Branches only
   ball<-  betadisper(Branch.dist, samp.Branch.dist$tag.id, type = "centroid")
   TukeyHSD(ball,  ordered = FALSE,conf.level = 0.95)
   
-  
+  set.seed(30)
+  adonis2(Branch.dist ~ tag.id*samp_loc*sub_loc, data = samp.Branch.dist)
   
 #adonis
   set.seed(30)
   adonis2(Branch.dist ~ tag.id*branch_plate*sub_loc, data = samp.Branch.dist)
-#   
-#   tag.id                       23   4.6163 0.19810  7.4949  0.003 ** 
-# branch_plate                  3   0.3351 0.01438  4.1712  0.023 *  
-# sub_loc                       2   2.7115 0.11636 50.6264  0.001 ***
-# tag.id:branch_plate          51   3.9256 0.16846  2.8743  0.058 .  
-# tag.id:sub_loc               46   4.5125 0.19365  3.6632  0.035 *  
-# branch_plate:sub_loc          6   0.5637 0.02419  3.5085  0.037 *  
-# tag.id:branch_plate:sub_loc  89   6.6110 0.28371  2.7738  0.056 .  
-# Residual                      1   0.0268 0.00115                   
-# Total                       221  23.3025 1.00000      
+
   
 ```
 
+#by PropD but not sure we need. 
 C-dom
 ```{r}
 
@@ -820,6 +833,220 @@ ggplot(scores.b, aes(x = NMDS1, y = NMDS2, color=Prop.D)) +
   #stat_ellipse(geom="polygon", alpha=0, aes(fill=location, color=location)) +
   ggtitle("NMDS 16s by colony") +
   theme_classic()+ facet_wrap(~tag.id)
+
+```
+
+# who is there: bar plots Phylum
+```{r}
+
+
+Bac.phy <- Bac %>% 
+  tax_glom(taxrank = "Phylum", NArm = FALSE) %>% 
+  transform_sample_counts(function(x) {x/sum(x)} ) 
+Bac.phy.melt <- psmelt(Bac.phy)
+
+Bac.phy.melt$Code<-paste(Bac.phy.melt$location, Bac.phy.melt$tag.id)
+Bac.phy.melt$Code <- factor(Bac.phy.melt$Code)
+Bac.phy.melt$sample_num <- factor(Bac.phy.melt$sample_num, levels = c("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"))
+Bac.phy.melt$location <- factor(Bac.phy.melt$location, levels = c("Branch tip","Branch mid","Branch base","Plate top","Plate edge","Plate underside","Lowest","Deepest"))
+
+
+nb.cols <- 48
+mycolors <- colorRampPalette(brewer.pal(11, "RdYlBu"))(nb.cols)
+
+pal = qualpal(48, colorspace=list(h=c(13,350), s=c(0.3,1), l=c(0.2,0.8)))
+
+
+
+mcap.p <- ggplot(Bac.phy.melt, aes(x = sample_num, y = Abundance, fill = Phylum)) +
+  geom_bar(stat = "identity") +
+  #scale_fill_manual(values=pal) +
+          scale_color_manual(values=pal$hex)+
+  ylab("Relative Abundance") +
+  xlab("location") +
+  theme(legend.position = "none")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+mcap.p +  facet_wrap(~ tag.id)
+
+mcap.p <- ggplot(Bac.phy.melt, aes(x = location, y = Abundance, fill = Phylum, group_by(location))) +
+  geom_bar(stat = "identity", position="fill") +
+  #scale_fill_manual(values=mycolors) +
+            scale_color_manual(values=pal$hex)+
+  ylab("Relative Abundance") +
+  xlab("location") +
+  #theme(legend.position = "none")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1));mcap.p
+mcap.p +  facet_wrap(~ tag.id)
+
+
+#AH
+dat <- Bac %>% tax_glom(taxrank = "Phylum") %>% psmelt()
+head(dat)
+
+df<-dat %>% 
+  group_by(location, Phylum) %>% 
+  summarise(TotalAbundance=sum(Abundance))%>% #calculate total abundance of each phylum
+  group_by(location) %>%
+  mutate(PercRelAbundance=TotalAbundance/sum(TotalAbundance)*100) %>%#calculate relative abundance
+  dplyr::select(!TotalAbundance) 
+
+df$Phylum <- gsub('[^[:alnum:] ]','',df$Phylum)
+
+#change to a matrix with phylum in rows and lifestage in columns
+df<-df%>%
+  spread(key=Phylum, value=PercRelAbundance)
+#replace na with 0, since 0 abundance was calculated as na in step above b/c dividing by 0
+df[is.na(df)] <- 0
+rownames(df)<-df$location
+location_list<-df$location
+dim(df)
+df<-as.matrix(df)
+df<-df[,-1]
+taxa_list<-colnames(df)
+df_mat <- matrix(as.numeric(df),    # Convert to numeric matrix
+                  ncol = ncol(df))                                   # Print numeric matrix
+colnames(df_mat)<-taxa_list
+rownames(df_mat)<-location_list
+df_mat<-t(df_mat)
+### above works
+
+
+
+```
+Try heatmap phylum
+```{r}
+ loc_order<-c("Branch tip", "Branch mid", "Branch base", "Plate top", "Plate edge", "Plate underside", "Deepest", "Lowest")
+library(ComplexHeatmap)
+row_dend = dendsort(hclust(dist(df_mat)))
+col_dend = dendsort(hclust(dist(t(df_mat))))
+col_fun = colorRamp2(c(0, 50, 100), c("white", "darkgray", "navy"))
+pdf(file = "16S-Phylum-Heatmap.pdf", height = 8, width = 18)
+ComplexHeatmap::Heatmap(df_mat, name = "Rel. Abun. (%)", row_title = "", column_title = "16S Relative Abundance (Phylum)", 
+        col = col_fun, 
+        row_names_side = "left", 
+        row_dend_side = "right",
+        width = unit(4, "in"), 
+        height = unit(4, "in"), 
+        column_dend_height = unit(.5, "in"),
+        row_dend_width = unit(.5, "in"),
+        column_dend_reorder = FALSE,
+        row_dend_reorder = TRUE,
+        row_gap = unit(2.5, "mm"),
+        clustering_distance_rows = "euclidean",
+        clustering_method_rows = "complete",
+        border = TRUE, 
+        column_names_gp =  gpar(fontsize = 12, border=FALSE),
+        column_names_rot = 35,
+        cluster_rows = row_dend, 
+        #cluster_columns = col_dend,
+        column_order = loc_order, 
+        row_names_gp = gpar(fontsize = 12, alpha = 0.75, border = FALSE))
+dev.off()
+
+
+
+plot<-plot_bar(Bac, fill = "Phylum")+theme(legend.position="bottom")
+
+
+
+
+
+
+
+
+
+```
+Family 
+```{r}
+
+Bac.fam <- Bac %>% 
+  tax_glom(taxrank = "Family", NArm = FALSE) %>% 
+  transform_sample_counts(function(x) {x/sum(x)} ) 
+Bac.fam.melt <- psmelt(Bac.fam)
+
+Bac.fam.melt$Code<-paste(Bac.fam.melt$location, Bac.fam.melt$tag.id)
+Bac.fam.melt$Code <- factor(Bac.fam.melt$Code)
+Bac.fam.melt$sample_num <- factor(Bac.fam.melt$sample_num, levels = c("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"))
+Bac.fam.melt$location <- factor(Bac.fam.melt$location, levels = c("Branch tip","Branch mid","Branch base","Plate top","Plate edge","Plate underside","Lowest","Deepest"))
+
+
+nb.cols <- 48
+mycolors <- colorRampPalette(brewer.pal(11, "RdYlBu"))(nb.cols)
+
+pal = qualpal(48, colorspace=list(h=c(13,350), s=c(0.3,1), l=c(0.2,0.8)))
+
+
+
+mcap.p <- ggplot(Bac.fam.melt, aes(x = sample_num, y = Abundance, fill = Family)) +
+  geom_bar(stat = "identity") +
+  #scale_fill_manual(values=pal) +
+          scale_color_manual(values=pal$hex)+
+  ylab("Relative Abundance") +
+  xlab("location") +
+  theme(legend.position = "none")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+mcap.p +  facet_wrap(~ tag.id)
+
+mcap.p <- ggplot(Bac.fam.melt, aes(x = sample_num, y = Abundance, fill = Phylum, group_by(sample_num))) +
+  geom_bar(stat = "identity", position="fill") +
+  #scale_fill_manual(values=mycolors) +
+            scale_color_manual(values=pal$hex)+
+  ylab("Relative Abundance") +
+  xlab("sample_num") +
+  theme(legend.position = "none")+
+  theme(axis.text.x = element_text(angle = 90, hjust = 1));mcap.p
+mcap.p +  facet_wrap(~ tag.id)
+
+
+```
+
+# mantel between ITS2 and 16S
+```{r}
+
+```
+# shared taxa (core in each sample location)
+https://microbiome.github.io/tutorials/core_venn.html
+```{r}
+library(eulerr)
+library(microbiomeutilities)
+Bac_sd <- as(sample_data(Bac), "data.frame") #look at samp data
+
+table(meta(Bac)$location, useNA = "always")
+
+bac.rel <- microbiome::transform(Bac, "compositional")
+
+locations <- unique(as.character(meta(bac.rel)$location))
+
+
+
+list_core <- c() # an empty object to store information
+
+for (n in locations){ # for each variable n in location
+    #print(paste0("Identifying Core Taxa for ", n))
+    
+    ps.sub <- subset_samples(bac.rel, location == n) # Choose sample from location by n
+    
+    core_m <- core_members(ps.sub, # ps.sub is phyloseq selected with only samples from g 
+                           detection = 0.001, # 0.001 in atleast 90% samples 
+                           prevalence = 0.75)
+    print(paste0("No. of core taxa in ", n, " : ", length(core_m))) # print core taxa identified in each DiseaseState.
+    list_core[[n]] <- core_m # add to a list core taxa for each group.
+    #print(list_core)
+}
+
+
+# Specify colors and plot venn
+# supplying colors in the order they appear in list_core
+mycols <- c("Branch mid"="#d6e2e9", "Branch base"="#cbf3f0", "Branch top"="#fcf5c7","Plate top"="#CCE2CB","Plate edge"="#FFDBC7","Plate underside"="#ECD5E3","Deepest"="#F6EAC2","Lowest"="ivory2") 
+
+
+plot(venn(list_core),
+     fills = mycols)
+#can only do 5 sets.,.,.,great
+
+print(list_core)
+
+
 
 ```
 
