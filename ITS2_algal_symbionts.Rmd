@@ -21,29 +21,13 @@ library(vegan)
 library(multcompView)
 library("ggpubr")
 library(tidyverse)
-
-# Load data (see data_exploration.Rmd)
-load("ITS2_Summer_symportal2020/data/coral_phyloseq_2022.RData") # Rel A data
-load("ITS2_Summer_symportal2020/data/Absolute_coral_phyloseq2022.RData") #absolute reads data
+ 
+#load("ITS2_Summer_symportal2020/data/coral_phyloseq_2022.RData") # Rel A data
+#load("ITS2_Summer_symportal2020/data/Absolute_coral_phyloseq2022.RData") #absolute reads data
 
 ```
 
 Use: coral_absolutePro and coral_Absolute_DIV to create your RelA dfs
-
-
-Clean up (after checking low samps)
-```{r}
-coral2 <- coral %>% 
-   subset_samples(!is.na(host_species))
- coralDIV2 <- coralDIV %>% 
-   subset_samples(!is.na(host_species))
-# 
-# # HERE YOU MAKE RELA DATA ACTUALLY OUT OF 100% 
-# # Transform to relative abundance
- coral2 <- transform_sample_counts(coral2, function(x) 100 * x/sum(x))
- coralDIV2 <- transform_sample_counts(coralDIV2, function(x) 100 * x/sum(x))
-
-```
 
 Data wrangle: look at low samples
 ```{r} 
@@ -55,7 +39,7 @@ LowSamps$post_taxa_id_absolute_symbiodiniaceae_seqs_log<-log10(LowSamps$post_tax
 hist(LowSamps$post_taxa_id_absolute_symbiodiniaceae_seqs_log, breaks=20)
 
 ```
-Look at the low samples: no patterns (this isn't running right now, figure it out (June 21, 2022))
+Look at the low samples: no patterns 
 ```{r} 
 sample_names(coral_Absolute_DIV) #print sample names
 
@@ -124,7 +108,7 @@ coral_Absolute_DIV2.prune_nonrare_sd <- as(sample_data(coral_Absolute_DIV2.prune
 
 
 #Make a rarefied phyloseq object for alpha diversity analyses
-coral_Absolute_DIV2.rare <- rarefy_even_depth(coralDIV2, sample.size = 2000, rngseed = 711)   #C14 sample removedbc less than 2000 
+coral_Absolute_DIV2.rare <- rarefy_even_depth(coral_Absolute_DIV2.prune, sample.size = 2000, rngseed = 711)   #C14 sample removedbc less than 2000 
 sample_sums(coral_Absolute_DIV2.rare) #Double check that the sub-sampling worked, this should report 2000 for each sample
 coralDIV2.rare <- as(sample_data(coral_Absolute_DIV2.rare), "data.frame")
 coralDIV2.rare
@@ -265,6 +249,13 @@ OTUdf<-OTUdf%>%
   DIV_RelA.dist <- phyloseq::distance(DIV_RelA, method = "bray")
   samp.DIV_RelA.dist <- as(sample_data(DIV_RelA), "data.frame") #sample df
 
+  samp.DIV_RelA.dist$Prop.D<-as.numeric(samp.DIV_RelA.dist$Prop.D)
+    samp.DIV_RelA.dist$Prop.C<-as.numeric(samp.DIV_RelA.dist$Prop.C)
+  samp.DIV_RelA.dist$Location<-as.factor(samp.DIV_RelA.dist$Location)
+  samp.DIV_RelA.dist$LocSamp<-as.factor(samp.DIV_RelA.dist$LocSamp)
+  samp.DIV_RelA.dist$TagID<-as.factor(samp.DIV_RelA.dist$TagID)
+
+  
 #adonis by colony level
   set.seed(30)
   adonis2(DIV_RelA.dist ~ TagID, data = samp.DIV_RelA.dist)
@@ -280,13 +271,21 @@ OTUdf<-OTUdf%>%
 
 #adonis by sample location and colony ID
   adonis2(DIV_RelA.dist ~ Location*TagID, data = samp.DIV_RelA.dist)
-   
+     set.seed(30)
  # Homogeneity of dispersion test, Location
   betaTagID <- betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$Location)
   perm<-permutest(betaTagID, pairwise = T) 
 
 #adonis by broad location and colony ID
   adonis2(DIV_RelA.dist ~ SampLoc*TagID, data = samp.DIV_RelA.dist)
+
+#anova is location a predictor of propD <- does this work?
+    aov.propD = aov(Prop.D ~ TagID*Location, data=samp.DIV_RelA.dist)
+    summary(aov.propD) # only location sig
+TukeyHSD(aov.propD)
+
+
+
   
 set.seed(30)
 ord.DIV_RelA.dist<- ordinate(DIV_RelA, "NMDS", "bray", trymax = 100) 
@@ -533,7 +532,6 @@ adonis2(Branch.only.dist ~ col.branch, data = samp.Branch.only.dist)
     adonis2(Branch.only.dist ~ TagID:branch.plate+TagID*Sub.loc, data = samp.Branch.only.dist)
 
 
-
 set.seed(300)
 ord.Branch.only<- ordinate(Branch.only, "NMDS", "bray", trymax = 150) #no convergence
 stressplot(ord.Branch.only)
@@ -649,10 +647,14 @@ ggplot(scores.ord.DIV_RelA_stats.T0, aes(x = NMDS1, y = NMDS2)) +
 
 ```
 
-Adonis within colony:
+#Adonis within colony:
 Subset by colony DIV, data setup
 ```{r} 
 sample_variables(DIV_RelA) #what are the variables
+  samp.DIV_RelA<- as(sample_data(DIV_RelA), "data.frame") #sample df
+samp.DIV_RelA$Prop.D<-as.numeric(samp.DIV_RelA$Prop.D)
+
+
 
 #970
 Mcap_970 <- subset_samples(DIV_RelA, TagID =="970") #Subset by colony 
@@ -949,9 +951,10 @@ names(speciesPalette) = speciesList
 
 #this works but you need better pallet color = grDevices::colors()[grep('gr(a|e)y', grDevices::colors(), invert = T)]
 
-
-
-
+#reorder factor for plotting to make plots in order
+sample_data(Pro_RelA)$Location <- factor(sample_data(Pro_RelA)$Location, levels = c("Branch tip", 
+    "Branch mid", "Branch base", "Plate top","Plate edge","Plate underside","Lowest","Deepest"))
+levels(sample_data(Pro_RelA)$Location)
 
 sample_variables(Pro_RelA) #what are the variables
 
@@ -981,7 +984,7 @@ Mcap_959_Pro <- subset_samples(Pro_RelA, TagID =="959") #Subset by colony
 Mcap_980_Pro <- subset_samples(Pro_RelA, TagID =="980") #Subset by colony 
   
 ```
-Plots PRO
+Plots PRO - colored by orange and blue
 ```{r} 
 library(RColorBrewer)
 profile.colors <- c("C31/C17d-C21-C21ac-C31a-C17e-C31.9-C17f" = "#0b17ff", 
@@ -1002,6 +1005,7 @@ profile.colors <- c("C31/C17d-C21-C21ac-C31a-C17e-C31.9-C17f" = "#0b17ff",
                    "D4/D1-D6-D1ab-D17d-D17j-D3h" ="#ffd51a",
                    "D1/D4" = "#feea15",
                    "D1/D4/D6" = "#fbff0e")
+
 
 
 
@@ -1245,6 +1249,389 @@ ggsave("Mcap_980_PRO_plot.pdf")
 #                     ncol = 4, nrow = 2);Mcap_DIV_PRO_plot1
 
 ```
+Plots PRO - colored by diverging colors for C-dom and D-dom
+
+```{r} 
+library(RColorBrewer)
+profile.colors <- c("C31/C17d-C21-C21ac-C31a-C17e-C31.9-C17f" = "#0b17ff", 
+                    "C31-C17d-C31.1-C31a-C21-C17e-C21ac" = "orchid4",
+                    "C31-C17d-C21-C31.9-C21ac-C17e-C31h-C31a" ="gold4",
+                    "C17d/C31-C21-C21ac-C17e-C17f-C31.9" = "tomato1",
+                    "C31/C17d-C21-C31.9-C31h-C31i-C21ac" = "magenta",
+                    "C31/C17d" = "#6c8dd0",
+                    "C31/C17d-C21-C21ac" = "aquamarine",
+                    "C31/C17d-C21-C21ac-C31.9" = "cyan",
+                   "C1/C3" = "yellowgreen",
+                   "C21/C3" = "sienna",
+                   "C21" = "purple4",
+                   "C3" = "forestgreen",
+                   "D1/D4-D6-D1ab-D3h-D4d" = "#ff9422",
+                   "D4/D1/D6-D1ab-D3h" = "yellow",
+                   "D1/D4/D6/D1ab" = "red4",
+                   "D4/D1-D6-D1ab-D17d-D17j-D3h" ="#ffd51a",
+                   "D1/D4" = "ivory4",
+                   "D1/D4/D6" = "black")
+
+
+
+#for the legend
+  Mcap_970_PRO_plot<-plot_bar(Mcap_970_Pro, "LocSamp",fill="its2_type_profile", title="Mcap_970_Pro")+
+  scale_fill_manual(values=profile.colors)+
+  theme(axis.text.x = element_text(angle = 90))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_970_PRO_plot
+
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_970_Pro)$LocSamp <- factor(sample_data(Mcap_970_Pro)$LocSamp, levels = c("Branch tip_A1", 
+    "Branch tip_A12", "Branch tip_A4","Branch tip_A9", "Branch mid_A2","Branch mid_A5","Branch mid_A13" ,"Branch mid_A10", "Branch base_A3", "Branch base_A6","Branch base_A11" ,"Branch base_A14","Lowest_A8","Lowest_A16","Deepest_A7", "Deepest_A15"))
+levels(sample_data(Mcap_970_Pro)$LocSamp)
+ 
+ Mcap_970_PRO_plot<-plot_bar(Mcap_970_Pro, "LocSamp",fill="its2_type_profile", title="Mcap_970_Pro")+
+  scale_fill_manual(values=profile.colors)+
+   theme(legend.position="none") + 
+  theme(axis.text.x = element_text(angle = 90))+
+  theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+panel.background = element_blank(), axis.line = element_line(colour = "black"));Mcap_970_PRO_plot
+ggsave("Mcap_970_PRO_plot.pdf")
+
+
+Mcap_970_PRO_plot<-plot_bar(Mcap_970_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_970_Pro")+
+    scale_fill_manual(values=profile.colors)+
+   theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_970_PRO_plot
+ggsave("Mcap_970_PRO_plot.pdf")
+
+#965
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_965_Pro)$LocSamp <- factor(sample_data(Mcap_965_Pro)$LocSamp, levels = c("Branch tip_B1", 
+    "Branch tip_B4", "Branch tip_B9","Branch tip_B12", "Branch mid_B2","Branch mid_B5","Branch mid_B10" , "Branch base_B3", "Branch base_B11","Branch base_B14" ,"Lowest_B8","Lowest_B16","Deepest_B7", "Deepest_B15"))
+levels(sample_data(Mcap_965_Pro)$LocSamp)
+
+Mcap_965_PRO_plot<-plot_bar(Mcap_965_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_965_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_965_PRO_plot
+ggsave("Mcap_965_PRO_plot.pdf")
+
+#969
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_969_Pro)$LocSamp <- factor(sample_data(Mcap_969_Pro)$LocSamp, levels = c("Branch tip_C1", 
+    "Branch tip_C4", "Branch tip_C9","Branch tip_C12", "Branch mid_C2","Branch mid_C5","Branch mid_C10" , "Branch mid_C13" ,"Branch base_C3","Branch base_C6","Branch base_C13", "Branch base_C11","Lowest_C8","Lowest_C16","Deepest_C7", "Deepest_C15"))
+levels(sample_data(Mcap_969_Pro)$LocSamp)
+
+Mcap_969_PRO_plot<-plot_bar(Mcap_969_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_969_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_969_PRO_plot
+ggsave("Mcap_969_PRO_plot.pdf")
+
+#972
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_972_Pro)$LocSamp <- factor(sample_data(Mcap_972_Pro)$LocSamp, levels = c("Branch tip_D1", 
+    "Branch tip_D9",  "Branch mid_D2","Branch mid_D10","Branch base_D3","Branch base_D11", "Plate top_D4","Plate top_D12","Plate edge_D5", "Plate edge_D13","Plate underside_D6", "Plate underside_D14","Lowest_D8","Lowest_D16","Deepest_D7", "Deepest_D15"))
+levels(sample_data(Mcap_972_Pro)$LocSamp)
+
+Mcap_972_PRO_plot<-plot_bar(Mcap_972_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_972_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_972_PRO_plot
+ggsave("Mcap_972_PRO_plot.pdf")
+
+#971
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_971_Pro)$LocSamp <- factor(sample_data(Mcap_971_Pro)$LocSamp, levels = c("Branch tip_E1", 
+    "Branch tip_E4", "Branch tip_E9","Branch tip_E12", "Branch mid_E2","Branch mid_E5","Branch mid_E10" , "Branch mid_E13" ,"Branch base_E3","Branch base_E6","Branch base_E11", "Branch base_E14","Lowest_E8","Lowest_E16","Deepest_E7", "Deepest_E15"))
+levels(sample_data(Mcap_971_Pro)$LocSamp)
+
+Mcap_971_PRO_plot<-plot_bar(Mcap_971_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_971_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_971_PRO_plot
+ggsave("Mcap_971_PRO_plot.pdf")
+
+
+#968
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_968_Pro)$LocSamp <- factor(sample_data(Mcap_968_Pro)$LocSamp, levels = c("Branch tip_F1", 
+    "Branch tip_F4", "Branch tip_F9","Branch tip_F12", "Branch mid_F2","Branch mid_F5","Branch mid_F10" , "Branch mid_F13" ,"Branch base_F3","Branch base_F6","Branch base_F11", "Branch base_F14","Lowest_F8","Lowest_F16","Deepest_F7", "Deepest_F15"))
+levels(sample_data(Mcap_968_Pro)$LocSamp)
+
+Mcap_968_PRO_plot<-plot_bar(Mcap_968_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_968_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_968_PRO_plot
+ggsave("Mcap_968_PRO_plot.pdf")
+
+
+#966
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_966_Pro)$LocSamp <- factor(sample_data(Mcap_966_Pro)$LocSamp, levels = c(
+    "Branch tip_G9",  "Branch mid_G2","Branch mid_G10","Branch base_G3","Branch base_G11", "Plate top_G4","Plate top_G12", "Plate edge_G13","Plate underside_G6", "Plate underside_G14","Lowest_G16","Deepest_G15"))
+levels(sample_data(Mcap_966_Pro)$LocSamp)
+
+Mcap_966_PRO_plot<-plot_bar(Mcap_966_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_966_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_966_PRO_plot
+ggsave("Mcap_966_PRO_plot.pdf")
+
+
+#978
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_978_Pro)$LocSamp <- factor(sample_data(Mcap_978_Pro)$LocSamp, levels = c("Branch tip_H1", 
+    "Branch tip_H4", "Branch tip_H9","Branch tip_H12", "Branch mid_H2","Branch mid_H5","Branch mid_H10" , "Branch mid_H13" ,"Branch base_H3","Branch base_H6","Branch base_H11", "Branch base_H14","Lowest_H8","Lowest_H16","Deepest_H7", "Deepest_H15"))
+
+Mcap_978_PRO_plot<-plot_bar(Mcap_978_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_978_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_978_PRO_plot
+ggsave("Mcap_978_PRO_plot.pdf")
+
+#963
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_963_Pro)$LocSamp <- factor(sample_data(Mcap_963_Pro)$LocSamp, levels = c("Branch tip_I1", 
+    "Branch tip_I4", "Branch tip_I9","Branch tip_I12", "Branch mid_I2","Branch mid_I5","Branch mid_I10" , "Branch mid_I13" ,"Branch base_I3","Branch base_I6","Branch base_I11", "Branch base_I14","Lowest_I8","Lowest_I16","Deepest_I7", "Deepest_I15"))
+Mcap_963_PRO_plot<-plot_bar(Mcap_963_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_963_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_963_PRO_plot
+ggsave("Mcap_963_PRO_plot.pdf")
+
+
+#961
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_961_Pro)$LocSamp <- factor(sample_data(Mcap_961_Pro)$LocSamp, levels = c("Branch tip_J1"
+,    "Branch tip_J9",  "Branch mid_J2","Branch mid_J10","Branch base_J3","Branch base_J11", "Plate top_J4","Plate top_J12", "Plate edge_J5","Plate edge_J13","Plate underside_J6", "Plate underside_J14","Lowest_J8","Lowest_J16","Deepest_J7","Deepest_J15"))
+levels(sample_data(Mcap_961_Pro)$LocSamp)
+
+Mcap_961_PRO_plot<-plot_bar(Mcap_961_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_961_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_961_PRO_plot
+ggsave("Mcap_961_PRO_plot.pdf")
+
+#981
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_981_Pro)$LocSamp <- factor(sample_data(Mcap_981_Pro)$LocSamp, levels = c("Branch tip_K1", 
+    "Branch tip_K4", "Branch tip_K9","Branch tip_K12", "Branch mid_K2","Branch mid_K5","Branch mid_K10" , "Branch mid_K13" ,"Branch base_K3","Branch base_K6","Branch base_K11", "Branch base_K14","Lowest_K8","Lowest_K16","Deepest_K7", "Deepest_K15"))
+Mcap_981_PRO_plot<-plot_bar(Mcap_981_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_981_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_981_PRO_plot
+ggsave("Mcap_981_PRO_plot.pdf")
+
+
+#967
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_967_Pro)$LocSamp <- factor(sample_data(Mcap_967_Pro)$LocSamp, levels = c("Branch tip_L1", 
+    "Branch tip_L4", "Branch tip_L9","Branch tip_L12", "Branch mid_L2","Branch mid_L5","Branch mid_L10" , "Branch mid_L13" ,"Branch base_L3","Branch base_L6","Branch base_L11", "Branch base_L14","Lowest_L8","Lowest_L16","Deepest_L7", "Deepest_L15"))
+
+Mcap_967_PRO_plot<-plot_bar(Mcap_967_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_967_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_967_PRO_plot
+ggsave("Mcap_967_PRO_plot.pdf")
+
+#983
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_983_Pro)$LocSamp <- factor(sample_data(Mcap_983_Pro)$LocSamp, levels = c("Branch tip_M1", 
+    "Branch tip_M4", "Branch tip_M9","Branch tip_M12", "Branch mid_M2","Branch mid_M5","Branch mid_M10" , "Branch mid_M13" ,"Branch base_M3","Branch base_M6","Branch base_M11", "Branch base_M14","Lowest_M8","Lowest_M16","Deepest_M7", "Deepest_M15"))
+
+Mcap_983_PRO_plot<-plot_bar(Mcap_983_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_983_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_983_PRO_plot
+ggsave("Mcap_983_PRO_plot.pdf")
+
+#974
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_974_Pro)$LocSamp <- factor(sample_data(Mcap_974_Pro)$LocSamp, levels = c("Branch tip_N1"
+,    "Branch tip_N9",  "Branch mid_N2","Branch mid_N10","Branch base_N3","Branch base_N11", "Plate top_N4","Plate top_N12", "Plate edge_N5","Plate edge_N13","Plate underside_N6", "Plate underside_N14","Lowest_N8","Lowest_N16","Deepest_N7","Deepest_N15"))
+
+Mcap_974_PRO_plot<-plot_bar(Mcap_974_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_974_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_974_PRO_plot
+ggsave("Mcap_974_PRO_plot.pdf")
+
+#984
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_984_Pro)$LocSamp <- factor(sample_data(Mcap_984_Pro)$LocSamp, levels = c("Branch tip_O1", 
+    "Branch tip_O4", "Branch tip_O9","Branch tip_O12", "Branch mid_O2","Branch mid_O5","Branch mid_O10" , "Branch mid_O13" ,"Branch base_O3","Branch base_O6","Branch base_O11", "Branch base_O14","Lowest_O8","Lowest_O16","Deepest_O7", "Deepest_O15"))
+
+Mcap_984_PRO_plot<-plot_bar(Mcap_984_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_984_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_984_PRO_plot
+ggsave("Mcap_984_PRO_plot.pdf")
+
+
+Mcap_962_PRO_plot<-plot_bar(Mcap_962_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_962_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_962_PRO_plot
+ggsave("Mcap_962_PRO_plot.pdf")
+
+
+#957
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_957_Pro)$LocSamp <- factor(sample_data(Mcap_957_Pro)$LocSamp, levels = c("Branch tip_Q1", 
+    "Branch tip_Q4", "Branch tip_Q9","Branch tip_Q12", "Branch mid_Q2","Branch mid_Q5","Branch mid_Q10" , "Branch mid_Q13" ,"Branch base_Q3","Branch base_Q6","Branch base_Q11", "Branch base_Q14","Lowest_Q8","Lowest_Q16","Deepest_Q7", "Deepest_Q15"))
+
+Mcap_957_PRO_plot<-plot_bar(Mcap_957_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_957_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_957_PRO_plot
+ggsave("Mcap_957_PRO_plot.pdf")
+
+#945
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_945_Pro)$LocSamp <- factor(sample_data(Mcap_945_Pro)$LocSamp, levels = c("Branch tip_R1", 
+    "Branch tip_R4", "Branch tip_R9","Branch tip_R12", "Branch mid_R2","Branch mid_R5","Branch mid_R10" , "Branch mid_R13" ,"Branch base_R3","Branch base_R6","Branch base_R11", "Branch base_R14","Lowest_R8","Lowest_R16","Deepest_R7", "Deepest_R15"))
+Mcap_945_PRO_plot<-plot_bar(Mcap_945_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_945_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_945_PRO_plot
+ggsave("Mcap_945_PRO_plot.pdf")
+
+
+#960
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_960_Pro)$LocSamp <- factor(sample_data(Mcap_960_Pro)$LocSamp, levels = c("Branch tip_S1", 
+    "Branch tip_S4", "Branch tip_S9","Branch tip_S12", "Branch mid_S2","Branch mid_S5","Branch mid_S10" , "Branch mid_S13" ,"Branch base_S3","Branch base_S6","Branch base_S11", "Branch base_S14","Lowest_S8","Lowest_S16","Deepest_S7", "Deepest_S15"))
+Mcap_960_PRO_plot<-plot_bar(Mcap_960_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_960_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_960_PRO_plot
+ggsave("Mcap_960_PRO_plot.pdf")
+
+#976
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_976_Pro)$LocSamp <- factor(sample_data(Mcap_976_Pro)$LocSamp, levels = c("Branch tip_T1", 
+    "Branch tip_T4", "Branch tip_T9","Branch tip_T12", "Branch mid_T2","Branch mid_T5","Branch mid_T10" , "Branch mid_T13" ,"Branch base_T3","Branch base_T6","Branch base_T11", "Branch base_T14","Lowest_T8","Lowest_T16","Deepest_T7", "Deepest_T15"))
+Mcap_976_PRO_plot<-plot_bar(Mcap_976_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_976_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_976_PRO_plot
+ggsave("Mcap_976_PRO_plot.pdf")
+
+#CD
+Mcap_985_PRO_plot<-plot_bar(Mcap_985_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_985_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_985_PRO_plot
+ggsave("Mcap_985_PRO_plot.pdf")
+
+Mcap_964_PRO_plot<-plot_bar(Mcap_964_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_964_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_964_PRO_plot
+ggsave("Mcap_964_PRO_plot.pdf")
+
+
+#985
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_985_Pro)$LocSamp <- factor(sample_data(Mcap_985_Pro)$LocSamp, levels = c("Branch tip_U1"
+,    "Branch tip_U9",  "Branch mid_U2","Branch mid_U10","Branch base_U3","Branch base_U11", "Plate top_U4","Plate top_U12", "Plate edge_U5","Plate edge_U13","Plate underside_U6", "Plate underside_U14","Lowest_U8","Lowest_U16","Deepest_U7","Deepest_U15"))
+Mcap_985_PRO_plot<-plot_bar(Mcap_985_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_985_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_985_PRO_plot
+ggsave("Mcap_985_PRO_plot.pdf")
+
+#959
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_959_Pro)$LocSamp <- factor(sample_data(Mcap_959_Pro)$LocSamp, levels = c("Branch tip_W1", 
+    "Branch tip_W4", "Branch tip_W9","Branch tip_W12", "Branch mid_W2","Branch mid_W5","Branch mid_W10" , "Branch mid_W13" ,"Branch base_W3","Branch base_W6","Branch base_W11", "Branch base_W14","Lowest_W8","Lowest_W16","Deepest_W7", "Deepest_W15"))
+
+Mcap_959_PRO_plot<-plot_bar(Mcap_959_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_959_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_959_PRO_plot
+ggsave("Mcap_959_PRO_plot.pdf")
+
+#980
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_980_Pro)$LocSamp <- factor(sample_data(Mcap_980_Pro)$LocSamp, levels = c("Branch tip_X1"
+,    "Branch tip_X9",  "Branch mid_X2","Branch mid_X10","Branch base_X3","Branch base_X11", "Plate top_X4","Plate top_X12", "Plate edge_X5","Plate edge_X13","Plate underside_X6", "Plate underside_X14","Lowest_X8","Lowest_X16","Deepest_X7","Deepest_X15"))
+Mcap_980_PRO_plot<-plot_bar(Mcap_980_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_980_Pro")+
+    scale_fill_manual(values=profile.colors)+
+  theme_bw()+
+   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
+   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+   theme(legend.position="none");Mcap_980_PRO_plot
+ggsave("Mcap_980_PRO_plot.pdf")
+
+
+# 
+# Mcap_DIV_PRO_plot1 <- ggarrange(Mcap_970_PRO_plot, Mcap_965_PRO_plot,Mcap_969_PRO_plot,Mcap_972_PRO_plot, Mcap_971_PRO_plot,Mcap_968_PRO_plot,Mcap_966_PRO_plot,Mcap_978_PRO_plot,
+#                     #labels = c("A", "B", "C","D","E","F"),
+#                     ncol = 4, nrow = 2);Mcap_DIV_PRO_plot1
+# 
+# Mcap_DIV_PRO_plot2 <- ggarrange(Mcap_963_PRO_plot, Mcap_961_PRO_plot,Mcap_981_PRO_plot,Mcap_967_PRO_plot,
+# Mcap_983_PRO_plot,Mcap_974_PRO_plot,Mcap_984_PRO_plot,Mcap_962_PRO_plot,
+#                     #labels = c("A", "B", "C","D","E","F"),
+#                     ncol = 4, nrow = 2);Mcap_DIV_PRO_plot2
+# 
+# Mcap_DIV_PRO_plot3 <- ggarrange(Mcap_957_PRO_plot,Mcap_945_PRO_plot,Mcap_960_PRO_plot,Mcap_976_PRO_plot,
+# Mcap_985_PRO_plot,Mcap_964_PRO_plot,Mcap_985_PRO_plot,Mcap_964_PRO_plot,Mcap_985_PRO_plot,Mcap_959_PRO_plot,Mcap_980_PRO_plot,
+#                     #labels = c("A", "B", "C","D","E","F"),
+#                     ncol = 4, nrow = 3);Mcap_DIV_PRO_plot3
+# 
+# 
+# Mcap_DIV_PRO_plot1 <- ggarrange(Mcap_970_PRO_plot, Mcap_965_PRO_plot,Mcap_969_PRO_plot,Mcap_972_PRO_plot, 
+#                     ncol = 4, nrow = 2);Mcap_DIV_PRO_plot1
+
+```
+
 Plots CLADE
 ```{r}   
 

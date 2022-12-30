@@ -20,6 +20,8 @@ library("writexl")
 setwd("~/Desktop/Microbial landscape/R/Mcapitata_microbial_landscape/ITS2_Summer_symportal2020")
 ```
 Reading in data with Ross code, this is relA. 
+
+
 # Relative Abundance 
 Read in coral ITS2 profiles: "coral"
 ```{r}  
@@ -54,7 +56,7 @@ tax1 <- as.matrix(tax0[, -1], dimnames = list(tax0$uid, colnames(tax0[-1])))
 rownames(tax1) <- tax0$uid
 tax <- tax_table(tax1)
 
-otu0 <- reaxd_tsv(
+otu0 <- read_tsv(
   file  = "20201214_matsuda_MCL/its2_type_profiles/133_20201216_DBV_20201216T011417.profiles.relative.abund_and_meta.txt") %>% 
   rename(sample_name = ...2) %>% #rename column "...2", previously "X2" in symportal language
   select(-1) %>%
@@ -66,6 +68,23 @@ otu <- otu_table(otu1, taxa_are_rows = FALSE)
 
 coral <- phyloseq(otu, tax, sam)
  
+sample_data(coral)$Prop.D <- as.numeric(sample_data(coral)$Prop.D)
+sample_data(coral)$Prop.C <- as.numeric(sample_data(coral)$Prop.C)
+sample_data(coral)$Location <- as.factor(sample_data(coral)$Location)
+sample_data(coral)$TagID <- as.factor(sample_data(coral)$TagID)
+sample_data(coral)$Depth.ft <- as.numeric(sample_data(coral)$Depth.ft)
+sample_data(coral)$Samp.Date <- as.Date(sample_data(coral)$Samp.Date)
+sample_data(coral)$Land_Ocean <- as.factor(sample_data(coral)$Land_Ocean)
+sample_data(coral)$SampleNum <- as.factor(sample_data(coral)$SampleNum)
+sample_data(coral)$SampLoc <- as.factor(sample_data(coral)$SampLoc)
+sample_data(coral)$BranchLoc <- as.factor(sample_data(coral)$BranchLoc)
+sample_data(coral)$branch.plate <- as.factor(sample_data(coral)$branch.plate)
+sample_data(coral)$Sample_name <- as.factor(sample_data(coral)$Sample_name)
+sample_data(coral)$Zoox <- as.factor(sample_data(coral)$Zoox)
+sample_data(coral)$LocSamp <- as.factor(sample_data(coral)$LocSamp)
+
+
+
 ```
 Read in coral post-QC sequence variants: "coralDIV"
 ```{r}  
@@ -94,6 +113,22 @@ otu1 <- as.matrix(otu0[, -1])
 rownames(otu1) <- otu0$sample_name
 otu <- otu_table(otu1, taxa_are_rows = FALSE)
 coralDIV <- phyloseq(otu, tax, sam)
+
+sample_data(coralDIV)$Prop.D <- as.numeric(sample_data(coralDIV)$Prop.D)
+sample_data(coralDIV)$Prop.C <- as.numeric(sample_data(coralDIV)$Prop.C)
+sample_data(coralDIV)$Location <- as.factor(sample_data(coralDIV)$Location)
+sample_data(coralDIV)$TagID <- as.factor(sample_data(coralDIV)$TagID)
+sample_data(coralDIV)$Depth.ft <- as.numeric(sample_data(coralDIV)$Depth.ft)
+sample_data(coralDIV)$Samp.Date <- as.Date(sample_data(coralDIV)$Samp.Date)
+sample_data(coralDIV)$Land_Ocean <- as.factor(sample_data(coralDIV)$Land_Ocean)
+sample_data(coralDIV)$SampleNum <- as.factor(sample_data(coralDIV)$SampleNum)
+sample_data(coralDIV)$SampLoc <- as.factor(sample_data(coralDIV)$SampLoc)
+sample_data(coralDIV)$BranchLoc <- as.factor(sample_data(coralDIV)$BranchLoc)
+sample_data(coralDIV)$branch.plate <- as.factor(sample_data(coralDIV)$branch.plate)
+sample_data(coralDIV)$Sample_name <- as.factor(sample_data(coralDIV)$Sample_name)
+sample_data(coralDIV)$Zoox <- as.factor(sample_data(coralDIV)$Zoox)
+sample_data(coralDIV)$LocSamp <- as.factor(sample_data(coralDIV)$LocSamp)
+
 ```
 
 ```{r} 
@@ -101,7 +136,7 @@ save(coral, coralDIV, file = "data/coral_phyloseq_2022.RData")
 ```
 
 #Reading in data by ABSOLUTE abundances
-This is the same as above just by absolute (you may not even want to keep this)
+This is the same as above just by absolute 
 
 Profiles Absolute
 ```{r}
@@ -137,6 +172,22 @@ rownames(otu1) <- otu0$sample_name
 otu <- otu_table(otu1, taxa_are_rows = FALSE)
 
 coral_absolutePro <- phyloseq(otu, tax, sam)
+
+sample_data(coral_absolutePro)$Prop.D <- as.numeric(sample_data(coral_absolutePro)$Prop.D)
+sample_data(coral_absolutePro)$Prop.C <- as.numeric(sample_data(coral_absolutePro)$Prop.C)
+sample_data(coral_absolutePro)$Location <- as.factor(sample_data(coral_absolutePro)$Location)
+sample_data(coral_absolutePro)$TagID <- as.factor(sample_data(coral_absolutePro)$TagID)
+sample_data(coral_absolutePro)$Depth.ft <- as.numeric(sample_data(coral_absolutePro)$Depth.ft)
+sample_data(coral_absolutePro)$Samp.Date <- as.Date(sample_data(coral_absolutePro)$Samp.Date)
+sample_data(coral_absolutePro)$Land_Ocean <- as.factor(sample_data(coral_absolutePro)$Land_Ocean)
+sample_data(coral_absolutePro)$SampleNum <- as.factor(sample_data(coral_absolutePro)$SampleNum)
+sample_data(coral_absolutePro)$SampLoc <- as.factor(sample_data(coral_absolutePro)$SampLoc)
+sample_data(coral_absolutePro)$BranchLoc <- as.factor(sample_data(coral_absolutePro)$BranchLoc)
+sample_data(coral_absolutePro)$branch.plate <- as.factor(sample_data(coral_absolutePro)$branch.plate)
+sample_data(coral_absolutePro)$Sample_name <- as.factor(sample_data(coral_absolutePro)$Sample_name)
+sample_data(coral_absolutePro)$Zoox <- as.factor(sample_data(coral_absolutePro)$Zoox)
+sample_data(coral_absolutePro)$LocSamp <- as.factor(sample_data(coral_absolutePro)$LocSamp)
+
 ```
 DIVs absolute
 ```{r} 
@@ -160,6 +211,22 @@ otu1 <- as.matrix(otu0[, -1])
 rownames(otu1) <- otu0$sample_name
 otu <- otu_table(otu1, taxa_are_rows = FALSE)
 coral_Absolute_DIV <- phyloseq(otu, tax, sam)
+
+sample_data(coral_Absolute_DIV)$Prop.D <- as.numeric(sample_data(coral_Absolute_DIV)$Prop.D)
+sample_data(coral_Absolute_DIV)$Prop.C <- as.numeric(sample_data(coral_Absolute_DIV)$Prop.C)
+sample_data(coral_Absolute_DIV)$Location <- as.factor(sample_data(coral_Absolute_DIV)$Location)
+sample_data(coral_Absolute_DIV)$TagID <- as.factor(sample_data(coral_Absolute_DIV)$TagID)
+sample_data(coral_Absolute_DIV)$Depth.ft <- as.numeric(sample_data(coral_Absolute_DIV)$Depth.ft)
+sample_data(coral_Absolute_DIV)$Samp.Date <- as.Date(sample_data(coral_Absolute_DIV)$Samp.Date)
+sample_data(coral_Absolute_DIV)$Land_Ocean <- as.factor(sample_data(coral_Absolute_DIV)$Land_Ocean)
+sample_data(coral_Absolute_DIV)$SampleNum <- as.factor(sample_data(coral_Absolute_DIV)$SampleNum)
+sample_data(coral_Absolute_DIV)$SampLoc <- as.factor(sample_data(coral_Absolute_DIV)$SampLoc)
+sample_data(coral_Absolute_DIV)$BranchLoc <- as.factor(sample_data(coral_Absolute_DIV)$BranchLoc)
+sample_data(coral_Absolute_DIV)$branch.plate <- as.factor(sample_data(coral_Absolute_DIV)$branch.plate)
+sample_data(coral_Absolute_DIV)$Sample_name <- as.factor(sample_data(coral_Absolute_DIV)$Sample_name)
+sample_data(coral_Absolute_DIV)$Zoox <- as.factor(sample_data(coral_Absolute_DIV)$Zoox)
+sample_data(coral_Absolute_DIV)$LocSamp <- as.factor(sample_data(coral_Absolute_DIV)$LocSamp)
+
 ```
 Save as an obj
 ```{r}
