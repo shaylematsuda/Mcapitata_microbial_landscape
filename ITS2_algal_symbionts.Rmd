@@ -23,7 +23,7 @@ library("ggpubr")
 library(tidyverse)
  
 #load("ITS2_Summer_symportal2020/data/coral_phyloseq_2022.RData") # Rel A data
-#load("ITS2_Summer_symportal2020/data/Absolute_coral_phyloseq2022.RData") #absolute reads data
+load("ITS2_Summer_symportal2020/data/Absolute_coral_phyloseq2022.RData") #absolute reads data
 
 ```
 
@@ -63,7 +63,7 @@ LOWtest <- subset_samples(coralDIV2, Sample_name =="S6"| Sample_name =="G7"|Samp
      readcount(LOWtest.prune)
 ```
  
-Remove low samples from the datasets (less than 2000)
+#Remove low samples from the datasets (less than 2000)
 coral_absolutePro
 coral_Absolute_DIV
 ```{r} 
@@ -255,8 +255,7 @@ OTUdf<-OTUdf%>%
   samp.DIV_RelA.dist$LocSamp<-as.factor(samp.DIV_RelA.dist$LocSamp)
   samp.DIV_RelA.dist$TagID<-as.factor(samp.DIV_RelA.dist$TagID)
 
-  
-#adonis by colony level
+  #adonis by colony level
   set.seed(30)
   adonis2(DIV_RelA.dist ~ TagID, data = samp.DIV_RelA.dist)
   set.seed(30)
@@ -274,11 +273,22 @@ OTUdf<-OTUdf%>%
      set.seed(30)
  # Homogeneity of dispersion test, Location
   betaTagID <- betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$Location)
-  perm<-permutest(betaTagID, pairwise = T) 
+  perm<-permutest(betaTagID, pairwise = T)
+  permutest(betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$Location, type = "centroid")) #sig
+  permutest(betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$TagID, type = "centroid")) #sig
+  permutest(betadisper(DIV_RelA.dist, samp.DIV_RelA.dist$Prop.D, type = "centroid")) #sig
 
+  
 #adonis by broad location and colony ID
   adonis2(DIV_RelA.dist ~ SampLoc*TagID, data = samp.DIV_RelA.dist)
 
+
+
+  
+  
+  
+  
+  
 #anova is location a predictor of propD <- does this work?
     aov.propD = aov(Prop.D ~ TagID*Location, data=samp.DIV_RelA.dist)
     summary(aov.propD) # only location sig
@@ -344,12 +354,12 @@ pal = qualpal(24, colorspace=list(h=c(10,350), s=c(0.3,1), l=c(0.2,0.8)))
 
   #same by location (for slides)
   pcoa <- ggplot(bray_pcoa_df, aes(x=pcoa1, y=pcoa2, color = Location)) + 
-  geom_point(size = 3,show.legend = F) +
+  geom_point(size = 3,show.legend = T) +
   labs(x = "PC1",
        y = "PC2",
        title = "PCoA of ITS2 vs PropD") +
   theme_bw();pcoa
-  
+  pcoa+facet_wrap(~Location)
 ```  
   
  Split into C-, D-, CD <-what is the deciding factor??? 
@@ -651,10 +661,6 @@ ggplot(scores.ord.DIV_RelA_stats.T0, aes(x = NMDS1, y = NMDS2)) +
 Subset by colony DIV, data setup
 ```{r} 
 sample_variables(DIV_RelA) #what are the variables
-  samp.DIV_RelA<- as(sample_data(DIV_RelA), "data.frame") #sample df
-samp.DIV_RelA$Prop.D<-as.numeric(samp.DIV_RelA$Prop.D)
-
-
 
 #970
 Mcap_970 <- subset_samples(DIV_RelA, TagID =="970") #Subset by colony 
@@ -664,6 +670,11 @@ Mcap_970 <- subset_samples(DIV_RelA, TagID =="970") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_970.dist ~ Location, data = samp.Mcap_970)
 
+    #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+    
 #965
 Mcap_965 <- subset_samples(DIV_RelA, TagID =="965") #Subset by colony  
   Mcap_965.dist <- phyloseq::distance(Mcap_965, method = "bray")
@@ -671,7 +682,10 @@ Mcap_965 <- subset_samples(DIV_RelA, TagID =="965") #Subset by colony
   
     #adonis by colony level
     adonis2(Mcap_965.dist ~ Location, data = samp.Mcap_965)
+    adonis2(Mcap_965.dist ~ SampLoc, data = samp.Mcap_965)
 
+    #no anova, no D
+    
 #969
 Mcap_969 <- subset_samples(DIV_RelA, TagID =="969") #Subset by colony  
   Mcap_969.dist <- phyloseq::distance(Mcap_969, method = "bray")
@@ -680,6 +694,10 @@ Mcap_969 <- subset_samples(DIV_RelA, TagID =="969") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_969.dist ~ Location, data = samp.Mcap_969)
     
+    #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_969)
+      summary(aov.propD) 
+
 #972
 Mcap_972 <- subset_samples(DIV_RelA, TagID =="972") #Subset by colony  
   Mcap_972.dist <- phyloseq::distance(Mcap_972, method = "bray")
@@ -687,6 +705,11 @@ Mcap_972 <- subset_samples(DIV_RelA, TagID =="972") #Subset by colony
   
     #adonis by colony level
     adonis2(Mcap_972.dist ~ Location, data = samp.Mcap_972)
+    
+      #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_972)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)  
    
 #971
 Mcap_971 <- subset_samples(DIV_RelA, TagID =="971") #Subset by colony  
@@ -696,6 +719,11 @@ Mcap_971 <- subset_samples(DIV_RelA, TagID =="971") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_971.dist ~ Location, data = samp.Mcap_971)    
 
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_971)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+    
 #968
 Mcap_968 <- subset_samples(DIV_RelA, TagID =="968") #Subset by colony  
   Mcap_968.dist <- phyloseq::distance(Mcap_968, method = "bray")
@@ -704,6 +732,10 @@ Mcap_968 <- subset_samples(DIV_RelA, TagID =="968") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_968.dist ~ Location, data = samp.Mcap_968)    
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_968)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
     
 #966
 Mcap_966 <- subset_samples(DIV_RelA, TagID =="966") #Subset by colony  
@@ -713,6 +745,12 @@ Mcap_966 <- subset_samples(DIV_RelA, TagID =="966") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_966.dist ~ Location, data = samp.Mcap_966)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_966)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
+      
 #978
 Mcap_978 <- subset_samples(DIV_RelA, TagID =="978") #Subset by colony  
   Mcap_978.dist <- phyloseq::distance(Mcap_978, method = "bray")
@@ -721,6 +759,11 @@ Mcap_978 <- subset_samples(DIV_RelA, TagID =="978") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_978.dist ~ Location, data = samp.Mcap_978)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_978)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
  #963
 Mcap_963 <- subset_samples(DIV_RelA, TagID =="963") #Subset by colony  
   Mcap_963.dist <- phyloseq::distance(Mcap_963, method = "bray")
@@ -729,6 +772,11 @@ Mcap_963 <- subset_samples(DIV_RelA, TagID =="963") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_963.dist ~ Location, data = samp.Mcap_963)
 
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_963)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #961
 Mcap_961 <- subset_samples(DIV_RelA, TagID =="961") #Subset by colony  
   Mcap_961.dist <- phyloseq::distance(Mcap_961, method = "bray")
@@ -737,6 +785,11 @@ Mcap_961 <- subset_samples(DIV_RelA, TagID =="961") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_961.dist ~ Location, data = samp.Mcap_961)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #981
 Mcap_981 <- subset_samples(DIV_RelA, TagID =="981") #Subset by colony  
   Mcap_981.dist <- phyloseq::distance(Mcap_981, method = "bray")
@@ -745,6 +798,11 @@ Mcap_981 <- subset_samples(DIV_RelA, TagID =="981") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_981.dist ~ Location, data = samp.Mcap_981)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #967
 Mcap_967 <- subset_samples(DIV_RelA, TagID =="967") #Subset by colony  
   Mcap_967.dist <- phyloseq::distance(Mcap_967, method = "bray")
@@ -753,6 +811,11 @@ Mcap_967 <- subset_samples(DIV_RelA, TagID =="967") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_967.dist ~ Location, data = samp.Mcap_967)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #983
 Mcap_983 <- subset_samples(DIV_RelA, TagID =="983") #Subset by colony  
   Mcap_983.dist <- phyloseq::distance(Mcap_983, method = "bray")
@@ -761,6 +824,11 @@ Mcap_983 <- subset_samples(DIV_RelA, TagID =="983") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_983.dist ~ Location, data = samp.Mcap_983)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #974
 Mcap_974 <- subset_samples(DIV_RelA, TagID =="974") #Subset by colony  
   Mcap_974.dist <- phyloseq::distance(Mcap_974, method = "bray")
@@ -769,6 +837,11 @@ Mcap_974 <- subset_samples(DIV_RelA, TagID =="974") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_974.dist ~ Location, data = samp.Mcap_974)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #984
 Mcap_984 <- subset_samples(DIV_RelA, TagID =="984") #Subset by colony  
   Mcap_984.dist <- phyloseq::distance(Mcap_984, method = "bray")
@@ -777,6 +850,11 @@ Mcap_984 <- subset_samples(DIV_RelA, TagID =="984") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_984.dist ~ Location, data = samp.Mcap_984)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #962
 Mcap_962 <- subset_samples(DIV_RelA, TagID =="962") #Subset by colony  
   Mcap_962.dist <- phyloseq::distance(Mcap_962, method = "bray")
@@ -785,6 +863,11 @@ Mcap_962 <- subset_samples(DIV_RelA, TagID =="962") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_962.dist ~ Location, data = samp.Mcap_962)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #957
 Mcap_957 <- subset_samples(DIV_RelA, TagID =="957") #Subset by colony  
   Mcap_957.dist <- phyloseq::distance(Mcap_957, method = "bray")
@@ -793,6 +876,11 @@ Mcap_957 <- subset_samples(DIV_RelA, TagID =="957") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_957.dist ~ Location, data = samp.Mcap_957)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #945
 Mcap_945 <- subset_samples(DIV_RelA, TagID =="945") #Subset by colony  
   Mcap_945.dist <- phyloseq::distance(Mcap_945, method = "bray")
@@ -801,6 +889,11 @@ Mcap_945 <- subset_samples(DIV_RelA, TagID =="945") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_945.dist ~ Location, data = samp.Mcap_945)
         
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #960
 Mcap_960 <- subset_samples(DIV_RelA, TagID =="960") #Subset by colony  
   Mcap_960.dist <- phyloseq::distance(Mcap_960, method = "bray")
@@ -809,6 +902,11 @@ Mcap_960 <- subset_samples(DIV_RelA, TagID =="960") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_960.dist ~ Location, data = samp.Mcap_960)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #976
 Mcap_976 <- subset_samples(DIV_RelA, TagID =="976") #Subset by colony  
   Mcap_976.dist <- phyloseq::distance(Mcap_976, method = "bray")
@@ -817,6 +915,11 @@ Mcap_976 <- subset_samples(DIV_RelA, TagID =="976") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_976.dist ~ Location, data = samp.Mcap_976)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #985
 Mcap_985 <- subset_samples(DIV_RelA, TagID =="985") #Subset by colony  
   Mcap_985.dist <- phyloseq::distance(Mcap_985, method = "bray")
@@ -825,6 +928,11 @@ Mcap_985 <- subset_samples(DIV_RelA, TagID =="985") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_985.dist ~ Location, data = samp.Mcap_985)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #964
 Mcap_964 <- subset_samples(DIV_RelA, TagID =="964") #Subset by colony  
   Mcap_964.dist <- phyloseq::distance(Mcap_964, method = "bray")
@@ -833,6 +941,11 @@ Mcap_964 <- subset_samples(DIV_RelA, TagID =="964") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_964.dist ~ Location, data = samp.Mcap_964)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #959
 Mcap_959 <- subset_samples(DIV_RelA, TagID =="959") #Subset by colony  
   Mcap_959.dist <- phyloseq::distance(Mcap_959, method = "bray")
@@ -841,6 +954,11 @@ Mcap_959 <- subset_samples(DIV_RelA, TagID =="959") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_959.dist ~ Location, data = samp.Mcap_959)
     
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
+      
 #980
 Mcap_980 <- subset_samples(DIV_RelA, TagID =="980") #Subset by colony  
   Mcap_980.dist <- phyloseq::distance(Mcap_980, method = "bray")
@@ -849,6 +967,10 @@ Mcap_980 <- subset_samples(DIV_RelA, TagID =="980") #Subset by colony
     #adonis by colony level
     adonis2(Mcap_980.dist ~ Location, data = samp.Mcap_980)
   
+        #anova
+     aov.propD = aov(Prop.D ~Location, data=samp.Mcap_970)
+      summary(aov.propD)
+      TukeyHSD(aov.propD)
 ```
 Plots DIVS by colony
 ```{r}  
@@ -984,7 +1106,7 @@ Mcap_959_Pro <- subset_samples(Pro_RelA, TagID =="959") #Subset by colony
 Mcap_980_Pro <- subset_samples(Pro_RelA, TagID =="980") #Subset by colony 
   
 ```
-Plots PRO - colored by orange and blue
+Plots PRO - colored by orange and blue (n0t reordered yet)
 ```{r} 
 library(RColorBrewer)
 profile.colors <- c("C31/C17d-C21-C21ac-C31a-C17e-C31.9-C17f" = "#0b17ff", 
@@ -1249,7 +1371,7 @@ ggsave("Mcap_980_PRO_plot.pdf")
 #                     ncol = 4, nrow = 2);Mcap_DIV_PRO_plot1
 
 ```
-Plots PRO - colored by diverging colors for C-dom and D-dom
+Plots PRO - colored by diverging colors for C-dom and D-dom) reordered
 
 ```{r} 
 library(RColorBrewer)
@@ -1564,7 +1686,15 @@ Mcap_985_PRO_plot<-plot_bar(Mcap_985_Pro, "LocSamp", fill="its2_type_profile", t
    theme(legend.position="none");Mcap_985_PRO_plot
 ggsave("Mcap_985_PRO_plot.pdf")
 
-Mcap_964_PRO_plot<-plot_bar(Mcap_964_Pro, "LocSamp", fill="its2_type_profile", title="Mcap_964_Pro")+
+#964
+ #reorder factor for plotting to make plots in order
+sample_data(Mcap_964_Pro)$LocSamp <- factor(sample_data(Mcap_972_Pro)$LocSamp, levels = c("Branch tip_V1", 
+    "Branch tip_V9",  "Branch mid_V2","Branch mid_V10","Branch base_V3","Branch base_V11", "Plate top_V4","Plate top_V12","Plate edge_V5", "Plate edge_V13","Plate underside_V6", "Plate underside_V14","Lowest_V8","Lowest_V16","Deepest_V7", "Deepest_V15"))
+sample_data(Mcap_964_Pro)$SampleNum <- factor(sample_data(Mcap_972_Pro)$SampleNum, levels = c("V1", 
+    "V9",  "V2","V10","V3","V11", "V4","V12","V5", "V13","V6", "V14","V8","V16","V7", "V15"))
+levels(sample_data(Mcap_964_Pro)$LocSamp)
+
+Mcap_964_PRO_plot<-plot_bar(Mcap_964_Pro, "SampleNum", fill="its2_type_profile", title="Mcap_964_Pro")+
     scale_fill_manual(values=profile.colors)+
   theme_bw()+
    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())+
@@ -1632,7 +1762,13 @@ ggsave("Mcap_980_PRO_plot.pdf")
 
 ```
 
-Plots CLADE
+#Plots CLADE
+reorder 
+```{r}
+
+```
+
+
 ```{r}   
 
 # library("RColorBrewer")
@@ -1901,6 +2037,30 @@ figureMCL6 <- ggarrange(Mcap_985_clade_plot, Mcap_964_clade_plot, Mcap_959_clade
 
 
 ```
+
+#probability of 1 sample correctly identifying dom symbiont
+```{r}
+probCD<-read.csv("propCD for probability.csv")
+
+as_tibble(probCD)
+
+#make a dom col for each sample 
+probCD$dom<- with(probCD, ifelse(
+  Prop.C>=0.5,"C", ifelse(
+    Prop.C<=0.5, "D","NA"))
+  )
+
+  #get meta per colony
+col.dom<-data.ra[c(16,26,31,32)]
+
+  prob.CD.col<- col.dom%>% group_by("ColonyDNA.ID" )
+  
+  
+```
+
+
+
+
 
 Ordination OLD
 ```{r}
