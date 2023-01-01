@@ -585,7 +585,7 @@ scores.b$Prop.D <- as.numeric(as.character(unifrac.sd$Prop.D))
 
 ###### plots
 library(qualpalr) #generate diverging colors
-pal = qualpal(24, colorspace=list(h=c(13,350), s=c(0.3,1), l=c(0.2,0.8)))
+pal = qualpal(25, colorspace=list(h=c(13,350), s=c(0.3,1), l=c(0.2,0.8)))
 
 ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=location)) + 
   geom_point(aes(color=location),size = 4) +
@@ -602,12 +602,37 @@ ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=location)) +
   theme_classic()+
   facet_wrap(~tag.id)
 
-ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=tag.id)) + 
-  geom_point(aes(color=tag.id),size = 4) +
+#plot means of location overlay
+scores.b2<-scores.b[c(1:2,4)]
+
+scores.b.mean<-  scores.b2 %>% #mean by CD by genotype
+  group_by(location) %>%
+   summarise_at(vars("NMDS1", "NMDS2"), mean)
+
+p<-ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=location)) + 
+  geom_point(aes(color=location),size = 4, alpha=1/5,show.legend=F) +
         scale_color_manual(values=pal$hex)+
-stat_ellipse(geom="polygon", alpha=1/6, aes(fill=tag.id)) +
+#stat_ellipse(geom="polygon", alpha=1, aes(fill=tag.id)) +
   ggtitle("NMDS 16s") +
   theme_classic()
+p+  geom_point(aes(color=location), data = scores.b.mean, size=8,show.legend=T)
+
+
+#plot means of genotypes overlay
+scores.b2<-scores.b[c(1:3)]
+
+scores.b.mean<-  scores.b2 %>% #mean by CD by genotype
+  group_by(tag.id) %>%
+   summarise_at(vars("NMDS1", "NMDS2"), mean)
+
+p<-ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=tag.id)) + 
+  geom_point(aes(color=tag.id),size = 4, alpha=1/5,show.legend=F) +
+        scale_color_manual(values=pal$hex)+
+#stat_ellipse(geom="polygon", alpha=1, aes(fill=tag.id)) +
+  ggtitle("NMDS 16s") +
+  theme_classic()
+p+  geom_point(aes(color=tag.id), data = scores.b.mean, size=8,show.legend=F)
+
 
 ggplot(scores.b, aes(x = NMDS1, y = NMDS2, fill=Prop.D)) + 
   geom_point(aes(color=Prop.D),size = 4) +

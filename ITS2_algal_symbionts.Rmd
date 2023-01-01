@@ -2045,17 +2045,42 @@ probCD<-read.csv("propCD for probability.csv")
 as_tibble(probCD)
 
 #make a dom col for each sample 
-probCD$dom<- with(probCD, ifelse(
+probCD<-data.ra[c(16,25,31,32)]
+
+probCD$dom.samp<- with(data.ra, ifelse(
   Prop.C>=0.5,"C", ifelse(
     Prop.C<=0.5, "D","NA"))
   )
 
-  #get meta per colony
-col.dom<-data.ra[c(16,26,31,32)]
+#get meta per colony to calc dom zoox per colony level
+col.dom<-data.ra[c(16,31,32)]
 
-  prob.CD.col<- col.dom%>% group_by("ColonyDNA.ID" )
+col.dom2<-  col.dom %>% #mean by CD by genotype
+  group_by(ColonyDNA.ID) %>%
+   summarise_at(vars("Prop.C", "Prop.D"), mean)
   
-  
+col.dom2$dom.colony<- with(col.dom2, ifelse( #col dom 
+  Prop.C>=0.5,"C", ifelse(
+    Prop.C<=0.5, "D","NA"))
+  )
+col.dom3<-col.dom2[c(1,4)] #keep what you need
+
+probCD2<-merge(probCD, col.dom3, by="ColonyDNA.ID", all.x=T) #merge
+
+probCD2<- transform(
+  probCD2, Match= ifelse(dom.samp==dom.colony, "Y", "N"))
+
+table(probCD2['Match']) # how many match or not. 
+#354 Yes, 21 no
+# 5 of the 24 colonies had at least 1 sample taht did not predict. it ranged from 1 to 
+
+probCD3<-probCD2 #make copy, fig probabilitiy by colony
+
+probCD3<-  probCD3 %>% #mean by  by genotype
+  group_by(ColonyDNA.ID) %>%
+   summarise_at(vars("Prop.C", "Prop.D"), mean)
+write.csv(probCD3,"probCD3.csv")
+
 ```
 
 
